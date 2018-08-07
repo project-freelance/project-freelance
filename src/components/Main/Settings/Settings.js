@@ -80,6 +80,7 @@ class Settings extends Component {
                 <option value="" disabled>
                   experience
                 </option>
+                <option value={0}> 0 years</option>
                 <option value={1}> >1 year</option>
                 <option value={3}>1 - 3 years</option>
                 <option value={5}> >5 years</option>
