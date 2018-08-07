@@ -6,6 +6,7 @@ import Splash from "./components/Splash/Splash";
 import Feed from "./components/Main/Feed/Feed";
 import Profile from "./components/Main/Profile/Profile";
 import Setup from "./components/Setup/Setup";
+import Settings from "./components/Main/Settings/Settings";
 
 export default (
   <Switch>
@@ -20,6 +21,7 @@ export default (
             <Switch>
               <Route path="/main/feed" component={Feed} />
               <Route path="/main/profile" component={Profile} />
+              <Route path="/main/settings" component={Settings} />
             </Switch>
           </Main>
         );

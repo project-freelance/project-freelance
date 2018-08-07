@@ -70,11 +70,11 @@ app.get("/login", (req, res, next) => {
           })
           .then(newUser => {
             req.session.user = newUser;
-            console.log(`here!!!! ${user.picture}`);
             return res.redirect("http://localhost:3000/#/setup");
           });
       } else {
         req.session.user = dbUser;
+        console.log(req.session);
         return res.redirect("http://localhost:3000/#/main/feed");
       }
     });
@@ -89,6 +89,7 @@ app.get("/logout", (req, res, next) => {
 // End Auth
 
 // user
+app.get("/api/user", userCtrl.getCurrentUser);
 app.put("/api/user/role/:id", userCtrl.updateRole);
 app.put("/api/user/specialty/:id", userCtrl.updateSpecialty);
 // app.post("/api/user-profile", authCtrl.createUserProfile);
