@@ -15,6 +15,7 @@ class Nav extends Component {
     //   ? this.props.user[0].profile_image
     //   : 'profile image';
     // console.log(this.props);
+    //Hellp
 
     return (
       <div>
