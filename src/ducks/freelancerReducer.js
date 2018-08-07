@@ -1,21 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
 
 //constants
-const ADD_FREELANCER = "ADD_FREELANCER";
-const GET_FREELANCER = "GET_FREELANCER";
-const GET_FREELANCERS = "GET_FREELANCERS";
-const UPDATE_FREELANCER = "UPDATE_FREELANCER";
+const ADD_FREELANCER = 'ADD_FREELANCER';
+const GET_FREELANCER = 'GET_FREELANCER';
+const GET_FREELANCERS = 'GET_FREELANCERS';
+const UPDATE_FREELANCER = 'UPDATE_FREELANCER';
 
-const ADD_FREELANCER_POST = "ADD_FREELANCER_POST";
-const GET_FREELANCER_POSTS = "GET_FREELANCER_POSTS";
-const DELETE_FREELANCER_POST = "DELETE_FREELANCER_POST";
-const UPDATE_FREELANCER_POST = "UPDATE_FREELANCER_POST";
+const ADD_FREELANCER_POST = 'ADD_FREELANCER_POST';
+const GET_FREELANCER_POSTS = 'GET_FREELANCER_POSTS';
+const DELETE_FREELANCER_POST = 'DELETE_FREELANCER_POST';
+const UPDATE_FREELANCER_POST = 'UPDATE_FREELANCER_POST';
 
 //action creators
 export function addFreelancer(bio, skills, experience, city, user_id) {
   return {
     type: ADD_FREELANCER,
-    payload: axios.post("/api/freelancer/", {
+    payload: axios.post('/api/freelancer/', {
       bio,
       skills,
       experience,
@@ -33,7 +33,7 @@ export function getFreelancer(id) {
 export function getFreelancers() {
   return {
     type: GET_FREELANCER,
-    payload: axios.get("/api/freelancers")
+    payload: axios.get('/api/freelancers')
   };
 }
 
@@ -47,7 +47,7 @@ export function updateFreelancer(id, bio, skills, experience, city) {
 export function addFreelancerPost(title, body, user_id) {
   return {
     type: ADD_FREELANCER_POST,
-    payload: axios.post("/api/freelancerPost/", {
+    payload: axios.post('/api/freelancerPost/', {
       title,
       body,
       user_id
@@ -83,7 +83,7 @@ const initialState = {
   //freelancerPost: [],
   freelancerPosts: [],
   isLoading: false,
-  error: ""
+  error: ''
 };
 
 //reducer
