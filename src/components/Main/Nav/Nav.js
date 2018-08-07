@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getUser } from '../../../ducks/userReducer';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUser } from "../../../ducks/userReducer";
 
-import './Nav.css';
+// import './Nav.css';
 
 class Nav extends Component {
   constructor(props) {
@@ -11,11 +11,10 @@ class Nav extends Component {
   }
 
   render() {
-    // let profile_image = this.props.user[0]
-    //   ? this.props.user[0].profile_image
-    //   : 'profile image';
-    // console.log(this.props);
-    //Hellp
+    let profile_image = this.props.user[0]
+      ? this.props.user[0].profile_image
+      : "profile image";
+    console.log(this.props);
 
     return (
       <div>
@@ -24,7 +23,7 @@ class Nav extends Component {
             <div className="account-image">
               <img
                 className="profileImage"
-                // src={profile_image}
+                src={profile_image}
                 alt="User Profile Image"
               />
             </div>
@@ -47,14 +46,14 @@ class Nav extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     user: state.userReducer.user
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    user: state.userReducer.user
+  };
+}
 
-// export default connect(
-//   mapStateToProps,
-//   {}
-// )(Nav);
-export default Nav;
+export default connect(
+  mapStateToProps,
+  {}
+)(Nav);
+// export default Nav;

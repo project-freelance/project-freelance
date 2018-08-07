@@ -8,11 +8,11 @@ import portfolioReducer from "./ducks/portfolioReducer";
 import employerReducer from "./ducks/employerReducer";
 
 const combinedReducers = combineReducers({
-  reviews: reviewReducer,
-  users: userReducer,
-  freelancers: freelancerReducer,
-  portfolio: portfolioReducer,
-  employers: employerReducer
+  reviewReducer,
+  userReducer,
+  freelancerReducer,
+  portfolioReducer,
+  employerReducer
 });
 
 const store = createStore(

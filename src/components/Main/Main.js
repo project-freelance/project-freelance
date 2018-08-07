@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import "./Main.css";
 import { getUser } from "../../ducks/userReducer";
@@ -12,7 +13,7 @@ class Main extends Component {
   }
   componentDidMount() {
     this.props.getUser().then(() => {
-      console.log(this.props);
+      console.log(this.props.user);
     });
   }
   render() {
@@ -30,7 +31,7 @@ class Main extends Component {
 
 function mapStateToProps(state) {
   return {
-    ...state.userReducer
+    user: state.userReducer.user
   };
 }
 export default connect(
