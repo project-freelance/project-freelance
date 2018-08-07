@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // controllers
-const authCtrl = require("./controllers/authCtrl");
+const userCtrl = require("./controllers/userCtrl");
 const employerCtrl = require("./controllers/employerCtrl");
 const freelancerCtrl = require("./controllers/freelancerCtrl");
 const portfolioCtrl = require("./controllers/portfolioCtrl");
@@ -89,8 +89,8 @@ app.get("/logout", (req, res, next) => {
 // End Auth
 
 // user
-app.put("/api/user/role", authCtrl.updateRole);
-app.put("/api/user/specialty", authCtrl.updateSpecialty);
+app.put("/api/user/role/:id", userCtrl.updateRole);
+app.put("/api/user/specialty/:id", userCtrl.updateSpecialty);
 // app.post("/api/user-profile", authCtrl.createUserProfile);
 
 // employer
