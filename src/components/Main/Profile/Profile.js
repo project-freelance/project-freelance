@@ -19,12 +19,36 @@ class Profile extends Component {
           />
         </div>
         <div className="employer_profile_image">Company Logo</div>
-        <div className="employer_profile_name">First Name and Last Name</div>
+        <div className="employer_profile_name">
+          <TextField
+            label="First Name / Last Name"
+            id="simple-start-adornment"
+            className=""
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">Kg</InputAdornment>
+              )
+            }}
+          />
+        </div>
         <div className="employer_profile_city">City</div>
         <div className="employer_profile_upload_company_logo">
           Upload Company Logo
         </div>
-        <div className="employer_profile_about">About</div>
+        <div className="employer_profile_about">
+          <TextField
+            label="About"
+            id="simple-start-adornment"
+            className=""
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  Tell us more about yourself...
+                </InputAdornment>
+              )
+            }}
+          />
+        </div>
       </div>
     );
   }
