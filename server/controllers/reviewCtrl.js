@@ -23,5 +23,12 @@ module.exports = {
     db.reviews.getReviews().then(reviews => {
       return res.status(200).send(reviews);
     });
+  },
+
+  deleteReview: (req, res, next) => {
+    let db = req.app.get("db");
+    db.reviews.deleteReview(req.params.id).then(() => {
+      return res.sendStatus(200);
+    });
   }
 };

@@ -23,5 +23,19 @@ module.exports = {
     db.portfolio.getPortfolio([req.params.id]).then(portfolio => {
       return res.status(200).send(portfolio);
     });
+  },
+
+  updatePortfolio: (req, res, next) => {
+    let db = req.app.get("db");
+    db.portfolio.updatePortfolio(req.params.id, req.body.image_url).then(() => {
+      return res.sendStatus(200);
+    });
+  },
+
+  deletePortfolio: (req, res, next) => {
+    let db = req.app.get("db");
+    db.portfolio.deletePortfolio(req.params.id).then(() => {
+      return res.sendStatus(200);
+    });
   }
 };
