@@ -6,6 +6,8 @@ const { json } = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
+const morgan = require("morgan");
+const strategy = require("./strategy");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -25,6 +27,66 @@ massive(process.env.CONNECTION_STRING)
 
 app.use(json());
 app.use(cors());
+app.use(morgan("tiny"));
+
+//Auth /Sessions
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 2 * 7 * 24 * 60 * 60 * 1000
+    }
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(strategy);
+
+passport.serializeUser((user, done) => {
+  return done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  return done(null, user);
+});
+
+app.get("/login", (req, res, next) => {
+  passport.authenticate("auth0", (err, user, info) => {
+    const db = req.app.get("db");
+    db.users.find({ auth_id: user.id }).then(([dbUser]) => {
+      if (!dbUser) {
+        db.users
+          .insert({
+            first_name: user.name.givenName,
+            last_name: user.name.familyName,
+            email: user.emails[0].value,
+            session_id: req.session.id,
+            auth_id: user.id,
+            profile_image: user.picture
+          })
+          .then(newUser => {
+            req.session.user = newUser;
+            console.log(`here!!!! ${user.picture}`);
+            return res.redirect("http://localhost:3000/#/setup");
+          });
+      } else {
+        req.session.user = dbUser;
+        return res.redirect("http://localhost:3000/#/main/feed");
+      }
+    });
+  })(req, res, next);
+});
+
+app.get("/logout", (req, res, next) => {
+  req.session = null;
+  res.redirect(process.env.REACT_APP_DEV_HOST);
+});
+
+// End Auth
 
 // user
 // app.put("/api/user", authCtrl.updateUser);
