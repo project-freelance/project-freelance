@@ -15,6 +15,28 @@ export function addPortfolio() {
     })
   };
 }
+export function getPortfolio(id) {
+  return {
+    type: GET_PORTFOLIO,
+    payload: axios.get(`/api/portfolio/${id}`)
+  };
+}
+export function updatePortfolio(id, image_url) {
+  return {
+    type: UPDATE_PORTFOLIO,
+    payload: axios.put(`/api/portfolio/${id}`, image_url)
+  };
+}
+export function deleteFreelancerPost(id) {
+  return {
+    type: DELETE_PORTFOLIO,
+    payload: axios.delete(`/api/portfolio/${id}`)
+  };
+}
 //initial state
-
+const initialState = {
+  portfolio: [],
+  isLoading: false,
+  error: ''
+};
 //reducer
