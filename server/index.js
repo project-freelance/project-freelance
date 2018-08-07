@@ -89,7 +89,8 @@ app.get("/logout", (req, res, next) => {
 // End Auth
 
 // user
-// app.put("/api/user", authCtrl.updateUser);
+app.put("/api/user/role", authCtrl.updateRole);
+app.put("/api/user/specialty", authCtrl.updateSpecialty);
 // app.post("/api/user-profile", authCtrl.createUserProfile);
 
 // employer
