@@ -7,11 +7,12 @@ const UPDATE_PORTFOLIO = 'UPDATE_PORTFOLIO';
 const DELETE_PORTFOLIO = 'DELETE_PORTFOLIO';
 
 //action creators
-export function addPortfolio() {
+export function addPortfolio(image_url, user_id) {
   return {
     type: ADD_PORTFOLIO,
     payload: axios.post('/api/portfolio', {
-      image_url
+      image_url,
+      user_id
     })
   };
 }
