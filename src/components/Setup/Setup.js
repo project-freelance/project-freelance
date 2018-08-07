@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { updateEmployer } from "../../ducks/employerReducer";
 
 class Setup extends Component {
   constructor() {
@@ -12,25 +13,25 @@ class Setup extends Component {
   chooseEmployer() {
     this.setState({
       role: "Employer"
-    });
+    }).then(this.props.updateRole("Employer"));
   }
 
   chooseFreelancer() {
     this.setState({
       role: "Freelancer"
-    });
+    }).then(this.props.updateRole("Freelancer"));
   }
 
   chooseDeveloper() {
     this.setState({
       role: "Developer"
-    });
+    }).then(this.props.updateSpecialty("Developer"));
   }
 
   chooseDesigner() {
     this.setState({
       role: "Designer"
-    });
+    }).then(this.props.updateSpecialty("Designer"));
   }
 
   render() {
