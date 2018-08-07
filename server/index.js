@@ -33,25 +33,30 @@ app.use(cors());
 // employer
 app.get("/api/employers", employerCtrl.getEmployers);
 app.get("/api/employer/:id", employerCtrl.getEmployer);
-app.post("/api/employer", employerCtrl.addEmployer);
+// app.post("/api/employer", employerCtrl.addEmployer);
 app.put("/api/employer/:id", employerCtrl.updateEmployer);
 // app.post("/api/employers-profile", employerCtrl.createEmployerProfile);
+
 app.post("/api/employerPost", employerCtrl.addEmployerPost);
 app.get("/api/employerPosts", employerCtrl.getEmployerPosts);
 app.delete("/api/employerPost/:id", employerCtrl.deleteEmployerPost);
 app.put("/api/employerPost/:id", employerCtrl.updateEmployerPost);
 
+app.get("/api/employer/appliedJobs/:id", employerCtrl.getAppliedJobs);
+
 // freelancer
-app.post("/api/freelancer", freelancerCtrl.addFreelancer);
+// app.post("/api/freelancer", freelancerCtrl.addFreelancer);
 app.get("/api/freelancers", freelancerCtrl.getFreelancers);
 app.get("/api/freelancer/:id", freelancerCtrl.getFreelancer);
 app.put("/api/freelancer/:id", freelancerCtrl.updateFreelancer);
+
 app.post("/api/freelancerPost", freelancerCtrl.addFreelancerPost);
 app.get("/api/freelancerPosts", freelancerCtrl.getFreelancerPosts);
 app.delete("/api/freelancerPost/:id", freelancerCtrl.deleteFreelancerPost);
 app.put("/api/freelancerPost/:id", freelancerCtrl.updateFreelancerPost);
-// app.post("/api/user-jobs", freelancerCtrl.addUserJob);
-// app.get("/api/user-jobs", freelancerCtrl.getUserJob);
+
+app.post("/api/user/jobs", freelancerCtrl.addFaveJob);
+app.get("/api/user/jobs/:id", freelancerCtrl.getFaveJobs);
 
 // portfolio
 app.get("/api/portfolio/:id", portfolioCtrl.getPortfolio);
