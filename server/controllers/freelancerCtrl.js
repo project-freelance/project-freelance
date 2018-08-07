@@ -84,5 +84,9 @@ module.exports = {
       .then(() => {
         return res.sendStatus(200);
       });
+  },
+  addFaveJob: (req, res, next) => {
+    let db = req.app.get("db");
+    db.freelancers.addFaveJob();
   }
 };
