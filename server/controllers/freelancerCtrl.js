@@ -87,6 +87,23 @@ module.exports = {
   },
   addFaveJob: (req, res, next) => {
     let db = req.app.get("db");
-    db.freelancers.addFaveJob();
+    const { employer_post_id, freelancer_id } = req.body;
+    db.freelancers
+      .addFaveJob([employer_post_id, freelancer_id])
+      .then(fave => {
+        res.status(200).send(fave);
+      })
+      .catch(err => {
+        res.status(500).send({
+          errorMessage: "error!"
+        });
+        console.log(err);
+      });
+  },
+  getFaveJobs: (req, res, next) => {
+    let db = req.app.get("db");
+    db.freelancers.getFaveJobs(req.params.id).then(jobs => {
+      return res.status(200).send(jobs);
+    });
   }
 };
