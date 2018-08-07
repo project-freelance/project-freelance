@@ -7,7 +7,7 @@ const GET_FREELANCERS = 'GET_FREELANCERS';
 const UPDATE_FREELANCER = 'UPDATE_FREELANCER';
 
 const ADD_FREELANCER_POST = 'ADD_FREELANCER_POST';
-const GET_FREELANCER_POST = 'GET_FREELANCER_POST';
+const GET_FREELANCER_POSTS = 'GET_FREELANCER_POSTS';
 const DELETE_FREELANCER_POST = 'DELETE_FREELANCER_POST';
 const UPDATE_FREELANCER_POST = 'UPDATE_FREELANCER_POST';
 
@@ -55,10 +55,10 @@ export function addFreelancerPost(title, body, user_id) {
   };
 }
 
-export function getFreelancerPost(id) {
+export function getFreelancerPosts() {
   return {
-    type: GET_FREELANCER_POST,
-    payload: axios.get(`/api/freelancerPost/${id}`)
+    type: GET_FREELANCER_POSTS,
+    payload: axios.get(`/api/freelancerPosts/`)
   };
 }
 
@@ -80,7 +80,7 @@ export function updateFreelancerPost(id, obj) {
 const initialState = {
   freelancer: [],
   freelancers: [],
-  freelancerPost: [],
+  //freelancerPost: [],
   freelancerPosts: [],
   isLoading: false,
   error: ''
@@ -179,18 +179,18 @@ export default function freelancerReducer(state = initialState, action) {
         error: action.payload
       };
 
-    case `${GET_FREELANCER_POST}_PENDING`:
+    case `${GET_FREELANCER_POSTS}_PENDING`:
       return {
         ...state,
         isLoading: true
       };
-    case `${GET_FREELANCER_POST}_FULFILLED`:
+    case `${GET_FREELANCER_POSTS}_FULFILLED`:
       return {
         ...state,
         isLoading: false,
-        freelancerPost: action.payload.data
+        freelancerPosts: action.payload.data
       };
-    case `${GET_FREELANCER_POST}_REJECTED`:
+    case `${GET_FREELANCER_POSTS}_REJECTED`:
       return {
         ...state,
         isLoading: false,
