@@ -42,7 +42,7 @@ app.get("/api/employerPosts", employerCtrl.getEmployerPosts);
 app.delete("/api/employerPost/:id", employerCtrl.deleteEmployerPost);
 app.put("/api/employerPost/:id", employerCtrl.updateEmployerPost);
 
-app.get("/api/employer/");
+app.get("/api/employer/appliedJobs/:id", employerCtrl.getAppliedJobs);
 
 // freelancer
 // app.post("/api/freelancer", freelancerCtrl.addFreelancer);

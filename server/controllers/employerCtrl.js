@@ -93,5 +93,11 @@ module.exports = {
       .then(() => {
         return res.sendStatus(200);
       });
+  },
+  getAppliedJobs: (req, res, next) => {
+    let db = req.app.get("db");
+    db.employers.getAppliedJobs(req.params.id).then(jobs => {
+      return res.status(200).send(jobs);
+    });
   }
 };
