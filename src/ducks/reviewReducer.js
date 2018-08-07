@@ -3,7 +3,7 @@ import axios from "axios";
 //constants
 const GET_REVIEWS = "GET_REVIEWS";
 const DELETE_REVIEW = "DELETE_REVIEW";
-const UPDATE_REVIEW = "UPDATE_REVIEW";
+const ADD_REVIEW = "ADD_REVIEW";
 
 //action creators
 export function getReviews() {
@@ -20,10 +20,16 @@ export function deleteReview(id) {
   };
 }
 
-export function updateReview(id, obj) {
+export function addReview(review, user_id, review_id, moment, rating) {
   return {
-    type: UPDATE_REVIEW,
-    payload: axios.put(`/api/review/${id}`, obj)
+    type: ADD_REVIEW,
+    payload: axios.post(`/api/review/`, {
+      review,
+      user_id,
+      review_id,
+      moment,
+      rating
+    })
   };
 }
 
@@ -72,18 +78,18 @@ export default function reviewReducer(state = initialState, action) {
         error: action.payload
       };
 
-    case `${UPDATE_REVIEW}_PENDING`:
+    case `${ADD_REVIEW}_PENDING`:
       return {
         ...state,
         isLoading: true
       };
-    case `${UPDATE_REVIEW}_FULFILLED`:
+    case `${ADD_REVIEW}_FULFILLED`:
       return {
         ...state,
         isLoading: false,
         reviews: action.payload.data
       };
-    case `${UPDATE_REVIEW}_REJECTED`:
+    case `${ADD_REVIEW}_REJECTED`:
       return {
         ...state,
         isLoading: false,
