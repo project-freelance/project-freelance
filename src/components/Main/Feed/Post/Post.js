@@ -25,20 +25,10 @@ class Post extends Component {
 
   handlePosts() {
     this.props.getUser(this.state.id, {
-      role: this.state.user.role
+      role: this.state.user[0].role
     });
-    // this.setState({
-
-    // })
+    console.log(this.state.user[0].role);
   }
-
-  // {this.state.user.role === 'Employer' && (
-
-  // )}
-
-  // {this.state.user.role === 'Freelancer' && (
-
-  // )}
 
   handleSpecialtyChange = specialty => event => {
     this.setState({
@@ -49,6 +39,14 @@ class Post extends Component {
   render() {
     const { title, body, specialty, price } = this.state;
     // console.log(this.props.user[0] && this.props.user[0].id);
+
+    // {
+    //   this.state.user.role === 'Employer' && <div />;
+    // }
+
+    // {this.state.user.role === 'Freelancer' && (
+
+    // )}
 
     return (
       <div>
