@@ -1,7 +1,36 @@
 .settings__container {
-  .settings__profileImage {
-    width: 200px;
-    border-radius: 100px;
-    object-fit: cover;
+  padding: 15px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas: "settings__profile settings__profile . settings__info settings__info" "settings__profile settings__profile . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" ". . . settings__info settings__info" ". . . settings__info settings__info";
+  color: rgb(127, 196, 253);
+  text-transform: capitalize;
+  .settings__profile {
+    grid-area: settings__profile;
+
+    .settings__profileImage {
+      border-radius: 20px;
+      border: 4px solid #dedede;
+      box-shadow: 1px 2px 10px 2px rgba(0, 0, 0, 0.46);
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      transition: 2s ease-in-out;
+      &:hover {
+        box-shadow: 2px 4px 20px 4px rgba(0, 0, 0, 0.46);
+      }
+    }
+  }
+  .settings__bio {
+    grid-area: settings__bio;
+    color: rgb(127, 196, 253);
+  }
+  .settings__info {
+    grid-area: settings__info;
+    margin-top: 25px;
+    color: rgb(127, 196, 253);
   }
 }
