@@ -62,7 +62,9 @@ class Profile extends Component {
               loggedInUser={this.props.user}
             />
           </div>
-        ) : null}
+        ) : (
+          <EmployerProfile />
+        )}
       </div>
     );
   }
