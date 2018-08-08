@@ -14,8 +14,6 @@ class Nav extends Component {
     let profile_image = this.props.user[0]
       ? this.props.user[0].profile_image
       : "profile image";
-    console.log(this.props);
-
     return (
       <div>
         <nav className="nav_bar">
@@ -28,16 +26,16 @@ class Nav extends Component {
               />
             </div>
           </Link>
-          <Link className="nav_links" to="/main/feed">
+          <Link className="nav__links" to="/main/feed">
             News Feed
           </Link>
-          <Link className="nav_links" to="">
+          <Link className="nav__links" to="">
             My Jobs
           </Link>
-          <Link className="nav_links" to="/main/profile">
+          <Link className="nav__links" to="/main/profile">
             My Profile
           </Link>
-          <Link className="nav_links" to="">
+          <Link className="nav__links" to="/main/settings">
             Settings
           </Link>
         </nav>
