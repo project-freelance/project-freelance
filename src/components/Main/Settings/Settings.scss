@@ -1,7 +1,29 @@
 .settings__container {
-  .settings__profileImage {
-    width: 200px;
-    border-radius: 100px;
-    object-fit: cover;
+  padding: 15px;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas: "settings__profile settings__profile . settings__info settings__info" "settings__profile settings__profile . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" ". . . settings__info settings__info" ". . . settings__info settings__info";
+  color: rgb(127, 196, 253);
+  text-transform: capitalize;
+  .settings__profile {
+    grid-area: settings__profile;
+
+    .settings__profileImage {
+      width: 200px;
+      border-radius: 100px;
+      object-fit: cover;
+    }
+  }
+  .settings__bio {
+    grid-area: settings__bio;
+    color: rgb(127, 196, 253);
+  }
+  .settings__info {
+    grid-area: settings__info;
+    margin-top: 25px;
+    color: rgb(127, 196, 253);
   }
 }
