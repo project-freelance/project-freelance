@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { addFreelancerPost } from '../../../../ducks/freelancerReducer';
 import { addEmployerPost } from '../../../../ducks/employerReducer';
 import { getUser } from '../../../../ducks/userReducer';
+import TextField from '@material-ui/core/TextField';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 class Post extends Component {
   constructor(props) {
@@ -10,125 +14,149 @@ class Post extends Component {
     this.state = {
       title: '',
       body: '',
-      specialty: '',
+      specialty: 0,
       price: 0
     };
   }
 
-  onChangeHandlerFreelancer = e => {
-    console.log(`${e.target.name}: `, e.target.value);
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+  componentDidMount() {
+    let userRole = this.props.user[0] && this.props.user[0].role;
+    // console.log(this.props.user[0] && this.props.user[0].role);
+    this.props.getUser();
+  }
 
-  onChangeHandlerEmployer = ev => {
-    console.log(`${ev.target.name}: `, ev.target.value);
+  handleSpecialtyChange = specialty => event => {
     this.setState({
-      [ev.target.name]: ev.target.value
+      [specialty]: event.target.value
     });
   };
 
   render() {
     const { title, body, specialty, price } = this.state;
     // console.log(this.props.user[0] && this.props.user[0].id);
-    // console.log()
+
     return (
       <div>
-        {/* create freelancer posting */}
-        <div className="freelancer__posting">
-          <h2>Create Freelancer Posting</h2>
-          <form>
-            <div>
-              Title:
-              <input
-                onChange={this.onChangeHandlerFreelancer}
-                name="title"
-                value={title}
-                placeholder="title..."
-              />
-            </div>
-            <div>
-              Description:
-              <input
-                onChange={this.onChangeHandlerFreelancer}
-                name="body"
-                value={body}
-                placeholder="description..."
-              />
-            </div>
+        <button onClick={() => console.log(this.state)} />
 
-            <button
-              onClick={() => {
-                this.props.addFreelancerPost(
-                  title,
-                  body,
-                  this.props.user[0] && this.props.user[0].id
-                );
-              }}
-              type="submit"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
+        {/* create freelancer posting */}
+
+        {this.props.user[0] &&
+          this.props.user[0].role === 'Freelancer' && (
+            <div>
+              <div className="freelancer__posting">
+                <h2>Create Freelancer Posting</h2>
+                <form>
+                  <div>
+                    <TextField
+                      id="Title"
+                      label="Title"
+                      className={'freelancer__post__title__input'}
+                      value={title}
+                      onChange={e => this.setState({ title: e.target.value })}
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="Description"
+                      label="Description"
+                      className={'freelancer__post__body__input'}
+                      value={body}
+                      onChange={e => this.setState({ body: e.target.value })}
+                      margin="normal"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      this.props.addFreelancerPost(
+                        title,
+                        body,
+                        this.props.user[0] && this.props.user[0].id
+                      );
+                    }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
 
         {/* create employer posting */}
-        <div className="employer__posting">
-          <h2>Create Employer Posting</h2>
-          <form>
+
+        {this.props.user[0] &&
+          this.props.user[0].role === 'Employer' && (
             <div>
-              Title:
-              <input
-                onChange={this.onChangeHandlerEmployer}
-                name="title"
-                value={title}
-                placeholder="title..."
-              />
+              <div className="employer__posting">
+                <h2>Create Job Posting</h2>
+                <form>
+                  <div>
+                    <TextField
+                      id="Title"
+                      label="Title"
+                      className={'employer__post__title__input'}
+                      value={title}
+                      onChange={e => this.setState({ title: e.target.value })}
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="Description"
+                      label="Description"
+                      className={'employer__post__body__input'}
+                      value={body}
+                      onChange={e => this.setState({ body: e.target.value })}
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <FormControl className={'form'}>
+                      <NativeSelect
+                        className={'employer__post__specialty__input'}
+                        value={specialty}
+                        name="specialty"
+                        onChange={this.handleSpecialtyChange('specialty')}
+                      >
+                        <option value="" disabled />
+                        <option value={'Select One'}> </option>
+                        <option value={'Developer'}> Developer </option>
+                        <option value={'Designer'}> Designer </option>
+                      </NativeSelect>
+                      <FormHelperText>Specialty</FormHelperText>
+                    </FormControl>
+                  </div>
+
+                  <div>
+                    <TextField
+                      id="Description"
+                      label="Price $"
+                      className={'employer__post__price__input'}
+                      value={price}
+                      onChange={e => this.setState({ price: e.target.value })}
+                      margin="normal"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      this.props.addEmployerPost(
+                        title,
+                        body,
+                        specialty,
+                        price,
+                        this.props.user[0] && this.props.user[0].id
+                      );
+                    }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
-            <div>
-              Description:
-              <input
-                onChange={this.onChangeHandlerEmployer}
-                name="body"
-                value={body}
-                placeholder="description..."
-              />
-            </div>
-            <div>
-              Specialty:
-              <input
-                onChange={this.onChangeHandlerEmployer}
-                name="specialty"
-                value={specialty}
-                placeholder="Developer or Designer..."
-              />
-            </div>
-            <div>
-              Price:
-              <input
-                onChange={this.onChangeHandlerEmployer}
-                name="price"
-                value={price}
-                placeholder="price..."
-              />
-            </div>
-            <button
-              onClick={() => {
-                this.props.addEmployerPost(
-                  title,
-                  body,
-                  specialty,
-                  price,
-                  this.props.user[0] && this.props.user[0].id
-                );
-              }}
-              type="submit"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
+          )}
       </div>
     );
   }
