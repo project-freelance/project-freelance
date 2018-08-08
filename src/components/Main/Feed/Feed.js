@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getEmployerPosts } from '../../../ducks/employerReducer';
-import { getFreelancerPosts } from '../../../ducks/freelancerReducer';
-import { getUsers } from '../../../ducks/userReducer';
-import '../Feed/Feed.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getEmployerPosts } from "../../../ducks/employerReducer";
+import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
+import { getUsers } from "../../../ducks/userReducer";
+import "../Feed/Feed.css";
 
 class Feed extends Component {
   constructor() {
@@ -21,6 +21,7 @@ class Feed extends Component {
         users: result.value.data
       });
       console.log(this.state.users);
+      console.log(this.state.users.id);
     });
   }
 
@@ -32,6 +33,7 @@ class Feed extends Component {
     ) : (
       users.map((user, i) => {
         //console.log(user);
+
         return (
           <div className="feed__userContainer" key={i}>
             <div className="userProfile">
@@ -43,7 +45,6 @@ class Feed extends Component {
               <p>{user.first_name}</p>
               <p>{user.last_name}</p>
               <p>{user.specialty}</p>
-              <p>{user.id}</p>
             </div>
           </div>
         );
@@ -54,8 +55,8 @@ class Feed extends Component {
       <p>Loading...</p>
     ) : (
       freelancerPosts.map((post, i) => {
-        // console.log(post.user_id);
-        //console.log(userInfo);
+        console.log(post.user_id);
+
         return (
           <div className="feed__freelancerPostContainer" key={i}>
             <div className="freelancerProfile">
