@@ -57,12 +57,32 @@ class Feed extends Component {
       freelancerPosts.map((post, i) => {
         console.log(post.user_id);
 
+        let postUser = users.map((user, id) => {
+          if (user.id === post.user_id) {
+            return (
+              <div key={user.id}>
+                <img
+                  src={user.profile_image}
+                  alt="person"
+                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                />
+                <p>{user.first_name}</p>
+                <p>{user.last_name}</p>
+                <p>{user.specialty}</p>
+              </div>
+            );
+          } else {
+            null;
+          }
+        });
+
         return (
           <div className="feed__freelancerPostContainer" key={i}>
             <div className="freelancerProfile">
-              <div>{userInfo}</div>
+              {/* <div>{userInfo}</div> */}
             </div>
             <div className="feed__freelancerPosting">
+              <div>{postUser}</div>
               <h3>Freelancer Posting</h3>
               <p>Post Title: {post.title}</p>
               <p>Post Body: {post.body}</p>
@@ -77,8 +97,27 @@ class Feed extends Component {
       <p>Loading...</p>
     ) : (
       employerPosts.map((post, i) => {
+        let postUser = users.map((user, id) => {
+          if (user.id === post.user_id) {
+            return (
+              <div key={user.id}>
+                <img
+                  src={user.profile_image}
+                  alt="person"
+                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                />
+                <p>{user.first_name}</p>
+                <p>{user.last_name}</p>
+                <p>{user.specialty}</p>
+              </div>
+            );
+          } else {
+            null;
+          }
+        });
         return (
           <div className="feed__employerPostContainer" key={i}>
+            <div>{postUser}</div>
             <h3>Employer Posting</h3>
             <p>Post Title:{post.title}</p>
             <p>Post Body:{post.body}</p>
