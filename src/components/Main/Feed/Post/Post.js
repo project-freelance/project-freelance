@@ -32,6 +32,7 @@ class Post extends Component {
   render() {
     const { title, body, specialty, price } = this.state;
     // console.log(this.props.user[0] && this.props.user[0].id);
+    // console.log()
     return (
       <div>
         {/* create freelancer posting */}
