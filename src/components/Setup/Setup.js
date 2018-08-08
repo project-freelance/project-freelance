@@ -23,19 +23,18 @@ class Setup extends Component {
   }
 
   componentDidMount() {
-    let userId = this.props.user[0] ? this.props.user[0].id : 123456789;
-
-    this.props.getUser().then(
-      this.setState({
-        id: userId
-      })
-    );
+    this.props
+      .getUser()
+      .then(() => this.setState({ id: this.props.user[0].id }));
   }
 
   chooseEmployer() {
+    console.log(this.state.id);
+    console.log(this.state.roleEmployer);
     this.props.updateRole(this.state.id, {
       role: this.state.roleEmployer
     });
+
     this.setState({
       employerClicked: true,
       freelancerClicked: false
