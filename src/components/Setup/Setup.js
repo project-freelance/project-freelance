@@ -82,6 +82,7 @@ class Setup extends Component {
           <button onClick={() => this.chooseEmployer()}>Employer</button>
         </div>
 
+        {/* if employer is clicked send to next */}
         {this.state.employerClicked && (
           <div className="setup__next">
             <Link to="/main/settings">
@@ -90,6 +91,7 @@ class Setup extends Component {
           </div>
         )}
 
+        {/* if freelancer is clicked show specialty options */}
         {this.state.freelancerClicked && (
           <div className="setup__chooseSpecialty">
             <h2> Are you a Developer or a Designer?</h2>
@@ -98,6 +100,7 @@ class Setup extends Component {
           </div>
         )}
 
+        {/* after freelancer picks specialty show next */}
         {this.state.freelancerClicked &&
           (this.state.developerClicked || this.state.designerClicked) && (
             <div className="setup__next">
