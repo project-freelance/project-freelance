@@ -4,6 +4,7 @@ import { getFreelancer } from "../../../ducks/freelancerReducer";
 import AddReview from "./Reviews/AddReview/AddReview";
 import { getUser } from "../../../ducks/userReducer";
 import EmployerProfile from "./EmployerProfile";
+import Portfolio from "./Portfolio/Portfolio";
 class Profile extends Component {
   componentDidMount() {
     this.props.getFreelancer(this.props.match.params.id);
@@ -40,8 +41,12 @@ class Profile extends Component {
               </div>
               <div>Bio: {`${freelancer[0] && freelancer[0].bio}`}</div>
               <div>
-                Portfolio...need images{" "}
-                {`${freelancer[0] && freelancer[0].image_url}`}
+                Portfolio:
+                <img
+                  src={`${freelancer[0] && freelancer[0].image_url}`}
+                  height="80"
+                  width="80"
+                />
               </div>
               {/* <button>Contact Me (...email address in users table)</button> */}
               <button>
@@ -63,6 +68,7 @@ class Profile extends Component {
             />
           </div>
         ) : (
+          // null
           <EmployerProfile />
         )}
       </div>
