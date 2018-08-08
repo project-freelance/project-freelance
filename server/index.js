@@ -83,7 +83,7 @@ app.get("/login", (req, res, next) => {
 
 app.get("/logout", (req, res, next) => {
   req.session = null;
-  res.redirect(process.env.REACT_APP_DEV_HOST);
+  res.redirect("http://localhost:3000");
 });
 
 // End Auth
