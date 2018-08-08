@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import LinearProgress from "@material-ui/core/LinearProgress";
 // Material UI
 
 import "./Settings.css";
@@ -25,7 +23,9 @@ class Settings extends Component {
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
       experience: 0,
-      profile_image: this.props.user[0].profile_image
+      profile_image: this.props.user[0].profile_image,
+      completed: 0,
+      percent: 0
     };
   }
   handleChange = name => event => {
@@ -50,6 +50,21 @@ class Settings extends Component {
       console.log(this.state.profile_image);
     }
   };
+
+  // progress bar
+  progress = percent => {
+    const { completed } = this.state;
+    if (completed === 100) {
+      window.setTimeout(() => this.setState({ completed: 0 }), 1000);
+    } else {
+      this.setState({
+        completed: percent
+      });
+    }
+  };
+
+  //end progress bar
+
   render() {
     let {
       last_name,
@@ -143,29 +158,22 @@ class Settings extends Component {
             </div>
           </form>
           <div />
-          <label htmlFor="outlined-button-file">
-            <ReactS3Uploader
-              style={{ display: "none" }}
-              signingUrl="/s3/sign"
-              signingUrlMethod="GET"
-              accept="image/*"
-              s3path=""
-              onProgress={this.progress}
-              onFinish={this.onPictureUpload}
-              contentDisposition="auto"
-              scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
-              inputRef={cmp => (this.uploadInput = cmp)}
-              server={process.env.REACT_APP_DEV_HOST}
-              autoUpload
-            />
-            <Button
-              variant="outlined"
-              component="span"
-              className={"settings__uploadButton"}
-            >
-              Upload
-            </Button>
-          </label>
+          <ReactS3Uploader
+            className="settings__uploadButton"
+            signingUrl="/s3/sign"
+            signingUrlMethod="GET"
+            accept="image/*"
+            s3path=""
+            onProgress={this.progress}
+            onFinish={this.onPictureUpload}
+            contentDisposition="auto"
+            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            inputRef={cmp => (this.uploadInput = cmp)}
+            server={process.env.REACT_APP_DEV_HOST}
+            autoUpload
+          />
+
+          <LinearProgress variant="determinate" value={this.state.completed} />
           <Button
             variant="outlined"
             color="primary"
