@@ -14,29 +14,36 @@ class Post extends Component {
     this.state = {
       title: '',
       body: '',
-      specialty: ''
+      specialty: 0,
+      price: 0
     };
   }
 
-  // onChangeHandlerFreelancer = e => {
-  //   console.log(`${e.target.name}: `, e.target.value);
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
+  componentDidMount() {
+    this.props.getUser();
+  }
 
-  // onChangeHandlerEmployer = ev => {
-  //   console.log(`${ev.target.name}: `, ev.target.value);
-  //   this.setState({
-  //     [ev.target.name]: ev.target.value
-  //   });
-  // };
+  handlePosts() {
+    this.props.getUser(this.state.id, {
+      role: this.state.user.role
+    });
+    // this.setState({
+
+    // })
+  }
+
+  // {this.state.user.role === 'Employer' && (
+
+  // )}
+
+  // {this.state.user.role === 'Freelancer' && (
+
+  // )}
 
   handleSpecialtyChange = specialty => event => {
     this.setState({
       [specialty]: event.target.value
     });
-    console.log(this.state);
   };
 
   render() {
@@ -46,27 +53,30 @@ class Post extends Component {
     return (
       <div>
         {/* create freelancer posting */}
+        <button onClick={() => console.log(this.state)} />
         <div className="freelancer__posting">
           <h2>Create Freelancer Posting</h2>
           <form>
-            <TextField
-              id="Title"
-              label="Title"
-              className={'freelancer__post__title__input'}
-              value={title}
-              onChange={e => this.setState({ title: e.target.value })}
-              margin="normal"
-            />
-
-            <TextField
-              id="Description"
-              label="Description"
-              className={'freelancer__post__body__input'}
-              value={body}
-              onChange={e => this.setState({ body: e.target.value })}
-              margin="normal"
-            />
-
+            <div>
+              <TextField
+                id="Title"
+                label="Title"
+                className={'freelancer__post__title__input'}
+                value={title}
+                onChange={e => this.setState({ title: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
+              <TextField
+                id="Description"
+                label="Description"
+                className={'freelancer__post__body__input'}
+                value={body}
+                onChange={e => this.setState({ body: e.target.value })}
+                margin="normal"
+              />
+            </div>
             <button
               onClick={() => {
                 this.props.addFreelancerPost(
@@ -86,49 +96,52 @@ class Post extends Component {
         <div className="employer__posting">
           <h2>Create Job Posting</h2>
           <form>
-            <TextField
-              id="Title"
-              label="Title"
-              className={'employer__post__title__input'}
-              value={title}
-              onChange={e => this.setState({ title: e.target.value })}
-              margin="normal"
-            />
+            <div>
+              <TextField
+                id="Title"
+                label="Title"
+                className={'employer__post__title__input'}
+                value={title}
+                onChange={e => this.setState({ title: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
+              <TextField
+                id="Description"
+                label="Description"
+                className={'employer__post__body__input'}
+                value={body}
+                onChange={e => this.setState({ body: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
+              <FormControl className={'form'}>
+                <NativeSelect
+                  className={'employer__post__specialty__input'}
+                  value={specialty}
+                  name="specialty"
+                  onChange={this.handleSpecialtyChange('specialty')}
+                >
+                  <option value="" disabled />
+                  <option value={'Developer'}> Developer </option>
+                  <option value={'Designer'}> Designer </option>
+                </NativeSelect>
+                <FormHelperText>Specialty: Choose one</FormHelperText>
+              </FormControl>
+            </div>
 
-            <TextField
-              id="Description"
-              label="Description"
-              className={'employer__post__body__input'}
-              value={body}
-              onChange={e => this.setState({ body: e.target.value })}
-              margin="normal"
-            />
-
-            <FormControl className={'form'}>
-              <NativeSelect
-                className={'employer__specialty__input'}
-                value={specialty}
-                name="specialty"
-                onChange={this.handleSpecialtyChange('specialty')}
-              >
-                <option value="" disabled>
-                  Specialty
-                </option>
-                <option value={0}> Developer </option>
-                <option value={1}> Designer </option>
-              </NativeSelect>
-              <FormHelperText>Choose one</FormHelperText>
-            </FormControl>
-
-            <TextField
-              id="Description"
-              label="Price $"
-              className={'employer__post__price__input'}
-              value={price}
-              onChange={e => this.setState({ price: e.target.value })}
-              margin="normal"
-            />
-
+            <div>
+              <TextField
+                id="Description"
+                label="Price $"
+                className={'employer__post__price__input'}
+                value={price}
+                onChange={e => this.setState({ price: e.target.value })}
+                margin="normal"
+              />
+            </div>
             <button
               onClick={() => {
                 this.props.addEmployerPost(
