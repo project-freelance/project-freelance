@@ -20,7 +20,7 @@ export default (
           <Main>
             <Switch>
               <Route path="/main/feed" component={Feed} />
-              <Route path="/main/profile" component={Profile} />
+              <Route path="/main/profile/:id" component={Profile} />
               <Route path="/main/settings" component={Settings} />
             </Switch>
           </Main>
