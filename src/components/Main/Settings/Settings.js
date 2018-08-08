@@ -47,7 +47,7 @@ class Settings extends Component {
       experience
     } = this.state;
     return (
-      <div>
+      <div className="settings__container">
         <h1>Settings</h1>
         <div>
           <img
@@ -56,8 +56,8 @@ class Settings extends Component {
             alt="User Profile Image"
           />
           <ul>
-            <li>First Name: {first_name} </li>
-            <li>Last Name: {last_name}</li>
+            <li>{first_name} </li>
+            <li>{last_name}</li>
           </ul>
         </div>
         <div>
@@ -110,6 +110,16 @@ class Settings extends Component {
           </form>
           <div />
         </div>
+        <TextField
+          hintText="MultiLine with rows: 2 and rowsMax: 4"
+          multiline={true}
+          rows={1}
+          rowsMax={4}
+          fullWidth
+          margin="normal"
+          placeholder="Placeholder"
+          helperText="Full width!"
+        />
         <button onClick={() => console.log(this.state)} />
       </div>
     );

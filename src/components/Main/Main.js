@@ -13,7 +13,7 @@ class Main extends Component {
   }
   componentDidMount() {
     this.props.getUser().then(() => {
-      console.log(this.props.user);
+      console.log(this.props.user[0]);
     });
   }
   render() {
