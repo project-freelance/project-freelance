@@ -6,7 +6,7 @@ class AddReview extends Component {
     super();
     this.state = {
       userInput: "",
-      time: new Datte(),
+      time: new Date(),
       rating: 0
     };
   }
