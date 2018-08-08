@@ -31,6 +31,7 @@ class Post extends Component {
   //     [ev.target.name]: ev.target.value
   //   });
   // };
+
   handleSpecialtyChange = specialty => event => {
     this.setState({
       [specialty]: event.target.value
@@ -41,7 +42,7 @@ class Post extends Component {
   render() {
     const { title, body, specialty, price } = this.state;
     // console.log(this.props.user[0] && this.props.user[0].id);
-    // console.log()
+
     return (
       <div>
         {/* create freelancer posting */}
@@ -83,7 +84,7 @@ class Post extends Component {
 
         {/* create employer posting */}
         <div className="employer__posting">
-          <h2>Create Employer Posting</h2>
+          <h2>Create Job Posting</h2>
           <form>
             <TextField
               id="Title"
@@ -103,15 +104,6 @@ class Post extends Component {
               margin="normal"
             />
 
-            {/* <TextField
-              id="Description"
-              label="Specialty"
-              className={'employer__post__specialty__input'}
-              value={specialty}
-              onChange={e => this.setState({ specialty: e.target.value })}
-              margin="normal"
-            /> */}
-
             <FormControl className={'form'}>
               <NativeSelect
                 className={'employer__specialty__input'}
@@ -130,30 +122,12 @@ class Post extends Component {
 
             <TextField
               id="Description"
-              label="Price"
+              label="Price $"
               className={'employer__post__price__input'}
               value={price}
               onChange={e => this.setState({ price: e.target.value })}
               margin="normal"
             />
-
-            {/* <FormControl className={'form'}>
-              <NativeSelect
-                className={'settings__experience__input'}
-                value={experience}
-                name="experience"
-                onChange={this.handleExperienceChange('experience')}
-              >
-                <option value="" disabled>
-                  experience
-                </option>
-                <option value={0}> 0 years</option>
-                <option value={1}> >1 year</option>
-                <option value={3}>1 - 3 years</option>
-                <option value={5}> >5 years</option>
-              </NativeSelect>
-              <FormHelperText>Experience</FormHelperText>
-            </FormControl> */}
 
             <button
               onClick={() => {
