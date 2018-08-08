@@ -36,15 +36,19 @@ class Feed extends Component {
 
         return (
           <div className="feed__userContainer" key={i}>
-            <div className="userProfile">
-              <img
-                src={user.profile_image}
-                alt="person"
-                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-              />
-              <p>{user.first_name}</p>
-              <p>{user.last_name}</p>
-              <p>{user.specialty}</p>
+            <div className="feed__userProfile">
+              <div className="feed__userImage">
+                <img
+                  src={user.profile_image}
+                  alt="person"
+                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                />
+              </div>
+              <div className="feed__userData">
+                <p>{user.first_name}</p>
+                <p>{user.last_name}</p>
+                <p>{user.specialty}</p>
+              </div>
             </div>
           </div>
         );
@@ -61,14 +65,25 @@ class Feed extends Component {
           if (user.id === post.user_id) {
             return (
               <div key={user.id}>
-                <img
-                  src={user.profile_image}
-                  alt="person"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-                />
-                <p>{user.first_name}</p>
-                <p>{user.last_name}</p>
-                <p>{user.specialty}</p>
+                <div>
+                  <img
+                    src={user.profile_image}
+                    alt="person"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%"
+                    }}
+                  />
+                </div>
+                <div>
+                  <p>
+                    {user.first_name}
+                    {user.last_name}
+                  </p>
+
+                  <p>{user.specialty}</p>
+                </div>
               </div>
             );
           } else {
@@ -78,15 +93,15 @@ class Feed extends Component {
 
         return (
           <div className="feed__freelancerPostContainer" key={i}>
-            <div className="freelancerProfile">
-              {/* <div>{userInfo}</div> */}
-            </div>
+            <div className="freelancerProfile" />
             <div className="feed__freelancerPosting">
               <div>{postUser}</div>
-              <h3>Freelancer Posting</h3>
-              <p>Post Title: {post.title}</p>
-              <p>Post Body: {post.body}</p>
-              <button>More Info</button>
+              <div>
+                <h3>Freelancer Posting</h3>
+                <p>Post Title: {post.title}</p>
+                <p>Post Body: {post.body}</p>
+                <button>More Info</button>
+              </div>
             </div>
           </div>
         );
@@ -106,6 +121,7 @@ class Feed extends Component {
                   alt="person"
                   style={{ width: "40px", height: "40px", borderRadius: "50%" }}
                 />
+
                 <p>{user.first_name}</p>
                 <p>{user.last_name}</p>
                 <p>{user.specialty}</p>
@@ -117,13 +133,18 @@ class Feed extends Component {
         });
         return (
           <div className="feed__employerPostContainer" key={i}>
-            <div>{postUser}</div>
-            <h3>Employer Posting</h3>
-            <p>Post Title:{post.title}</p>
-            <p>Post Body:{post.body}</p>
-            <p>Job:{post.specialty}</p>
-            <p>Pay: {post.price}</p>
-            <button>More Info</button>
+            <div className="feed__employerPosting">
+              <div>{postUser}</div>
+              <div>
+                <h3>Employer Posting</h3>
+                <p>Post Title:{post.title}</p>
+                <p>Post Body:{post.body}</p>
+                <p>Job:{post.specialty}</p>
+                <p>
+                  Pay: {post.price} <button>More Info</button>
+                </p>
+              </div>
+            </div>
           </div>
         );
       })
