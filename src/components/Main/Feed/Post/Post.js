@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addFreelancerPost } from '../../../../ducks/freelancerReducer';
 import { addEmployerPost } from '../../../../ducks/employerReducer';
+import { getUser } from '../../../../ducks/userReducer';
 
 class Post extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class Post extends Component {
     this.state = {
       title: '',
       body: '',
-      id: 0,
       specialty: '',
       price: 0
     };
@@ -30,100 +30,104 @@ class Post extends Component {
   };
 
   render() {
-    const { title, body, specialty, price, user_id } = this.state;
+    const { title, body, specialty, price } = this.state;
+    // console.log(this.props.user[0] && this.props.user[0].id);
     return (
       <div>
         {/* create freelancer posting */}
-        <div>
+        <div className="freelancer__posting">
           <h2>Create Freelancer Posting</h2>
-        </div>
-        <form>
-          <div>
-            Title:
-            <input
-              onChange={this.onChangeHandlerFreelancer}
-              name="title"
-              value={title}
-              placeholder="title..."
-            />
-          </div>
-          <div>
-            Description:
-            <input
-              onChange={this.onChangeHandlerFreelancer}
-              name="body"
-              value={body}
-              placeholder="description..."
-            />
-          </div>
+          <form>
+            <div>
+              Title:
+              <input
+                onChange={this.onChangeHandlerFreelancer}
+                name="title"
+                value={title}
+                placeholder="title..."
+              />
+            </div>
+            <div>
+              Description:
+              <input
+                onChange={this.onChangeHandlerFreelancer}
+                name="body"
+                value={body}
+                placeholder="description..."
+              />
+            </div>
 
-          <button
-            onClick={() => {
-              this.props.addFreelancerPost(title, body, user_id);
-            }}
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
+            <button
+              onClick={() => {
+                this.props.addFreelancerPost(
+                  title,
+                  body,
+                  this.props.user[0] && this.props.user[0].id
+                );
+              }}
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
 
         {/* create employer posting */}
-        <div>
+        <div className="employer__posting">
           <h2>Create Employer Posting</h2>
+          <form>
+            <div>
+              Title:
+              <input
+                onChange={this.onChangeHandlerEmployer}
+                name="title"
+                value={title}
+                placeholder="title..."
+              />
+            </div>
+            <div>
+              Description:
+              <input
+                onChange={this.onChangeHandlerEmployer}
+                name="body"
+                value={body}
+                placeholder="description..."
+              />
+            </div>
+            <div>
+              Specialty:
+              <input
+                onChange={this.onChangeHandlerEmployer}
+                name="specialty"
+                value={specialty}
+                placeholder="Developer or Designer..."
+              />
+            </div>
+            <div>
+              Price:
+              <input
+                onChange={this.onChangeHandlerEmployer}
+                name="price"
+                value={price}
+                placeholder="price..."
+              />
+            </div>
+            <button
+              onClick={() => {
+                this.props.addEmployerPost(
+                  title,
+                  body,
+                  specialty,
+                  price,
+                  this.props.user[0] && this.props.user[0].id
+                );
+              }}
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-        <form>
-          <div>
-            Title:
-            <input
-              onChange={this.onChangeHandlerEmployer}
-              name="title"
-              value={title}
-              placeholder="title..."
-            />
-          </div>
-          <div>
-            Description:
-            <input
-              onChange={this.onChangeHandlerEmployer}
-              name="body"
-              value={body}
-              placeholder="description..."
-            />
-          </div>
-          <div>
-            Specialty:
-            <input
-              onChange={this.onChangeHandlerEmployer}
-              name="specialty"
-              value={specialty}
-              placeholder="specialty..."
-            />
-          </div>
-          <div>
-            Price:
-            <input
-              onChange={this.onChangeHandlerEmployer}
-              name="price"
-              value={price}
-              placeholder="price..."
-            />
-          </div>
-
-          <button
-            onClick={() => {
-              this.props.addEmployerPost(
-                title,
-                body,
-                specialty,
-                price,
-                user_id
-              );
-            }}
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
       </div>
     );
   }
@@ -132,10 +136,11 @@ class Post extends Component {
 function mapStateToProps(state) {
   return {
     freelancerPosts: state.freelancerReducer.freelancerPosts,
-    employerPosts: state.employerReducer.employerPosts
+    employerPosts: state.employerReducer.employerPosts,
+    user: state.userReducer.user
   };
 }
 export default connect(
   mapStateToProps,
-  { addFreelancerPost, addEmployerPost }
+  { addFreelancerPost, addEmployerPost, getUser }
 )(Post);
