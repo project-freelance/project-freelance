@@ -31,13 +31,14 @@ class AddReview extends Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
+    console.log(this.props[0] && this.props[0].first_name);
     // console.log(this.props[0] && this.props[0].email);
     // console.log(this.state);
     // console.log(typeof this.props.loggedInUser[0].id);
     return (
       <div>
-        <div>Leave Review of {this.props.name}</div>
+        <div>Leave Review of {this.props[0] && this.props[0].first_name}</div>
         <input
           onChange={e => this.changeHandler(e)}
           placeholder="Enter review here"
