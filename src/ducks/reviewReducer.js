@@ -20,13 +20,14 @@ export function deleteReview(id) {
   };
 }
 
-export function addReview(review, user_id, review_id, moment, rating) {
+export function addReview(review, user_id, reviewer_id, moment, rating) {
+  // console.log(review, user_id, review_id, moment, rating);
   return {
     type: ADD_REVIEW,
     payload: axios.post(`/api/review/`, {
       review,
       user_id,
-      review_id,
+      reviewer_id,
       moment,
       rating
     })
@@ -84,9 +85,11 @@ export default function reviewReducer(state = initialState, action) {
         isLoading: true
       };
     case `${ADD_REVIEW}_FULFILLED`:
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
+
         reviews: action.payload.data
       };
     case `${ADD_REVIEW}_REJECTED`:

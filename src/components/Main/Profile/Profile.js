@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
 import AddReview from "./Reviews/AddReview/AddReview";
+import { getUser } from "../../../ducks/userReducer";
 class Profile extends Component {
   componentDidMount() {
     this.props.getFreelancer(this.props.match.params.id);
+    this.props.getUser();
   }
 
   render() {
@@ -56,15 +58,23 @@ class Profile extends Component {
           </button>
           <button>Add Review/Rating</button>
         </div>
-        <AddReview name={`${freelancer[0] && freelancer[0].first_name}`} />
+        <AddReview
+          {...freelancer}
+          // beingReviewed={`${freelancer[0] && freelancer[0].first_name}`}
+          // beingReviewed={`${(...freelancer)}`}
+          loggedInUser={this.props.user}
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ freelancerReducer }) => ({ ...freelancerReducer });
+const mapStateToProps = ({ freelancerReducer, userReducer }) => ({
+  ...freelancerReducer,
+  ...userReducer
+});
 
 export default connect(
   mapStateToProps,
-  { getFreelancer }
+  { getFreelancer, getUser }
 )(Profile);
