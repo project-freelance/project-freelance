@@ -143,21 +143,37 @@ class Settings extends Component {
             </div>
           </form>
           <div />
-          <ReactS3Uploader
-            signingUrl="/s3/sign"
-            signingUrlMethod="GET"
-            accept="image/*"
-            s3path=""
-            onProgress={this.progress}
-            onFinish={this.onPictureUpload}
-            contentDisposition="auto"
-            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
-            inputRef={cmp => (this.uploadInput = cmp)}
-            server={process.env.REACT_APP_DEV_HOST}
-            autoUpload
-          />
+          <label htmlFor="outlined-button-file">
+            <ReactS3Uploader
+              style={{ display: "none" }}
+              signingUrl="/s3/sign"
+              signingUrlMethod="GET"
+              accept="image/*"
+              s3path=""
+              onProgress={this.progress}
+              onFinish={this.onPictureUpload}
+              contentDisposition="auto"
+              scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+              inputRef={cmp => (this.uploadInput = cmp)}
+              server={process.env.REACT_APP_DEV_HOST}
+              autoUpload
+            />
+            <Button
+              variant="outlined"
+              component="span"
+              className={"settings__uploadButton"}
+            >
+              Upload
+            </Button>
+          </label>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={"settings__saveButton"}
+          >
+            Save
+          </Button>
         </div>
-
         {/* <button onClick={() => console.log(this.state)} /> */}
       </div>
     );
