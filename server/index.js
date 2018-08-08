@@ -90,6 +90,7 @@ app.get("/logout", (req, res, next) => {
 
 // user
 app.get("/api/user", userCtrl.getCurrentUser);
+app.get("/api/users", userCtrl.getUsers);
 app.put("/api/user/role/:id", userCtrl.updateRole);
 app.put("/api/user/specialty/:id", userCtrl.updateSpecialty);
 // app.post("/api/user-profile", authCtrl.createUserProfile);

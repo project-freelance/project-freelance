@@ -2,6 +2,7 @@ import axios from "axios";
 
 //constants
 const GET_USER = "GET_USER";
+const GET_USERS = "GET_USERS";
 const UPDATE_ROLE = "UPDATE_ROLE";
 const UPDATE_SPECIALTY = "UPDATE_SPECIALTY";
 
@@ -10,6 +11,12 @@ export function getUser() {
   return {
     type: GET_USER,
     payload: axios.get("/api/user")
+  };
+}
+export function getUsers() {
+  return {
+    type: GET_USERS,
+    payload: axios.get("/api/users")
   };
 }
 export function updateRole(id, role) {
@@ -28,6 +35,7 @@ export function updateSpecialty(id, specialty) {
 //initial state
 const initialState = {
   user: [],
+  users: [],
   loading: false
 };
 
@@ -47,6 +55,23 @@ export default function userReducer(state = initialState, action) {
         loading: false
       };
     case `${GET_USER}_REJECTED`:
+      return {
+        ...state,
+        loading: false
+      };
+
+    case `${GET_USERS}_PENDING`:
+      return {
+        ...state,
+        loading: true
+      };
+    case `${GET_USERS}_FULFILLED`:
+      return {
+        ...state,
+        users: action.payload.data,
+        loading: false
+      };
+    case `${GET_USERS}_REJECTED`:
       return {
         ...state,
         loading: false
