@@ -9,6 +9,7 @@ class Feed extends Component {
   componentDidMount() {
     this.props.getEmployerPosts();
     this.props.getFreelancerPosts();
+    this.props.getUsers();
   }
 
   render() {
@@ -19,6 +20,7 @@ class Feed extends Component {
     ) : (
       freelancerPosts.map((post, i) => {
         console.log(post.user_id);
+        console.log(this.props.users);
         return (
           <div className="feed__freelancerPostContainer" key={i}>
             <div className="freelancerProfile">
