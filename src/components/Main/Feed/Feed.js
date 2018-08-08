@@ -6,25 +6,60 @@ import { getUsers } from "../../../ducks/userReducer";
 import "../Feed/Feed.css";
 
 class Feed extends Component {
+  constructor() {
+    super();
+    this.state = {
+      users: []
+    };
+  }
+
   componentDidMount() {
     this.props.getEmployerPosts();
     this.props.getFreelancerPosts();
-    this.props.getUsers();
+    this.props.getUsers().then(result => {
+      this.setState({
+        users: result.value.data
+      });
+      console.log(this.state.users);
+    });
   }
 
   render() {
     let { employerPosts, freelancerPosts, isLoading, users } = this.props;
 
+    let userInfo = isLoading ? (
+      <p>Loading...</p>
+    ) : (
+      users.map((user, i) => {
+        //console.log(user);
+        return (
+          <div className="feed__userContainer" key={i}>
+            <div className="userProfile">
+              <img
+                src={user.profile_image}
+                alt="person"
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+              />
+              <p>{user.first_name}</p>
+              <p>{user.last_name}</p>
+              <p>{user.specialty}</p>
+              <p>{user.id}</p>
+            </div>
+          </div>
+        );
+      })
+    );
+
     freelancerPosts = isLoading ? (
       <p>Loading...</p>
     ) : (
       freelancerPosts.map((post, i) => {
-        console.log(post.user_id);
-        console.log(this.props.users);
+        // console.log(post.user_id);
+        //console.log(userInfo);
         return (
           <div className="feed__freelancerPostContainer" key={i}>
             <div className="freelancerProfile">
-              <div>Image</div>
+              <div>{userInfo}</div>
             </div>
             <div className="feed__freelancerPosting">
               <h3>Freelancer Posting</h3>
