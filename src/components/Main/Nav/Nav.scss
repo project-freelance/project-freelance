@@ -1,0 +1,33 @@
+.nav__container {
+  margin-top: 3vh;
+  color: white;
+  text-transform: capitalize;
+  .nav__bar {
+  }
+  .nav__accountImage {
+    .nav__profileImage {
+      width: 100px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 50px;
+    }
+  }
+  .nav__links {
+    color: white;
+    &:hover {
+      color: lightblue;
+      pointer: cursor;
+    }
+  }
+  a:visited {
+    color: white;
+  }
+
+  a:hover {
+    color: hotpink;
+  }
+
+  a:active {
+    color: blue;
+  }
+}
