@@ -7,20 +7,65 @@ class Post extends Component {
     super(props);
     this.state = {
       title: '',
-      body: ''
+      body: '',
+      id: 0
     };
   }
+
+  onChangeHandler = e => {
+    console.log(`${e.target.name}: `, e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   render() {
+    const { title, body } = this.state;
     return (
       <div>
-        <div>Create Freelancer Posting</div>
-        <div>Post Title:</div>
-        <div>Post Description:</div>
-        <button>Cancel</button>
-        <button>Submit</button>
+        <div>
+          <h2>Create Freelancer Posting</h2>
+        </div>
+        <form>
+          <div>
+            Post Title:
+            <input
+              onChange={this.onChangeHandler}
+              name="title"
+              value={title}
+              placeholder="title..."
+            />
+          </div>
+          <div>
+            Post Description:
+            <input
+              onChange={this.onChangeHandler}
+              name="description"
+              value={body}
+              placeholder="description..."
+            />
+          </div>
+          <button>Cancel</button>
+          <button
+            onClick={() => {
+              this.props.addFreelancerPost(title, body);
+            }}
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     );
   }
 }
 
-export default Post;
+function mapStateToProps(state) {
+  return {
+    freelancerPosts: state.freelancerReducer.freelancerPosts
+  };
+}
+export default connect(
+  mapStateToProps,
+  { addFreelancerPost }
+)(Post);
