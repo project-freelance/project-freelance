@@ -26,7 +26,8 @@
     "react-scripts": "1.1.4",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.0",
-    "redux-promise-middleware": "^5.1.1"
+    "redux-promise-middleware": "^5.1.1",
+    "semantic-ui-react": "^0.82.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -39,5 +40,5 @@
     "eject": "react-scripts eject"
   },
   "main": "server/index.js",
- "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001"
 }

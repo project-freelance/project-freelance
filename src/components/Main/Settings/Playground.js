@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getUser } from '../../../ducks/userReducer';
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,14 +14,14 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import './Settings.css';
 
 class Settings extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      first_name: this.props.user[0].first_name,
-      last_name: this.props.user[0].last_name,
-      email: this.props.user[0].email,
-      experience: 0,
-      profile_image: this.props.user[0].profile_image
+      first_name: 'Cat in the Hat',
+      last_name: '',
+      email: '',
+      age: '',
+      experience: 0
     };
   }
   handleChange = name => event => {
@@ -39,27 +37,9 @@ class Settings extends Component {
     console.log(this.state);
   };
   render() {
-    let {
-      last_name,
-      first_name,
-      email,
-      profile_image,
-      experience
-    } = this.state;
     return (
-      <div className="settings__container">
+      <div>
         <h1>Settings</h1>
-        <div>
-          <img
-            className="settings__profileImage"
-            src={profile_image}
-            alt="User Profile Image"
-          />
-          <ul>
-            <li>{first_name} </li>
-            <li>{last_name}</li>
-          </ul>
-        </div>
         <div>
           <form
             className={'settings__formContainer'}
@@ -67,33 +47,33 @@ class Settings extends Component {
             autoComplete="off"
           >
             <TextField
-              id="First Name"
+              id="name"
               label="First Name"
-              className={'settings__firstName__input'}
-              value={first_name}
-              onChange={e => this.setState({ first_name: e.target.value })}
+              className={'hellow World'}
+              value={this.state.name}
+              onChange={this.handleChange('name')}
               margin="normal"
             />
             <TextField
-              id="Last Name"
+              id="name"
               label="Last Name"
-              className={'settings__lastname__input'}
-              value={last_name}
-              onChange={e => this.setState({ last_name: e.target.value })}
+              className={'hellow World'}
+              value={this.state.name}
+              onChange={this.handleChange('name')}
               margin="normal"
             />
             <TextField
               id="name"
               label="email"
-              className={'settings__email__input'}
-              value={email}
-              onChange={e => this.setState({ email: e.target.value })}
+              className={'hellow World'}
+              value={this.state.name}
+              onChange={this.handleChange('name')}
               margin="normal"
             />
             <FormControl className={'form'}>
               <NativeSelect
-                className={'settings__experience__input'}
-                value={experience}
+                className={'form'}
+                value={this.state.experience}
                 name="experience"
                 onChange={this.handleExperienceChange('experience')}
               >
@@ -110,28 +90,10 @@ class Settings extends Component {
           </form>
           <div />
         </div>
-        <TextField
-          hintText="MultiLine with rows: 2 and rowsMax: 4"
-          multiline={true}
-          rows={1}
-          rowsMax={4}
-          fullWidth
-          margin="normal"
-          placeholder="Placeholder"
-          helperText="Full width!"
-        />
         <button onClick={() => console.log(this.state)} />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.userReducer.user
-  };
-}
-export default connect(
-  mapStateToProps,
-  { getUser }
-)(Settings);
+export default Settings;

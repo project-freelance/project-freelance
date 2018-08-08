@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../ducks/employerReducer";
-import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
-import { getUsers } from "../../../ducks/userReducer";
-import "../Feed/Feed.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployerPosts } from '../../../ducks/employerReducer';
+import { getFreelancerPosts } from '../../../ducks/freelancerReducer';
+import { getUsers } from '../../../ducks/userReducer';
+import '../Feed/Feed.css';
 
 class Feed extends Component {
   constructor() {
