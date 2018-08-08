@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
@@ -13,9 +14,24 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import NativeSelect from "@material-ui/core/NativeSelect";
+=======
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getUser } from '../../../ducks/userReducer';
+// Material UI
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+>>>>>>> master
 // Material UI
 
-import "./Settings.css";
+import './Settings.css';
 
 class Settings extends Component {
   constructor(props) {
@@ -85,10 +101,11 @@ class Settings extends Component {
         </div>
         <div className="settings__info">
           <form
-            className={"settings__formContainer"}
+            className={'settings__formContainer'}
             noValidate
             autoComplete="off"
           >
+<<<<<<< HEAD
             <div>
               <TextField
                 id="First Name"
@@ -141,6 +158,49 @@ class Settings extends Component {
                 <FormHelperText>Experience</FormHelperText>
               </FormControl>
             </div>
+=======
+            <TextField
+              id="First Name"
+              label="First Name"
+              className={'settings__firstName__input'}
+              value={first_name}
+              onChange={e => this.setState({ first_name: e.target.value })}
+              margin="normal"
+            />
+            <TextField
+              id="Last Name"
+              label="Last Name"
+              className={'settings__lastname__input'}
+              value={last_name}
+              onChange={e => this.setState({ last_name: e.target.value })}
+              margin="normal"
+            />
+            <TextField
+              id="name"
+              label="email"
+              className={'settings__email__input'}
+              value={email}
+              onChange={e => this.setState({ email: e.target.value })}
+              margin="normal"
+            />
+            <FormControl className={'form'}>
+              <NativeSelect
+                className={'settings__experience__input'}
+                value={experience}
+                name="experience"
+                onChange={this.handleExperienceChange('experience')}
+              >
+                <option value="" disabled>
+                  experience
+                </option>
+                <option value={0}> 0 years</option>
+                <option value={1}> >1 year</option>
+                <option value={3}>1 - 3 years</option>
+                <option value={5}> >5 years</option>
+              </NativeSelect>
+              <FormHelperText>Experience</FormHelperText>
+            </FormControl>
+>>>>>>> master
           </form>
           <div />
           <ReactS3Uploader
