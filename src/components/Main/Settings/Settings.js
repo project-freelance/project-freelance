@@ -178,7 +178,6 @@ class Settings extends Component {
           </form>
           <div />
           <ReactS3Uploader
-            // className="settings__uploadButton"
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
             accept="image/*"
@@ -190,7 +189,6 @@ class Settings extends Component {
             inputRef={cmp => (this.uploadInput = cmp)}
             server={process.env.REACT_APP_DEV_HOST}
             autoUpload
-            onError={this.logError}
           />
 
           <LinearProgress variant="determinate" value={this.state.completed} />
