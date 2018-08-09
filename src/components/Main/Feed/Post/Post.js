@@ -15,6 +15,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import './Post.css';
 
+import Icon from '@material-ui/core/Icon';
+
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +59,7 @@ class Post extends Component {
 
         {/* Modal Posting Button */}
 
-        <Button onClick={this.handleClickOpen}>Create Posting</Button>
+        <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button>
         <Dialog
           className="post__job__modal"
           open={this.state.open}
@@ -74,7 +76,7 @@ class Post extends Component {
                   <div className="freelancer__posting">
                     <h2>Create Freelancer Posting</h2>
                     <form>
-                      <div>
+                      <div className="freelancer__post__title">
                         <TextField
                           id="Title"
                           label="Title"
@@ -86,7 +88,7 @@ class Post extends Component {
                           margin="normal"
                         />
                       </div>
-                      <div>
+                      <div className="freelancer__post__body">
                         <TextField
                           id="Description"
                           label="Description"
@@ -98,23 +100,32 @@ class Post extends Component {
                           margin="normal"
                         />
                       </div>
-                      <Button onClick={this.handleClose} color="primary">
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          this.handleClose,
-                            this.props.addFreelancerPost(
-                              title,
-                              body,
-                              this.props.user[0] && this.props.user[0].id
-                            );
-                        }}
-                        type="submit"
-                        color="primary"
-                      >
-                        Submit
-                      </Button>
+                      <div className="freelancer__post__buttons">
+                        <Button
+                          style={{
+                            backgroundColor: '#FF4500'
+                          }}
+                          onClick={this.handleClose}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          style={{
+                            backgroundColor: '#00FF7F'
+                          }}
+                          onClick={() => {
+                            this.handleClose,
+                              this.props.addFreelancerPost(
+                                title,
+                                body,
+                                this.props.user[0] && this.props.user[0].id
+                              );
+                          }}
+                          type="submit"
+                        >
+                          Submit
+                        </Button>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -182,10 +193,18 @@ class Post extends Component {
                         />
                       </div>
                       <div className="employer__post__buttons">
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button
+                          style={{
+                            backgroundColor: '#FF4500'
+                          }}
+                          onClick={this.handleClose}
+                        >
                           Cancel
                         </Button>
                         <Button
+                          style={{
+                            backgroundColor: '#00FF7F'
+                          }}
                           onClick={() => {
                             this.handleClose,
                               this.props.addEmployerPost(
@@ -197,7 +216,6 @@ class Post extends Component {
                               );
                           }}
                           type="submit"
-                          color="primary"
                         >
                           Submit
                         </Button>

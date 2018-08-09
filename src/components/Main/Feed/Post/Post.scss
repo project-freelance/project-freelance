@@ -6,12 +6,32 @@
   flex-direction: column;
 }
 
+.freelancer__post__buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.employer__post__buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .employer__posting {
-  height: 300px;
+  height: 350px;
   width: 400px;
   margin: auto;
   padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.employer__post__title,
+.employer__post__body,
+.employer__post__specialty,
+.employer__post__price {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
