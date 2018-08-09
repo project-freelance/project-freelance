@@ -91,7 +91,7 @@ app.get("/logout", (req, res, next) => {
 app.use(
   "/s3",
   require("react-s3-uploader/s3router")({
-    bucket: "upply-userprofile",
+    bucket: process.env.AWS_S3_URL,
     region: "us-east-2", //optional
     signatureVersion: "v4", //optional (use for some amazon regions: frankfurt and others)
     headers: { "Access-Control-Allow-Origin": "*" }, // optional
