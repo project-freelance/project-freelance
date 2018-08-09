@@ -219,7 +219,8 @@ class Post extends Component {
                                 body,
                                 specialty,
                                 price,
-                                this.props.user[0] && this.props.user[0].id
+                                this.props.user[0] && this.props.user[0].id,
+                                time
                               );
                           }}
                           type="submit"
