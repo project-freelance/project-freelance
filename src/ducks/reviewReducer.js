@@ -4,6 +4,7 @@ import axios from "axios";
 const GET_REVIEWS = "GET_REVIEWS";
 const DELETE_REVIEW = "DELETE_REVIEW";
 const ADD_REVIEW = "ADD_REVIEW";
+const GET_AVG_RATING = "GET_AVG_RATING";
 
 //action creators
 export function getReviews() {
@@ -34,9 +35,17 @@ export function addReview(review, user_id, reviewer_id, moment, rating) {
   };
 }
 
+export function getAvgRating(id) {
+  return {
+    type: GET_AVG_RATING,
+    payload: axios.get(`/api/rating/${id}`)
+  };
+}
+
 //initial state
 const initialState = {
   reviews: [],
+  rating: [],
   isLoading: false
 };
 
@@ -97,6 +106,24 @@ export default function reviewReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         error: action.payload
+      };
+
+    case `${GET_AVG_RATING}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${GET_AVG_RATING}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        rating: action.payload.data
+      };
+    case `${GET_AVG_RATING}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.data
       };
 
     default:

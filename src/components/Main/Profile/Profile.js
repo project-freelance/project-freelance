@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
 import AddReview from "./Reviews/AddReview/AddReview";
 import { getUser } from "../../../ducks/userReducer";
+import { getAvgRating } from "../../../ducks/reviewReducer";
 import EmployerProfile from "./EmployerProfile";
 import Portfolio from "./Portfolio/Portfolio";
 class Profile extends Component {
   componentDidMount() {
     this.props.getFreelancer(this.props.match.params.id);
     this.props.getUser();
+    this.props.getAvgRating(this.props.match.params.id);
   }
 
   render() {
@@ -76,12 +78,17 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ freelancerReducer, userReducer }) => ({
+const mapStateToProps = ({
+  freelancerReducer,
+  userReducer,
+  reviewReducer
+}) => ({
   ...freelancerReducer,
-  ...userReducer
+  ...userReducer,
+  ...reviewReducer
 });
 
 export default connect(
   mapStateToProps,
-  { getFreelancer, getUser }
+  { getFreelancer, getUser, getAvgRating }
 )(Profile);
