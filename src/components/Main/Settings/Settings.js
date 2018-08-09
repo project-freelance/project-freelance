@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
+import { updateUser } from "../../../ducks/userReducer";
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
+
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import LinearProgress from "@material-ui/core/LinearProgress";
 // Material UI
 
 import "./Settings.css";
@@ -25,7 +23,11 @@ class Settings extends Component {
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
       experience: 0,
-      profile_image: this.props.user[0].profile_image
+      city: "",
+      profile_image: this.props.user[0].profile_image,
+      completed: 0,
+      percent: 0,
+      bio: ""
     };
   }
   handleChange = name => event => {
@@ -46,17 +48,38 @@ class Settings extends Component {
         s3.filename
       }`
     });
-    {
-      console.log(this.state.profile_image);
+  };
+  onSaveHandler = () => {
+    this.props.updateUser(this.state);
+  };
+
+  // progress bar
+  progress = percent => {
+    console.log(percent);
+    const { completed } = this.state;
+    if (completed === 100) {
+      window.setTimeout(() => this.setState({ completed: 0 }), 1000);
+    } else {
+      this.setState({
+        completed: percent
+      });
     }
   };
+  logError = e => {
+    console.log(e);
+  };
+
+  //end progress bar
+
   render() {
     let {
       last_name,
       first_name,
       email,
       profile_image,
-      experience
+      experience,
+      city,
+      bio
     } = this.state;
     return (
       <div className="settings__container">
@@ -81,6 +104,8 @@ class Settings extends Component {
             margin="normal"
             placeholder="Placeholder"
             helperText="Full width!"
+            value={bio}
+            onChange={e => this.setState({ bio: e.target.value })}
           />
         </div>
         <div className="settings__info">
@@ -123,6 +148,17 @@ class Settings extends Component {
               />
             </div>
             <div>
+              <TextField
+                id="name"
+                label="city"
+                fullWidth
+                className={"settings__city__input"}
+                value={city}
+                onChange={e => this.setState({ city: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
               <FormControl className={"form"}>
                 <NativeSelect
                   className={"settings__experience__input"}
@@ -143,33 +179,28 @@ class Settings extends Component {
             </div>
           </form>
           <div />
-          <label htmlFor="outlined-button-file">
-            <ReactS3Uploader
-              style={{ display: "none" }}
-              signingUrl="/s3/sign"
-              signingUrlMethod="GET"
-              accept="image/*"
-              s3path=""
-              onProgress={this.progress}
-              onFinish={this.onPictureUpload}
-              contentDisposition="auto"
-              scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
-              inputRef={cmp => (this.uploadInput = cmp)}
-              server={process.env.REACT_APP_DEV_HOST}
-              autoUpload
-            />
-            <Button
-              variant="outlined"
-              component="span"
-              className={"settings__uploadButton"}
-            >
-              Upload
-            </Button>
-          </label>
+          <ReactS3Uploader
+            // className="settings__uploadButton"
+            signingUrl="/s3/sign"
+            signingUrlMethod="GET"
+            accept="image/*"
+            s3path=""
+            onProgress={this.progress}
+            onFinish={this.onPictureUpload}
+            contentDisposition="auto"
+            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            inputRef={cmp => (this.uploadInput = cmp)}
+            server={process.env.REACT_APP_DEV_HOST}
+            autoUpload
+            onError={this.logError}
+          />
+
+          <LinearProgress variant="determinate" value={this.state.completed} />
           <Button
             variant="outlined"
             color="primary"
             className={"settings__saveButton"}
+            onClick={this.onSaveHandler}
           >
             Save
           </Button>
@@ -187,5 +218,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, updateUser }
 )(Settings);

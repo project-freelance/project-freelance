@@ -27,5 +27,17 @@ module.exports = {
       .then(users => res.status(200).send(users))
       .catch(err => res.status(500).send({ errorMessage: "oops" }));
   },
-  updateUser: (req, res, next) => {}
+  updateUser: (req, res, next) => {
+    let db = req.app.get("db");
+    const { id } = req.session.user;
+    let { first_name, last_name, email, profile_image } = req.body;
+    console.log(first_name, last_name, email, profile_image);
+    console.log(id);
+    db.user
+      .updateUser([id, first_name, last_name, email, profile_image])
+      .then(user => res.status(200).send(user))
+      .catch(err =>
+        res.status(500).send({ errorMessage: "Couldnt update user" })
+      );
+  }
 };
