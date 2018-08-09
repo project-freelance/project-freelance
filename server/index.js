@@ -107,6 +107,7 @@ app.get("/api/user", userCtrl.getCurrentUser);
 app.get("/api/users", userCtrl.getUsers);
 app.put("/api/user/role/:id", userCtrl.updateRole);
 app.put("/api/user/specialty/:id", userCtrl.updateSpecialty);
+app.put("/api/user", userCtrl.updateUser);
 // app.post("/api/user-profile", authCtrl.createUserProfile);
 
 // employer
@@ -145,8 +146,9 @@ app.delete("/api/portfolio/:id", portfolioCtrl.deletePortfolio);
 
 // reviews
 app.get("/api/reviews", reviewCtrl.getReviews);
-app.get("/api/rating", reviewCtrl.getAvgRating);
 app.post("/api/review", reviewCtrl.addReview);
 app.delete("/api/review/:id", reviewCtrl.deleteReview);
+
+app.get("/api/rating/:id", reviewCtrl.getAvgRating);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
