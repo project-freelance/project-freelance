@@ -1,6 +1,9 @@
 .setup__container {
-  background-color: #424242;
-  height: auto;
-  width: auto;
+  padding-top: 20vh;
+  background-color: rgb(61, 61, 64);
+  height: 100vh;
+  width: 100vw;
   color: white;
+  display: flex;
+  flex-direction: column;
 }

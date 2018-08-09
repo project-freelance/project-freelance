@@ -74,19 +74,31 @@ class Setup extends Component {
   }
 
   render() {
+    let btn_class = this.state.black ? "blackButton" : "whiteButton";
+
     return (
       <div className="setup__container">
         <h1>Are you a Freelancer or an Employer?</h1>
 
         <div className="setup__chooseRole">
           <Button
-            style={{ backgroundColor: "#0D47A1", color: "white" }}
-            onClick={() => this.chooseFreelancer()}
+            className={btn_class}
+            style={{
+              backgroundColor: this.state.freelancerClicked ? "red" : "blue",
+              color: "white",
+              marginRight: "20px"
+            }}
+            onClick={() => {
+              this.chooseFreelancer();
+            }}
           >
             Freelancer
           </Button>
           <Button
-            style={{ backgroundColor: "#0D47A1", color: "white" }}
+            style={{
+              backgroundColor: "#0D47A1",
+              color: "white"
+            }}
             onClick={() => this.chooseEmployer()}
           >
             Employer
@@ -97,7 +109,15 @@ class Setup extends Component {
         {this.state.employerClicked && (
           <div className="setup__next">
             <Link to="/main/settings">
-              <Button>Next</Button>
+              <Button
+                style={{
+                  backgroundColor: "#0D47A1",
+                  color: "white",
+                  marginTop: "20px"
+                }}
+              >
+                Next
+              </Button>
             </Link>
           </div>
         )}
@@ -107,7 +127,11 @@ class Setup extends Component {
           <div className="setup__chooseSpecialty">
             <h2> Are you a Developer or a Designer?</h2>
             <Button
-              style={{ backgroundColor: "#0D47A1", color: "white" }}
+              style={{
+                backgroundColor: "#0D47A1",
+                color: "white",
+                marginRight: "20px"
+              }}
               onClick={() => this.chooseDeveloper()}
             >
               Developer
@@ -126,7 +150,13 @@ class Setup extends Component {
           (this.state.developerClicked || this.state.designerClicked) && (
             <div className="setup__next">
               <Link to="/main/settings">
-                <Button style={{ backgroundColor: "#0D47A1", color: "white" }}>
+                <Button
+                  style={{
+                    backgroundColor: "#0D47A1",
+                    color: "white",
+                    marginTop: "20px"
+                  }}
+                >
                   Next
                 </Button>
               </Link>
