@@ -27,6 +27,7 @@ module.exports = {
       .then(users => res.status(200).send(users))
       .catch(err => res.status(500).send({ errorMessage: "oops" }));
   },
+<<<<<<< HEAD
   updateUser: (req, res, next) => {
     let db = req.app.get("db");
     const { id } = req.session.user;
@@ -38,4 +39,7 @@ module.exports = {
         res.status(500).send({ errorMessage: "Couldnt update user" })
       );
   }
+=======
+  updateUser: (req, res, next) => {}
+>>>>>>> master
 };
