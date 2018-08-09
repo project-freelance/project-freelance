@@ -145,6 +145,7 @@ app.delete("/api/portfolio/:id", portfolioCtrl.deletePortfolio);
 
 // reviews
 app.get("/api/reviews", reviewCtrl.getReviews);
+app.get("/api/rating", reviewCtrl.getAvgRating);
 app.post("/api/review", reviewCtrl.addReview);
 app.delete("/api/review/:id", reviewCtrl.deleteReview);
 

@@ -25,6 +25,13 @@ module.exports = {
     });
   },
 
+  getAvgRating: (req, res, next) => {
+    let db = req.app.get("db");
+    db.reviews.getAvgRating().then(ratings => {
+      return res.status(200).send(ratings);
+    });
+  },
+
   deleteReview: (req, res, next) => {
     let db = req.app.get("db");
     db.reviews.deleteReview(req.params.id).then(() => {
