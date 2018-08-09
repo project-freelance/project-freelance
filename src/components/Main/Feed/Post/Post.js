@@ -7,6 +7,12 @@ import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 class Post extends Component {
   constructor(props) {
@@ -15,7 +21,8 @@ class Post extends Component {
       title: '',
       body: '',
       specialty: 0,
-      price: 0
+      price: 0,
+      open: false
     };
   }
 
@@ -24,6 +31,14 @@ class Post extends Component {
     // console.log(this.props.user[0] && this.props.user[0].role);
     this.props.getUser();
   }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   handleSpecialtyChange = specialty => event => {
     this.setState({
