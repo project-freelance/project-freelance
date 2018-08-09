@@ -23,9 +23,11 @@ class Settings extends Component {
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
       experience: 0,
+      city: "",
       profile_image: this.props.user[0].profile_image,
       completed: 0,
-      percent: 0
+      percent: 0,
+      bio: ""
     };
   }
   handleChange = name => event => {
@@ -46,9 +48,6 @@ class Settings extends Component {
         s3.filename
       }`
     });
-    {
-      console.log(this.state.profile_image);
-    }
   };
   onSaveHandler = () => {
     this.props.updateUser(this.state);
@@ -56,6 +55,7 @@ class Settings extends Component {
 
   // progress bar
   progress = percent => {
+    console.log(percent);
     const { completed } = this.state;
     if (completed === 100) {
       window.setTimeout(() => this.setState({ completed: 0 }), 1000);
@@ -64,6 +64,9 @@ class Settings extends Component {
         completed: percent
       });
     }
+  };
+  logError = e => {
+    console.log(e);
   };
 
   //end progress bar
@@ -74,7 +77,9 @@ class Settings extends Component {
       first_name,
       email,
       profile_image,
-      experience
+      experience,
+      city,
+      bio
     } = this.state;
     return (
       <div className="settings__container">
@@ -99,15 +104,9 @@ class Settings extends Component {
             margin="normal"
             placeholder="Placeholder"
             helperText="Full width!"
+            value={bio}
+            onChange={e => this.setState({ bio: e.target.value })}
           />
-          <Button
-            variant="outlined"
-            color="primary"
-            className={"settings__saveButton"}
-            onClick={this.onSaveHandler}
-          >
-            Save
-          </Button>
         </div>
         <div className="settings__info">
           <form
@@ -149,6 +148,17 @@ class Settings extends Component {
               />
             </div>
             <div>
+              <TextField
+                id="name"
+                label="city"
+                fullWidth
+                className={"settings__city__input"}
+                value={city}
+                onChange={e => this.setState({ city: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
               <FormControl className={"form"}>
                 <NativeSelect
                   className={"settings__experience__input"}
@@ -170,7 +180,7 @@ class Settings extends Component {
           </form>
           <div />
           <ReactS3Uploader
-            className="settings__uploadButton"
+            // className="settings__uploadButton"
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
             accept="image/*"
@@ -182,6 +192,7 @@ class Settings extends Component {
             inputRef={cmp => (this.uploadInput = cmp)}
             server={process.env.REACT_APP_DEV_HOST}
             autoUpload
+            onError={this.logError}
           />
 
           <LinearProgress variant="determinate" value={this.state.completed} />

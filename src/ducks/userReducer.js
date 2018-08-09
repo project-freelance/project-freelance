@@ -33,9 +33,10 @@ export function updateSpecialty(id, specialty) {
   };
 }
 export const updateUser = obj => {
+  console.log(obj);
   return {
     type: UPDATE_USER,
-    payload: axios.put("/api/updateUser", obj)
+    payload: axios.put("/api/user", obj)
   };
 };
 
