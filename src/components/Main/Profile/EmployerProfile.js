@@ -47,7 +47,7 @@ class EmployerProfile extends Component {
                 employer[0]
                   .email}?subject=I'd like to offer you a position with... `}
             >
-              <div>Contact</div>
+              <div>Contact Me</div>
             </a>
           </button>
         </div>
