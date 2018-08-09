@@ -27,8 +27,9 @@ module.exports = {
 
   getAvgRating: (req, res, next) => {
     let db = req.app.get("db");
-    db.reviews.getAvgRating().then(ratings => {
-      return res.status(200).send(ratings);
+    db.reviews.getAvgRating(req.params.id).then(rating => {
+      // console.log(+rating[0].round);
+      return res.status(200).send(rating[0].round);
     });
   },
 
