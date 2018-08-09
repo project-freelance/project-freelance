@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../ducks/employerReducer";
-import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
-import { getUsers } from "../../../ducks/userReducer";
-import "../Feed/Feed.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployerPosts } from '../../../ducks/employerReducer';
+import { getFreelancerPosts } from '../../../ducks/freelancerReducer';
+import { getUsers } from '../../../ducks/userReducer';
+import '../Feed/Feed.css';
+import Post from '../Feed/Post/Post';
 
 class Feed extends Component {
   constructor() {
@@ -41,7 +42,7 @@ class Feed extends Component {
                 <img
                   src={user.profile_image}
                   alt="person"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                 />
               </div>
               <div className="feed__userData">
@@ -70,9 +71,9 @@ class Feed extends Component {
                     src={user.profile_image}
                     alt="person"
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%"
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%'
                     }}
                   />
                 </div>
@@ -119,7 +120,7 @@ class Feed extends Component {
                 <img
                   src={user.profile_image}
                   alt="person"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                 />
 
                 <p>{user.first_name}</p>
@@ -153,6 +154,11 @@ class Feed extends Component {
     return (
       <div className="feed__container">
         <h1>In the Feed...</h1>
+
+        <button>
+          <Post />
+        </button>
+
         {freelancerPosts}
         {employerPosts}
       </div>
