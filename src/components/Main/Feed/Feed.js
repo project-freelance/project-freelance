@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getEmployerPosts } from '../../../ducks/employerReducer';
-import { getFreelancerPosts } from '../../../ducks/freelancerReducer';
-import { getUsers } from '../../../ducks/userReducer';
-import '../Feed/Feed.css';
-import Post from '../Feed/Post/Post';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getEmployerPosts } from "../../../ducks/employerReducer";
+import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
+import { getUsers } from "../../../ducks/userReducer";
+import "../Feed/Feed.css";
+import Post from "../Feed/Post/Post";
+import { Link } from "react-router-dom";
 
 class Feed extends Component {
   constructor() {
@@ -42,7 +43,11 @@ class Feed extends Component {
                 <img
                   src={user.profile_image}
                   alt="person"
-                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%"
+                  }}
                 />
               </div>
               <div className="feed__userData">
@@ -66,25 +71,31 @@ class Feed extends Component {
           if (user.id === post.user_id) {
             return (
               <div key={user.id}>
-                <div>
-                  <img
-                    src={user.profile_image}
-                    alt="person"
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%'
-                    }}
-                  />
-                </div>
-                <div>
-                  <p>
-                    {user.first_name}
-                    {user.last_name}
-                  </p>
+                <Link
+                  className="feed__linkToUser"
+                  to={`/main/profile/${user.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <div>
+                    <img
+                      src={user.profile_image}
+                      alt="person"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%"
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <p>
+                      {user.first_name}
+                      {user.last_name}
+                    </p>
 
-                  <p>{user.specialty}</p>
-                </div>
+                    <p>{user.specialty}</p>
+                  </div>
+                </Link>
               </div>
             );
           } else {
@@ -117,15 +128,25 @@ class Feed extends Component {
           if (user.id === post.user_id) {
             return (
               <div key={user.id}>
-                <img
-                  src={user.profile_image}
-                  alt="person"
-                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-                />
+                <Link
+                  className="feed__linkToUser"
+                  to={`/main/profile/${user.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    src={user.profile_image}
+                    alt="person"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%"
+                    }}
+                  />
 
-                <p>{user.first_name}</p>
-                <p>{user.last_name}</p>
-                <p>{user.specialty}</p>
+                  <p>{user.first_name}</p>
+                  <p>{user.last_name}</p>
+                  <p>{user.specialty}</p>
+                </Link>
               </div>
             );
           } else {
