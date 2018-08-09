@@ -9,7 +9,8 @@ import AvgRating from "./Reviews/AvgRating/AvgRating";
 class EmployerProfile extends Component {
   componentDidMount() {
     this.props.getEmployer(this.props.match.params.id);
-    this.props.getUser();
+    // this.props.getUser();
+    this.props.getAvgRating(this.props.match.params.id);
   }
 
   render() {
@@ -41,7 +42,9 @@ class EmployerProfile extends Component {
             width="60"
           />
           <div>City: {`${employer[0] && employer[0].city}`}</div>
-          <div>Avg Rating (props...need to build)</div>
+          <div>
+            <AvgRating rating={this.props.rating && +this.props.rating} />
+          </div>
           <div>Bio: {`${employer[0] && employer[0].bio}`}</div>
           <button>
             <a
