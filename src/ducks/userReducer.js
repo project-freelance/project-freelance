@@ -5,6 +5,7 @@ const GET_USER = "GET_USER";
 const GET_USERS = "GET_USERS";
 const UPDATE_ROLE = "UPDATE_ROLE";
 const UPDATE_SPECIALTY = "UPDATE_SPECIALTY";
+const UPDATE_USER = "UPDATE_USER";
 
 //action creators
 export function getUser() {
@@ -31,6 +32,12 @@ export function updateSpecialty(id, specialty) {
     payload: axios.put(`/api/user/specialty/${id}`, specialty)
   };
 }
+export const updateUser = obj => {
+  return {
+    type: UPDATE_USER,
+    payload: axios.put("/api/updateUser", obj)
+  };
+};
 
 //initial state
 const initialState = {
@@ -111,6 +118,23 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         error: action.payload
+      };
+    case `${UPDATE_USER}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${UPDATE_USER}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        user: action.payload.data
+      };
+    case `${UPDATE_USER}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.data
       };
 
     default:

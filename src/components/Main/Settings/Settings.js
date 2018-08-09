@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { updateUser } from "../../../ducks/userReducer";
 // Material UI
 
 import TextField from "@material-ui/core/TextField";
@@ -49,6 +49,9 @@ class Settings extends Component {
     {
       console.log(this.state.profile_image);
     }
+  };
+  onSaveHandler = () => {
+    this.props.updateUser(this.state);
   };
 
   // progress bar
@@ -97,6 +100,14 @@ class Settings extends Component {
             placeholder="Placeholder"
             helperText="Full width!"
           />
+          <Button
+            variant="outlined"
+            color="primary"
+            className={"settings__saveButton"}
+            onClick={this.onSaveHandler}
+          >
+            Save
+          </Button>
         </div>
         <div className="settings__info">
           <form
@@ -178,6 +189,7 @@ class Settings extends Component {
             variant="outlined"
             color="primary"
             className={"settings__saveButton"}
+            onClick={this.onSaveHandler}
           >
             Save
           </Button>
@@ -195,5 +207,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, updateUser }
 )(Settings);
