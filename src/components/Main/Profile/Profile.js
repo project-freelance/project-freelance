@@ -6,6 +6,7 @@ import { getUser } from "../../../ducks/userReducer";
 import { getAvgRating } from "../../../ducks/reviewReducer";
 import EmployerProfile from "./EmployerProfile";
 import Portfolio from "./Portfolio/Portfolio";
+import AvgRating from "./Reviews/AvgRating/AvgRating";
 class Profile extends Component {
   componentDidMount() {
     this.props.getFreelancer(this.props.match.params.id);
@@ -34,7 +35,10 @@ class Profile extends Component {
                 width="120"
               />
               <div>{`${freelancer[0] && freelancer[0].city}`}</div>
-              <div>Avg Rating (props...need to build)</div>
+              <div>
+                Avg Rating{" "}
+                <AvgRating rating={this.props.rating && this.props.rating} />
+              </div>
               <div>{`${freelancer[0] && freelancer[0].specialty}`}</div>
               <div>Skills: {`${freelancer[0] && freelancer[0].skills}`}</div>
               <div>
