@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import jenhomepage from '../../jenhomepage.png';
+import './Splash.css';
 
 class Splash extends Component {
   render() {
     return (
       <div>
-        Splash
-        <a href="http://localhost:3001/login">Login</a>
         <div className="splash__logo__info__page">Splash</div>
         <div className="splash__login">
           <a href="http://localhost:3001/login">Login</a>
