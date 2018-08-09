@@ -1,0 +1,17 @@
+.freelancer__posting {
+  height: 300px;
+  width: 400px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.employer__posting {
+  height: 300px;
+  width: 400px;
+  margin: auto;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
