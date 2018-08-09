@@ -51,9 +51,9 @@ module.exports = {
 
   addEmployerPost: (req, res, next) => {
     let db = req.app.get("db");
-    const { title, body, specialty, price, user_id } = req.body;
+    const { title, body, specialty, price, user_id, moment } = req.body;
     db.employers
-      .addEmployerPost([title, body, specialty, price, user_id])
+      .addEmployerPost([title, body, specialty, price, user_id, moment])
       .then(post => {
         return res
           .status(200)

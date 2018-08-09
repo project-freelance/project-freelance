@@ -66,7 +66,14 @@ export function updateEmployer(
   };
 }
 
-export function addEmployerPost(title, body, specialty, price, user_id) {
+export function addEmployerPost(
+  title,
+  body,
+  specialty,
+  price,
+  user_id,
+  moment
+) {
   return {
     type: ADD_EMPLOYER_POST,
     payload: axios.post("/api/employerPost/", {
@@ -74,7 +81,8 @@ export function addEmployerPost(title, body, specialty, price, user_id) {
       body,
       specialty,
       price,
-      user_id
+      user_id,
+      moment
     })
   };
 }
