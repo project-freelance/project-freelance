@@ -8,9 +8,19 @@ import "./Nav.css";
 class Nav extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      id: 0
+    };
+  }
+
+  componentDidMount() {
+    this.props
+      .getUser()
+      .then(() => this.setState({ id: this.props.user[0].id }));
   }
 
   render() {
+    console.log(this.props);
     let profile_image = this.props.user[0]
       ? this.props.user[0].profile_image
       : "profile image";
@@ -21,6 +31,8 @@ class Nav extends Component {
     let last_name = this.props.user[0]
       ? this.props.user[0].last_name
       : "last Name";
+
+    let id = this.props.user[0] ? this.props.user[0].id : 0;
 
     return (
       <div className="nav__container">
@@ -50,7 +62,7 @@ class Nav extends Component {
             </Link>
           </div>
           <div>
-            <Link className="nav__links" to="/main/profile">
+            <Link className="nav__links" to={`/main/profile/${id}`}>
               My Profile
             </Link>
           </div>
@@ -76,6 +88,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {}
+  { getUser }
 )(Nav);
 // export default Nav;

@@ -30,6 +30,9 @@ class Settings extends Component {
       bio: ""
     };
   }
+  componentDidMount() {
+    console.log(this.state);
+  }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
