@@ -53,6 +53,7 @@ class Post extends Component {
 
   render() {
     const { title, body, specialty, price, time } = this.state;
+    console.log(this.state.time);
     // console.log(this.props.user[0] && this.props.user[0].id);
 
     return (
