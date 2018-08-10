@@ -42,11 +42,10 @@ class Settings extends Component {
     });
     console.log(this.state);
   };
+
   onPictureUpload = s3 => {
     this.setState({
-      profile_image: `https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/${
-        s3.filename
-      }`
+      profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
     });
   };
   onSaveHandler = () => {
