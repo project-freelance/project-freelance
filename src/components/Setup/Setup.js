@@ -74,17 +74,14 @@ class Setup extends Component {
   }
 
   render() {
-    let btn_class = this.state.black ? "blackButton" : "whiteButton";
-
     return (
       <div className="setup__container">
         <h1>Are you a Freelancer or an Employer?</h1>
 
         <div className="setup__chooseRole">
           <Button
-            className={btn_class}
             style={{
-              backgroundColor: this.state.freelancerClicked ? "red" : "blue",
+              backgroundColor: this.state.freelancerClicked ? "green" : "blue",
               color: "white",
               marginRight: "20px"
             }}
@@ -96,7 +93,7 @@ class Setup extends Component {
           </Button>
           <Button
             style={{
-              backgroundColor: "#0D47A1",
+              backgroundColor: this.state.employerClicked ? "green" : "blue",
               color: "white"
             }}
             onClick={() => this.chooseEmployer()}
@@ -111,7 +108,7 @@ class Setup extends Component {
             <Link to="/main/settings">
               <Button
                 style={{
-                  backgroundColor: "#0D47A1",
+                  backgroundColor: "blue",
                   color: "white",
                   marginTop: "20px"
                 }}
@@ -128,7 +125,7 @@ class Setup extends Component {
             <h2> Are you a Developer or a Designer?</h2>
             <Button
               style={{
-                backgroundColor: "#0D47A1",
+                backgroundColor: this.state.developerClicked ? "green" : "blue",
                 color: "white",
                 marginRight: "20px"
               }}
@@ -137,7 +134,10 @@ class Setup extends Component {
               Developer
             </Button>
             <Button
-              style={{ backgroundColor: "#0D47A1", color: "white" }}
+              style={{
+                backgroundColor: this.state.designerClicked ? "green" : "blue",
+                color: "white"
+              }}
               onClick={() => this.chooseDesigner()}
             >
               Designer
