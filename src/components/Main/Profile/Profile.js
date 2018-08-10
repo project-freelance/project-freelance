@@ -36,9 +36,13 @@ class Profile extends Component {
               </div>
 
               <div>{`${freelancer[0] && freelancer[0].city}`}</div>
-              <div>
-                <AvgRating rating={this.props.rating && +this.props.rating} />
-              </div>
+
+              {this.props.rating ? (
+                <div>
+                  <AvgRating rating={this.props.rating && +this.props.rating} />
+                </div>
+              ) : null}
+
               <div>{`${freelancer[0] && freelancer[0].specialty}`}</div>
               <div>Skills: {`${freelancer[0] && freelancer[0].skills}`}</div>
               <div>
