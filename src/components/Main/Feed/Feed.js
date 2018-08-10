@@ -7,6 +7,8 @@ import "../Feed/Feed.css";
 import Post from "../Feed/Post/Post";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
+import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
 
 class Feed extends Component {
   constructor() {
@@ -29,7 +31,7 @@ class Feed extends Component {
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     let { employerPosts, freelancerPosts, isLoading, users } = this.props;
 
     let userInfo = isLoading ? (
@@ -118,7 +120,10 @@ class Feed extends Component {
                 <div>
                   <Moment fromNow>{post.moment}</Moment>
                 </div>
-                <button>More Info</button>
+
+                <button>
+                  <FreelancerPostModal />
+                </button>
               </div>
             </div>
           </div>
@@ -165,14 +170,26 @@ class Feed extends Component {
               <div>{postUser}</div>
               <div>
                 <h3>Employer Posting</h3>
-                <p>Post Title:{post.title}</p>
-                <p>Post Body:{post.body}</p>
-                <p>Job:{post.specialty}</p>
+                <p>
+                  Post Title:
+                  {post.title}
+                </p>
+                <p>
+                  Post Body:
+                  {post.body}
+                </p>
+                <p>
+                  Job:
+                  {post.specialty}
+                </p>
                 <div>
                   <Moment fromNow>{post.moment}</Moment>
                 </div>
                 <p>
-                  Pay: {post.price} <button>More Info</button>
+                  Pay: {post.price}{" "}
+                  <button>
+                    <EmployerPostModal />
+                  </button>
                 </p>
               </div>
             </div>
