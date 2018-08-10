@@ -67,7 +67,7 @@ class Feed extends Component {
       <p>Loading...</p>
     ) : (
       freelancerPosts.map((post, i) => {
-        console.log(post.user_id);
+        // console.log(post.user_id);
 
         let postUser = users.map((user, id) => {
           if (user.id === post.user_id) {
