@@ -35,7 +35,11 @@ class Profile extends Component {
                 {`${freelancer[0] && freelancer[0].last_name}`}
               </div>
 
-              <div>{`${freelancer[0] && freelancer[0].city}`}</div>
+              {freelancer[0].city && freelancer[0].city.length > 0 ? (
+                <div>{`${freelancer[0] && freelancer[0].city}`}</div>
+              ) : (
+                <div>No city listed</div>
+              )}
 
               {this.props.rating && this.props.rating > 0 ? (
                 <div>
@@ -48,20 +52,36 @@ class Profile extends Component {
               )}
 
               <div>{`${freelancer[0] && freelancer[0].specialty}`}</div>
-              <div>Skills: {`${freelancer[0] && freelancer[0].skills}`}</div>
-              <div>
-                {`${freelancer[0] && freelancer[0].experience}`} years of
-                experience
-              </div>
-              <div>Bio: {`${freelancer[0] && freelancer[0].bio}`}</div>
-              <div>
+
+              {freelancer[0].skills && freelancer[0].skills.length > 0 ? (
+                <div>Skills: {`${freelancer[0] && freelancer[0].skills}`}</div>
+              ) : (
+                <div>No skills listed</div>
+              )}
+
+              {freelancer[0].experience && freelancer[0].experience > 0 ? (
+                <div>
+                  {`${freelancer[0] && freelancer[0].experience}`} years of
+                  experience
+                </div>
+              ) : (
+                <div>No experience listed</div>
+              )}
+
+              {freelancer[0].bio && freelancer[0].bio.length > 0 ? (
+                <div>Bio: {`${freelancer[0] && freelancer[0].bio}`}</div>
+              ) : (
+                <div>No bio listed</div>
+              )}
+
+              {/* <div>
                 Portfolio:
                 <img
                   src={`${freelancer[0] && freelancer[0].image_url}`}
                   height="80"
                   width="80"
                 />
-              </div>
+              </div> */}
               {/* <button>Contact Me (...email address in users table)</button> */}
               <button>
                 <a
