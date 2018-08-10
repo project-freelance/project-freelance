@@ -42,9 +42,17 @@ class EmployerProfile extends Component {
             width="60"
           />
           <div>City: {`${employer[0] && employer[0].city}`}</div>
-          <div>
-            <AvgRating rating={this.props.rating && +this.props.rating} />
-          </div>
+
+          {this.props.rating && this.props.rating > 0 ? (
+            <div>
+              <AvgRating rating={this.props.rating && +this.props.rating} />
+            </div>
+          ) : (
+            <div>
+              <div>No Rating Dude</div>
+            </div>
+          )}
+
           <div>Bio: {`${employer[0] && employer[0].bio}`}</div>
           <button>
             <a
