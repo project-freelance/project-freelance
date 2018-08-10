@@ -37,12 +37,14 @@ class Profile extends Component {
 
               <div>{`${freelancer[0] && freelancer[0].city}`}</div>
 
-              {this.props.rating ? (
+              {this.props.rating && this.props.rating > 0 ? (
                 <div>
                   <AvgRating rating={this.props.rating && +this.props.rating} />
                 </div>
               ) : (
-                <p>No rating dude</p>
+                <div>
+                  <div>No Rating Dude</div>
+                </div>
               )}
 
               <div>{`${freelancer[0] && freelancer[0].specialty}`}</div>
