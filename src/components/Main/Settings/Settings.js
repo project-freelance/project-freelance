@@ -44,7 +44,9 @@ class Settings extends Component {
   };
   onPictureUpload = s3 => {
     this.setState({
-      profile_image: `${process.env.AW_S3_ADDRESS}/${s3.filename}`
+      profile_image: `https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/${
+        s3.filename
+      }`
     });
   };
   onSaveHandler = () => {
@@ -52,17 +54,17 @@ class Settings extends Component {
   };
 
   // progress bar
-  // progress = percent => {
-  //   console.log(percent);
-  //   const { completed } = this.state;
-  //   if (completed === 100) {
-  //     window.setTimeout(() => this.setState({ completed: 0 }), 1000);
-  //   } else {
-  //     this.setState({
-  //       completed: percent
-  //     });
-  //   }
-  // };
+  progress = percent => {
+    console.log(percent);
+    const { completed } = this.state;
+    if (completed === 100) {
+      window.setTimeout(() => this.setState({ completed: 0 }), 1000);
+    } else {
+      this.setState({
+        completed: percent
+      });
+    }
+  };
   // logError = e => {
   //   console.log(e);
   // };
@@ -178,7 +180,6 @@ class Settings extends Component {
           </form>
           <div />
           <ReactS3Uploader
-            // className="settings__uploadButton"
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
             accept="image/*"
@@ -190,7 +191,6 @@ class Settings extends Component {
             inputRef={cmp => (this.uploadInput = cmp)}
             server={process.env.REACT_APP_DEV_HOST}
             autoUpload
-            onError={this.logError}
           />
 
           <LinearProgress variant="determinate" value={this.state.completed} />
@@ -203,7 +203,7 @@ class Settings extends Component {
             Save
           </Button>
         </div>
-        {/* <button onClick={() => console.log(this.state)} /> */}
+        <button onClick={() => console.log(this.state)} />
       </div>
     );
   }
