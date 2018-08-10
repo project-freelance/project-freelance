@@ -20,7 +20,7 @@ class Nav extends Component {
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     let profile_image = this.props.user[0]
       ? this.props.user[0].profile_image
       : "profile image";
