@@ -122,7 +122,7 @@ class Feed extends Component {
                 </div>
 
                 <button>
-                  <FreelancerPostModal />
+                  <FreelancerPostModal userId={post.user_id} postId={post.id} />
                 </button>
               </div>
             </div>
@@ -188,7 +188,7 @@ class Feed extends Component {
                 <p>
                   Pay: {post.price}{" "}
                   <button>
-                    <EmployerPostModal />
+                    <EmployerPostModal userId={post.user_id} postId={post.id} />
                   </button>
                 </p>
               </div>

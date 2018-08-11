@@ -1,40 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addFreelancerPost } from "../../../../../ducks/freelancerReducer";
-import { addEmployerPost } from "../../../../../ducks/employerReducer";
+import { getEmployerPosts } from "../../../../../ducks/employerReducer";
+import {
+  addFaveJob,
+  getFaveJobs
+} from "../../../../../ducks/freelancerReducer";
 import { getUser } from "../../../../../ducks/userReducer";
-import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
+import { getUsers } from "../../../../../ducks/userReducer";
 import Dialog from "@material-ui/core/Dialog";
-//import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-//import DialogContentText from "@material-ui/core/DialogContentText";
-//import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import "../Post.css";
-//import AddCircle from "@material-ui/icons/AddCircle.js";
-
-import Icon from "@material-ui/core/Icon";
+import Moment from "react-moment";
+import "../EmployerPostModal/EmployerPostModal.css";
+import { Link } from "react-router-dom";
 
 class EmployerPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: "",
-      specialty: 0,
-      price: 0,
       open: false,
-      time: new Date()
+      favJobs: []
     };
   }
 
   componentDidMount() {
-    let userRole = this.props.user[0] && this.props.user[0].role;
-    // console.log(this.props.user[0] && this.props.user[0].role);
-    this.props.getUser();
+    this.props.getFaveJobs(this.props.user[0].id);
   }
 
   handleClickOpen = () => {
@@ -52,206 +42,114 @@ class EmployerPostModal extends Component {
   };
 
   render() {
-    const { title, body, specialty, price, time } = this.state;
-    // console.log(this.state.time);
-    // console.log(this.props.user[0] && this.props.user[0].id);
+    const localUserId = this.props && this.props.userId;
+    const postId = this.props && this.props.postId;
+    const freelancer_id = this.props && this.props.freelancer_id;
+
+    let matchUser = this.props.users.find(user => user.id === localUserId);
+    console.log(matchUser);
+
+    let matchPost = this.props.employerPosts.find(post => post.id === postId);
+    console.log(matchUser);
+    console.log(matchPost);
+    console.log(this.props);
+
+    // let jobCheck = this.props.getFaveJobs.find(
+    //   job => job.employer_post_id === freelancer_id
+    // );
+    // console.log(jobCheck);
 
     return (
       <div>
-        {/* <button onClick={() => console.log(this.state)} /> */}
-
-        {/* Modal Posting Button */}
+        {/* Modal Open Button */}
         <Button onClick={this.handleClickOpen}>More Info</Button>
 
-        {/* <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button> */}
         <Dialog
-          className="post__job__modal"
+          className="employerPostModal__container"
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          contentStyle={{ width: "50vw", maxWidth: "100%", height: "50vh" }}
+          contentStyle={{
+            width: "70vh",
+            maxWidth: "100%",
+            height: "70vw",
+            padding: "30px"
+          }}
         >
           <DialogContent>
-            {/* create freelancer posting */}
-
-            {this.props.user[0] &&
-              this.props.user[0].role === "Freelancer" && (
-                <div>
-                  <div className="freelancer__posting">
-                    <h2>Create Freelancer Posting</h2>
-                    <form>
-                      <div className="freelancer__post__title">
-                        <TextField
-                          id="Title"
-                          label="Title"
-                          className={"freelancer__post__title__input"}
-                          value={title}
-                          onChange={e =>
-                            this.setState({ title: e.target.value })
-                          }
-                          margin="normal"
-                        />
-                      </div>
-                      <div className="freelancer__post__body">
-                        <TextField
-                          id="Description"
-                          label="Description"
-                          className={"freelancer__post__body__input"}
-                          value={body}
-                          onChange={e =>
-                            this.setState({ body: e.target.value })
-                          }
-                          margin="normal"
-                        />
-                      </div>
-                      <div className="freelancer__post__buttons">
-                        <Button
-                          style={{
-                            backgroundColor: "#FF4500"
-                          }}
-                          onClick={this.handleClose}
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          style={{
-                            backgroundColor: "#00FF7F"
-                          }}
-                          onClick={() => {
-                            this.handleClose,
-                              this.props.addFreelancerPost(
-                                title,
-                                body,
-                                this.props.user[0] && this.props.user[0].id,
-                                time
-                              );
-                          }}
-                          type="submit"
-                        >
-                          Submit
-                        </Button>
-                      </div>
-                    </form>
+            <div>
+              <div className="employerPostModal__content">
+                <div className="employerPostModal__picCancel">
+                  <div>
+                    <img
+                      src={matchUser && matchUser.profile_image}
+                      alt="person"
+                      style={{
+                        width: "120px",
+                        height: "120px"
+                      }}
+                    />
+                  </div>
+                  <div className="employerPostModal__buttonMoment">
+                    <div>
+                      <Button
+                        style={{
+                          backgroundColor: "#FF4500"
+                        }}
+                        onClick={this.handleClose}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                    <div>
+                      <Moment fromNow>{matchPost && matchPost.moment}</Moment>
+                    </div>
                   </div>
                 </div>
-              )}
+                <div className="employerPostModal__data">
+                  <h2>
+                    {matchUser &&
+                      matchUser.first_name + " " + matchUser.last_name}
+                  </h2>
+                  <p>{matchUser && matchUser.specialty}</p>
+                  <p>{matchPost && matchPost.title}</p>
+                  <p>{matchPost && matchPost.body}</p>
+                  <p>${matchPost && matchPost.price}</p>
 
-            {/* create employer posting */}
-
-            {this.props.user[0] &&
-              this.props.user[0].role === "Employer" && (
-                <div>
-                  <div className="employer__posting">
-                    <h2>Create Job Posting</h2>
-                    <form>
-                      <div className="employer__post__title">
-                        <TextField
-                          id="Title"
-                          label="Title"
-                          className={"employer__post__title__input"}
-                          value={title}
-                          onChange={e =>
-                            this.setState({ title: e.target.value })
-                          }
-                          margin="normal"
-                        />
-                      </div>
-                      <div className="employer__post__body">
-                        <TextField
-                          id="Description"
-                          label="Description"
-                          className={"employer__post__body__input"}
-                          value={body}
-                          onChange={e =>
-                            this.setState({ body: e.target.value })
-                          }
-                          margin="normal"
-                        />
-                      </div>
-                      <div className="employer__post__specialty">
-                        <FormControl className={"form"}>
-                          <NativeSelect
-                            className={"employer__post__specialty__input"}
-                            value={specialty}
-                            name="specialty"
-                            onChange={this.handleSpecialtyChange("specialty")}
-                          >
-                            <option value="" disabled />
-                            <option value={"Select One"}> </option>
-                            <option value={"Developer"}> Developer </option>
-                            <option value={"Designer"}> Designer </option>
-                          </NativeSelect>
-                          <FormHelperText>Specialty</FormHelperText>
-                        </FormControl>
-                      </div>
-
-                      <div className="employer__post__price">
-                        <TextField
-                          id="Description"
-                          label="Price $"
-                          className={"employer__post__price__input"}
-                          value={price}
-                          onChange={e =>
-                            this.setState({ price: e.target.value })
-                          }
-                          margin="normal"
-                        />
-                      </div>
-                      <div className="employer__post__buttons">
+                  <form>
+                    <div className="employerPostModal__buttons">
+                      <Link
+                        to={`/main/profile/${matchUser && matchUser.id}`}
+                        style={{ textDecoration: "none" }}
+                      >
                         <Button
                           style={{
-                            backgroundColor: "#FF4500"
+                            backgroundColor: "#0000FF"
                           }}
-                          onClick={this.handleClose}
                         >
-                          Cancel
+                          View My Profile
                         </Button>
-                        <Button
-                          style={{
-                            backgroundColor: "#00FF7F"
-                          }}
-                          onClick={() => {
-                            this.handleClose,
-                              this.props.addEmployerPost(
-                                title,
-                                body,
-                                specialty,
-                                price,
-                                this.props.user[0] && this.props.user[0].id,
-                                time
-                              );
-                          }}
-                          type="submit"
-                        >
-                          Submit
-                        </Button>
-                      </div>
-                    </form>
-                  </div>
+                      </Link>
+                      <Button
+                        style={{
+                          backgroundColor: "#008000"
+                        }}
+                        onClick={() => {
+                          this.props.addFaveJob(
+                            matchPost.id,
+                            this.props.user[0].id
+                          ),
+                            console.log(matchPost.id, this.props.user[0].id);
+                        }}
+                      >
+                        Apply to this Job
+                      </Button>
+                    </div>
+                  </form>
                 </div>
-              )}
+              </div>
+            </div>
           </DialogContent>
-          {/* <DialogActions> */}
-          {/* <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button> */}
-          {/* <Button
-              onClick={() => {
-                this.handleClose,
-                  this.props.addEmployerPost(
-                    title,
-                    body,
-                    specialty,
-                    price,
-                    this.props.user[0] && this.props.user[0].id
-                  );
-              }}
-              type="submit"
-              color="primary"
-            >
-              Submit
-            </Button> */}
-          {/* </DialogActions> */}
         </Dialog>
       </div>
     );
@@ -260,16 +158,19 @@ class EmployerPostModal extends Component {
 
 function mapStateToProps(state) {
   return {
-    freelancerPosts: state.freelancerReducer.freelancerPosts,
     employerPosts: state.employerReducer.employerPosts,
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    users: state.userReducer.users,
+    favJobs: state.freelancerReducer.favJobs
   };
 }
 export default connect(
   mapStateToProps,
   {
-    addFreelancerPost,
-    addEmployerPost,
-    getUser
+    getEmployerPosts,
+    getUser,
+    getUsers,
+    addFaveJob,
+    getFaveJobs
   }
 )(EmployerPostModal);
