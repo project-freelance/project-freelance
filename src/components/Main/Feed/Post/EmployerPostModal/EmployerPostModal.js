@@ -18,16 +18,13 @@ class EmployerPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      favJobs: []
+      open: false
     };
   }
 
   componentDidMount() {
     this.props.getFaveJobs &&
-      this.props
-        .getFaveJobs(this.props.user[0] && this.props.user[0].id)
-        .then(() => this.setState({ favJobs: this.props.favJobs }));
+      this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
   }
 
   handleClickOpen = () => {
@@ -44,32 +41,16 @@ class EmployerPostModal extends Component {
     });
   };
 
-  // refreshFavJobs = () => {
-  //   this.props.getFaveJobs(this.props.user[0].id);
-  // };
-
   render() {
     const userIdFromPost = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
-    const freelancer_id = this.props && this.props.freelancer_id;
 
     let matchUser = this.props.users.find(user => user.id === userIdFromPost);
-    //console.log(matchUser);
-
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
-    // console.log(matchUser);
-    // console.log(matchPost);
-    // console.log(this.props);
 
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
-    console.log(matchJob);
-
-    // let jobCheck = this.props.getFaveJobs.find(
-    //   job => job.employer_post_id === freelancer_id
-    // );
-    // console.log(jobCheck);
 
     return (
       <div>
@@ -143,7 +124,6 @@ class EmployerPostModal extends Component {
                         </Button>
                       </Link>
                       {matchJob.includes(matchPost.id) && (
-                        // == this.props.user[0].id
                         <div className="employerPostModal__applied">
                           APPLIED
                         </div>
@@ -156,12 +136,9 @@ class EmployerPostModal extends Component {
                           onClick={() => {
                             this.props
                               .addFaveJob(matchPost.id, this.props.user[0].id)
-                              .then(console.log(this.props.favJobs));
-                            // .then(
-                            //   this.props.getFaveJobs(this.props.user[0]).id
-                            // );
-
-                            //.then(this.refreshFavJobs());
+                              .then(
+                                this.props.getFaveJobs(this.props.user[0].id)
+                              );
                           }}
                         >
                           Apply to this Job

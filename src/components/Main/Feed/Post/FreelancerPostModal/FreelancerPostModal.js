@@ -36,11 +36,7 @@ class FreelancerPostModal extends Component {
     const postId = this.props && this.props.postId;
 
     let matchUser = this.props.users.find(user => user.id === localUserId);
-    console.log(matchUser);
-
     let matchPost = this.props.freelancerPosts.find(post => post.id === postId);
-    console.log(matchUser);
-    console.log(matchPost);
 
     return (
       <div>
