@@ -1,0 +1,29 @@
+.splash__container {
+  margin: 15px;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . ." "splash__loginContainer splash__loginContainer splash__imageOne ." "splash__loginContainer splash__loginContainer . ." "splash__loginContainer splash__loginContainer splash__imageTwo ." "splash__loginContainer splash__loginContainer . ." ". . Splash__imageThree ." ". . . .";
+  img {
+    height: 170px;
+    width: auto;
+  }
+}
+
+.splash__imageOne {
+  margin-top: 10vh;
+  grid-area: splash__imageOne;
+}
+
+.splash__imageTwo {
+  grid-area: splash__imageTwo;
+}
+
+.Splash__imageThree {
+  grid-area: Splash__imageThree;
+}
+
+.splash__loginContainer {
+  grid-area: splash__loginContainer;
+}
