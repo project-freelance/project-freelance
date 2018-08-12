@@ -24,7 +24,10 @@ class EmployerPostModal extends Component {
   }
 
   componentDidMount() {
-    this.props.getFaveJobs(this.props.user[0].id);
+    this.props.getFaveJobs &&
+      this.props
+        .getFaveJobs(this.props.user[0] && this.props.user[0].id)
+        .then(() => this.setState({ favJobs: this.props.favJobs }));
   }
 
   handleClickOpen = () => {
@@ -40,6 +43,10 @@ class EmployerPostModal extends Component {
       [specialty]: event.target.value
     });
   };
+
+  // refreshFavJobs = () => {
+  //   this.props.getFaveJobs(this.props.user[0].id);
+  // };
 
   render() {
     const userIdFromPost = this.props && this.props.userId;
@@ -147,12 +154,14 @@ class EmployerPostModal extends Component {
                             backgroundColor: "#008000"
                           }}
                           onClick={() => {
-                            this.props.addFaveJob(
-                              matchPost.id,
-                              this.props.user[0].id
-                            ),
-                              //  matchJob.push(matchPost.id),
-                              console.log(matchPost.id, this.props.user[0].id);
+                            this.props
+                              .addFaveJob(matchPost.id, this.props.user[0].id)
+                              .then(console.log(this.props.favJobs));
+                            // .then(
+                            //   this.props.getFaveJobs(this.props.user[0]).id
+                            // );
+
+                            //.then(this.refreshFavJobs());
                           }}
                         >
                           Apply to this Job
