@@ -1,0 +1,30 @@
+.freelancerPostModal__content {
+  height: 450px;
+  width: 400px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.freelancerPostModal__picCancel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.freelancerPostModal__buttonMoment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.freelancerPostModal__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.freelancerPostModal__buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
