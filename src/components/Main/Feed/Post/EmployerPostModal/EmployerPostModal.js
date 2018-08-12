@@ -42,17 +42,22 @@ class EmployerPostModal extends Component {
   };
 
   render() {
-    const localUserId = this.props && this.props.userId;
+    const userIdFromPost = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
     const freelancer_id = this.props && this.props.freelancer_id;
 
-    let matchUser = this.props.users.find(user => user.id === localUserId);
-    console.log(matchUser);
+    let matchUser = this.props.users.find(user => user.id === userIdFromPost);
+    //console.log(matchUser);
 
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
-    console.log(matchUser);
-    console.log(matchPost);
-    console.log(this.props);
+    // console.log(matchUser);
+    // console.log(matchPost);
+    // console.log(this.props);
+
+    let matchJob = this.props.favJobs
+      .filter(person => person.freelancer_id === this.props.user[0].id)
+      .map(item => item.employer_post_id);
+    console.log(matchJob);
 
     // let jobCheck = this.props.getFaveJobs.find(
     //   job => job.employer_post_id === freelancer_id
@@ -130,20 +135,29 @@ class EmployerPostModal extends Component {
                           View My Profile
                         </Button>
                       </Link>
-                      <Button
-                        style={{
-                          backgroundColor: "#008000"
-                        }}
-                        onClick={() => {
-                          this.props.addFaveJob(
-                            matchPost.id,
-                            this.props.user[0].id
-                          ),
-                            console.log(matchPost.id, this.props.user[0].id);
-                        }}
-                      >
-                        Apply to this Job
-                      </Button>
+                      {matchJob.includes(matchPost.id) && (
+                        // == this.props.user[0].id
+                        <div className="employerPostModal__applied">
+                          APPLIED
+                        </div>
+                      )}
+                      {!matchJob.includes(matchPost.id) && (
+                        <Button
+                          style={{
+                            backgroundColor: "#008000"
+                          }}
+                          onClick={() => {
+                            this.props.addFaveJob(
+                              matchPost.id,
+                              this.props.user[0].id
+                            ),
+                              //  matchJob.push(matchPost.id),
+                              console.log(matchPost.id, this.props.user[0].id);
+                          }}
+                        >
+                          Apply to this Job
+                        </Button>
+                      )}
                     </div>
                   </form>
                 </div>

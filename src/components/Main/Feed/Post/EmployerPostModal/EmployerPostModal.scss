@@ -17,6 +17,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.employerPostModal__applied {
+  color: green;
+  font-weight: bold;
+}
 
 .employerPostModal__content {
   display: flex;
