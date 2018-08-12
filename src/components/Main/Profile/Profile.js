@@ -43,13 +43,21 @@ class Profile extends Component {
         this.props.freelancer[0].role === "Freelancer" ? (
           <div className="profile__container">
             <div className="profile_left_panel">
-              <h1>Freelancer Profile</h1>
-              <img
+              {/* <h1>Freelancer Profile</h1> */}
+              <div
+                style={{
+                  backgroundImage: `url(${freelancer[0] &&
+                    freelancer[0].profile_image}`
+                }}
+                className="profile_user_img"
+              />
+              {/* <img
                 src={`${freelancer[0] && freelancer[0].profile_image}`}
                 alt="profile_pic"
-                height="120"
-                width="120"
-              />
+                // height="120"
+                // width="120"
+                className="profile_user_img"
+              /> */}
             </div>
             <div>
               <div className="profile_right_panel">

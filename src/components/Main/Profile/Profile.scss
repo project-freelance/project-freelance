@@ -2,4 +2,26 @@
   display: flex;
   //   flex-direction: column;
   background-color: yellow;
+  margin-top: 3vh;
+}
+
+.profile_left_panel {
+  background-color: white;
+  width: 33%;
+  height: 100vh;
+}
+
+.profile_right_panel {
+  background-color: green;
+  //   width:
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.profile_user_img {
+  background-size: cover;
+  height: 50vh;
+  background-position: bottom;
+  //   width: 120px;
 }
