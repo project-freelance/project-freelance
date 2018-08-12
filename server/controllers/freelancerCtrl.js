@@ -28,6 +28,7 @@ module.exports = {
   getFreelancer: (req, res, next) => {
     let db = req.app.get("db");
     db.freelancers.getFreelancer([req.params.id]).then(freelancer => {
+      console.log(freelancer);
       return res.status(200).send(freelancer);
     });
   },

@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addFreelancerPost } from "../../../../ducks/freelancerReducer";
-import { addEmployerPost } from "../../../../ducks/employerReducer";
-import { getUser } from "../../../../ducks/userReducer";
+import { addFreelancerPost } from "../../../../../ducks/freelancerReducer";
+import { addEmployerPost } from "../../../../../ducks/employerReducer";
+import { getUser } from "../../../../../ducks/userReducer";
 import TextField from "@material-ui/core/TextField";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
+//import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+//import DialogContentText from "@material-ui/core/DialogContentText";
+//import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import "./Post.css";
-import AddCircle from "@material-ui/icons/AddCircle.js";
+import "../Post.css";
+//import AddCircle from "@material-ui/icons/AddCircle.js";
 
 import Icon from "@material-ui/core/Icon";
 
-class Post extends Component {
+class EmployerPostModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,10 +61,7 @@ class Post extends Component {
         {/* <button onClick={() => console.log(this.state)} /> */}
 
         {/* Modal Posting Button */}
-        <button onClick={this.handleClickOpen}>
-          <AddCircle />
-          {/* <Post /> */}
-        </button>
+        <Button onClick={this.handleClickOpen}>More Info</Button>
 
         {/* <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button> */}
         <Dialog
@@ -270,5 +267,9 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { addFreelancerPost, addEmployerPost, getUser }
-)(Post);
+  {
+    addFreelancerPost,
+    addEmployerPost,
+    getUser
+  }
+)(EmployerPostModal);
