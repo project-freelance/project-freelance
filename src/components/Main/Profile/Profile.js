@@ -1,21 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getFreelancer } from "../../../ducks/freelancerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import EmployerProfile from "./EmployerProfile";
-import Portfolio from "./Portfolio/Portfolio";
-import AvgRating from "./Reviews/AvgRating/AvgRating";
-import Moment from "react-moment";
-import Reviews from "./Reviews/Reviews";
-import "./Profile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getFreelancer } from '../../../ducks/freelancerReducer';
+import AddReview from './Reviews/AddReview/AddReview';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
+import EmployerProfile from './EmployerProfile';
+import Portfolio from './Portfolio/Portfolio';
+import AvgRating from './Reviews/AvgRating/AvgRating';
+import Moment from 'react-moment';
+import Reviews from './Reviews/Reviews';
+import Button from '@material-ui/core/Button';
+import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
+import './Profile.css';
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
       reviewShow: true,
-      allReviewsShow: false
+      allReviewsShow: false,
+      open: false
     };
   }
   componentDidMount() {
@@ -28,6 +31,14 @@ class Profile extends Component {
   toggleReviews = () => {
     this.setState({ reviewShow: !this.state.reviewShow });
   };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
   render() {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
@@ -43,7 +54,7 @@ class Profile extends Component {
           {freelancer[0] && freelancer[0].heading}
         </div>
         {this.props.freelancer[0] &&
-        this.props.freelancer[0].role === "Freelancer" ? (
+        this.props.freelancer[0].role === 'Freelancer' ? (
           <div className="profile__container">
             <div className="profile__left__panel">
               <img
@@ -54,7 +65,7 @@ class Profile extends Component {
             <div>
               <div className="profile__right__panel">
                 <div className="profile__user__name">
-                  {`${freelancer[0] && freelancer[0].first_name}`}{" "}
+                  {`${freelancer[0] && freelancer[0].first_name}`}{' '}
                   {`${freelancer[0] && freelancer[0].last_name}`}
                 </div>
                 <div id="profile__line__space">
@@ -62,7 +73,7 @@ class Profile extends Component {
                     <div>{`${freelancer[0] && freelancer[0].city}, `}</div>
                   ) : (
                     <div>No city listed</div>
-                  )}{" "}
+                  )}{' '}
                   {freelancer[0] && freelancer[0].state}
                 </div>
                 {/* <div>{`${freelancer[0] && freelancer[0].state}`}</div> */}
@@ -117,17 +128,44 @@ class Profile extends Component {
                   id="profile__line__space"
                   className="profile__sample__portfolio"
                 >
-                  PORTFOLIO GOES HERE
+                  <PortfolioModal
+                    url1={this.props.freelancer[0].image_url1}
+                    link1={this.props.freelancer[0].link1}
+                    url2={this.props.freelancer[0].image_url2}
+                    link2={this.props.freelancer[0].link2}
+                    url3={this.props.freelancer[0].image_url3}
+                    link3={this.props.freelancer[0].link3}
+                  />
+                  {/* <Dialog
+                    className="profile__portfolio__modal__container"
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                    contentStyle={{
+                      width: '500px',
+                      maxWidth: '100%',
+                      height: '500px',
+                      padding: '10px'
+                    }}
+                  >
+                    <DialogContent>
+                      <div className="profile__portfolio__modal">
+                        <Portfolio
+                          url1={this.props.freelancer[0].image_url1}
+                          url2={this.props.freelancer[0].image_url2}
+                          url3={this.props.freelancer[0].image_url3}
+                        />
+                      </div>
+                    </DialogContent>
+                  </Dialog> */}
+                  {/* <Portfolio
+                    url1={this.props.freelancer[0].image_url1}
+                    link1={this.props.freelancer[0].link1}
+                    url2={this.props.freelancer[0].image_url2}
+                    url3={this.props.freelancer[0].image_url3}
+                  /> */}
                 </div>
-                {/* <div>
-                Portfolio:
-                <img
-                  src={`${freelancer[0] && freelancer[0].image_url}`}
-                  height="80"
-                  width="80"
-                />
-              </div> */}
-                {/* <button>Contact Me (...email address in users table)</button> */}
+
                 <div className="profile__contact__btn">
                   <a
                     href={`mailto:${freelancer[0] &&
@@ -162,7 +200,7 @@ class Profile extends Component {
                         />
                         <div>
                           <div>
-                            {reviewerObj && reviewerObj.first_name}{" "}
+                            {reviewerObj && reviewerObj.first_name}{' '}
                             {reviewerObj && reviewerObj.last_name}
                           </div>
                           {this.props.reviews[0] &&
