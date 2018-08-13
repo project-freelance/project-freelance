@@ -19,7 +19,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main__container">
-        <div className="main__topNav">Main</div>
+        {/* <div className="main__topNav">Main</div> */}
         <div className="main__sideNav">
           <Nav />
         </div>
