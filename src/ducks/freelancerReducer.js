@@ -13,6 +13,7 @@ const UPDATE_FREELANCER_POST = "UPDATE_FREELANCER_POST";
 
 const ADD_FAVE_JOB = "ADD_FAVE_JOB";
 const GET_FAVE_JOBS = "GET_FAVE_JOB";
+const DELETE_FAVE_JOB = "DELETE_FAVE_JOB";
 
 //action creators
 export function addFreelancer(bio, skills, experience, city, user_id) {
@@ -92,6 +93,12 @@ export function getFaveJobs(id) {
   return {
     type: GET_FAVE_JOBS,
     payload: axios.get(`/api/user/jobs/${id}`)
+  };
+}
+export function deleteFaveJob(id) {
+  return {
+    type: DELETE_FAVE_JOB,
+    payload: axios.delete(`/api/user/job/${id}`)
   };
 }
 
@@ -283,6 +290,24 @@ export default function freelancerReducer(state = initialState, action) {
         favJobs: action.payload.data
       };
     case `${GET_FAVE_JOBS}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case `${DELETE_FAVE_JOB}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${DELETE_FAVE_JOB}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favJobs: action.payload.data
+      };
+    case `${DELETE_FAVE_JOB}_REJECTED`:
       return {
         ...state,
         isLoading: false,

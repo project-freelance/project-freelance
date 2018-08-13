@@ -1,10 +1,18 @@
 module.exports = {
   addEmployer: (req, res, next) => {
     let db = req.app.get("db");
-    const { bio, company, position, city, user_id, company_logo } = req.body;
+    const {
+      bio,
+      company,
+      position,
+      city,
+      state,
+      user_id,
+      company_logo
+    } = req.body;
 
     db.employers
-      .addEmployer([bio, company, position, city, user_id, company_logo])
+      .addEmployer([bio, company, position, city, state, user_id, company_logo])
       .then(employer => {
         console.log(employer);
         return res.status(200).send(employer);
@@ -42,6 +50,7 @@ module.exports = {
         req.body.company,
         req.body.position,
         req.body.city,
+        req.body.state,
         req.body.company_logo
       )
       .then(() => {
