@@ -67,9 +67,11 @@ class Feed extends Component {
       })
     );
 
-    console.log(employerPosts);
-    console.log(freelancerPosts);
+    // console.log(employerPosts);
+    // console.log(freelancerPosts);
+    // console.log(preMerge(employerPosts, freelancerPosts));
 
+    //function to merge arrays and sort by moment
     function preMerge(arr1, arr2) {
       let result = [...arr1, ...arr2];
       return result.sort(function(a, b) {
@@ -77,8 +79,24 @@ class Feed extends Component {
       });
     }
 
+    //calling merge function
+
     let mergedArrays = preMerge(employerPosts, freelancerPosts);
+
     console.log(mergedArrays);
+    console.log(users);
+    console.log(mergedDiv);
+
+    let mergedDiv = mergedArrays.map((post, i) => {
+      return (
+        <div className="feed__freelancerPostContainer">
+          <p>{post.title}</p>
+          <p>{post.moment}</p>
+        </div>
+      );
+    });
+
+    //let mergedAndMapped = mergedArrays.map();
 
     freelancerPosts = isLoading ? (
       <p>Loading...</p>
@@ -216,16 +234,14 @@ class Feed extends Component {
       })
     );
 
-    // console.log(employerPosts);
-    // console.log(freelancerPosts);
-
-    // function mergeTwo(arr1, arr2) {
+    // function preMerge(arr1, arr2) {
     //   let result = [...arr1, ...arr2];
-    //   return result;
-    //   // return result.sort((a,b) => a-b);
+    //   return result.sort(function(a, b) {
+    //     return a.moment > b.moment ? 1 : b.moment > a.moment ? -1 : 0;
+    //   });
     // }
 
-    // console.log(mergeTwo(employerPosts, freelancerPosts));
+    // console.log(preMerge(employerPosts, freelancerPosts));
 
     return (
       <div className="feed__container">
@@ -237,9 +253,15 @@ class Feed extends Component {
 
         {freelancerPosts}
         {employerPosts}
+        {/* {freelancerPosts}
+        {employerPosts} */}
         <h1>divider</h1>
+        {/* {preMerge(employerPosts, freelancerPosts)} */}
+
+        {/* {mergedArrays} */}
         {/* {mergeTwo(employerPosts, freelancerPosts)} */}
         {/* {mergedArrays} */}
+        {mergedDiv}
       </div>
     );
   }
