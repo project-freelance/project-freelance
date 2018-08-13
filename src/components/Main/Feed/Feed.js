@@ -14,9 +14,7 @@ import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
 class Feed extends Component {
   constructor() {
     super();
-    this.state = {
-      users: []
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -32,235 +30,151 @@ class Feed extends Component {
   }
 
   render() {
+    //getting logged in user's saved jobs
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
 
     let { employerPosts, freelancerPosts, isLoading, users } = this.props;
 
-    let userInfo = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      users.map((user, i) => {
-        return (
-          <div className="feed__userContainer" key={i}>
-            <div className="feed__userProfile">
-              <div className="feed__userImage">
-                <img
-                  src={user.profile_image}
-                  alt="person"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%"
-                  }}
-                />
-              </div>
-              <div className="feed__userData">
-                <p>{user.first_name}</p>
-                <p>{user.last_name}</p>
-                <p>{user.specialty}</p>
-              </div>
-            </div>
-          </div>
-        );
-      })
-    );
-
-    // console.log(employerPosts);
-    // console.log(freelancerPosts);
-    // console.log(preMerge(employerPosts, freelancerPosts));
-
     //function to merge arrays and sort by moment
     function preMerge(arr1, arr2) {
       let result = [...arr1, ...arr2];
       return result.sort(function(a, b) {
-        return a.moment > b.moment ? 1 : b.moment > a.moment ? -1 : 0;
+        return a.moment < b.moment ? 1 : b.moment < a.moment ? -1 : 0;
       });
     }
 
-    //calling merge function
-
+    //invoking the merge function passing in our arrays
     let mergedArrays = preMerge(employerPosts, freelancerPosts);
 
-    console.log(mergedArrays);
-    console.log(users);
-    console.log(mergedDiv);
-
-    let mergedDiv = mergedArrays.map((post, i) => {
-      return (
-        <div className="feed__freelancerPostContainer">
-          <p>{post.title}</p>
-          <p>{post.moment}</p>
-        </div>
-      );
-    });
-
-    //let mergedAndMapped = mergedArrays.map();
-
-    freelancerPosts = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      freelancerPosts.map((post, i) => {
-        let postUser = users.map((user, id) => {
-          if (user.id === post.user_id) {
+    //mapping through merged freelancer and employer arrays
+    let mergedDiv = mergedArrays.map((post, index) => {
+      //matching post to user who posted to display user data
+      let postUser = users.map((user, i) => {
+        if (post.user_id == user.id) {
+          //if freelancer display this in return
+          if (user.role === "Freelancer") {
             return (
-              <div key={user.id}>
-                <Link
-                  className="feed__linkToUser"
-                  to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div>
+              <div key={index}>
+                <div className="feed__mergedFreelancerContainer">
+                  <div className="feed__freelancerUser">
+                    <Link
+                      className="feed__linkToUser"
+                      to={`/main/profile/${user.id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div className="feed__userImage">
+                        <img
+                          src={user.profile_image}
+                          alt="person"
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            borderRadius: "50%"
+                          }}
+                        />
+                      </div>
+                      <div className="feed__userName">
+                        {user.first_name}
+                        {user.last_name}
+                        {user.specialty}
+                      </div>
+                    </Link>
+                  </div>
+                  <div className="feed__freelancerPosting">
+                    <h3>Freelancer Posting</h3>
+                    <p>Post Title: {post.title}</p>
+                    <p>Post Body: {post.body}</p>
+                    <div>
+                      <Moment fromNow>{post.moment}</Moment>
+                    </div>
+
+                    <button>
+                      <FreelancerPostModal
+                        userId={post.user_id}
+                        postId={post.id}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          } else {
+            //if employer display this in return
+            return (
+              <div className="feed__mergedEmployerContainer">
+                <div className="feed__employerPosting">
+                  <Link
+                    className="feed__linkToUser"
+                    to={`/main/profile/${user.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
                     <img
                       src={user.profile_image}
                       alt="person"
                       style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "80px",
+                        height: "80px",
                         borderRadius: "50%"
                       }}
                     />
-                  </div>
-                  <div>
+
                     <p>
                       {user.first_name}
                       {user.last_name}
                     </p>
-
-                    <p>{user.specialty}</p>
-                  </div>
-                </Link>
-              </div>
-            );
-          } else {
-            null;
-          }
-        });
-
-        return (
-          <div className="feed__freelancerPostContainer" key={i}>
-            <div className="freelancerProfile" />
-            <div className="feed__freelancerPosting">
-              <div>{postUser}</div>
-              <div>
-                <h3>Freelancer Posting</h3>
-                <p>Post Title: {post.title}</p>
-                <p>Post Body: {post.body}</p>
+                  </Link>
+                </div>
+                <p>{user.specialty}</p>
+                <p>{post.title}</p>
+                <p>{post.moment}</p>
 
                 <div>
-                  <Moment fromNow>{post.moment}</Moment>
+                  <h3>Employer Posting</h3>
+                  {matchJob.includes(post.id) && (
+                    <div className="feed__applied">
+                      <p>APPLIED</p>
+                    </div>
+                  )}
+                  <p>
+                    Post Title:
+                    {post.title}
+                  </p>
+                  <p>
+                    Post Body:
+                    {post.body}
+                  </p>
+                  <p>
+                    Job:
+                    {post.specialty}
+                  </p>
+                  <div>
+                    <Moment fromNow>{post.moment}</Moment>
+                  </div>
+                  <p>
+                    Pay: {post.price}
+                    <button>
+                      <EmployerPostModal
+                        userId={post.user_id}
+                        postId={post.id}
+                      />
+                    </button>
+                  </p>
                 </div>
-
-                <button>
-                  <FreelancerPostModal userId={post.user_id} postId={post.id} />
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })
-    );
-
-    employerPosts = isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      employerPosts.map((post, i) => {
-        let postUser = users.map((user, id) => {
-          if (user.id === post.user_id) {
-            return (
-              <div key={user.id}>
-                <Link
-                  className="feed__linkToUser"
-                  to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <img
-                    src={user.profile_image}
-                    alt="person"
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%"
-                    }}
-                  />
-
-                  <p>{user.first_name}</p>
-                  <p>{user.last_name}</p>
-                  <p>{user.specialty}</p>
-                </Link>
               </div>
             );
-          } else {
-            null;
           }
-        });
-        return (
-          <div className="feed__employerPostContainer" key={i}>
-            <div className="feed__employerPosting">
-              <div>{postUser}</div>
-              <div>
-                <h3>Employer Posting</h3>
-                {matchJob.includes(post.id) && (
-                  <div className="feed__applied">
-                    <p>APPLIED</p>
-                  </div>
-                )}
-                <p>
-                  Post Title:
-                  {post.title}
-                </p>
-                <p>
-                  Post Body:
-                  {post.body}
-                </p>
-                <p>
-                  Job:
-                  {post.specialty}
-                </p>
-                <div>
-                  <Moment fromNow>{post.moment}</Moment>
-                </div>
-                <p>
-                  Pay: {post.price}
-                  <button>
-                    <EmployerPostModal userId={post.user_id} postId={post.id} />
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      })
-    );
+        }
+      });
+      return <div>{postUser} </div>;
+    });
 
-    // function preMerge(arr1, arr2) {
-    //   let result = [...arr1, ...arr2];
-    //   return result.sort(function(a, b) {
-    //     return a.moment > b.moment ? 1 : b.moment > a.moment ? -1 : 0;
-    //   });
-    // }
-
-    // console.log(preMerge(employerPosts, freelancerPosts));
-
+    //render return the merged mapped arrays
     return (
       <div className="feed__container">
         <h1>In the Feed...</h1>
-
-        <button>
-          <Post />
-        </button>
-
-        {freelancerPosts}
-        {employerPosts}
-        {/* {freelancerPosts}
-        {employerPosts} */}
-        <h1>divider</h1>
-        {/* {preMerge(employerPosts, freelancerPosts)} */}
-
-        {/* {mergedArrays} */}
-        {/* {mergeTwo(employerPosts, freelancerPosts)} */}
-        {/* {mergedArrays} */}
+        <Post />
         {mergedDiv}
       </div>
     );
