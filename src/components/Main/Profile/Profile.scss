@@ -115,3 +115,12 @@
 .profile__sample__portfolio {
   font-size: 40px;
 }
+
+.profile__portfolio__container {
+  display: flex;
+}
+
+.profile__portfolio__image {
+  height: 10vh;
+  width: 10vw;
+}
