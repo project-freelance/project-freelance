@@ -1,4 +1,4 @@
 UPDATE freelancer_profile
-    SET bio=$2, skills=$3, experience=$4, city=$5
+    SET heading=$2, bio=$3, skills=$4, experience=$5, city=$6, state=$7
 WHERE user_id=$1
 RETURNING *;

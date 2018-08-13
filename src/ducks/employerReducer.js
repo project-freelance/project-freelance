@@ -47,10 +47,12 @@ export function getEmployers() {
 
 export function updateEmployer(
   id,
+  heading,
   bio,
   company,
   position,
   city,
+  state,
   user_id,
   company_logo
 ) {
@@ -58,10 +60,12 @@ export function updateEmployer(
     type: UPDATE_EMPLOYER,
     payload: axios.put(
       `/api/employer/${id}`,
+      heading,
       bio,
       company,
       position,
       city,
+      state,
       user_id,
       company_logo
     )

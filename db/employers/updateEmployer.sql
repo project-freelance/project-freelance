@@ -1,4 +1,4 @@
 UPDATE employer_profile
-    SET bio=$2, company=$3, position=$4, city=$5, state=$6, company_logo=$7
+    SET heading=$2, bio=$3, company=$4, position=$5, city=$6, state=$7, company_logo=$8
 WHERE user_id=$1
 RETURNING *;
