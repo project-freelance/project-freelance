@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { getEmployerPosts } from '../../../../../ducks/employerReducer';
 import {
   addFaveJob,
-  getFaveJobs
+  getFaveJobs,
+  deleteFaveJob
 } from '../../../../../ducks/freelancerReducer';
 import { getUser } from '../../../../../ducks/userReducer';
 import { getUsers } from '../../../../../ducks/userReducer';
@@ -44,14 +45,20 @@ class EmployerPostModal extends Component {
   render() {
     const userIdFromPost = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
+    // const idFromModalPost = this.props && this.props.id;
 
     let matchUser = this.props.users.find(user => user.id === userIdFromPost);
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
+
+    // let modalPostId = this.props.emp_user_join.find(
+    //   id => id === idFromModalPost
+    // );
 
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
 
+    console.log(this.props.favJobs);
     return (
       <div>
         {/* Modal Open Button */}
@@ -126,6 +133,16 @@ class EmployerPostModal extends Component {
                       {matchJob.includes(matchPost.id) && (
                         <div className="employerPostModal__applied">
                           APPLIED
+                          <Button
+                            style={{
+                              backgroundColor: '#008000'
+                            }}
+                            onClick={() => {
+                              this.props.deleteFaveJob();
+                            }}
+                          >
+                            Unapply
+                          </Button>
                         </div>
                       )}
                       {!matchJob.includes(matchPost.id) && (
@@ -171,6 +188,7 @@ export default connect(
     getUser,
     getUsers,
     addFaveJob,
-    getFaveJobs
+    getFaveJobs,
+    deleteFaveJob
   }
 )(EmployerPostModal);
