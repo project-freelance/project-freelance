@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getEmployerPosts } from "../../../ducks/employerReducer";
 import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
-import { getUsers } from "../../../ducks/userReducer";
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getFaveJobs } from "../../../ducks/freelancerReducer";
 import "../Feed/Feed.css";
 import Post from "../Feed/Post/Post";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
+import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
 
 class Feed extends Component {
   constructor() {
@@ -22,20 +26,22 @@ class Feed extends Component {
       this.setState({
         users: result.value.data
       });
-      console.log(this.state.users);
-      console.log(this.state.users.id);
     });
+    this.props.getFaveJobs &&
+      this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
   }
 
   render() {
+    let matchJob = this.props.favJobs
+      .filter(person => person.freelancer_id === this.props.user[0].id)
+      .map(item => item.employer_post_id);
+
     let { employerPosts, freelancerPosts, isLoading, users } = this.props;
 
     let userInfo = isLoading ? (
       <p>Loading...</p>
     ) : (
       users.map((user, i) => {
-        //console.log(user);
-
         return (
           <div className="feed__userContainer" key={i}>
             <div className="feed__userProfile">
@@ -65,8 +71,6 @@ class Feed extends Component {
       <p>Loading...</p>
     ) : (
       freelancerPosts.map((post, i) => {
-        console.log(post.user_id);
-
         let postUser = users.map((user, id) => {
           if (user.id === post.user_id) {
             return (
@@ -112,7 +116,14 @@ class Feed extends Component {
                 <h3>Freelancer Posting</h3>
                 <p>Post Title: {post.title}</p>
                 <p>Post Body: {post.body}</p>
-                <button>More Info</button>
+
+                <div>
+                  <Moment fromNow>{post.moment}</Moment>
+                </div>
+
+                <button>
+                  <FreelancerPostModal userId={post.user_id} postId={post.id} />
+                </button>
               </div>
             </div>
           </div>
@@ -159,11 +170,31 @@ class Feed extends Component {
               <div>{postUser}</div>
               <div>
                 <h3>Employer Posting</h3>
-                <p>Post Title:{post.title}</p>
-                <p>Post Body:{post.body}</p>
-                <p>Job:{post.specialty}</p>
+                {matchJob.includes(post.id) && (
+                  <div className="feed__applied">
+                    <p>APPLIED</p>
+                  </div>
+                )}
                 <p>
-                  Pay: {post.price} <button>More Info</button>
+                  Post Title:
+                  {post.title}
+                </p>
+                <p>
+                  Post Body:
+                  {post.body}
+                </p>
+                <p>
+                  Job:
+                  {post.specialty}
+                </p>
+                <div>
+                  <Moment fromNow>{post.moment}</Moment>
+                </div>
+                <p>
+                  Pay: {post.price}
+                  <button>
+                    <EmployerPostModal userId={post.user_id} postId={post.id} />
+                  </button>
                 </p>
               </div>
             </div>
@@ -191,11 +222,13 @@ function mapStateToProps(state) {
   return {
     employerPosts: state.employerReducer.employerPosts,
     freelancerPosts: state.freelancerReducer.freelancerPosts,
-    users: state.userReducer.users
+    user: state.userReducer.user,
+    users: state.userReducer.users,
+    favJobs: state.freelancerReducer.favJobs
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getEmployerPosts, getFreelancerPosts, getUsers }
+  { getEmployerPosts, getFreelancerPosts, getUsers, getUser, getFaveJobs }
 )(Feed);

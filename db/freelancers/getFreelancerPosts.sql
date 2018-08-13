@@ -1,2 +1,3 @@
 SELECT *
-FROM freelancer_post;
+FROM freelancer_post
+ORDER BY moment DESC;

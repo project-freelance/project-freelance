@@ -1,21 +1,24 @@
-import axios from 'axios';
+import axios from "axios";
 
 //constants
-const ADD_FREELANCER = 'ADD_FREELANCER';
-const GET_FREELANCER = 'GET_FREELANCER';
-const GET_FREELANCERS = 'GET_FREELANCERS';
-const UPDATE_FREELANCER = 'UPDATE_FREELANCER';
+const ADD_FREELANCER = "ADD_FREELANCER";
+const GET_FREELANCER = "GET_FREELANCER";
+const GET_FREELANCERS = "GET_FREELANCERS";
+const UPDATE_FREELANCER = "UPDATE_FREELANCER";
 
-const ADD_FREELANCER_POST = 'ADD_FREELANCER_POST';
-const GET_FREELANCER_POSTS = 'GET_FREELANCER_POSTS';
-const DELETE_FREELANCER_POST = 'DELETE_FREELANCER_POST';
-const UPDATE_FREELANCER_POST = 'UPDATE_FREELANCER_POST';
+const ADD_FREELANCER_POST = "ADD_FREELANCER_POST";
+const GET_FREELANCER_POSTS = "GET_FREELANCER_POSTS";
+const DELETE_FREELANCER_POST = "DELETE_FREELANCER_POST";
+const UPDATE_FREELANCER_POST = "UPDATE_FREELANCER_POST";
+
+const ADD_FAVE_JOB = "ADD_FAVE_JOB";
+const GET_FAVE_JOBS = "GET_FAVE_JOB";
 
 //action creators
 export function addFreelancer(bio, skills, experience, city, user_id) {
   return {
     type: ADD_FREELANCER,
-    payload: axios.post('/api/freelancer/', {
+    payload: axios.post("/api/freelancer/", {
       bio,
       skills,
       experience,
@@ -33,7 +36,7 @@ export function getFreelancer(id) {
 export function getFreelancers() {
   return {
     type: GET_FREELANCER,
-    payload: axios.get('/api/freelancers')
+    payload: axios.get("/api/freelancers")
   };
 }
 
@@ -44,13 +47,14 @@ export function updateFreelancer(id, bio, skills, experience, city) {
   };
 }
 
-export function addFreelancerPost(title, body, user_id) {
+export function addFreelancerPost(title, body, user_id, moment) {
   return {
     type: ADD_FREELANCER_POST,
-    payload: axios.post('/api/freelancerPost/', {
+    payload: axios.post("/api/freelancerPost/", {
       title,
       body,
-      user_id
+      user_id,
+      moment
     })
   };
 }
@@ -75,15 +79,31 @@ export function updateFreelancerPost(id, obj) {
     payload: axios.put(`/api/freelancerPost/${id}`, obj)
   };
 }
+export function addFaveJob(employer_post_id, freelancer_id) {
+  return {
+    type: ADD_FAVE_JOB,
+    payload: axios.post("/api/user/jobs", {
+      employer_post_id,
+      freelancer_id
+    })
+  };
+}
+export function getFaveJobs(id) {
+  return {
+    type: GET_FAVE_JOBS,
+    payload: axios.get(`/api/user/jobs/${id}`)
+  };
+}
 
 //initial state
 const initialState = {
   freelancer: [],
   freelancers: [],
-  //freelancerPost: [],
+  favJob: [],
+  favJobs: [],
   freelancerPosts: [],
   isLoading: false,
-  error: ''
+  error: ""
 };
 
 //reducer
@@ -227,6 +247,42 @@ export default function freelancerReducer(state = initialState, action) {
         freelancerPost: action.payload.data
       };
     case `${UPDATE_FREELANCER_POST}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case `${ADD_FAVE_JOB}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${ADD_FAVE_JOB}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favJob: action.payload.data
+      };
+    case `${ADD_FAVE_JOB}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case `${GET_FAVE_JOBS}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${GET_FAVE_JOBS}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favJobs: action.payload.data
+      };
+    case `${GET_FAVE_JOBS}_REJECTED`:
       return {
         ...state,
         isLoading: false,

@@ -20,7 +20,7 @@ module.exports = {
   getReviews: (req, res, next) => {
     let db = req.app.get("db");
 
-    db.reviews.getReviews().then(reviews => {
+    db.reviews.getReviews(req.params.id).then(reviews => {
       return res.status(200).send(reviews);
     });
   },

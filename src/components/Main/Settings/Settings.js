@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getUser } from "../../../ducks/userReducer";
-import ReactS3Uploader from "react-s3-uploader";
-import { updateUser } from "../../../ducks/userReducer";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getUser } from '../../../ducks/userReducer';
+import ReactS3Uploader from 'react-s3-uploader';
+import { updateUser } from '../../../ducks/userReducer';
 // Material UI
 
-import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import TextField from '@material-ui/core/TextField';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import LinearProgress from '@material-ui/core/LinearProgress';
 // Material UI
 
-import "./Settings.css";
+import './Settings.css';
 
 class Settings extends Component {
   constructor(props) {
@@ -23,12 +23,15 @@ class Settings extends Component {
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
       experience: 0,
-      city: "",
+      city: '',
       profile_image: this.props.user[0].profile_image,
       completed: 0,
       percent: 0,
-      bio: ""
+      bio: ''
     };
+  }
+  componentDidMount() {
+    console.log(this.state);
   }
   handleChange = name => event => {
     this.setState({
@@ -42,11 +45,10 @@ class Settings extends Component {
     });
     console.log(this.state);
   };
+
   onPictureUpload = s3 => {
     this.setState({
-      profile_image: `https://s3.us-east-2.amazonaws.com/upply-userprofile/${
-        s3.filename
-      }`
+      profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
     });
   };
   onSaveHandler = () => {
@@ -65,9 +67,9 @@ class Settings extends Component {
       });
     }
   };
-  logError = e => {
-    console.log(e);
-  };
+  // logError = e => {
+  //   console.log(e);
+  // };
 
   //end progress bar
 
@@ -91,7 +93,7 @@ class Settings extends Component {
           />
           <h2>
             {first_name}
-            {"  "} {last_name}
+            {'  '} {last_name}
           </h2>
         </div>
         <div className="settings__bio">
@@ -110,7 +112,7 @@ class Settings extends Component {
         </div>
         <div className="settings__info">
           <form
-            className={"settings__formContainer"}
+            className={'settings__formContainer'}
             noValidate
             autoComplete="off"
           >
@@ -119,7 +121,7 @@ class Settings extends Component {
                 id="First Name"
                 label="First Name"
                 fullWidth
-                className={"settings__firstName__input"}
+                className={'settings__firstName__input'}
                 value={first_name}
                 onChange={e => this.setState({ first_name: e.target.value })}
                 margin="normal"
@@ -130,7 +132,7 @@ class Settings extends Component {
                 id="Last Name"
                 label="Last Name"
                 fullWidth
-                className={"settings__lastname__input"}
+                className={'settings__lastname__input'}
                 value={last_name}
                 onChange={e => this.setState({ last_name: e.target.value })}
                 margin="normal"
@@ -141,7 +143,7 @@ class Settings extends Component {
                 id="name"
                 label="email"
                 fullWidth
-                className={"settings__email__input"}
+                className={'settings__email__input'}
                 value={email}
                 onChange={e => this.setState({ email: e.target.value })}
                 margin="normal"
@@ -152,19 +154,19 @@ class Settings extends Component {
                 id="name"
                 label="city"
                 fullWidth
-                className={"settings__city__input"}
+                className={'settings__city__input'}
                 value={city}
                 onChange={e => this.setState({ city: e.target.value })}
                 margin="normal"
               />
             </div>
             <div>
-              <FormControl className={"form"}>
+              <FormControl className={'form'}>
                 <NativeSelect
-                  className={"settings__experience__input"}
+                  className={'settings__experience__input'}
                   value={experience}
                   name="experience"
-                  onChange={this.handleExperienceChange("experience")}
+                  onChange={this.handleExperienceChange('experience')}
                 >
                   <option value="" disabled>
                     experience
@@ -180,7 +182,6 @@ class Settings extends Component {
           </form>
           <div />
           <ReactS3Uploader
-            // className="settings__uploadButton"
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
             accept="image/*"
@@ -188,24 +189,23 @@ class Settings extends Component {
             onProgress={this.progress}
             onFinish={this.onPictureUpload}
             contentDisposition="auto"
-            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, '')}
             inputRef={cmp => (this.uploadInput = cmp)}
             server={process.env.REACT_APP_DEV_HOST}
             autoUpload
-            onError={this.logError}
           />
 
           <LinearProgress variant="determinate" value={this.state.completed} />
           <Button
             variant="outlined"
             color="primary"
-            className={"settings__saveButton"}
+            className={'settings__saveButton'}
             onClick={this.onSaveHandler}
           >
             Save
           </Button>
         </div>
-        {/* <button onClick={() => console.log(this.state)} /> */}
+        <button onClick={() => console.log(this.state)} />
       </div>
     );
   }

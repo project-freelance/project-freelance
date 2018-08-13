@@ -92,7 +92,7 @@ app.use(
   "/s3",
   require("react-s3-uploader/s3router")({
     bucket: process.env.AWS_S3_URL,
-    region: "us-east-2", //optional
+    region: "us-east-1", //optional
     signatureVersion: "v4", //optional (use for some amazon regions: frankfurt and others)
     headers: { "Access-Control-Allow-Origin": "*" }, // optional
     ACL: "private", // this is default
@@ -145,7 +145,7 @@ app.put("/api/portfolio/:id", portfolioCtrl.updatePortfolio);
 app.delete("/api/portfolio/:id", portfolioCtrl.deletePortfolio);
 
 // reviews
-app.get("/api/reviews", reviewCtrl.getReviews);
+app.get("/api/reviews/:id", reviewCtrl.getReviews);
 app.post("/api/review", reviewCtrl.addReview);
 app.delete("/api/review/:id", reviewCtrl.deleteReview);
 

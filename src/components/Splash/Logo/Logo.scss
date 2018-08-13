@@ -1,0 +1,94 @@
+:root {
+  --x-width: 200px;
+  --x-height: 40px;
+  --x-color: rgb(127, 196, 253);
+}
+.logo__container {
+  //   padding: 50vh;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(127, 196, 253);
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--x-color);
+  }
+  .f {
+    position: absolute;
+    top: 50vh;
+    left: 40vw;
+    width: var(--x-width);
+    height: var(--x-height);
+    background: white;
+    perspective: 1000px;
+    will-change: transform;
+  }
+  #F-team3,
+  #F-team4 {
+    width: calc(var(--x-width) / 2);
+  }
+  @for $i from 1 through 4 {
+    #f-team#{$i} {
+      animation: f#{$i} 2s ease-in-out forwards infinite alternate;
+    }
+  }
+  .container {
+    position: relative;
+    width: var(--x-width);
+    height: 200px;
+    will-change: transform;
+  }
+  @keyframes f1 {
+    50%,
+    100% {
+      height: 50px;
+      width: 150px;
+      transform: rotate(-90deg) translateY(-25px) translateX(-10px);
+    }
+    80% {
+      height: 50px;
+      width: 150px;
+      transform: rotate(-90deg) translateY(-50px) translateX(-10px);
+    }
+    100% {
+      height: 50px;
+      width: 150px;
+      transform: rotate(-90deg) translateY(-50px) translateX(-10px);
+    }
+  }
+  @keyframes f3 {
+    50%,
+    100% {
+      transform: translateY(-57px);
+    }
+    100% {
+      transform: translateY(-57px);
+    }
+  }
+  .logo__title {
+    color: white;
+    position: absolute;
+    top: 60vh;
+    left: 38vw;
+    font-size: 2.5em;
+
+    h1 {
+      font-family: "Permanent Marker", cursive;
+      animation-duration: 5s;
+      animation-name: Dropdown;
+    }
+
+    @keyframes Dropdown {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}

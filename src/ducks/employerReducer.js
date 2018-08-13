@@ -10,6 +10,8 @@ const GET_EMPLOYER_POSTS = "GET_EMPLOYER_POSTS";
 const DELETE_EMPLOYER_POST = "DELETE_EMPLOYER_POST";
 const UPDATE_EMPLOYER_POST = "UPDATE_EMPLOYER_POST";
 
+const GET_APPLIED_JOBS = "GET_APPLIED_JOBS";
+
 export function addEmployer(
   bio,
   company,
@@ -66,7 +68,14 @@ export function updateEmployer(
   };
 }
 
-export function addEmployerPost(title, body, specialty, price, user_id) {
+export function addEmployerPost(
+  title,
+  body,
+  specialty,
+  price,
+  user_id,
+  moment
+) {
   return {
     type: ADD_EMPLOYER_POST,
     payload: axios.post("/api/employerPost/", {
@@ -74,7 +83,8 @@ export function addEmployerPost(title, body, specialty, price, user_id) {
       body,
       specialty,
       price,
-      user_id
+      user_id,
+      moment
     })
   };
 }
@@ -99,12 +109,19 @@ export function updateEmployerPost(id, obj) {
     payload: axios.put(`/api/employerPost/${id}`, obj)
   };
 }
+export function getAppliedJobs(id) {
+  return {
+    type: GET_APPLIED_JOBS,
+    payload: axios.get(`/api/employer/appliedJobs/${id}`)
+  };
+}
 
 //initial state
 const initialState = {
   employer: [],
   employers: [],
   employerPosts: [],
+  appliedJobs: [],
   isLoading: false,
   error: ""
 };
@@ -248,6 +265,23 @@ export default function employerReducer(state = initialState, action) {
         employerPosts: action.payload.data
       };
     case `${UPDATE_EMPLOYER_POST}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case `${GET_APPLIED_JOBS}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${GET_APPLIED_JOBS}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        appliedJobs: action.payload.data
+      };
+    case `${GET_APPLIED_JOBS}_REJECTED`:
       return {
         ...state,
         isLoading: false,
