@@ -11,6 +11,10 @@
   flex-direction: row;
   justify-content: space-around;
 }
+.feed__applied {
+  color: green;
+  font-weight: bold;
+}
 
 .feed__employerPostContainer {
   border: 2px solid black;

@@ -11,6 +11,9 @@ const GET_FREELANCER_POSTS = "GET_FREELANCER_POSTS";
 const DELETE_FREELANCER_POST = "DELETE_FREELANCER_POST";
 const UPDATE_FREELANCER_POST = "UPDATE_FREELANCER_POST";
 
+const ADD_FAVE_JOB = "ADD_FAVE_JOB";
+const GET_FAVE_JOBS = "GET_FAVE_JOB";
+
 //action creators
 export function addFreelancer(bio, skills, experience, city, user_id) {
   return {
@@ -76,12 +79,28 @@ export function updateFreelancerPost(id, obj) {
     payload: axios.put(`/api/freelancerPost/${id}`, obj)
   };
 }
+export function addFaveJob(employer_post_id, freelancer_id) {
+  return {
+    type: ADD_FAVE_JOB,
+    payload: axios.post("/api/user/jobs", {
+      employer_post_id,
+      freelancer_id
+    })
+  };
+}
+export function getFaveJobs(id) {
+  return {
+    type: GET_FAVE_JOBS,
+    payload: axios.get(`/api/user/jobs/${id}`)
+  };
+}
 
 //initial state
 const initialState = {
   freelancer: [],
   freelancers: [],
-  //freelancerPost: [],
+  favJob: [],
+  favJobs: [],
   freelancerPosts: [],
   isLoading: false,
   error: ""
@@ -228,6 +247,42 @@ export default function freelancerReducer(state = initialState, action) {
         freelancerPost: action.payload.data
       };
     case `${UPDATE_FREELANCER_POST}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case `${ADD_FAVE_JOB}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${ADD_FAVE_JOB}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favJob: action.payload.data
+      };
+    case `${ADD_FAVE_JOB}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    case `${GET_FAVE_JOBS}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${GET_FAVE_JOBS}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favJobs: action.payload.data
+      };
+    case `${GET_FAVE_JOBS}_REJECTED`:
       return {
         ...state,
         isLoading: false,

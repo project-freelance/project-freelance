@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { getUser, updateRole, updateSpecialty } from "../../ducks/userReducer";
+import { addPortfolio } from "../../ducks/portfolioReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import "./Setup.css";
+import Button from "@material-ui/core/Button";
 class Setup extends Component {
   constructor() {
     super();
@@ -49,6 +52,10 @@ class Setup extends Component {
       freelancerClicked: true,
       employerClicked: false
     });
+    this.props.addPortfolio(this.state.id);
+    // .then(() => {
+    //   this.props.addPortfolio(this.state.id);
+    // });
   }
 
   chooseDeveloper() {
@@ -72,20 +79,48 @@ class Setup extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="setup__container">
         <h1>Are you a Freelancer or an Employer?</h1>
 
         <div className="setup__chooseRole">
-          <button onClick={() => this.chooseFreelancer()}>Freelancer</button>
-          <button onClick={() => this.chooseEmployer()}>Employer</button>
+          <Button
+            style={{
+              backgroundColor: this.state.freelancerClicked ? "green" : "blue",
+              color: "white",
+              marginRight: "20px"
+            }}
+            onClick={() => {
+              this.chooseFreelancer();
+            }}
+          >
+            Freelancer
+          </Button>
+          <Button
+            style={{
+              backgroundColor: this.state.employerClicked ? "green" : "blue",
+              color: "white"
+            }}
+            onClick={() => this.chooseEmployer()}
+          >
+            Employer
+          </Button>
         </div>
 
         {/* if employer is clicked send to next */}
         {this.state.employerClicked && (
           <div className="setup__next">
             <Link to="/main/settings">
-              <button>Next</button>
+              <Button
+                style={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  marginTop: "20px"
+                }}
+              >
+                Next
+              </Button>
             </Link>
           </div>
         )}
@@ -94,8 +129,25 @@ class Setup extends Component {
         {this.state.freelancerClicked && (
           <div className="setup__chooseSpecialty">
             <h2> Are you a Developer or a Designer?</h2>
-            <button onClick={() => this.chooseDeveloper()}>Developer</button>
-            <button onClick={() => this.chooseDesigner()}>Designer</button>
+            <Button
+              style={{
+                backgroundColor: this.state.developerClicked ? "green" : "blue",
+                color: "white",
+                marginRight: "20px"
+              }}
+              onClick={() => this.chooseDeveloper()}
+            >
+              Developer
+            </Button>
+            <Button
+              style={{
+                backgroundColor: this.state.designerClicked ? "green" : "blue",
+                color: "white"
+              }}
+              onClick={() => this.chooseDesigner()}
+            >
+              Designer
+            </Button>
           </div>
         )}
 
@@ -104,7 +156,15 @@ class Setup extends Component {
           (this.state.developerClicked || this.state.designerClicked) && (
             <div className="setup__next">
               <Link to="/main/settings">
-                <button>Next</button>
+                <Button
+                  style={{
+                    backgroundColor: "#0D47A1",
+                    color: "white",
+                    marginTop: "20px"
+                  }}
+                >
+                  Next
+                </Button>
               </Link>
             </div>
           )}
@@ -120,5 +180,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateRole, updateSpecialty }
+  { getUser, updateRole, updateSpecialty, addPortfolio }
 )(Setup);

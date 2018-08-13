@@ -1,32 +1,66 @@
 import React, { Component } from 'react';
-import jenhomepage from '../../jenhomepage.png';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import Logo from './Logo/Logo';
+
 import './Splash.css';
 
 class Splash extends Component {
   render() {
     return (
-      <div>
-        <div className="splash__logo__info__page">Splash</div>
-        <div className="splash__login">
-          <a href="http://localhost:3001/login">Login</a>
+      <div className="splash__content">
+        <div className="splash__logoContainer">
+          <Logo />
         </div>
-        <div className="splash__right__image__top">
-          <img src={jenhomepage} className="jen__homepage__image" alt="test" />
-        </div>
-        <div className="splash__right__image__middle">
-          <a href="http://via.placeholder.com/350x150" />
-        </div>
-        <div className="splash__right__image__bottom">
-          <a href="https://placeimg.com/640/480/tech" />
-        </div>
-        <div className="splash__left__image__top">
-          <a href="https://placeimg.com/640/480/tech" />
-        </div>
-        <div className="splash__left__image__middle">
-          <a href="https://placeimg.com/640/480/tech" />
-        </div>
-        <div className="splash__left__image__bottom">
-          <a href="https://placeimg.com/640/480/tech" />
+        <div className="splash__container">
+          <div className="splash__imageOne">
+            <div>
+              <img src="https://s3.amazonaws.com/freelancer-userprofilebucket/pug.jpeg" />
+              <p className="legend">image One</p>
+            </div>
+          </div>
+          <div class="splash__imageTwo">
+            <div>
+              <img src="https://s3.amazonaws.com/freelancer-userprofilebucket/Pug1.jpeg" />
+              <p className="legend">image Two</p>
+            </div>
+          </div>
+          <div class="Splash__imageThree">
+            <div>
+              <img src="https://s3.amazonaws.com/freelancer-userprofilebucket/Pug3.jpg" />
+              <p className="legend">image Three</p>
+            </div>
+          </div>
+          <div class="splash__loginContainer">
+            <div>
+              <h1>Freelancer</h1>
+            </div>
+            <div>
+              <p>
+                Prow scuttle parrel provost Sail ho shrouds spirits boom
+                mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's
+                nest nipperkin grog yardarm hempen halter furl. Swab barque
+                interloper chantey doubloon starboard grog black jack gangway
+                rutters. Deadlights jack lad schooner scallywag dance the hempen
+                jig carouser broadside cable strike colors. Bring a spring upon
+                her cable holystone blow the man down spanker Shiver me timbers
+                to go on account lookout wherry doubloon chase. Belay yo-ho-ho
+                keelhaul squiffy black spot yardarm spyglass sheet transom heave
+                to. Trysail Sail ho Corsair red ensign hulk smartly boom jib rum
+                gangway. Case shot Shiver me timbers gangplank crack Jennys tea
+                cup ballast Blimey lee snow crow's nest rutters. Fluke jib
+                scourge of the seven seas boatswain schooner gaff booty Jack Tar
+                transom spirits.
+              </p>
+            </div>
+            <Button
+              variant="outlined"
+              color="primary"
+              href="http://localhost:3001/login"
+            >
+              Login
+            </Button>
+          </div>
         </div>
       </div>
     );

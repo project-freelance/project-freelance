@@ -7,10 +7,10 @@ const ADD_REVIEW = "ADD_REVIEW";
 const GET_AVG_RATING = "GET_AVG_RATING";
 
 //action creators
-export function getReviews() {
+export function getReviews(id) {
   return {
     type: GET_REVIEWS,
-    payload: axios.get("/api/reviews")
+    payload: axios.get(`/api/reviews/${id}`)
   };
 }
 
