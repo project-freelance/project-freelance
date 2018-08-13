@@ -1,27 +1,105 @@
 .profile__container {
   display: flex;
+  background-color: white;
+  //   padding-left: 10vw;
+  padding-right: 15vw;
   //   flex-direction: column;
-  background-color: yellow;
-  margin-top: 3vh;
+  //   background-color: yellow;
+  //   margin-top: 3vh;
 }
 
-.profile_left_panel {
+.profile__left__panel {
   background-color: white;
-  width: 33%;
+  width: 50vw;
   height: 100vh;
 }
+.profile__user__img {
+  background-size: cover;
+  height: 50vh;
+  margin: 3vh;
+  //   background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center top;
+  //   width: 120px;
+}
 
-.profile_right_panel {
-  background-color: green;
+.profile__right__panel {
+  //   background-color: green;
+  //   background-color: green;
+  text-align: left;
   //   width:
   display: flex;
   flex-direction: column;
+  //   width: 50vw;
   height: 100vh;
+  //   margin-right: 10vw;
+  // padding-right: 10vw;
+  //   justify-content: space-between;
 }
 
-.profile_user_img {
+.profile__user__name {
+  margin-top: 3vh;
+  //   margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#profile__line__space {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.profile__stars__number {
+  display: flex;
+}
+.profile__reviews__num {
+  margin-left: 8px;
+  color: #888888;
+}
+
+.profile__contact__btn {
+  height: 5vh;
+  width: 11vw;
+  background-color: rgb(127, 196, 253);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.profile__contact__text {
+  text-decoration: none;
+  color: white;
+}
+
+.profile__reviewer__img {
   background-size: cover;
-  height: 50vh;
-  background-position: bottom;
-  //   width: 120px;
+  height: 50px;
+  width: 50px;
+  //   object-fit: cover;
+  //   background-repeat: no-repeat;
+  //   background-position: center;
+  border-radius: 50px;
+}
+
+.profile__reviews__avg {
+  display: flex;
+}
+
+.profile__review__block {
+  display: flex;
+}
+
+.profile__reviews__toggle {
+  color: #4c7aa2;
+  cursor: pointer;
+}
+
+.profile__addReview__btn {
+  color: #4c7aa2;
+  cursor: pointer;
+}
+
+.profile__sample__portfolio {
+  font-size: 40px;
 }

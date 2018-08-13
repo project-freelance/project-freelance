@@ -24,7 +24,7 @@ class AvgRating extends Component {
           //   changeRating={this.changeRating}
           numberOfStars={5}
           name="rating"
-          starDimension="30px"
+          starDimension="20px"
         />
       </div>
     );
