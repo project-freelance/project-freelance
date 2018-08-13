@@ -38,10 +38,12 @@ module.exports = {
     db.freelancers
       .updateFreelancer(
         req.params.id,
+        req.body.heading,
         req.body.bio,
         req.body.skills,
         req.body.experience,
-        req.body.city
+        req.body.city,
+        req.body.state
       )
       .then(() => {
         return res.sendStatus(200);
