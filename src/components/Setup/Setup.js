@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getUser, updateRole, updateSpecialty } from "../../ducks/userReducer";
+import { addPortfolio } from "../../ducks/portfolioReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Setup.css";
@@ -51,6 +52,10 @@ class Setup extends Component {
       freelancerClicked: true,
       employerClicked: false
     });
+    this.props.addPortfolio(this.state.id);
+    // .then(() => {
+    //   this.props.addPortfolio(this.state.id);
+    // });
   }
 
   chooseDeveloper() {
@@ -74,6 +79,7 @@ class Setup extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="setup__container">
         <h1>Are you a Freelancer or an Employer?</h1>
@@ -174,5 +180,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateRole, updateSpecialty }
+  { getUser, updateRole, updateSpecialty, addPortfolio }
 )(Setup);
