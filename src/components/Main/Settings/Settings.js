@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { getUser } from '../../../ducks/userReducer';
 import ReactS3Uploader from 'react-s3-uploader';
 import { updateUser } from '../../../ducks/userReducer';
-// Material UI
+import { updateFreelancer } from '../../../ducks/freelancerReducer';
+import { updateEmployer } from '../../../ducks/employerReducer';
 
+// Material UI
 import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -24,10 +26,12 @@ class Settings extends Component {
       email: this.props.user[0].email,
       experience: 0,
       city: '',
+      state: '',
       profile_image: this.props.user[0].profile_image,
       completed: 0,
       percent: 0,
-      bio: ''
+      bio: '',
+      heading: ''
     };
   }
   componentDidMount() {
@@ -52,7 +56,13 @@ class Settings extends Component {
     });
   };
   onSaveHandler = () => {
-    this.props.updateUser(this.state);
+    this.props.updateUser(this.state).then(() => {
+      if (this.props.user[0].role === 'Freelancer') {
+        this.props.updateFreelancer(this.props.user[0].id, this.state);
+      } else {
+        this.props.updateEmployer(this.props.user[0].id, this.state);
+      }
+    });
   };
 
   // progress bar
@@ -81,7 +91,9 @@ class Settings extends Component {
       profile_image,
       experience,
       city,
-      bio
+      bio,
+      state,
+      heading
     } = this.state;
     return (
       <div className="settings__container">
@@ -97,6 +109,18 @@ class Settings extends Component {
           </h2>
         </div>
         <div className="settings__bio">
+          <h4>Heading</h4>
+          <TextField
+            multiline={true}
+            rows={1}
+            rowsMax={1}
+            fullWidth
+            margin="normal"
+            placeholder="Placeholder"
+            helperText="Full width!"
+            value={heading}
+            onChange={e => this.setState({ heading: e.target.value })}
+          />
           <h4>Bio</h4>
           <TextField
             multiline={true}
@@ -161,6 +185,17 @@ class Settings extends Component {
               />
             </div>
             <div>
+              <TextField
+                id="name"
+                label="state"
+                fullWidth
+                className={'settings__state__input'}
+                value={state}
+                onChange={e => this.setState({ state: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
               <FormControl className={'form'}>
                 <NativeSelect
                   className={'settings__experience__input'}
@@ -205,7 +240,7 @@ class Settings extends Component {
             Save
           </Button>
         </div>
-        <button onClick={() => console.log(this.state)} />
+        <button onClick={() => console.log(this.props)} />
       </div>
     );
   }
@@ -218,5 +253,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateUser }
+  { getUser, updateUser, updateEmployer, updateFreelancer }
 )(Settings);
