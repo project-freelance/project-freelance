@@ -67,6 +67,19 @@ class Feed extends Component {
       })
     );
 
+    console.log(employerPosts);
+    console.log(freelancerPosts);
+
+    function preMerge(arr1, arr2) {
+      let result = [...arr1, ...arr2];
+      return result.sort(function(a, b) {
+        return a.moment > b.moment ? 1 : b.moment > a.moment ? -1 : 0;
+      });
+    }
+
+    let mergedArrays = preMerge(employerPosts, freelancerPosts);
+    console.log(mergedArrays);
+
     freelancerPosts = isLoading ? (
       <p>Loading...</p>
     ) : (
@@ -203,6 +216,17 @@ class Feed extends Component {
       })
     );
 
+    // console.log(employerPosts);
+    // console.log(freelancerPosts);
+
+    // function mergeTwo(arr1, arr2) {
+    //   let result = [...arr1, ...arr2];
+    //   return result;
+    //   // return result.sort((a,b) => a-b);
+    // }
+
+    // console.log(mergeTwo(employerPosts, freelancerPosts));
+
     return (
       <div className="feed__container">
         <h1>In the Feed...</h1>
@@ -213,6 +237,9 @@ class Feed extends Component {
 
         {freelancerPosts}
         {employerPosts}
+        <h1>divider</h1>
+        {/* {mergeTwo(employerPosts, freelancerPosts)} */}
+        {/* {mergedArrays} */}
       </div>
     );
   }
