@@ -16,6 +16,8 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 // Material UI
 
 import "./Settings.css";
+import FreelancerSettings from "./FreelancerSettings/FreelancerSettings";
+import EmployerSettings from "./EmployerSettings/EmployerSettings";
 
 class Settings extends Component {
   constructor(props) {
@@ -24,10 +26,12 @@ class Settings extends Component {
       first_name: this.props.user[0].first_name,
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
+      role: this.props.user[0].role,
       experience: 0,
       city: "",
       state: "",
       profile_image: this.props.user[0].profile_image,
+      company_image: "",
       completed: 0,
       percent: 0,
       bio: "",
@@ -82,166 +86,31 @@ class Settings extends Component {
   // };
 
   //end progress bar
-
+  settingDecider = () => {
+    if (this.props.user[0].role == "Freelancer") {
+      return <FreelancerSettings />;
+    } else {
+      return <EmployerSettings />;
+    }
+  };
   render() {
     let {
       last_name,
       first_name,
       email,
       profile_image,
+      company_image,
       experience,
       city,
       bio,
       state,
       heading
     } = this.state;
-    return (
-      <div className="settings__container">
-        <div className="settings__profile">
-          <img
-            className="settings__profileImage"
-            src={profile_image}
-            alt="User Profile Image"
-          />
-          <h2>
-            {first_name}
-            {"  "} {last_name}
-          </h2>
-        </div>
-        <div className="settings__bio">
-          <h4>Heading</h4>
-          <TextField
-            multiline={true}
-            rows={1}
-            rowsMax={1}
-            fullWidth
-            margin="normal"
-            placeholder="Placeholder"
-            helperText="Full width!"
-            value={heading}
-            onChange={e => this.setState({ heading: e.target.value })}
-          />
-          <h4>Bio</h4>
-          <TextField
-            multiline={true}
-            rows={1}
-            rowsMax={4}
-            fullWidth
-            margin="normal"
-            placeholder="Placeholder"
-            helperText="Full width!"
-            value={bio}
-            onChange={e => this.setState({ bio: e.target.value })}
-          />
-        </div>
-        <div className="settings__info">
-          <form
-            className={"settings__formContainer"}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                id="First Name"
-                label="First Name"
-                fullWidth
-                className={"settings__firstName__input"}
-                value={first_name}
-                onChange={e => this.setState({ first_name: e.target.value })}
-                margin="normal"
-              />
-            </div>
-            <div>
-              <TextField
-                id="Last Name"
-                label="Last Name"
-                fullWidth
-                className={"settings__lastname__input"}
-                value={last_name}
-                onChange={e => this.setState({ last_name: e.target.value })}
-                margin="normal"
-              />
-            </div>
-            <div>
-              <TextField
-                id="name"
-                label="email"
-                fullWidth
-                className={"settings__email__input"}
-                value={email}
-                onChange={e => this.setState({ email: e.target.value })}
-                margin="normal"
-              />
-            </div>
-            <div>
-              <TextField
-                id="name"
-                label="city"
-                fullWidth
-                className={"settings__city__input"}
-                value={city}
-                onChange={e => this.setState({ city: e.target.value })}
-                margin="normal"
-              />
-            </div>
-            <div>
-              <TextField
-                id="name"
-                label="state"
-                fullWidth
-                className={"settings__state__input"}
-                value={state}
-                onChange={e => this.setState({ state: e.target.value })}
-                margin="normal"
-              />
-            </div>
-            <div>
-              <FormControl className={"form"}>
-                <NativeSelect
-                  className={"settings__experience__input"}
-                  value={experience}
-                  name="experience"
-                  onChange={this.handleExperienceChange("experience")}
-                >
-                  <option value="" disabled>
-                    experience
-                  </option>
-                  <option value={0}> 0 years</option>
-                  <option value={1}> >1 year</option>
-                  <option value={3}>1 - 3 years</option>
-                  <option value={5}> >5 years</option>
-                </NativeSelect>
-                <FormHelperText>Experience</FormHelperText>
-              </FormControl>
-            </div>
-          </form>
-          <div />
-          <ReactS3Uploader
-            signingUrl="/s3/sign"
-            signingUrlMethod="GET"
-            accept="image/*"
-            s3path=""
-            onProgress={this.progress}
-            onFinish={this.onPictureUpload}
-            contentDisposition="auto"
-            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
-            inputRef={cmp => (this.uploadInput = cmp)}
-            server={process.env.REACT_APP_DEV_HOST}
-            autoUpload
-          />
 
-          <LinearProgress variant="determinate" value={this.state.completed} />
-          <Button
-            variant="outlined"
-            color="primary"
-            className={"settings__saveButton"}
-            onClick={this.onSaveHandler}
-          >
-            Save
-          </Button>
-        </div>
-        <button onClick={() => console.log(this.props)} />
-      </div>
+    let settingShow = this.settingDecider();
+
+    return (
+      <div className="settings__container--conditional">{settingShow}</div>
     );
   }
 }
