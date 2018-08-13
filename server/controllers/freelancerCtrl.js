@@ -104,6 +104,7 @@ module.exports = {
         console.log(err);
       });
   },
+
   getFaveJobs: (req, res, next) => {
     let db = req.app.get("db");
     db.freelancers.getFaveJobs(req.params.id).then(jobs => {
