@@ -41,10 +41,26 @@ export function getFreelancers() {
   };
 }
 
-export function updateFreelancer(id, bio, skills, experience, city) {
+export function updateFreelancer(
+  id,
+  heading,
+  bio,
+  skills,
+  experience,
+  city,
+  state
+) {
   return {
     type: UPDATE_FREELANCER,
-    payload: axios.put(`/api/freelancer/${id}`, bio, skills, experience, city)
+    payload: axios.put(
+      `/api/freelancer/${id}`,
+      heading,
+      bio,
+      skills,
+      experience,
+      city,
+      state
+    )
   };
 }
 

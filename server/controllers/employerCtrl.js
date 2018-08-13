@@ -46,6 +46,7 @@ module.exports = {
     db.employers
       .updateEmployer(
         req.params.id,
+        req.body.heading,
         req.body.bio,
         req.body.company,
         req.body.position,
