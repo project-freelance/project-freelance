@@ -7,7 +7,7 @@ class Portfolio extends Component {
     super(props);
     this.state = {
       url1: "https://s3.amazonaws.com/freelancer-userprofilebucket/pug.jpeg",
-      link1: "pug1",
+      link1: "www.google.com",
       url2: "https://s3.amazonaws.com/freelancer-userprofilebucket/Pug1.jpeg",
       link2: "pug2",
       url3: "https://s3.amazonaws.com/freelancer-userprofilebucket/Pug3.jpg",

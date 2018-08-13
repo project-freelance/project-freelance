@@ -39,17 +39,16 @@ class Profile extends Component {
     console.log(this.props);
     return (
       <div>
+        <div className="profile__header">
+          {freelancer[0] && freelancer[0].heading}
+        </div>
         {this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer" ? (
           <div className="profile__container">
             <div className="profile__left__panel">
-              {/* <h1>Freelancer Profile</h1> */}
-              <div
-                style={{
-                  backgroundImage: `url(${freelancer[0] &&
-                    freelancer[0].profile_image}`
-                }}
+              <img
                 className="profile__user__img"
+                src={freelancer[0] && freelancer[0].profile_image}
               />
             </div>
             <div>
