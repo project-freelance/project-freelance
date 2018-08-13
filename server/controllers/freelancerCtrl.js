@@ -107,5 +107,12 @@ module.exports = {
     db.freelancers.getFaveJobs(req.params.id).then(jobs => {
       return res.status(200).send(jobs);
     });
+  },
+
+  deleteFaveJob: (req, res, next) => {
+    let db = req.app.get("db");
+    db.freelancers.deleteFaveJob(req.params.id).then(() => {
+      return res.sendStatus(200);
+    });
   }
 };
