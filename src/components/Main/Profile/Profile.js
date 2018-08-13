@@ -60,11 +60,13 @@ class Profile extends Component {
                 </div>
                 <div id="profile__line__space">
                   {freelancer[0].city && freelancer[0].city.length > 0 ? (
-                    <div>{`${freelancer[0] && freelancer[0].city}`}</div>
+                    <div>{`${freelancer[0] && freelancer[0].city}, `}</div>
                   ) : (
                     <div>No city listed</div>
-                  )}
+                  )}{" "}
+                  {freelancer[0] && freelancer[0].state}
                 </div>
+                {/* <div>{`${freelancer[0] && freelancer[0].state}`}</div> */}
 
                 <div className="profile__stars__number">
                   {this.props.rating && this.props.rating > 0 ? (
