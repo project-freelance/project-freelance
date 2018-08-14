@@ -1,14 +1,15 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import Main from "./components/Main/Main";
-import Splash from "./components/Splash/Splash";
-import Feed from "./components/Main/Feed/Feed";
-import Profile from "./components/Main/Profile/Profile";
-import Setup from "./components/Setup/Setup";
-import Settings from "./components/Main/Settings/Settings";
-import Post from "./components/Main/Feed/Post/Post";
-import Portfolio from "./components/Main/Profile/Portfolio/Portfolio";
+import Main from './components/Main/Main';
+import Splash from './components/Splash/Splash';
+import Feed from './components/Main/Feed/Feed';
+import Profile from './components/Main/Profile/Profile';
+import Setup from './components/Setup/Setup';
+import Settings from './components/Main/Settings/Settings';
+import Post from './components/Main/Feed/Post/Post';
+import Portfolio from './components/Main/Profile/Portfolio/Portfolio';
+import AppliedJobs from './components/Main/Feed/AppliedJobs/AppliedJobs';
 
 export default (
   <Switch>
@@ -26,6 +27,7 @@ export default (
               <Route path="/main/settings" component={Settings} />
               <Route exact path="/main/post" component={Post} />
               <Route path="/main/portfolio" component={Portfolio} />
+              <Route path="/main/appliedjobs" component={AppliedJobs} />
             </Switch>
           </Main>
         );

@@ -5,7 +5,7 @@
   align-items: center;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  border-top: 0.1px solid lightgrey;
+  // border-top: 0.1px solid lightgrey;
   border-bottom: 0.1px solid lightgrey;
 }
 
@@ -29,4 +29,10 @@
 .reviews__review__moment {
   color: #a4a4a4;
   font-size: 12px;
+}
+
+.reviews__container {
+  // background-color: red;
+  border-top: 0.1px solid lightgrey;
+  // border-bottom: 0.1px solid lightgrey;
 }

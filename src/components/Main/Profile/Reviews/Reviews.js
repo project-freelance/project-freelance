@@ -30,7 +30,7 @@ class Reviews extends Component {
       );
     });
     return (
-      <div>
+      <div className="reviews__container">
         <div>{myReviews}</div>
       </div>
     );

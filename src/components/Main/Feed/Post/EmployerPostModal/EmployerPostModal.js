@@ -131,17 +131,24 @@ class EmployerPostModal extends Component {
                       </Link>
                       {matchJob.includes(matchPost.id) && (
                         <div className="employerPostModal__applied">
-                          APPLIED
                           <Button
                             style={{
                               backgroundColor: "#008000"
                             }}
                             onClick={() => {
-                              this.props.deleteFaveJob();
+                              this.props
+                                .deleteFaveJob(
+                                  matchPost.id,
+                                  this.props.user[0].id
+                                )
+                                .then(
+                                  this.props.getFaveJobs(this.props.user[0].id)
+                                );
                             }}
                           >
                             Unapply
                           </Button>
+                          APPLIED
                         </div>
                       )}
                       {!matchJob.includes(matchPost.id) && (

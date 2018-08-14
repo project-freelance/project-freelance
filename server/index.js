@@ -113,7 +113,7 @@ app.put("/api/user", userCtrl.updateUser);
 // employer
 app.get("/api/employers", employerCtrl.getEmployers);
 app.get("/api/employer/:id", employerCtrl.getEmployer);
-// app.post("/api/employer", employerCtrl.addEmployer);
+app.post("/api/employer/:id", employerCtrl.addEmployer);
 app.put("/api/employer/:id", employerCtrl.updateEmployer);
 // app.post("/api/employers-profile", employerCtrl.createEmployerProfile);
 
@@ -125,7 +125,7 @@ app.put("/api/employerPost/:id", employerCtrl.updateEmployerPost);
 app.get("/api/employer/appliedJobs/:id", employerCtrl.getAppliedJobs);
 
 // freelancer
-// app.post("/api/freelancer", freelancerCtrl.addFreelancer);
+app.post("/api/freelancer/:id", freelancerCtrl.addFreelancer);
 app.get("/api/freelancers", freelancerCtrl.getFreelancers);
 app.get("/api/freelancer/:id", freelancerCtrl.getFreelancer);
 app.put("/api/freelancer/:id", freelancerCtrl.updateFreelancer);
@@ -137,7 +137,8 @@ app.put("/api/freelancerPost/:id", freelancerCtrl.updateFreelancerPost);
 
 app.post("/api/user/jobs", freelancerCtrl.addFaveJob);
 app.get("/api/user/jobs/:id", freelancerCtrl.getFaveJobs);
-app.delete("/api/user/job/:id", freelancerCtrl.deleteFaveJob);
+// app.delete("/api/user/job/:id", freelancerCtrl.deleteFaveJob);
+app.delete("/api/user/job/:empid/:freeid", freelancerCtrl.deleteFaveJob);
 
 // portfolio
 app.get("/api/portfolio/:id", portfolioCtrl.getPortfolio);
