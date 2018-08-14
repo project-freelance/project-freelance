@@ -6,6 +6,7 @@ import { getUser } from "../../../ducks/userReducer";
 import { getAvgRating } from "../../../ducks/reviewReducer";
 import { withRouter } from "react-router-dom";
 import AvgRating from "./Reviews/AvgRating/AvgRating";
+import "./EmployerProfile.css";
 class EmployerProfile extends Component {
   componentDidMount() {
     this.props.getEmployer(this.props.match.params.id);
@@ -18,51 +19,55 @@ class EmployerProfile extends Component {
     console.log(this.props);
     return (
       <div>
-        <div>
-          <div>
-            <h1>Employer Profile</h1>
+        <div className="employerProfile__header">
+          {employer[0] && employer[0].heading}
+        </div>
+        <div className="employerProfile__container">
+          <div className="employerProfile__left__panel">
+            <img
+              src={`${employer[0] && employer[0].company_logo}`}
+              alt="company logo"
+              className="employerProfile__company__img"
+              // height="120"
+              // width="120"
+            />
           </div>
-          <img
-            src={`${employer[0] && employer[0].company_logo}`}
-            alt="company logo"
-            height="120"
-            width="120"
-          />
-          <div>{`${employer[0] && employer[0].company}`}</div>
-          {/* <div>Hiring Mgr: </div> */}
-          <div>
-            Hiring Mgr: {`${employer[0] && employer[0].first_name}`}{" "}
-            {`${employer[0] && employer[0].last_name}`}
+          <div className="employerProfile__right__panel">
+            <div className="employerProfile__company">{`${employer[0] &&
+              employer[0].company}`}</div>
+            <div>City: {`${employer[0] && employer[0].city}`}</div>
+            {this.props.rating && this.props.rating > 0 ? (
+              <div>
+                <AvgRating rating={this.props.rating && +this.props.rating} />
+              </div>
+            ) : (
+              <div>
+                <div>No Rating Dude</div>
+              </div>
+            )}
+            <div>
+              Hiring Mgr: {`${employer[0] && employer[0].first_name}`}{" "}
+              {`${employer[0] && employer[0].last_name}`}
+            </div>
+            <div>Position: {`${employer[0] && employer[0].position}`} </div>
+            <img
+              src={`${employer[0] && employer[0].profile_image}`}
+              alt="profile_pic"
+              height="60"
+              width="60"
+            />
+
+            <div>Bio: {`${employer[0] && employer[0].bio}`}</div>
+            <button>
+              <a
+                href={`mailto:${employer[0] &&
+                  employer[0]
+                    .email}?subject=I'd like to offer you a position with... `}
+              >
+                <div>Contact Me</div>
+              </a>
+            </button>
           </div>
-          <div>Position: {`${employer[0] && employer[0].position}`} </div>
-          <img
-            src={`${employer[0] && employer[0].profile_image}`}
-            alt="profile_pic"
-            height="60"
-            width="60"
-          />
-          <div>City: {`${employer[0] && employer[0].city}`}</div>
-
-          {this.props.rating && this.props.rating > 0 ? (
-            <div>
-              <AvgRating rating={this.props.rating && +this.props.rating} />
-            </div>
-          ) : (
-            <div>
-              <div>No Rating Dude</div>
-            </div>
-          )}
-
-          <div>Bio: {`${employer[0] && employer[0].bio}`}</div>
-          <button>
-            <a
-              href={`mailto:${employer[0] &&
-                employer[0]
-                  .email}?subject=I'd like to offer you a position with... `}
-            >
-              <div>Contact Me</div>
-            </a>
-          </button>
         </div>
         <AddReview {...employer} loggedInUser={this.props.user} />
       </div>

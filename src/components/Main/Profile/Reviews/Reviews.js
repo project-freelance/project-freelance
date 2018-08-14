@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
+import "./Reviews.css";
 
 class Reviews extends Component {
   render(props) {
@@ -10,24 +11,26 @@ class Reviews extends Component {
         this.props.users.find(user => user.id === review.reviewer_id);
       console.log(reviewerObj);
       return (
-        <div key={review.id}>
-          <div>
-            {reviewerObj && reviewerObj.first_name}{" "}
-            {reviewerObj && reviewerObj.last_name}
-          </div>
+        <div className="reviews__review__block" key={review.id}>
           <img
             src={reviewerObj && reviewerObj.profile_image}
-            height="60"
-            width="60"
+            className="reviews__reviewer__img"
           />
-          <div>{review.review}</div>
-          <Moment fromNow>{review.moment}</Moment>
+          <div className="reviews__review__textBlock">
+            <div>
+              {reviewerObj && reviewerObj.first_name}{" "}
+              {reviewerObj && reviewerObj.last_name}
+            </div>
+            <div>{review.review}</div>
+            <div className="reviews__review__moment">
+              <Moment fromNow>{review.moment}</Moment>
+            </div>
+          </div>
         </div>
       );
     });
     return (
       <div>
-        <div>Reviewsssssss</div>
         <div>{myReviews}</div>
       </div>
     );

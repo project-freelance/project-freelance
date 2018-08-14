@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import Portfolio from '../Portfolio';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import './PortfolioModal.css';
-//hello
-//hellotest
+import React, { Component } from "react";
+import Portfolio from "../Portfolio";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import "./PortfolioModal.css";
+
 export default class PortfolioModal extends Component {
   constructor(props) {
     super(props);
@@ -46,12 +45,12 @@ export default class PortfolioModal extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          contentStyle={{
-            width: '500px',
-            maxWidth: '100%',
-            height: '500px',
-            padding: '10px'
-          }}
+          // contentStyle={{
+          //   width: '500px',
+          //   maxWidth: '100%',
+          //   height: '500px',
+          //   padding: '10px'
+          // }}
         >
           <DialogContent>
             <div className="profile__portfolio__modal">

@@ -1,11 +1,7 @@
 .profile__container {
   display: flex;
   background-color: white;
-  //   padding-left: 10vw;
   padding-right: 15vw;
-  //   flex-direction: column;
-  //   background-color: yellow;
-  //   margin-top: 3vh;
 }
 
 .profile__header {
@@ -25,33 +21,20 @@
   height: 100vh;
 }
 .profile__user__img {
-  // background-size: cover;
   height: 50vh;
   margin: 3vh;
   object-fit: cover;
-  //   background-attachment: fixed;
-  // background-repeat: no-repeat;
-  // background-position: center top;
-  //   width: 120px;
 }
 
 .profile__right__panel {
-  //   background-color: green;
-  //   background-color: green;
   text-align: left;
-  //   width:
   display: flex;
   flex-direction: column;
-  //   width: 50vw;
   height: 100vh;
-  //   margin-right: 10vw;
-  // padding-right: 10vw;
-  //   justify-content: space-between;
 }
 
 .profile__user__name {
   margin-top: 3vh;
-  //   margin-bottom: 10px;
   font-size: 30px;
   font-weight: bold;
 }
@@ -63,6 +46,11 @@
 
 .profile__stars__number {
   display: flex;
+}
+
+.profile__portfolio__title {
+  font-weight: bold;
+  color: #373737;
 }
 .profile__reviews__num {
   margin-left: 8px;
@@ -84,13 +72,15 @@
   color: white;
 }
 
+.profile__reviews__title {
+  font-weight: bold;
+  color: #373737;
+}
+
 .profile__reviewer__img {
   background-size: cover;
-  height: 50px;
-  width: 50px;
-  //   object-fit: cover;
-  //   background-repeat: no-repeat;
-  //   background-position: center;
+  height: 60px;
+  width: 60px;
   border-radius: 50px;
 }
 
@@ -100,6 +90,28 @@
 
 .profile__review__block {
   display: flex;
+  // background-color: red;
+  height: 10vh;
+  align-items: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  border-top: 0.1px solid lightgrey;
+  border-bottom: 0.1px solid lightgrey;
+}
+
+.profile__review__textBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // background-color: yellow;
+  height: 7vh;
+  margin-left: 1vw;
+  // height: 100vh;
+}
+
+.profile__review__moment {
+  color: #a4a4a4;
+  font-size: 12px;
 }
 
 .profile__reviews__toggle {

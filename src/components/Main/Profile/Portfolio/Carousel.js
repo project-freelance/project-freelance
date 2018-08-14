@@ -11,8 +11,9 @@ export default props => (
       </div>
       <div>
         <img src={props.url2} />
-        <p className="legend">{props.link2}</p>
+        <div className="legend">{props.link2}</div>
       </div>
+
       <div>
         <img src={props.url3} />
         <p className="legend">{props.link3}</p>
