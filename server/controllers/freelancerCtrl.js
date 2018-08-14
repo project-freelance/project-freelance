@@ -112,9 +112,17 @@ module.exports = {
     });
   },
 
+  // deleteFaveJob: (req, res, next) => {
+  //   let db = req.app.get("db");
+  //   db.freelancers.deleteFaveJob(req.params.id).then(() => {
+  //     return res.sendStatus(200);
+  //   });
+  // }
   deleteFaveJob: (req, res, next) => {
     let db = req.app.get("db");
-    db.freelancers.deleteFaveJob(req.params.id).then(() => {
+    console.log(req.params);
+    let { empid, freeid } = req.params;
+    db.freelancers.deleteFaveJob(empid, freeid).then(() => {
       return res.sendStatus(200);
     });
   }

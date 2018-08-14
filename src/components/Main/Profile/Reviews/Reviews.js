@@ -11,19 +11,21 @@ class Reviews extends Component {
         this.props.users.find(user => user.id === review.reviewer_id);
       console.log(reviewerObj);
       return (
-        <div className="reviews__review__block" key={review.id}>
-          <img
-            src={reviewerObj && reviewerObj.profile_image}
-            className="reviews__reviewer__img"
-          />
-          <div className="reviews__review__textBlock">
-            <div>
-              {reviewerObj && reviewerObj.first_name}{" "}
-              {reviewerObj && reviewerObj.last_name}
-            </div>
-            <div>{review.review}</div>
-            <div className="reviews__review__moment">
-              <Moment fromNow>{review.moment}</Moment>
+        <div className="reviews__container">
+          <div className="reviews__review__block" key={review.id}>
+            <img
+              src={reviewerObj && reviewerObj.profile_image}
+              className="reviews__reviewer__img"
+            />
+            <div className="reviews__review__textBlock">
+              <div>
+                {reviewerObj && reviewerObj.first_name}{" "}
+                {reviewerObj && reviewerObj.last_name}
+              </div>
+              <div>{review.review}</div>
+              <div className="reviews__review__moment">
+                <Moment fromNow>{review.moment}</Moment>
+              </div>
             </div>
           </div>
         </div>
