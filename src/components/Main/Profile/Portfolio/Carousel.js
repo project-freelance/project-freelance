@@ -18,12 +18,7 @@ export default props => (
           <div className="legend">{props.link2}</div>
         </div>
       </a>
-
-<<<<<<< HEAD
-      {/* <a href={`http://${props.link3}`}> */}
-=======
       <img src={props.url3} />
->>>>>>> master
       <div>
         <a href={"http://www.google.com"} />
         <p className="legend">{props.link3}</p>
