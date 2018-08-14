@@ -23,19 +23,22 @@ class EmployerSettings extends Component {
       first_name: this.props.user[0].first_name,
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
-      experience: 0,
       city: "",
       state: "",
       profile_image: this.props.user[0].profile_image,
-      company_image: "",
+      company_image:
+        "https://s3.amazonaws.com/freelancer-userprofilebucket/Pug1.jpeg",
       completed: 0,
       percent: 0,
       bio: "",
-      heading: ""
+      heading: "",
+      company: "",
+      position: ""
     };
   }
   componentDidMount() {
     console.log(this.state);
+    console.log(this.props);
   }
   handleChange = name => event => {
     this.setState({
@@ -86,11 +89,12 @@ class EmployerSettings extends Component {
       email,
       profile_image,
       company_image,
-      experience,
       city,
       bio,
       state,
-      heading
+      heading,
+      company,
+      position
     } = this.state;
     return (
       <div className="settings__container">
@@ -112,6 +116,28 @@ class EmployerSettings extends Component {
           />
         </div>
         <div className="settings__bio">
+          <div>
+            <TextField
+              id="name"
+              label="company"
+              fullWidth
+              className={"settings__company__input"}
+              value={company}
+              onChange={e => this.setState({ company: e.target.value })}
+              margin="normal"
+            />
+          </div>
+          <div>
+            <TextField
+              id="name"
+              label="position"
+              fullWidth
+              className={"settings__position__input"}
+              value={position}
+              onChange={e => this.setState({ position: e.target.value })}
+              margin="normal"
+            />
+          </div>
           <h4>Heading</h4>
           <TextField
             multiline={true}
@@ -198,25 +224,6 @@ class EmployerSettings extends Component {
                 margin="normal"
               />
             </div>
-            <div>
-              <FormControl className={"form"}>
-                <NativeSelect
-                  className={"settings__experience__input"}
-                  value={experience}
-                  name="experience"
-                  onChange={this.handleExperienceChange("experience")}
-                >
-                  <option value="" disabled>
-                    experience
-                  </option>
-                  <option value={0}> 0 years</option>
-                  <option value={1}> >1 year</option>
-                  <option value={3}>1 - 3 years</option>
-                  <option value={5}> >5 years</option>
-                </NativeSelect>
-                <FormHelperText>Experience</FormHelperText>
-              </FormControl>
-            </div>
           </form>
           <div />
           <ReactS3Uploader
@@ -243,7 +250,7 @@ class EmployerSettings extends Component {
             Save
           </Button>
         </div>
-        {/* <button onClick={() => console.log(this.props)} /> */}
+        <button onClick={() => console.log(this.props)} />
       </div>
     );
   }
@@ -251,7 +258,9 @@ class EmployerSettings extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    // employer: state.employerReducer.employer
+    ...state.EmployerReducer
   };
 }
 export default connect(
