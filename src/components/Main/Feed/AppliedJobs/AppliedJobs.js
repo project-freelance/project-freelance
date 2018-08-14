@@ -24,13 +24,6 @@ class AppliedJobs extends Component {
     ]);
 
     this.setState({ users: values[1].value.data });
-
-    // .then(result => {
-    //   this.setState({
-    //     users: result.value.data
-    //   });
-    // });
-    // ;
   }
 
   render() {

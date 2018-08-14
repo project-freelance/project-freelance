@@ -19,6 +19,9 @@
   // }
 
   .main__sideNav {
+    position: fixed;
+    height: 100vh;
+    width: 15vw;
     grid-area: main__sideNav;
     background-color: rgb(46, 45, 48);
   }

@@ -45,6 +45,7 @@ class EmployerPostModal extends Component {
   render() {
     const userIdFromPost = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
+    // const idFromModalPost = this.props && this.props.id;
 
     let matchUser = this.props.users.find(user => user.id === userIdFromPost);
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
