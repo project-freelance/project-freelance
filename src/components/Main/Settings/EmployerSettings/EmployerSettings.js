@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUser } from "../../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
 import { updateUser } from "../../../../ducks/userReducer";
-import { updateEmployer } from "../../../../ducks/employerReducer";
+import { updateEmployer, getEmployer } from "../../../../ducks/employerReducer";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -20,23 +20,24 @@ class EmployerSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      completed: 0,
+      percent: 0,
       first_name: this.props.user[0].first_name,
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
-      city: "",
-      state: "",
       profile_image: this.props.user[0].profile_image,
-      company_image:
-        "https://s3.amazonaws.com/freelancer-userprofilebucket/Pug1.jpeg",
-      completed: 0,
-      percent: 0,
-      bio: "",
-      heading: "",
-      company: "",
-      position: ""
+
+      company_logo: this.props.employer[0].company_logo,
+      city: this.props.employer[0].city,
+      state: this.props.employer[0].state,
+      bio: this.props.employer[0].bio,
+      heading: this.props.employer[0].bio,
+      company: this.props.employer[0].company,
+      position: this.props.employer[0].position
     };
   }
   componentDidMount() {
+    this.props.getEmployer(this.props.user[0].id);
     console.log(this.state);
     console.log(this.props);
   }
@@ -58,6 +59,11 @@ class EmployerSettings extends Component {
       profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
     });
   };
+  onLogoPictureUpload = s3 => {
+    this.setState({
+      company_logo: process.env.REACT_APP_DEV_S3_URL + s3.filename
+    });
+  };
   onSaveHandler = () => {
     this.props.updateUser(this.state).then(() => {
       this.props.updateEmployer(this.props.user[0].id, this.state);
@@ -76,9 +82,6 @@ class EmployerSettings extends Component {
       });
     }
   };
-  // logError = e => {
-  //   console.log(e);
-  // };
 
   //end progress bar
 
@@ -88,7 +91,7 @@ class EmployerSettings extends Component {
       first_name,
       email,
       profile_image,
-      company_image,
+      company_logo,
       city,
       bio,
       state,
@@ -111,8 +114,21 @@ class EmployerSettings extends Component {
           </h2>
           <img
             className="settings__profileImage"
-            src={company_image}
+            src={company_logo}
             alt="User Profile Image"
+          />
+          <ReactS3Uploader
+            signingUrl="/s3/sign"
+            signingUrlMethod="GET"
+            accept="image/*"
+            s3path=""
+            onProgress={this.progress}
+            onFinish={this.onLogoPictureUpload}
+            contentDisposition="auto"
+            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            inputRef={cmp => (this.uploadInput = cmp)}
+            server={process.env.REACT_APP_DEV_HOST}
+            autoUpload
           />
         </div>
         <div className="settings__bio">
@@ -259,11 +275,10 @@ class EmployerSettings extends Component {
 function mapStateToProps(state) {
   return {
     user: state.userReducer.user,
-    // employer: state.employerReducer.employer
-    ...state.EmployerReducer
+    employer: state.employerReducer.employer
   };
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateUser, updateEmployer }
+  { getUser, updateUser, updateEmployer, getEmployer }
 )(EmployerSettings);

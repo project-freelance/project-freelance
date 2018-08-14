@@ -29,57 +29,9 @@ class Settings extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.state);
-    getEmployer(this.props.user[0].id);
-    // .then(() => {
-    //   console.log(this.props);
-    // });
+    // this.props.getEmployer(this.props.user[0].id);
   }
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-    console.log(this.state);
-  };
-  handleExperienceChange = experience => event => {
-    this.setState({
-      [experience]: event.target.value
-    });
-    console.log(this.state);
-  };
 
-  onPictureUpload = s3 => {
-    this.setState({
-      profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
-    });
-  };
-  onSaveHandler = () => {
-    this.props.updateUser(this.state).then(() => {
-      if (this.props.user[0].role === "Freelancer") {
-        this.props.updateFreelancer(this.props.user[0].id, this.state);
-      } else {
-        this.props.updateEmployer(this.props.user[0].id, this.state);
-      }
-    });
-  };
-
-  // progress bar
-  progress = percent => {
-    console.log(percent);
-    const { completed } = this.state;
-    if (completed === 100) {
-      window.setTimeout(() => this.setState({ completed: 0 }), 1000);
-    } else {
-      this.setState({
-        completed: percent
-      });
-    }
-  };
-  // logError = e => {
-  //   console.log(e);
-  // };
-
-  //end progress bar
   settingDecider = () => {
     if (this.props.user[0].role == "Freelancer") {
       return <FreelancerSettings />;
@@ -88,20 +40,9 @@ class Settings extends Component {
     }
   };
   render() {
-    let {
-      last_name,
-      first_name,
-      email,
-      profile_image,
-      company_image,
-      experience,
-      city,
-      bio,
-      state,
-      heading
-    } = this.state;
-
     let settingShow = this.settingDecider();
+    console.log(this.props);
+    console.log(this.state);
 
     return (
       <div className="settings__container--conditional">{settingShow}</div>
