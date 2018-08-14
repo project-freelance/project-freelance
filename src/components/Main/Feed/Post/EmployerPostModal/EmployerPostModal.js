@@ -50,14 +50,13 @@ class EmployerPostModal extends Component {
     let matchUser = this.props.users.find(user => user.id === userIdFromPost);
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
 
-    // let modalPostId = this.props.emp_user_join.find(
-    //   id => id === idFromModalPost
-    // );
-
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
     return (
       <div>
         {/* Modal Open Button */}
@@ -141,8 +140,11 @@ class EmployerPostModal extends Component {
                                   matchPost.id,
                                   this.props.user[0].id
                                 )
-                                .then(
-                                  this.props.getFaveJobs(this.props.user[0].id)
+                                .then(() =>
+                                  this.props.getFaveJobs(
+                                    this.props.favJobs[0] &&
+                                      this.props.favJobs[0].freelancer_id
+                                  )
                                 );
                             }}
                           >
@@ -159,7 +161,7 @@ class EmployerPostModal extends Component {
                           onClick={() => {
                             this.props
                               .addFaveJob(matchPost.id, this.props.user[0].id)
-                              .then(
+                              .then(() =>
                                 this.props.getFaveJobs(this.props.user[0].id)
                               );
                           }}

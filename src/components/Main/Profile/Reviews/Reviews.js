@@ -4,7 +4,6 @@ import "./Reviews.css";
 
 class Reviews extends Component {
   render(props) {
-    console.log(this.props);
     let myReviews = this.props.reviews.map(review => {
       let reviewerObj =
         this.props.users &&
