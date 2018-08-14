@@ -18,6 +18,7 @@
   width: 50vw;
   height: 100vh;
   //   display: flex;
+  // margin-left: 0;
 }
 
 .employerProfile__company__img {
@@ -33,8 +34,53 @@
   height: 100vh;
 }
 
+#employerProfile__line__space {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .employerProfile__company {
   margin-top: 3vh;
   font-size: 30px;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.employerProfile__avgReview__block {
+  // background-color: red;
+  display: flex;
+}
+
+.employerProfile__reviews__num {
+  margin-left: 8px;
+  color: #888888;
+}
+
+.employerProfile__mgr__block {
+  // background-color: red;
+  display: flex;
+  align-items: center;
+}
+.employerProfile__mgr__text {
+}
+
+.employerProfile__mgr__img {
+  border-radius: 50px;
+  margin-left: 35px;
+}
+
+.employerProfile__contact__btn {
+  height: 5vh;
+  width: 11vw;
+  background-color: rgb(127, 196, 253);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.employerProfile__contact__text {
+  text-decoration: none;
+  color: white;
 }

@@ -50,7 +50,7 @@ class Profile extends Component {
     let { freelancer, review } = this.props;
     console.log(this.props);
     return (
-      <div>
+      <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer" ? (
           <div>
