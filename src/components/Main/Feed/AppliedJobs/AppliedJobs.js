@@ -11,8 +11,8 @@ import Button from '@material-ui/core/Button';
 import EmployerPostModal from '../Post/EmployerPostModal/EmployerPostModal';
 
 class AppliedJobs extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   componentDidMount() {
@@ -88,7 +88,15 @@ class AppliedJobs extends Component {
                     backgroundColor: 'rgb(127, 196, 253)'
                   }}
                 >
-                  <EmployerPostModal userId={post.user_id} postId={post.id} />
+                  <EmployerPostModal
+                    userId={post.user_id}
+                    postId={post.id}
+                    // onClick={event =>
+                    //   event
+                    //     .preventDefault()
+                    //     .then(this.props.getFaveJobs(this.props.user[0].id))
+                    // }
+                  />
                 </Button>
                 {matchJob.includes(post.id) && (
                   <div className="feed__applied">
