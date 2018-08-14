@@ -136,8 +136,8 @@ class AppliedJobs extends Component {
           </Button>
         </div>
         <div>
-          <h1>In the Feed...</h1>
-          <Post />
+          <h1>My Applied Jobs...</h1>
+
           {appliedJobs}
         </div>
       </div>
