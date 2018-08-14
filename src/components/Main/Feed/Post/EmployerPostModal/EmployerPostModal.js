@@ -57,6 +57,10 @@ class EmployerPostModal extends Component {
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     return (
       <div>
         {/* Modal Open Button */}

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getUser } from "../../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
 import { updateUser } from "../../../../ducks/userReducer";
-import { updateEmployer } from "../../../../ducks/employerReducer";
+import { updateEmployer, getEmployer } from "../../../../ducks/employerReducer";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -20,22 +20,26 @@ class EmployerSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      completed: 0,
+      percent: 0,
       first_name: this.props.user[0].first_name,
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
-      experience: 0,
-      city: "",
-      state: "",
       profile_image: this.props.user[0].profile_image,
-      company_image: "",
-      completed: 0,
-      percent: 0,
-      bio: "",
-      heading: ""
+
+      company_logo: this.props.employer[0].company_logo,
+      city: this.props.employer[0].city,
+      state: this.props.employer[0].state,
+      bio: this.props.employer[0].bio,
+      heading: this.props.employer[0].bio,
+      company: this.props.employer[0].company,
+      position: this.props.employer[0].position
     };
   }
   componentDidMount() {
+    this.props.getEmployer(this.props.user[0].id);
     console.log(this.state);
+    console.log(this.props);
   }
   handleChange = name => event => {
     this.setState({
@@ -53,6 +57,11 @@ class EmployerSettings extends Component {
   onPictureUpload = s3 => {
     this.setState({
       profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
+    });
+  };
+  onLogoPictureUpload = s3 => {
+    this.setState({
+      company_logo: process.env.REACT_APP_DEV_S3_URL + s3.filename
     });
   };
   onSaveHandler = () => {
@@ -73,9 +82,6 @@ class EmployerSettings extends Component {
       });
     }
   };
-  // logError = e => {
-  //   console.log(e);
-  // };
 
   //end progress bar
 
@@ -85,12 +91,13 @@ class EmployerSettings extends Component {
       first_name,
       email,
       profile_image,
-      company_image,
-      experience,
+      company_logo,
       city,
       bio,
       state,
-      heading
+      heading,
+      company,
+      position
     } = this.state;
     return (
       <div className="settings__container">
@@ -107,11 +114,46 @@ class EmployerSettings extends Component {
           </h2>
           <img
             className="settings__profileImage"
-            src={company_image}
+            src={company_logo}
             alt="User Profile Image"
+          />
+          <ReactS3Uploader
+            signingUrl="/s3/sign"
+            signingUrlMethod="GET"
+            accept="image/*"
+            s3path=""
+            onProgress={this.progress}
+            onFinish={this.onLogoPictureUpload}
+            contentDisposition="auto"
+            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            inputRef={cmp => (this.uploadInput = cmp)}
+            server={process.env.REACT_APP_DEV_HOST}
+            autoUpload
           />
         </div>
         <div className="settings__bio">
+          <div>
+            <TextField
+              id="name"
+              label="company"
+              fullWidth
+              className={"settings__company__input"}
+              value={company}
+              onChange={e => this.setState({ company: e.target.value })}
+              margin="normal"
+            />
+          </div>
+          <div>
+            <TextField
+              id="name"
+              label="position"
+              fullWidth
+              className={"settings__position__input"}
+              value={position}
+              onChange={e => this.setState({ position: e.target.value })}
+              margin="normal"
+            />
+          </div>
           <h4>Heading</h4>
           <TextField
             multiline={true}
@@ -198,25 +240,6 @@ class EmployerSettings extends Component {
                 margin="normal"
               />
             </div>
-            <div>
-              <FormControl className={"form"}>
-                <NativeSelect
-                  className={"settings__experience__input"}
-                  value={experience}
-                  name="experience"
-                  onChange={this.handleExperienceChange("experience")}
-                >
-                  <option value="" disabled>
-                    experience
-                  </option>
-                  <option value={0}> 0 years</option>
-                  <option value={1}> >1 year</option>
-                  <option value={3}>1 - 3 years</option>
-                  <option value={5}> >5 years</option>
-                </NativeSelect>
-                <FormHelperText>Experience</FormHelperText>
-              </FormControl>
-            </div>
           </form>
           <div />
           <ReactS3Uploader
@@ -243,7 +266,7 @@ class EmployerSettings extends Component {
             Save
           </Button>
         </div>
-        {/* <button onClick={() => console.log(this.props)} /> */}
+        <button onClick={() => console.log(this.props)} />
       </div>
     );
   }
@@ -251,10 +274,11 @@ class EmployerSettings extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    employer: state.employerReducer.employer
   };
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateUser, updateEmployer }
+  { getUser, updateUser, updateEmployer, getEmployer }
 )(EmployerSettings);
