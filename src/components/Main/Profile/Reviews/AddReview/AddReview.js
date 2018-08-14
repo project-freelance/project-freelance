@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import StarRatings from "react-star-ratings";
 import { connect } from "react-redux";
-import { addReview } from "../../../../../ducks/reviewReducer";
+import { addReview, getReviews } from "../../../../../ducks/reviewReducer";
+import { withRouter } from "react-router-dom";
 
 class AddReview extends Component {
   constructor() {
@@ -9,7 +10,8 @@ class AddReview extends Component {
     this.state = {
       userInput: "",
       time: new Date(),
-      rating: 0
+      rating: 0,
+      open: true
     };
   }
 
@@ -25,17 +27,32 @@ class AddReview extends Component {
     });
   };
 
-  submitHandler = (review, user_id, reviewer_id, moment, rating) => {
-    // console.log(review, user_id, review_id, moment, rating);
-    this.props.addReview(review, user_id, reviewer_id, moment, rating);
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
+  submitHandler = (review, user_id, reviewer_id, moment, rating) => {
+    // console.log(review, user_id, review_id, moment, rating);
+    this.props
+      .addReview(review, user_id, reviewer_id, moment, rating)
+      .then(() => {
+        this.props.getReviews(this.props.match.params.id);
+      });
+  };
+
+  // goToProperty = id => {
+  //   this.props.history.push(`/property/${id}`);
+  // };
+
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     // console.log(this.props[0] && this.props[0].first_name);
     return (
       <div>
-        <div>Leave Review of {this.props[0] && this.props[0].first_name}</div>
+        <div>
+          Leave Review of{" "}
+          {this.props.beingReviewed && this.props.beingReviewed.first_name}
+        </div>
         <input
           onChange={e => this.changeHandler(e)}
           placeholder="Enter review here"
@@ -49,7 +66,7 @@ class AddReview extends Component {
           name="rating"
           starDimension="25px"
         />
-        <button
+        {/* <button
           onClick={() =>
             this.submitHandler(
               this.state.userInput,
@@ -59,6 +76,20 @@ class AddReview extends Component {
               this.state.rating
             )
           }
+        > */}
+        <button
+          onClick={() => {
+            // this.handleClose,
+            this.submitHandler(
+              this.state.userInput,
+              this.props.beingReviewed && this.props.beingReviewed.user_id,
+              this.props.loggedInUser && this.props.loggedInUser.id,
+              this.state.time,
+              this.state.rating
+            );
+          }}
+          type="submit"
+          // onClick={() => this.props.onClose}
         >
           Submit Review
         </button>
@@ -69,7 +100,9 @@ class AddReview extends Component {
 
 const mapStateToProps = ({ reviewReducer }) => ({ ...reviewReducer });
 
-export default connect(
-  mapStateToProps,
-  { addReview }
-)(AddReview);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { addReview, getReviews }
+  )(AddReview)
+);
