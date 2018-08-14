@@ -137,7 +137,8 @@ app.put("/api/freelancerPost/:id", freelancerCtrl.updateFreelancerPost);
 
 app.post("/api/user/jobs", freelancerCtrl.addFaveJob);
 app.get("/api/user/jobs/:id", freelancerCtrl.getFaveJobs);
-app.delete("/api/user/job/:id", freelancerCtrl.deleteFaveJob);
+// app.delete("/api/user/job/:id", freelancerCtrl.deleteFaveJob);
+app.delete("/api/user/job/:empid/:freeid", freelancerCtrl.deleteFaveJob);
 
 // portfolio
 app.get("/api/portfolio/:id", portfolioCtrl.getPortfolio);
