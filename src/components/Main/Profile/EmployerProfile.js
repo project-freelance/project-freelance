@@ -167,6 +167,7 @@ class EmployerProfile extends Component {
                   </div>
                 </div>
               )}
+              <ReviewModal {...employer} loggedInUser={this.props.user} />
             </div>
           </div>
         </div>
