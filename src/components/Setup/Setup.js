@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { getUser, updateRole, updateSpecialty } from "../../ducks/userReducer";
 import { addPortfolio } from "../../ducks/portfolioReducer";
+import { addFreelancer } from "../../ducks/freelancerReducer";
+import { addEmployer } from "../../ducks/employerReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Setup.css";
@@ -32,12 +34,12 @@ class Setup extends Component {
   }
 
   chooseEmployer() {
-    console.log(this.state.id);
-    console.log(this.state.roleEmployer);
+    let id = this.state.id && this.state.id;
+
     this.props.updateRole(this.state.id, {
       role: this.state.roleEmployer
     });
-
+    this.props.addEmployer(id);
     this.setState({
       employerClicked: true,
       freelancerClicked: false
@@ -45,17 +47,17 @@ class Setup extends Component {
   }
 
   chooseFreelancer() {
+    let id = this.state.id && this.state.id;
+
     this.props.updateRole(this.state.id, {
       role: this.state.roleFreelancer
     });
+    this.props.addFreelancer(id);
     this.setState({
       freelancerClicked: true,
       employerClicked: false
     });
     this.props.addPortfolio(this.state.id);
-    // .then(() => {
-    //   this.props.addPortfolio(this.state.id);
-    // });
   }
 
   chooseDeveloper() {
@@ -180,5 +182,12 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateRole, updateSpecialty, addPortfolio }
+  {
+    getUser,
+    updateRole,
+    updateSpecialty,
+    addPortfolio,
+    addFreelancer,
+    addEmployer
+  }
 )(Setup);

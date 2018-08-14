@@ -12,24 +12,30 @@ const UPDATE_EMPLOYER_POST = "UPDATE_EMPLOYER_POST";
 
 const GET_APPLIED_JOBS = "GET_APPLIED_JOBS";
 
-export function addEmployer(
-  bio,
-  company,
-  position,
-  city,
-  user_id,
-  company_logo
-) {
+// export function addEmployer(
+//   bio,
+//   company,
+//   position,
+//   city,
+//   user_id,
+//   company_logo
+// ) {
+//   return {
+//     type: ADD_EMPLOYER,
+//     payload: axios.post("/api/employer/", {
+//       bio,
+//       company,
+//       position,
+//       city,
+//       user_id,
+//       company_logo
+//     })
+//   };
+// }
+export function addEmployer(id) {
   return {
     type: ADD_EMPLOYER,
-    payload: axios.post("/api/employer/", {
-      bio,
-      company,
-      position,
-      city,
-      user_id,
-      company_logo
-    })
+    payload: axios.post(`/api/employer/${id}`)
   };
 }
 export function getEmployer(id) {

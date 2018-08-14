@@ -1,18 +1,34 @@
 module.exports = {
+  // addEmployer: (req, res, next) => {
+  //   let db = req.app.get("db");
+  //   const {
+  //     bio,
+  //     company,
+  //     position,
+  //     city,
+  //     state,
+  //     user_id,
+  //     company_logo
+  //   } = req.body;
+
+  //   db.employers
+  //     .addEmployer([bio, company, position, city, state, user_id, company_logo])
+  //     .then(employer => {
+  //       console.log(employer);
+  //       return res.status(200).send(employer);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({
+  //         errorMessage: "error!"
+  //       });
+  //       console.log(err);
+  //     });
+  // },
+
   addEmployer: (req, res, next) => {
     let db = req.app.get("db");
-    const {
-      bio,
-      company,
-      position,
-      city,
-      state,
-      user_id,
-      company_logo
-    } = req.body;
-
     db.employers
-      .addEmployer([bio, company, position, city, state, user_id, company_logo])
+      .addEmployer([req.params.id])
       .then(employer => {
         console.log(employer);
         return res.status(200).send(employer);

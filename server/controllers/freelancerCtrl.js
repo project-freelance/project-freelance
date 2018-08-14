@@ -1,10 +1,26 @@
 module.exports = {
+  // addFreelancer: (req, res, next) => {
+  //   let db = req.app.get("db");
+  //   const { bio, skills, experience, city, user_id } = req.body;
+
+  //   db.freelancers
+  //     .addFreelancer([bio, skills, experience, city, user_id])
+  //     .then(freelancer => {
+  //       console.log(freelancer);
+  //       return res.status(200).send(freelancer);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({
+  //         errorMessage: "error!"
+  //       });
+  //       console.log(err);
+  //     });
+  // },
+
   addFreelancer: (req, res, next) => {
     let db = req.app.get("db");
-    const { bio, skills, experience, city, user_id } = req.body;
-
     db.freelancers
-      .addFreelancer([bio, skills, experience, city, user_id])
+      .addFreelancer([req.params.id])
       .then(freelancer => {
         console.log(freelancer);
         return res.status(200).send(freelancer);
@@ -123,7 +139,9 @@ module.exports = {
     console.log(req.params);
     let { empid, freeid } = req.params;
     db.freelancers.deleteFaveJob(empid, freeid).then(() => {
-      return res.sendStatus(200);
+      db.freelancers.getFaveJobs(req.params.id).then(jobs => {
+        return res.status(200).send(jobs);
+      });
     });
   }
 };

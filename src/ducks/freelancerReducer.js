@@ -16,16 +16,22 @@ const GET_FAVE_JOBS = "GET_FAVE_JOB";
 const DELETE_FAVE_JOB = "DELETE_FAVE_JOB";
 
 //action creators
-export function addFreelancer(bio, skills, experience, city, user_id) {
+// export function addFreelancer(bio, skills, experience, city, user_id) {
+//   return {
+//     type: ADD_FREELANCER,
+//     payload: axios.post("/api/freelancer/", {
+//       bio,
+//       skills,
+//       experience,
+//       city,
+//       user_id
+//     })
+//   };
+// }
+export function addFreelancer(id) {
   return {
     type: ADD_FREELANCER,
-    payload: axios.post("/api/freelancer/", {
-      bio,
-      skills,
-      experience,
-      city,
-      user_id
-    })
+    payload: axios.post(`/api/freelancer/${id}`)
   };
 }
 export function getFreelancer(id) {
@@ -111,10 +117,10 @@ export function getFaveJobs(id) {
     payload: axios.get(`/api/user/jobs/${id}`)
   };
 }
-export function deleteFaveJob(id) {
+export function deleteFaveJob(empid, freeid) {
   return {
     type: DELETE_FAVE_JOB,
-    payload: axios.delete(`/api/user/job/${id}`)
+    payload: axios.delete(`/api/user/job/${empid}/${freeid}`)
   };
 }
 
