@@ -144,6 +144,7 @@ export default function employerReducer(state = initialState, action) {
         isLoading: true
       };
     case `${GET_EMPLOYER}_FULFILLED`:
+      console.log(action.payload.data);
       return {
         ...state,
         isLoading: false,

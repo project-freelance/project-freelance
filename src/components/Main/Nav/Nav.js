@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getUser } from '../../../ducks/userReducer';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUser } from "../../../ducks/userReducer";
+import { getEmployer } from "../../../ducks/employerReducer";
 
-import './Nav.css';
+import "./Nav.css";
 
 class Nav extends Component {
   constructor(props) {
@@ -16,21 +17,22 @@ class Nav extends Component {
   componentDidMount() {
     this.props
       .getUser()
-      .then(() => this.setState({ id: this.props.user[0].id }));
+      .then(() => this.setState({ id: this.props.user[0].id }))
+      .then(() => this.props.getEmployer(this.props.user[0].id));
   }
 
   render() {
     //console.log(this.props);
     let profile_image = this.props.user[0]
       ? this.props.user[0].profile_image
-      : 'profile image';
+      : "profile image";
     let first_name = this.props.user[0]
       ? this.props.user[0].first_name
-      : 'first Name';
+      : "first Name";
 
     let last_name = this.props.user[0]
       ? this.props.user[0].last_name
-      : 'last Name';
+      : "last Name";
 
     let id = this.props.user[0] ? this.props.user[0].id : 0;
 
@@ -46,7 +48,7 @@ class Nav extends Component {
             <div>
               <h3>
                 {first_name}
-                {'  '} {last_name}
+                {"  "} {last_name}
               </h3>
             </div>
           </div>
@@ -88,6 +90,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, getEmployer }
 )(Nav);
 // export default Nav;
