@@ -14,8 +14,9 @@ export default props => (
         <div className="legend">{props.link2}</div>
       </div>
 
+      <img src={props.url3} />
       <div>
-        <img src={props.url3} />
+        <a href={"http://www.google.com"} />
         <p className="legend">{props.link3}</p>
       </div>
     </Carousel>
