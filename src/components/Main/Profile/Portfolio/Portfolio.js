@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Carousel from './Carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React, { Component } from "react";
+import Carousel from "./Carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class Portfolio extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Portfolio extends Component {
 
   render() {
     let { url1, url2, url3, link1, link2, link3 } = this.state;
-    console.log(this.props);
     return (
       <div>
         <Carousel

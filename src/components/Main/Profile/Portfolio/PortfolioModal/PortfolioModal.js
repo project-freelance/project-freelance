@@ -20,7 +20,6 @@ export default class PortfolioModal extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className="profile__portfolio__container">

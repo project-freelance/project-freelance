@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import AddReview from "../AddReview/AddReview";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import "./ReviewModal.css";
 // import "./PortfolioModal.css";
 
 export default class ReviewModal extends Component {
@@ -24,9 +25,14 @@ export default class ReviewModal extends Component {
     console.log(this.props);
     return (
       <div>
-        <p> Test from ReviewModal</p>
         <div>
-          <div onClick={this.handleClickOpen}>Write a Review!!!</div>
+          <div
+            className="reviewModal__addReview__btn"
+            onClick={this.handleClickOpen}
+          >
+            Have you worked with {this.props[0] && this.props[0].first_name}?
+            Write a review!
+          </div>
         </div>
         {/* <div className="profile__portfolio__container">
           <img
