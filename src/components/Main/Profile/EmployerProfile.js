@@ -35,14 +35,17 @@ class EmployerProfile extends Component {
           <div className="employerProfile__right__panel">
             <div className="employerProfile__company">{`${employer[0] &&
               employer[0].company}`}</div>
-            <div>City: {`${employer[0] && employer[0].city}`}</div>
+            <div>
+              {`${employer[0] && employer[0].city}`},{" "}
+              {`${employer[0] && employer[0].state}`}
+            </div>
             {this.props.rating && this.props.rating > 0 ? (
               <div>
                 <AvgRating rating={this.props.rating && +this.props.rating} />
               </div>
             ) : (
               <div>
-                <div>No Rating Dude</div>
+                <div>No ratings have been made yet.</div>
               </div>
             )}
             <div>
