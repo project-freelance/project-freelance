@@ -45,10 +45,8 @@ class Profile extends Component {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
-    console.log(reviewerObj);
 
     let { freelancer, review } = this.props;
-    console.log(this.props);
     return (
       <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
@@ -208,10 +206,6 @@ class Profile extends Component {
                         </div>
                       </div>
                     )}
-                  </div>
-                  <div className="profile__addReview__btn">
-                    Have you worked with {freelancer[0].first_name}? Write a
-                    review
                   </div>
                   {/* <AddReview {...freelancer} loggedInUser={this.props.user} /> */}
                   <ReviewModal {...freelancer} loggedInUser={this.props.user} />

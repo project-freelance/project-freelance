@@ -84,3 +84,46 @@
   text-decoration: none;
   color: white;
 }
+
+.employerProfile__review__block {
+  display: flex;
+  // background-color: red;
+  height: 10vh;
+  align-items: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  border-top: 0.1px solid lightgrey;
+  border-bottom: 0.1px solid lightgrey;
+}
+
+.employerProfile__review__textBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // background-color: yellow;
+  height: 7vh;
+  margin-left: 1vw;
+  // height: 100vh;
+}
+
+.employerProfile__reviewer__img {
+  background-size: cover;
+  height: 60px;
+  width: 60px;
+  border-radius: 50px;
+}
+
+.employerProfile__review__moment {
+  color: #a4a4a4;
+  font-size: 12px;
+}
+
+.employerProfile__reviews__toggle {
+  color: #4c7aa2;
+  cursor: pointer;
+}
+
+.employerProfile__addReview__btn {
+  color: #4c7aa2;
+  cursor: pointer;
+}
