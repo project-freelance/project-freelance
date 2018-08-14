@@ -20,6 +20,8 @@
 .employerPostModal__applied {
   color: green;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
 }
 
 .employerPostModal__content {
