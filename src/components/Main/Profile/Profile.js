@@ -11,6 +11,7 @@ import Moment from "react-moment";
 import Reviews from "./Reviews/Reviews";
 import Button from "@material-ui/core/Button";
 import PortfolioModal from "./Portfolio/PortfolioModal/PortfolioModal";
+import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
 import "./Profile.css";
 class Profile extends Component {
   constructor() {
@@ -77,11 +78,8 @@ class Profile extends Component {
                       </div>
                     ) : (
                       <div>No city listed</div>
-                    )}{" "}
-                    {freelancer[0] && freelancer[0].state}
+                    )}
                   </div>
-                  {/* <div>{`${freelancer[0] && freelancer[0].state}`}</div> */}
-
                   <div className="profile__stars__number">
                     {this.props.rating && this.props.rating > 0 ? (
                       <div>
@@ -98,7 +96,6 @@ class Profile extends Component {
                       ({this.props.reviews.length})
                     </div>
                   </div>
-
                   <div id="profile__line__space">{`${freelancer[0] &&
                     freelancer[0].specialty}`}</div>
                   <div id="profile__line__space">
@@ -143,7 +140,6 @@ class Profile extends Component {
                       link3={this.props.freelancer[0].link3}
                     />
                   </div>
-
                   <div
                     className="profile__contact__btn"
                     id="profile__line__space"
@@ -217,12 +213,10 @@ class Profile extends Component {
                     Have you worked with {freelancer[0].first_name}? Write a
                     review
                   </div>
+                  {/* <AddReview {...freelancer} loggedInUser={this.props.user} /> */}
+                  <ReviewModal {...freelancer} loggedInUser={this.props.user} />
                 </div>
               </div>
-              {/* <AddReview
-              {...freelancer}
-              loggedInUser={this.props.user}
-            /> */}
             </div>
           </div>
         ) : (
