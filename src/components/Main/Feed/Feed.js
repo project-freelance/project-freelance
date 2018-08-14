@@ -10,11 +10,18 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
 import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
+import Button from "@material-ui/core/Button";
 
 class Feed extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      showFreelancers: true,
+      showEmployers: true
+    };
+    this.filterFreelancers = this.filterFreelancers.bind(this);
+    this.filterEmployers = this.filterEmployers.bind(this);
+    this.resetFeed = this.resetFeed.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +34,16 @@ class Feed extends Component {
     });
     this.props.getFaveJobs &&
       this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
+  }
+
+  filterFreelancers() {
+    this.setState({ showFreelancers: false, showEmployers: true });
+  }
+  filterEmployers() {
+    this.setState({ showEmployers: false, showFreelancers: true });
+  }
+  resetFeed() {
+    this.setState({ showEmployers: true, showFreelancers: true });
   }
 
   render() {
@@ -48,8 +65,18 @@ class Feed extends Component {
     //invoking the merge function passing in our arrays
     let mergedArrays = preMerge(employerPosts, freelancerPosts);
 
+    if (this.state.showFreelancers === false) {
+      mergedArrays = employerPosts;
+    } else if (this.state.showEmployers === false) {
+      mergedArrays = freelancerPosts;
+    } else {
+      mergedArrays = preMerge(employerPosts, freelancerPosts);
+    }
+
+    console.log(mergedArrays);
+
     //mapping through merged freelancer and employer arrays
-    let mergedDiv = mergedArrays.map((post, index) => {
+    let mergedStyled = mergedArrays.map((post, index) => {
       //matching post to user who posted to display user data
       let postUser = users.map((user, i) => {
         if (post.user_id == user.id) {
@@ -76,8 +103,7 @@ class Feed extends Component {
                         />
                       </div>
                       <div className="feed__userName">
-                        {user.first_name}
-                        {user.last_name}
+                        <p>{`${user.first_name} ${user.last_name}`}</p>
                         {user.specialty}
                       </div>
                     </Link>
@@ -89,13 +115,20 @@ class Feed extends Component {
                     <div>
                       <Moment fromNow>{post.moment}</Moment>
                     </div>
-
-                    <button>
-                      <FreelancerPostModal
-                        userId={post.user_id}
-                        postId={post.id}
-                      />
-                    </button>
+                  </div>
+                  <div className="feed__freelancerModalButton">
+                    <div className="feed__freelancerModalButton">
+                      <Button
+                        style={{
+                          backgroundColor: "rgb(127, 196, 253)"
+                        }}
+                      >
+                        <FreelancerPostModal
+                          userId={post.user_id}
+                          postId={post.id}
+                        />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -104,67 +137,68 @@ class Feed extends Component {
             //if employer display this in return
             return (
               <div className="feed__mergedEmployerContainer">
-                <div className="feed__employerPosting">
+                <div className="feed__employerData">
                   <Link
                     className="feed__linkToUser"
                     to={`/main/profile/${user.id}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <img
-                      src={user.profile_image}
-                      alt="person"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "50%"
-                      }}
-                    />
-
-                    <p>
-                      {user.first_name}
-                      {user.last_name}
-                    </p>
+                    <div className="feed__employerImage">
+                      <img
+                        src={user.profile_image}
+                        alt="person"
+                        style={{
+                          width: "80px",
+                          height: "80px",
+                          borderRadius: "50%"
+                        }}
+                      />
+                    </div>
+                    <div className="feed__employerName">
+                      <p>{`${user.first_name} ${user.last_name}`}</p>
+                      <p>{user.specialty}</p>
+                    </div>
                   </Link>
                 </div>
-                <p>{user.specialty}</p>
-                <p>{post.title}</p>
-                <p>{post.moment}</p>
 
-                <div>
+                <div className="feed__employerPosting">
                   <h3>Employer Posting</h3>
-                  {matchJob.includes(post.id) && (
-                    <div className="feed__applied">
-                      <p>APPLIED</p>
-                    </div>
-                  )}
                   <p>
                     Post Title:
                     {post.title}
                   </p>
                   <p>
+                    Job Title:
+                    {post.specialty}
+                  </p>
+                  <p>
                     Post Body:
                     {post.body}
                   </p>
-                  <p>
-                    Job:
-                    {post.specialty}
-                  </p>
+                  <p>Pay: {post.price}</p>
                   <div>
                     <Moment fromNow>{post.moment}</Moment>
                   </div>
-                  <p>
-                    Pay: {post.price}
-                    <button>
-                      <EmployerPostModal
-                        userId={post.user_id}
-                        postId={post.id}
-                      />
-                    </button>
-                  </p>
+                </div>
+                <div className="feed__employerModalButton">
+                  <Button
+                    style={{
+                      backgroundColor: "rgb(127, 196, 253)"
+                    }}
+                  >
+                    <EmployerPostModal userId={post.user_id} postId={post.id} />
+                  </Button>
+                  {matchJob.includes(post.id) && (
+                    <div className="feed__applied">
+                      <p>APPLIED</p>
+                    </div>
+                  )}
                 </div>
               </div>
             );
           }
+        } else {
+          return null;
         }
       });
       return <div>{postUser} </div>;
@@ -173,9 +207,41 @@ class Feed extends Component {
     //render return the merged mapped arrays
     return (
       <div className="feed__container">
-        <h1>In the Feed...</h1>
-        <Post />
-        {mergedDiv}
+        <div className="feed__topNav">
+          <Button
+            style={{
+              // backgroundColor: "rgb(127, 196, 253)"
+              color: "white"
+            }}
+            onClick={() => this.filterFreelancers()}
+          >
+            Show Employers Only
+          </Button>
+          <Button
+            style={{
+              // backgroundColor: "rgb(127, 196, 253)"
+              color: "white"
+            }}
+            onClick={() => this.filterEmployers()}
+          >
+            Show Freelancers Only
+          </Button>
+
+          <Button
+            style={{
+              // backgroundColor: "rgb(127, 196, 253)"
+              color: "white"
+            }}
+            onClick={() => this.resetFeed()}
+          >
+            Reset Feed
+          </Button>
+        </div>
+        <div>
+          <h1>In the Feed...</h1>
+          <Post />
+          {mergedStyled}
+        </div>
       </div>
     );
   }

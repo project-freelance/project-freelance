@@ -1,39 +1,61 @@
 .feed__mergedFreelancerContainer {
   border: 2px solid black;
-  background-color: pink;
+  background-color: tan;
   margin-left: 10px;
   margin-bottom: 10px;
   width: 80vw;
   display: flex;
   flex-direction: row;
+}
+
+.feed__freelancerPosting {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: flex-start;
+  width: 70%;
+}
+.feed__freelancerModalButton {
+  display: flex;
+  justify-content: flex-end;
+  height: 10%;
 }
 
 .feed__mergedEmployerContainer {
   border: 2px solid black;
-  background-color: skyblue;
+  background-color: blanchedalmond;
   margin-left: 10px;
   margin-bottom: 10px;
   width: 80vw;
-}
-.feed__freelancerPosting {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.feed__freelancerPosting {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
 }
 
 .feed__employerPosting {
+  margin-left: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
+  width: 70%;
+}
+
+.feed__employerModalButton {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 10%;
 }
 
 .feed__applied {
   color: green;
   font-weight: bold;
+}
+.feed__topNav {
+  background-color: #343337;
+  padding-left: 2vw;
+  height: 8vh;
+  display: flex;
+  justify-content: space-around;
+  color: white;
 }
