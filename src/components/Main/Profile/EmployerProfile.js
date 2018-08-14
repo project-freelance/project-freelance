@@ -30,12 +30,10 @@ class EmployerProfile extends Component {
 
   render() {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
+
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
-    console.log(reviewerObj);
-
     let { employer, review } = this.props;
-    console.log(this.props);
     return (
       <div>
         <div className="employerProfile__header">
@@ -73,6 +71,11 @@ class EmployerProfile extends Component {
                 <div>No ratings have been made yet.</div>
               </div>
             )}
+
+            <div id="employerProfile__line__space">
+              Company Profile: {`${employer[0] && employer[0].bio}`}
+            </div>
+
             <div
               id="employerProfile__line__space"
               className="employerProfile__mgr__block"
@@ -85,8 +88,6 @@ class EmployerProfile extends Component {
                   {`${employer[0] && employer[0].position}`}
                 </div>
               </div>
-
-              {/* <div>Position: {`${employer[0] && employer[0].position}`} </div> */}
               <div>
                 <img
                   src={`${employer[0] && employer[0].profile_image}`}
@@ -98,9 +99,6 @@ class EmployerProfile extends Component {
               </div>
             </div>
 
-            <div id="employerProfile__line__space">
-              Company Profile: {`${employer[0] && employer[0].bio}`}
-            </div>
             <div
               className="employerProfile__contact__btn"
               id="profile__line__space"
@@ -126,18 +124,16 @@ class EmployerProfile extends Component {
                 <div>
                   <div className="employerProfile__review__block">
                     <div
-                      style={
-                        {
-                          // backgroundImage: `url(${reviewerObj &&
-                          //   reviewerObj.profile_image})`
-                        }
-                      }
+                      style={{
+                        backgroundImage: `url(${reviewerObj &&
+                          reviewerObj.profile_image})`
+                      }}
                       className="employerProfile__reviewer__img"
                     />
                     <div className="employerProfile__review__textBlock">
                       <div>
-                        {/* {reviewerObj && reviewerObj.first_name}{" "}
-                        {reviewerObj && reviewerObj.last_name} */}
+                        {reviewerObj && reviewerObj.first_name}{" "}
+                        {reviewerObj && reviewerObj.last_name}
                       </div>
                       {this.props.reviews[0] && this.props.reviews[0].review}
                       <div className="employerProfile__review__moment">

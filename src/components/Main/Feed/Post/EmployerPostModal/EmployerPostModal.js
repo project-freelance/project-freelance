@@ -46,8 +46,6 @@ class EmployerPostModal extends Component {
     const userIdFromPost = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
     // const idFromModalPost = this.props && this.props.id;
-    console.log(this.props);
-    console.log(this.state);
 
     let matchUser = this.props.users.find(user => user.id === userIdFromPost);
     let matchPost = this.props.employerPosts.find(post => post.id === postId);
@@ -59,8 +57,6 @@ class EmployerPostModal extends Component {
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
-
-    console.log(this.props.favJobs);
     return (
       <div>
         {/* Modal Open Button */}
