@@ -1,3 +1,7 @@
+.profile__mainContainer {
+  // background-color: red;
+}
+
 .profile__container {
   display: flex;
   background-color: white;
@@ -18,7 +22,7 @@
 .profile__left__panel {
   background-color: white;
   width: 50vw;
-  height: 100vh;
+  // height: 100vh;
 }
 .profile__user__img {
   height: 50vh;
@@ -30,7 +34,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  // height: 100vh;
 }
 
 .profile__user__name {
