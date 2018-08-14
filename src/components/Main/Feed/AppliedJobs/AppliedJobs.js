@@ -1,32 +1,40 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getEmployerPosts } from '../../../../ducks/employerReducer';
-import { getUser, getUsers } from '../../../../ducks/userReducer';
-import { getFaveJobs } from '../../../../ducks/freelancerReducer';
-import { Link } from 'react-router-dom';
-import Feed from '../Feed';
-import Post from '../Post/Post';
-import Moment from 'react-moment';
-import Button from '@material-ui/core/Button';
-import EmployerPostModal from '../Post/EmployerPostModal/EmployerPostModal';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getEmployerPosts } from "../../../../ducks/employerReducer";
+import { getUser, getUsers } from "../../../../ducks/userReducer";
+import { getFaveJobs } from "../../../../ducks/freelancerReducer";
+import { Link } from "react-router-dom";
+import Feed from "../Feed";
+import Post from "../Post/Post";
+import Moment from "react-moment";
+import Button from "@material-ui/core/Button";
+import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
 
 class AppliedJobs extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getEmployerPosts();
-    this.props.getUsers().then(result => {
-      this.setState({
-        users: result.value.data
-      });
-    });
-    this.props.getFaveJobs &&
-      this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
+  async componentDidMount() {
+    const values = await Promise.all([
+      this.props.getEmployerPosts(),
+      this.props.getUsers(),
+      this.props.getFaveJobs &&
+        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
+    ]);
+
+    this.setState({ users: values[1].value.data });
+
+    // .then(result => {
+    //   this.setState({
+    //     users: result.value.data
+    //   });
+    // });
+    // ;
   }
 
   render() {
+    console.log(this.props);
     let { employerPosts, isLoading, users } = this.props;
 
     let matchJob = this.props.favJobs
@@ -43,16 +51,16 @@ class AppliedJobs extends Component {
                 <Link
                   className="feed__linkToUser"
                   to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: "none" }}
                 >
                   <div className="feed__employerImage">
                     <img
                       src={user.profile_image}
                       alt="person"
                       style={{
-                        width: '80px',
-                        height: '80px',
-                        borderRadius: '50%'
+                        width: "80px",
+                        height: "80px",
+                        borderRadius: "50%"
                       }}
                     />
                   </div>
@@ -85,7 +93,7 @@ class AppliedJobs extends Component {
               <div className="feed__employerModalButton">
                 <Button
                   style={{
-                    backgroundColor: 'rgb(127, 196, 253)'
+                    backgroundColor: "rgb(127, 196, 253)"
                   }}
                 >
                   <EmployerPostModal userId={post.user_id} postId={post.id} />
@@ -111,7 +119,7 @@ class AppliedJobs extends Component {
         <div className="feed__topNav">
           <Button
             style={{
-              color: 'white'
+              color: "white"
             }}
             onClick={() => this.filterFreelancers()}
           >
@@ -119,7 +127,7 @@ class AppliedJobs extends Component {
           </Button>
           <Button
             style={{
-              color: 'white'
+              color: "white"
             }}
             onClick={() => this.filterEmployers()}
           >
@@ -128,7 +136,7 @@ class AppliedJobs extends Component {
 
           <Button
             style={{
-              color: 'white'
+              color: "white"
             }}
             onClick={() => this.resetFeed()}
           >
