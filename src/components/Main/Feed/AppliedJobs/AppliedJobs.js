@@ -4,17 +4,13 @@ import { getEmployerPosts } from "../../../../ducks/employerReducer";
 import { getUser, getUsers } from "../../../../ducks/userReducer";
 import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
-import Feed from "../Feed";
-import Post from "../Post/Post";
+//import Post from "../Post/Post";
 import Moment from "react-moment";
 import Button from "@material-ui/core/Button";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
+import "./AppliedJobs.css";
 
 class AppliedJobs extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   async componentDidMount() {
     const values = await Promise.all([
       this.props.getEmployerPosts(),
@@ -28,18 +24,27 @@ class AppliedJobs extends Component {
 
   render() {
     console.log(this.props);
-    let { employerPosts, isLoading, users } = this.props;
+    let { employerPosts, users } = this.props;
 
+    //takes fav jobs and filters to match freelancer id then maps through to get employer_post_id
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
 
+    //matches employer job postings to logged in user
+    let matchJobEmployer = this.props.employerPosts.filter(
+      person => person.user_id === this.props.user[0].id
+    );
+
+    console.log(matchJobEmployer);
+
     let appliedJobs = employerPosts.map((post, index) => {
       //matching post to user who posted to display user data
       let postUser = users.map((user, i) => {
-        if (post.user_id == user.id && matchJob.includes(post.id)) {
+        //if post matches logged in user and is on favorites list
+        if (post.user_id === user.id && matchJob.includes(post.id)) {
           return (
-            <div className="feed__mergedEmployerContainer">
+            <div key={i} className="feed__mergedEmployerContainer">
               <div className="feed__employerData">
                 <Link
                   className="feed__linkToUser"
@@ -84,13 +89,7 @@ class AppliedJobs extends Component {
                 </div>
               </div>
               <div className="feed__employerModalButton">
-                <Button
-                  style={{
-                    backgroundColor: "rgb(127, 196, 253)"
-                  }}
-                >
-                  <EmployerPostModal userId={post.user_id} postId={post.id} />
-                </Button>
+                <EmployerPostModal userId={post.user_id} postId={post.id} />
                 {matchJob.includes(post.id) && (
                   <div className="feed__applied">
                     <p>APPLIED</p>
@@ -99,46 +98,43 @@ class AppliedJobs extends Component {
               </div>
             </div>
           );
+          // } else if (
+          //   post.user_id === user.id &&
+          //   matchJobEmployer.includes(post.id)
+          // ) {
+          //   return (
+          //     <div>
+          //       <p>{matchJobEmployer.id}</p>
+          //       <p>{user.first_name}</p>
+          //     </div>
+          //   );
         } else {
           return null;
         }
       });
-      return <div>{postUser} </div>;
+
+      let employerJobsPosted = matchJobEmployer.map((employer, index) => {
+        return (
+          <div>
+            <div>{employer.id}</div>
+          </div>
+        );
+      });
+
+      return (
+        <div key={index}>
+          {postUser} {employerJobsPosted}
+        </div>
+      );
     });
 
     //render return the merged mapped arrays
     return (
-      <div className="feed__container">
-        <div className="feed__topNav">
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.filterFreelancers()}
-          >
-            Show Employers Only
-          </Button>
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.filterEmployers()}
-          >
-            Show Freelancers Only
-          </Button>
-
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.resetFeed()}
-          >
-            Reset Feed
-          </Button>
-        </div>
+      <div className="appliedJobs__container">
+        <div className="appliedJobs__topNav" />
         <div>
-          <h1>In the Feed...</h1>
-          <Post />
+          {/* <Post /> */}
+          <h1>Coming soon...</h1>
           {appliedJobs}
         </div>
       </div>
