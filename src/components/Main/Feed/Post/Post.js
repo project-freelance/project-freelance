@@ -8,15 +8,10 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import './Post.css';
 import AddCircle from '@material-ui/icons/AddCircle.js';
-
-import Icon from '@material-ui/core/Icon';
 
 class Post extends Component {
   constructor(props) {
@@ -234,27 +229,6 @@ class Post extends Component {
                 </div>
               )}
           </DialogContent>
-          {/* <DialogActions> */}
-          {/* <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button> */}
-          {/* <Button
-              onClick={() => {
-                this.handleClose,
-                  this.props.addEmployerPost(
-                    title,
-                    body,
-                    specialty,
-                    price,
-                    this.props.user[0] && this.props.user[0].id
-                  );
-              }}
-              type="submit"
-              color="primary"
-            >
-              Submit
-            </Button> */}
-          {/* </DialogActions> */}
         </Dialog>
       </div>
     );

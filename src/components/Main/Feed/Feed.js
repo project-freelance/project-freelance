@@ -53,7 +53,6 @@ class Feed extends Component {
   }
 
   render() {
-    console.log(this.props);
     //getting logged in user's saved jobs
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
