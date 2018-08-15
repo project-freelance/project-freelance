@@ -5,7 +5,6 @@ import { getUser, getUsers } from "../../../../ducks/userReducer";
 import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import Button from "@material-ui/core/Button";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
 import "./AppliedJobs.css";
 
@@ -44,14 +43,14 @@ class AppliedJobs extends Component {
       let postUser = users.map((user, i) => {
         if (post.user_id === user.id && matchJob.includes(post.id)) {
           return (
-            <div key={i} className="feed__mergedEmployerContainer">
-              <div className="feed__employerData">
+            <div key={i} className="appliedJobs__freelancerFavContainer">
+              <div className="appliedJobs__userData">
                 <Link
-                  className="feed__linkToUser"
+                  className="appliedJobs__linkToUser"
                   to={`/main/profile/${user.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <div className="feed__employerImage">
+                  <div className="appliedJobs__employerImage">
                     <img
                       src={user.profile_image}
                       alt="person"
@@ -62,14 +61,14 @@ class AppliedJobs extends Component {
                       }}
                     />
                   </div>
-                  <div className="feed__employerName">
+                  <div className="appliedJobs__employerName">
                     <p>{`${user.first_name} ${user.last_name}`}</p>
                     <p>{user.specialty}</p>
                   </div>
                 </Link>
               </div>
 
-              <div className="feed__employerPosting">
+              <div className="appliedJobs__employerPosting">
                 <h3>Employer Posting</h3>
                 <p>
                   Post Title:
@@ -88,11 +87,11 @@ class AppliedJobs extends Component {
                   <Moment fromNow>{post.moment}</Moment>
                 </div>
               </div>
-              <div className="feed__employerModalButton">
+              <div className="appliedJobs__employerModalButton">
                 <EmployerPostModal userId={post.user_id} postId={post.id} />
 
                 {matchJob.includes(post.id) && (
-                  <div className="feed__applied">
+                  <div className="appliedJobs__applied">
                     <p>APPLIED</p>
                   </div>
                 )}
@@ -107,14 +106,14 @@ class AppliedJobs extends Component {
       let postUser2 = users.map((user, i) => {
         if (post.user_id === user.id && matchJobEmployer.includes(post.id)) {
           return (
-            <div key={i} className="feed__mergedEmployerContainer">
-              <div className="feed__employerData">
+            <div key={i} className="appliedJobs__employerListingContainer">
+              <div className="appliedJobs__employerData">
                 <Link
-                  className="feed__linkToUser"
+                  className="appliedJobs__linkToUser"
                   to={`/main/profile/${user.id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <div className="feed__employerImage">
+                  <div className="appliedJobs__employerImage">
                     <img
                       src={user.profile_image}
                       alt="person"
@@ -125,14 +124,14 @@ class AppliedJobs extends Component {
                       }}
                     />
                   </div>
-                  <div className="feed__employerName">
+                  <div className="appliedJobs__employerName">
                     <p>{`${user.first_name} ${user.last_name}`}</p>
                     <p>{user.specialty}</p>
                   </div>
                 </Link>
               </div>
 
-              <div className="feed__employerPosting">
+              <div className="appliedJobs__employerPosting">
                 <h3>Employer Posting</h3>
                 <p>
                   Post Title:
@@ -151,7 +150,7 @@ class AppliedJobs extends Component {
                   <Moment fromNow>{post.moment}</Moment>
                 </div>
               </div>
-              <div className="feed__employerModalButton">
+              <div className="appliedJobs__employerModalButton">
                 <EmployerPostModal userId={post.user_id} postId={post.id} />
 
                 {matchJob.includes(post.id) && (
@@ -178,44 +177,9 @@ class AppliedJobs extends Component {
 
     //render return the merged mapped arrays
     return (
-<<<<<<< HEAD
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
         <div>{appliedJobs}</div>
-=======
-      <div className="feed__container">
-        <div className="feed__topNav">
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.filterFreelancers()}
-          >
-            Show Employers Only
-          </Button>
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.filterEmployers()}
-          >
-            Show Freelancers Only
-          </Button>
-
-          <Button
-            style={{
-              color: "white"
-            }}
-            onClick={() => this.resetFeed()}
-          >
-            Reset Feed
-          </Button>
-        </div>
-        <div>
-          <h1>My Applied Jobs...</h1>
-          {appliedJobs}
-        </div>
->>>>>>> master
       </div>
     );
   }

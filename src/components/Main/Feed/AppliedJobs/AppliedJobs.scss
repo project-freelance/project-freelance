@@ -12,3 +12,48 @@
   display: flex;
   justify-content: space-around;
 }
+
+.appliedJobs__freelancerFavContainer {
+  border: 2px solid black;
+  background-color: tan;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+}
+.appliedJobs__employerListingContainer {
+  border: 2px solid black;
+  background-color: blanchedalmond;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.appliedJobs__employerPosting {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.appliedJobs__applied {
+  color: green;
+  font-weight: bold;
+}
+
+.appliedJobs__freelancerModalButton {
+  display: flex;
+  justify-content: flex-end;
+  height: 10%;
+}
+
+.appliedJobs__employerModalButton {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 10%;
+}
