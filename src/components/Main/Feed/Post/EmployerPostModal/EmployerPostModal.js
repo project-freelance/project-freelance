@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../../../ducks/employerReducer";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployerPosts } from '../../../../../ducks/employerReducer';
 import {
   addFaveJob,
   getFaveJobs,
   deleteFaveJob
-} from "../../../../../ducks/freelancerReducer";
-import { getUser } from "../../../../../ducks/userReducer";
-import { getUsers } from "../../../../../ducks/userReducer";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import Button from "@material-ui/core/Button";
-import Moment from "react-moment";
-import "../EmployerPostModal/EmployerPostModal.css";
-import { Link } from "react-router-dom";
+} from '../../../../../ducks/freelancerReducer';
+import { getUser } from '../../../../../ducks/userReducer';
+import { getUsers } from '../../../../../ducks/userReducer';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import Button from '@material-ui/core/Button';
+import Moment from 'react-moment';
+import '../EmployerPostModal/EmployerPostModal.css';
+import { Link } from 'react-router-dom';
 
 class EmployerPostModal extends Component {
   constructor(props) {
@@ -64,10 +64,10 @@ class EmployerPostModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentStyle={{
-            width: "70vh",
-            maxWidth: "100%",
-            height: "70vw",
-            padding: "30px"
+            width: '70vh',
+            maxWidth: '100%',
+            height: '70vw',
+            padding: '30px'
           }}
         >
           <DialogContent>
@@ -79,8 +79,8 @@ class EmployerPostModal extends Component {
                       src={matchUser && matchUser.profile_image}
                       alt="person"
                       style={{
-                        width: "120px",
-                        height: "120px"
+                        width: '120px',
+                        height: '120px'
                       }}
                     />
                   </div>
@@ -88,7 +88,7 @@ class EmployerPostModal extends Component {
                     <div>
                       <Button
                         style={{
-                          backgroundColor: "#FF4500"
+                          backgroundColor: '#FF4500'
                         }}
                         onClick={this.handleClose}
                       >
@@ -103,7 +103,7 @@ class EmployerPostModal extends Component {
                 <div className="employerPostModal__data">
                   <h2>
                     {matchUser &&
-                      matchUser.first_name + " " + matchUser.last_name}
+                      matchUser.first_name + ' ' + matchUser.last_name}
                   </h2>
                   <p>{matchUser && matchUser.specialty}</p>
                   <p>{matchPost && matchPost.title}</p>
@@ -114,11 +114,11 @@ class EmployerPostModal extends Component {
                     <div className="employerPostModal__buttons">
                       <Link
                         to={`/main/profile/${matchUser && matchUser.id}`}
-                        style={{ textDecoration: "none" }}
+                        style={{ textDecoration: 'none' }}
                       >
                         <Button
                           style={{
-                            backgroundColor: "#0000FF"
+                            backgroundColor: '#0000FF'
                           }}
                         >
                           View My Profile
@@ -128,7 +128,7 @@ class EmployerPostModal extends Component {
                         <div className="employerPostModal__applied">
                           <Button
                             style={{
-                              backgroundColor: "#008000"
+                              backgroundColor: '#008000'
                             }}
                             onClick={() => {
                               this.props
@@ -152,7 +152,7 @@ class EmployerPostModal extends Component {
                       {!matchJob.includes(matchPost.id) && (
                         <Button
                           style={{
-                            backgroundColor: "#008000"
+                            backgroundColor: '#008000'
                           }}
                           onClick={() => {
                             this.props

@@ -178,9 +178,44 @@ class AppliedJobs extends Component {
 
     //render return the merged mapped arrays
     return (
+<<<<<<< HEAD
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
         <div>{appliedJobs}</div>
+=======
+      <div className="feed__container">
+        <div className="feed__topNav">
+          <Button
+            style={{
+              color: "white"
+            }}
+            onClick={() => this.filterFreelancers()}
+          >
+            Show Employers Only
+          </Button>
+          <Button
+            style={{
+              color: "white"
+            }}
+            onClick={() => this.filterEmployers()}
+          >
+            Show Freelancers Only
+          </Button>
+
+          <Button
+            style={{
+              color: "white"
+            }}
+            onClick={() => this.resetFeed()}
+          >
+            Reset Feed
+          </Button>
+        </div>
+        <div>
+          <h1>My Applied Jobs...</h1>
+          {appliedJobs}
+        </div>
+>>>>>>> master
       </div>
     );
   }

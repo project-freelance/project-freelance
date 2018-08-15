@@ -1,5 +1,5 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
+import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
 
 export default props => (
   <div>
@@ -20,7 +20,7 @@ export default props => (
       </a>
       <img src={props.url3} />
       <div>
-        <a href={"http://www.google.com"} />
+        <a href={'http://www.google.com'} />
         <p className="legend">{props.link3}</p>
       </div>
       {/* </a> */}
