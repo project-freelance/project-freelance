@@ -73,8 +73,6 @@ class Feed extends Component {
       mergedArrays = preMerge(employerPosts, freelancerPosts);
     }
 
-    console.log(mergedArrays);
-
     //mapping through merged freelancer and employer arrays
     let mergedStyled = mergedArrays.map((post, index) => {
       //matching post to user who posted to display user data
@@ -118,16 +116,10 @@ class Feed extends Component {
                   </div>
                   <div className="feed__freelancerModalButton">
                     <div className="feed__freelancerModalButton">
-                      <Button
-                        style={{
-                          backgroundColor: "rgb(127, 196, 253)"
-                        }}
-                      >
-                        <FreelancerPostModal
-                          userId={post.user_id}
-                          postId={post.id}
-                        />
-                      </Button>
+                      <FreelancerPostModal
+                        userId={post.user_id}
+                        postId={post.id}
+                      />
                     </div>
                   </div>
                 </div>
@@ -136,7 +128,7 @@ class Feed extends Component {
           } else {
             //if employer display this in return
             return (
-              <div className="feed__mergedEmployerContainer">
+              <div key={i} className="feed__mergedEmployerContainer">
                 <div className="feed__employerData">
                   <Link
                     className="feed__linkToUser"
@@ -181,13 +173,8 @@ class Feed extends Component {
                   </div>
                 </div>
                 <div className="feed__employerModalButton">
-                  <Button
-                    style={{
-                      backgroundColor: "rgb(127, 196, 253)"
-                    }}
-                  >
-                    <EmployerPostModal userId={post.user_id} postId={post.id} />
-                  </Button>
+                  <EmployerPostModal userId={post.user_id} postId={post.id} />
+
                   {matchJob.includes(post.id) && (
                     <div className="feed__applied">
                       <p>APPLIED</p>
@@ -201,7 +188,7 @@ class Feed extends Component {
           return null;
         }
       });
-      return <div>{postUser} </div>;
+      return <div key={index}>{postUser} </div>;
     });
 
     //render return the merged mapped arrays
