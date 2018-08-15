@@ -3,7 +3,15 @@ import { connect } from "react-redux";
 import { getUser } from "../../../../ducks/userReducer";
 import ReactS3Uploader from "react-s3-uploader";
 import { updateUser } from "../../../../ducks/userReducer";
-import { updateFreelancer } from "../../../../ducks/freelancerReducer";
+import {
+  getFreelancer,
+  updateFreelancer
+} from "../../../../ducks/freelancerReducer";
+import {
+  getPortfolio,
+  updatePortfolio,
+  deleteFreelancerPost
+} from "../../../../ducks/portfolioReducer";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -23,18 +31,30 @@ class FreelancerSettings extends Component {
       first_name: this.props.user[0].first_name,
       last_name: this.props.user[0].last_name,
       email: this.props.user[0].email,
-      experience: 0,
-      city: "",
-      state: "",
       profile_image: this.props.user[0].profile_image,
+
+      experience: this.props.freelancer[0].experience,
+      city: this.props.freelancer[0].city,
+      state: this.props.freelancer[0].state,
+      bio: this.props.freelancer[0].bio,
+      heading: this.props.freelancer[0].heading,
+      skills: this.props.freelancer[0].skills,
+
+      image_url1: this.props.portfolio[0].image_url1,
+      image_url2: this.props.portfolio[0].image_url2,
+      image_url3: this.props.portfolio[0].image_url3,
+      link1: this.props.portfolio[0].link1,
+      link2: this.props.portfolio[0].link2,
+      link3: this.props.portfolio[0].link3,
+
       completed: 0,
-      percent: 0,
-      bio: "",
-      heading: ""
+      percent: 0
     };
   }
   componentDidMount() {
-    console.log(this.state);
+    // this.props
+    //   .getPortfolio(this.props.user[0].id)
+    //   .then(console.log(this.props));
   }
   handleChange = name => event => {
     this.setState({
@@ -54,9 +74,26 @@ class FreelancerSettings extends Component {
       profile_image: process.env.REACT_APP_DEV_S3_URL + s3.filename
     });
   };
+  onPortfolio1Upload = s3 => {
+    this.setState({
+      image_url1: process.env.REACT_APP_DEV_S3_URL + s3.filename
+    });
+  };
+  onPortfolio2Upload = s3 => {
+    this.setState({
+      image_url2: process.env.REACT_APP_DEV_S3_URL + s3.filename
+    });
+  };
+  onPortfolio3Upload = s3 => {
+    this.setState({
+      image_url3: process.env.REACT_APP_DEV_S3_URL + s3.filename
+    });
+  };
+
   onSaveHandler = () => {
     this.props.updateUser(this.state).then(() => {
       this.props.updateFreelancer(this.props.user[0].id, this.state);
+      this.props.updatePortfolio(this.props.user[0].id, this.state);
     });
   };
 
@@ -80,12 +117,18 @@ class FreelancerSettings extends Component {
       first_name,
       email,
       profile_image,
-      company_image,
       experience,
       city,
       bio,
       state,
-      heading
+      heading,
+      skills,
+      link1,
+      link2,
+      link3,
+      image_url1,
+      image_url2,
+      image_url3
     } = this.state;
     return (
       <div className="settings__container">
@@ -189,6 +232,17 @@ class FreelancerSettings extends Component {
               />
             </div>
             <div>
+              <TextField
+                id="skills"
+                label="skills"
+                fullWidth
+                className={"settings__skills__input"}
+                value={skills}
+                onChange={e => this.setState({ skills: e.target.value })}
+                margin="normal"
+              />
+            </div>
+            <div>
               <FormControl className={"form"}>
                 <NativeSelect
                   className={"settings__experience__input"}
@@ -232,8 +286,108 @@ class FreelancerSettings extends Component {
           >
             Save
           </Button>
+          <div className="settings__portfolio">
+            <div>
+              <TextField
+                id="link1"
+                label="link1"
+                fullWidth
+                className={"settings__link__input"}
+                value={link1}
+                onChange={e => this.setState({ link1: e.target.value })}
+                margin="normal"
+              />
+              <img
+                className="settings__portfolioImage"
+                src={image_url1}
+                alt="Porfolio image one"
+              />{" "}
+              <ReactS3Uploader
+                signingUrl="/s3/sign"
+                signingUrlMethod="GET"
+                accept="image/*"
+                s3path=""
+                onProgress={this.progress}
+                onFinish={this.onPortfolio1Upload}
+                contentDisposition="auto"
+                scrubFilename={filename =>
+                  filename.replace(/[^\w\d_\-.]+/gi, "")
+                }
+                inputRef={cmp => (this.uploadInput = cmp)}
+                server={process.env.REACT_APP_DEV_HOST}
+                autoUpload
+              />
+            </div>
+            <div>
+              <TextField
+                id="name"
+                label="link2"
+                fullWidth
+                className={"settings__link__input"}
+                value={link2}
+                onChange={e => this.setState({ link2: e.target.value })}
+                margin="normal"
+              />
+              <img
+                className="settings__portfolioImage"
+                src={image_url2}
+                alt="portfolio image two"
+              />{" "}
+              <ReactS3Uploader
+                signingUrl="/s3/sign"
+                signingUrlMethod="GET"
+                accept="image/*"
+                s3path=""
+                onProgress={this.progress}
+                onFinish={this.onPortfolio2Upload}
+                contentDisposition="auto"
+                scrubFilename={filename =>
+                  filename.replace(/[^\w\d_\-.]+/gi, "")
+                }
+                inputRef={cmp => (this.uploadInput = cmp)}
+                server={process.env.REACT_APP_DEV_HOST}
+                autoUpload
+              />
+            </div>
+            <div>
+              <TextField
+                id="name"
+                label="link3"
+                fullWidth
+                className={"settings__link3__input"}
+                value={link3}
+                onChange={e => this.setState({ link3: e.target.value })}
+                margin="normal"
+              />
+              <img
+                className="settings__portfolioImage"
+                src={image_url3}
+                alt="portfolio image 3"
+              />
+              <ReactS3Uploader
+                signingUrl="/s3/sign"
+                signingUrlMethod="GET"
+                accept="image/*"
+                s3path=""
+                onProgress={this.progress}
+                onFinish={this.onPortfolio3Upload}
+                contentDisposition="auto"
+                scrubFilename={filename =>
+                  filename.replace(/[^\w\d_\-.]+/gi, "")
+                }
+                inputRef={cmp => (this.uploadInput = cmp)}
+                server={process.env.REACT_APP_DEV_HOST}
+                autoUpload
+              />
+            </div>
+          </div>
         </div>
-        {/* <button onClick={() => console.log(this.props)} /> */}
+        <button
+          onClick={() => {
+            console.log(this.props);
+            console.log(this.state);
+          }}
+        />
       </div>
     );
   }
@@ -241,10 +395,20 @@ class FreelancerSettings extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    freelancer: state.freelancerReducer.freelancer,
+    portfolio: state.portfolioReducer.portfolio
   };
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateUser, updateFreelancer }
+  {
+    getUser,
+    updateUser,
+    updateFreelancer,
+    getFreelancer,
+    getPortfolio,
+    updatePortfolio,
+    deleteFreelancerPost
+  }
 )(FreelancerSettings);
