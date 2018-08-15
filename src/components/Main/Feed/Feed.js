@@ -183,25 +183,21 @@ class Feed extends Component {
                 ) : null}
 
                 <div className="feed__employerPosting">
-                  <h3>Employer Posting</h3>
-                  <p>
-                    Post Title:
+                  <h3>
+                    Employer Posting: &nbsp;
                     {post.title}
-                  </p>
+                  </h3>
                   <p>
-                    Job Title:
+                    Looking For: &nbsp;
                     {post.specialty}
                   </p>
-                  <p>
-                    Post Body:
-                    {post.body}
-                  </p>
-                  <p>Pay: {post.price}</p>
-                  <div>
-                    <Moment fromNow>{post.moment}</Moment>
-                  </div>
+                  <p>{post.body}</p>
                 </div>
                 <div className="feed__employerModalButton">
+                  <div>
+                    <Moment fromNow>{post.moment}</Moment>
+                    <p>Pay: {post.price}</p>
+                  </div>
                   <EmployerPostModal userId={post.user_id} postId={post.id} />
 
                   {matchJob.includes(post.id) && (
