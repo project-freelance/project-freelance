@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../ducks/employerReducer";
-import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
+import {
+  getEmployerPosts,
+  deleteEmployerPost
+} from "../../../ducks/employerReducer";
+import {
+  getFreelancerPosts,
+  deleteFreelancerPost
+} from "../../../ducks/freelancerReducer";
 import { getUser, getUsers } from "../../../ducks/userReducer";
 import { getFaveJobs } from "../../../ducks/freelancerReducer";
 import "../Feed/Feed.css";
@@ -47,6 +53,7 @@ class Feed extends Component {
   }
 
   render() {
+    console.log(this.props);
     //getting logged in user's saved jobs
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
@@ -106,6 +113,18 @@ class Feed extends Component {
                       </div>
                     </Link>
                   </div>
+                  {post.user_id === this.props.user[0].id ? (
+                    <button
+                      onClick={() =>
+                        this.props.deleteFreelancerPost(post.id).then(() => {
+                          this.props.getFreelancerPosts();
+                        })
+                      }
+                    >
+                      Delete Post
+                    </button>
+                  ) : null}
+
                   <div className="feed__freelancerPosting">
                     <h3>Freelancer Posting</h3>
                     <p>Post Title: {post.title}</p>
@@ -152,6 +171,17 @@ class Feed extends Component {
                     </div>
                   </Link>
                 </div>
+                {post.user_id === this.props.user[0].id ? (
+                  <button
+                    onClick={() =>
+                      this.props.deleteEmployerPost(post.id).then(() => {
+                        this.props.getEmployerPosts();
+                      })
+                    }
+                  >
+                    Delete Post
+                  </button>
+                ) : null}
 
                 <div className="feed__employerPosting">
                   <h3>Employer Posting</h3>
@@ -246,5 +276,13 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getEmployerPosts, getFreelancerPosts, getUsers, getUser, getFaveJobs }
+  {
+    getEmployerPosts,
+    getFreelancerPosts,
+    getUsers,
+    getUser,
+    getFaveJobs,
+    deleteFreelancerPost,
+    deleteEmployerPost
+  }
 )(Feed);
