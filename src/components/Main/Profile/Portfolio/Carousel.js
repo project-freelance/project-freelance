@@ -18,7 +18,6 @@ export default props => (
           <div className="legend">{props.link2}</div>
         </div>
       </a>
-
       <img src={props.url3} />
       <div>
         <a href={'http://www.google.com'} />
