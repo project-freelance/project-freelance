@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
-import { updateUser } from "../../../ducks/userReducer";
-import { updateFreelancer } from "../../../ducks/freelancerReducer";
-import { updateEmployer, getEmployer } from "../../../ducks/employerReducer";
+import axios from "axios";
 
 import "./Settings.css";
 import FreelancerSettings from "./FreelancerSettings/FreelancerSettings";
@@ -13,30 +11,20 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: this.props.user[0].first_name,
-      last_name: this.props.user[0].last_name,
-      email: this.props.user[0].email,
-      role: this.props.user[0].role,
-      experience: 0,
-      city: "",
-      state: "",
-      profile_image: this.props.user[0].profile_image,
-      company_image: "",
-      completed: 0,
-      percent: 0,
-      bio: "",
-      heading: ""
+      role: ""
     };
   }
+
   componentDidMount() {
-    // this.props.getEmployer(this.props.user[0].id);
+    axios
+      .get("/api/user")
+      .then(response => this.setState({ role: response.data[0].role }));
   }
 
   settingDecider = () => {
-    if (this.props.user[0].role == "Freelancer") {
-      console.log(this.props.user[0].role);
+    if (this.state.role == "Freelancer") {
       return <FreelancerSettings />;
-    } else {
+    } else if (this.state.role == "Employer") {
       return <EmployerSettings />;
     }
   };
@@ -57,5 +45,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getUser, updateEmployer, updateFreelancer, getEmployer }
+  { getUser }
 )(Settings);

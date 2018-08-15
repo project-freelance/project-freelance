@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import { getEmployer } from "../../../ducks/employerReducer";
+import { getFreelancer } from "../../../ducks/freelancerReducer";
+import { getPortfolio } from "../../../ducks/portfolioReducer";
 
 import "./Nav.css";
 
@@ -18,7 +20,13 @@ class Nav extends Component {
     this.props
       .getUser()
       .then(() => this.setState({ id: this.props.user[0].id }))
-      .then(() => this.props.getEmployer(this.props.user[0].id));
+      .then(() =>
+        this.props
+          .getEmployer(this.props.user[0].id)
+          .then(() => this.props.getFreelancer(this.props.user[0].id))
+          .then(() => this.props.getPortfolio(this.props.user[0].id))
+          .then(() => console.log(`Nav done ${this.props}`))
+      );
   }
 
   render() {
@@ -90,6 +98,6 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getUser, getEmployer }
+  { getUser, getEmployer, getFreelancer, getPortfolio }
 )(Nav);
 // export default Nav;

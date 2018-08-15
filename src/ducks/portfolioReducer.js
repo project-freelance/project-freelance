@@ -68,10 +68,11 @@ export default function portfolioReducer(state = initialState, action) {
         isLoading: true
       };
     case `${GET_PORTFOLIO}_FULFILLED`:
+      console.log(action.payload.data);
       return {
         ...state,
         isLoading: false,
-        freelancer: action.payload.data
+        portfolio: action.payload.data
       };
     case `${GET_PORTFOLIO}_REJECTED`:
       return {
@@ -89,7 +90,7 @@ export default function portfolioReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        freelancer: action.payload.data
+        portfolio: action.payload.data
       };
     case `${ADD_PORTFOLIO}_REJECTED`:
       return {
@@ -107,7 +108,7 @@ export default function portfolioReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        freelancer: action.payload.data
+        portfolio: action.payload.data
       };
     case `${UPDATE_PORTFOLIO}_REJECTED`:
       return {
@@ -125,7 +126,7 @@ export default function portfolioReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        freelancerPost: action.payload.data
+        portfolio: action.payload.data
       };
     case `${DELETE_PORTFOLIO}_REJECTED`:
       return {
