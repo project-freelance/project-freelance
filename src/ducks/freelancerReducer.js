@@ -42,7 +42,7 @@ export function getFreelancer(id) {
 }
 export function getFreelancers() {
   return {
-    type: GET_FREELANCER,
+    type: GET_FREELANCERS,
     payload: axios.get("/api/freelancers")
   };
 }

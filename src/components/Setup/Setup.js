@@ -6,6 +6,7 @@ import { addEmployer } from "../../ducks/employerReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Setup.css";
+import Settings from "../Main/Settings/Settings";
 import Button from "@material-ui/core/Button";
 class Setup extends Component {
   constructor() {
