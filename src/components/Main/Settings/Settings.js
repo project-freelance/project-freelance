@@ -34,6 +34,7 @@ class Settings extends Component {
 
   settingDecider = () => {
     if (this.props.user[0].role == "Freelancer") {
+      console.log(this.props.user[0].role);
       return <FreelancerSettings />;
     } else {
       return <EmployerSettings />;
@@ -41,8 +42,6 @@ class Settings extends Component {
   };
   render() {
     let settingShow = this.settingDecider();
-    console.log(this.props);
-    console.log(this.state);
 
     return (
       <div className="settings__container--conditional">{settingShow}</div>
