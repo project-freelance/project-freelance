@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getFreelancer } from "../../../ducks/freelancerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import EmployerProfile from "./EmployerProfile";
-import Portfolio from "./Portfolio/Portfolio";
-import AvgRating from "./Reviews/AvgRating/AvgRating";
-import Moment from "react-moment";
-import Reviews from "./Reviews/Reviews";
-import Button from "@material-ui/core/Button";
-import PortfolioModal from "./Portfolio/PortfolioModal/PortfolioModal";
-import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
-import "./Profile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getFreelancer } from '../../../ducks/freelancerReducer';
+import AddReview from './Reviews/AddReview/AddReview';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
+import EmployerProfile from './EmployerProfile';
+import Portfolio from './Portfolio/Portfolio';
+import AvgRating from './Reviews/AvgRating/AvgRating';
+import Moment from 'react-moment';
+import Reviews from './Reviews/Reviews';
+import Button from '@material-ui/core/Button';
+import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
+import ReviewModal from './Reviews/ReviewModal/ReviewModal';
+import './Profile.css';
 class Profile extends Component {
   constructor() {
     super();
@@ -50,7 +50,7 @@ class Profile extends Component {
     return (
       <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
-        this.props.freelancer[0].role === "Freelancer" ? (
+        this.props.freelancer[0].role === 'Freelancer' ? (
           <div>
             <div className="profile__header">
               {freelancer[0] && freelancer[0].heading}
@@ -65,13 +65,13 @@ class Profile extends Component {
               <div>
                 <div className="profile__right__panel">
                   <div className="profile__user__name">
-                    {`${freelancer[0] && freelancer[0].first_name}`}{" "}
+                    {`${freelancer[0] && freelancer[0].first_name}`}{' '}
                     {`${freelancer[0] && freelancer[0].last_name}`}
                   </div>
                   <div id="profile__line__space">
                     {freelancer[0].city && freelancer[0].city.length > 0 ? (
                       <div>
-                        {`${freelancer[0] && freelancer[0].city},`}{" "}
+                        {`${freelancer[0] && freelancer[0].city},`}{' '}
                         {freelancer[0] && freelancer[0].state}
                       </div>
                     ) : (
@@ -170,7 +170,7 @@ class Profile extends Component {
                           />
                           <div className="profile__review__textBlock">
                             <div>
-                              {reviewerObj && reviewerObj.first_name}{" "}
+                              {reviewerObj && reviewerObj.first_name}{' '}
                               {reviewerObj && reviewerObj.last_name}
                             </div>
                             {this.props.reviews[0] &&

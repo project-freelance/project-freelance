@@ -1,16 +1,22 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../ducks/employerReducer";
-import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getFaveJobs } from "../../../ducks/freelancerReducer";
-import "../Feed/Feed.css";
-import Post from "../Feed/Post/Post";
-import { Link } from "react-router-dom";
-import Moment from "react-moment";
-import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
-import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
-import Button from "@material-ui/core/Button";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  getEmployerPosts,
+  deleteEmployerPost
+} from '../../../ducks/employerReducer';
+import {
+  getFreelancerPosts,
+  deleteFreelancerPost
+} from '../../../ducks/freelancerReducer';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getFaveJobs } from '../../../ducks/freelancerReducer';
+import '../Feed/Feed.css';
+import Post from '../Feed/Post/Post';
+import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+import FreelancerPostModal from './Post/FreelancerPostModal/FreelancerPostModal';
+import EmployerPostModal from './Post/EmployerPostModal/EmployerPostModal';
+import Button from '@material-ui/core/Button';
 
 class Feed extends Component {
   constructor() {
@@ -47,6 +53,7 @@ class Feed extends Component {
   }
 
   render() {
+    console.log(this.props);
     //getting logged in user's saved jobs
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
@@ -73,15 +80,13 @@ class Feed extends Component {
       mergedArrays = preMerge(employerPosts, freelancerPosts);
     }
 
-    console.log(mergedArrays);
-
     //mapping through merged freelancer and employer arrays
     let mergedStyled = mergedArrays.map((post, index) => {
       //matching post to user who posted to display user data
       let postUser = users.map((user, i) => {
         if (post.user_id == user.id) {
           //if freelancer display this in return
-          if (user.role === "Freelancer") {
+          if (user.role === 'Freelancer') {
             return (
               <div key={index}>
                 <div className="feed__mergedFreelancerContainer">
@@ -89,16 +94,16 @@ class Feed extends Component {
                     <Link
                       className="feed__linkToUser"
                       to={`/main/profile/${user.id}`}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
                       <div className="feed__userImage">
                         <img
                           src={user.profile_image}
                           alt="person"
                           style={{
-                            width: "80px",
-                            height: "80px",
-                            borderRadius: "50%"
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%'
                           }}
                         />
                       </div>
@@ -108,6 +113,18 @@ class Feed extends Component {
                       </div>
                     </Link>
                   </div>
+                  {post.user_id === this.props.user[0].id ? (
+                    <button
+                      onClick={() =>
+                        this.props.deleteFreelancerPost(post.id).then(() => {
+                          this.props.getFreelancerPosts();
+                        })
+                      }
+                    >
+                      Delete Post
+                    </button>
+                  ) : null}
+
                   <div className="feed__freelancerPosting">
                     <h3>Freelancer Posting</h3>
                     <p>Post Title: {post.title}</p>
@@ -118,16 +135,10 @@ class Feed extends Component {
                   </div>
                   <div className="feed__freelancerModalButton">
                     <div className="feed__freelancerModalButton">
-                      <Button
-                        style={{
-                          backgroundColor: "rgb(127, 196, 253)"
-                        }}
-                      >
-                        <FreelancerPostModal
-                          userId={post.user_id}
-                          postId={post.id}
-                        />
-                      </Button>
+                      <FreelancerPostModal
+                        userId={post.user_id}
+                        postId={post.id}
+                      />
                     </div>
                   </div>
                 </div>
@@ -136,21 +147,21 @@ class Feed extends Component {
           } else {
             //if employer display this in return
             return (
-              <div className="feed__mergedEmployerContainer">
+              <div key={i} className="feed__mergedEmployerContainer">
                 <div className="feed__employerData">
                   <Link
                     className="feed__linkToUser"
                     to={`/main/profile/${user.id}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: 'none' }}
                   >
                     <div className="feed__employerImage">
                       <img
                         src={user.profile_image}
                         alt="person"
                         style={{
-                          width: "80px",
-                          height: "80px",
-                          borderRadius: "50%"
+                          width: '80px',
+                          height: '80px',
+                          borderRadius: '50%'
                         }}
                       />
                     </div>
@@ -160,6 +171,17 @@ class Feed extends Component {
                     </div>
                   </Link>
                 </div>
+                {post.user_id === this.props.user[0].id ? (
+                  <button
+                    onClick={() =>
+                      this.props.deleteEmployerPost(post.id).then(() => {
+                        this.props.getEmployerPosts();
+                      })
+                    }
+                  >
+                    Delete Post
+                  </button>
+                ) : null}
 
                 <div className="feed__employerPosting">
                   <h3>Employer Posting</h3>
@@ -181,13 +203,8 @@ class Feed extends Component {
                   </div>
                 </div>
                 <div className="feed__employerModalButton">
-                  <Button
-                    style={{
-                      backgroundColor: "rgb(127, 196, 253)"
-                    }}
-                  >
-                    <EmployerPostModal userId={post.user_id} postId={post.id} />
-                  </Button>
+                  <EmployerPostModal userId={post.user_id} postId={post.id} />
+
                   {matchJob.includes(post.id) && (
                     <div className="feed__applied">
                       <p>APPLIED</p>
@@ -201,7 +218,7 @@ class Feed extends Component {
           return null;
         }
       });
-      return <div>{postUser} </div>;
+      return <div key={index}>{postUser} </div>;
     });
 
     //render return the merged mapped arrays
@@ -211,7 +228,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.filterFreelancers()}
           >
@@ -220,7 +237,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.filterEmployers()}
           >
@@ -230,7 +247,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.resetFeed()}
           >
@@ -259,5 +276,13 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getEmployerPosts, getFreelancerPosts, getUsers, getUser, getFaveJobs }
+  {
+    getEmployerPosts,
+    getFreelancerPosts,
+    getUsers,
+    getUser,
+    getFaveJobs,
+    deleteFreelancerPost,
+    deleteEmployerPost
+  }
 )(Feed);
