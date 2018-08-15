@@ -1,29 +1,29 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addFreelancerPost } from "../../../../ducks/freelancerReducer";
-import { addEmployerPost } from "../../../../ducks/employerReducer";
-import { getUser } from "../../../../ducks/userReducer";
-import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
-import "./Post.css";
-import AddCircle from "@material-ui/icons/AddCircle.js";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addFreelancerPost } from '../../../../ducks/freelancerReducer';
+import { addEmployerPost } from '../../../../ducks/employerReducer';
+import { getUser } from '../../../../ducks/userReducer';
+import TextField from '@material-ui/core/TextField';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import './Post.css';
+import AddCircle from '@material-ui/icons/AddCircle.js';
 
-import Icon from "@material-ui/core/Icon";
+import Icon from '@material-ui/core/Icon';
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      body: "",
+      title: '',
+      body: '',
       specialty: 0,
       price: 0,
       open: false,
@@ -72,13 +72,13 @@ class Post extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          contentStyle={{ width: "50vw", maxWidth: "100%", height: "50vh" }}
+          contentStyle={{ width: '50vw', maxWidth: '100%', height: '50vh' }}
         >
           <DialogContent>
             {/* create freelancer posting */}
 
             {this.props.user[0] &&
-              this.props.user[0].role === "Freelancer" && (
+              this.props.user[0].role === 'Freelancer' && (
                 <div>
                   <div className="freelancer__posting">
                     <h2>Create Freelancer Posting</h2>
@@ -87,7 +87,7 @@ class Post extends Component {
                         <TextField
                           id="Title"
                           label="Title"
-                          className={"freelancer__post__title__input"}
+                          className={'freelancer__post__title__input'}
                           value={title}
                           onChange={e =>
                             this.setState({ title: e.target.value })
@@ -99,7 +99,7 @@ class Post extends Component {
                         <TextField
                           id="Description"
                           label="Description"
-                          className={"freelancer__post__body__input"}
+                          className={'freelancer__post__body__input'}
                           value={body}
                           onChange={e =>
                             this.setState({ body: e.target.value })
@@ -110,7 +110,7 @@ class Post extends Component {
                       <div className="freelancer__post__buttons">
                         <Button
                           style={{
-                            backgroundColor: "#FF4500"
+                            backgroundColor: '#FF4500'
                           }}
                           onClick={this.handleClose}
                         >
@@ -118,7 +118,7 @@ class Post extends Component {
                         </Button>
                         <Button
                           style={{
-                            backgroundColor: "#00FF7F"
+                            backgroundColor: '#00FF7F'
                           }}
                           onClick={() => {
                             this.handleClose,
@@ -142,7 +142,7 @@ class Post extends Component {
             {/* create employer posting */}
 
             {this.props.user[0] &&
-              this.props.user[0].role === "Employer" && (
+              this.props.user[0].role === 'Employer' && (
                 <div>
                   <div className="employer__posting">
                     <h2>Create Job Posting</h2>
@@ -151,7 +151,7 @@ class Post extends Component {
                         <TextField
                           id="Title"
                           label="Title"
-                          className={"employer__post__title__input"}
+                          className={'employer__post__title__input'}
                           value={title}
                           onChange={e =>
                             this.setState({ title: e.target.value })
@@ -163,7 +163,7 @@ class Post extends Component {
                         <TextField
                           id="Description"
                           label="Description"
-                          className={"employer__post__body__input"}
+                          className={'employer__post__body__input'}
                           value={body}
                           onChange={e =>
                             this.setState({ body: e.target.value })
@@ -172,17 +172,17 @@ class Post extends Component {
                         />
                       </div>
                       <div className="employer__post__specialty">
-                        <FormControl className={"form"}>
+                        <FormControl className={'form'}>
                           <NativeSelect
-                            className={"employer__post__specialty__input"}
+                            className={'employer__post__specialty__input'}
                             value={specialty}
                             name="specialty"
-                            onChange={this.handleSpecialtyChange("specialty")}
+                            onChange={this.handleSpecialtyChange('specialty')}
                           >
                             <option value="" disabled />
-                            <option value={"Select One"}> </option>
-                            <option value={"Developer"}> Developer </option>
-                            <option value={"Designer"}> Designer </option>
+                            <option value={'Select One'}> </option>
+                            <option value={'Developer'}> Developer </option>
+                            <option value={'Designer'}> Designer </option>
                           </NativeSelect>
                           <FormHelperText>Specialty</FormHelperText>
                         </FormControl>
@@ -192,7 +192,7 @@ class Post extends Component {
                         <TextField
                           id="Description"
                           label="Price $"
-                          className={"employer__post__price__input"}
+                          className={'employer__post__price__input'}
                           value={price}
                           onChange={e =>
                             this.setState({ price: e.target.value })
@@ -203,7 +203,7 @@ class Post extends Component {
                       <div className="employer__post__buttons">
                         <Button
                           style={{
-                            backgroundColor: "#FF4500"
+                            backgroundColor: '#FF4500'
                           }}
                           onClick={this.handleClose}
                         >
@@ -211,7 +211,7 @@ class Post extends Component {
                         </Button>
                         <Button
                           style={{
-                            backgroundColor: "#00FF7F"
+                            backgroundColor: '#00FF7F'
                           }}
                           onClick={() => {
                             this.handleClose,

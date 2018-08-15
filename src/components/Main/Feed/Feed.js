@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../ducks/employerReducer";
-import { getFreelancerPosts } from "../../../ducks/freelancerReducer";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getFaveJobs } from "../../../ducks/freelancerReducer";
-import "../Feed/Feed.css";
-import Post from "../Feed/Post/Post";
-import { Link } from "react-router-dom";
-import Moment from "react-moment";
-import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
-import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
-import Button from "@material-ui/core/Button";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployerPosts } from '../../../ducks/employerReducer';
+import { getFreelancerPosts } from '../../../ducks/freelancerReducer';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getFaveJobs } from '../../../ducks/freelancerReducer';
+import '../Feed/Feed.css';
+import Post from '../Feed/Post/Post';
+import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+import FreelancerPostModal from './Post/FreelancerPostModal/FreelancerPostModal';
+import EmployerPostModal from './Post/EmployerPostModal/EmployerPostModal';
+import Button from '@material-ui/core/Button';
 
 class Feed extends Component {
   constructor() {
@@ -79,7 +79,7 @@ class Feed extends Component {
       let postUser = users.map((user, i) => {
         if (post.user_id == user.id) {
           //if freelancer display this in return
-          if (user.role === "Freelancer") {
+          if (user.role === 'Freelancer') {
             return (
               <div key={index}>
                 <div className="feed__mergedFreelancerContainer">
@@ -87,16 +87,16 @@ class Feed extends Component {
                     <Link
                       className="feed__linkToUser"
                       to={`/main/profile/${user.id}`}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
                       <div className="feed__userImage">
                         <img
                           src={user.profile_image}
                           alt="person"
                           style={{
-                            width: "80px",
-                            height: "80px",
-                            borderRadius: "50%"
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%'
                           }}
                         />
                       </div>
@@ -133,16 +133,16 @@ class Feed extends Component {
                   <Link
                     className="feed__linkToUser"
                     to={`/main/profile/${user.id}`}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: 'none' }}
                   >
                     <div className="feed__employerImage">
                       <img
                         src={user.profile_image}
                         alt="person"
                         style={{
-                          width: "80px",
-                          height: "80px",
-                          borderRadius: "50%"
+                          width: '80px',
+                          height: '80px',
+                          borderRadius: '50%'
                         }}
                       />
                     </div>
@@ -198,7 +198,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.filterFreelancers()}
           >
@@ -207,7 +207,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.filterEmployers()}
           >
@@ -217,7 +217,7 @@ class Feed extends Component {
           <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
-              color: "white"
+              color: 'white'
             }}
             onClick={() => this.resetFeed()}
           >

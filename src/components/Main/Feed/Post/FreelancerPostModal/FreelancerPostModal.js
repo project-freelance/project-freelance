@@ -20,7 +20,7 @@ class FreelancerPostModal extends Component {
     };
   }
   componentDidMount() {
-    this.props.getFreelancer();
+    this.props.getFreelancer(this.props.userId);
   }
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -37,11 +37,7 @@ class FreelancerPostModal extends Component {
   };
 
   render() {
-    console.log(this.props.freelancer[0]);
-    console.log(this.props.user[0]);
-    console.log(this.props);
-    console.log(this.props.user[0].email);
-    console.log(matchUser);
+    // console.log(this.props.userId);
 
     const localUserId = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
@@ -119,34 +115,17 @@ class FreelancerPostModal extends Component {
                           View My Profile
                         </Button>
                       </Link>
-                      {/* <a
-                        href={`mailto:${this.props.user[0] &&
-                          this.props.user[0]
-                            .email}?subject=I'd like to offer you a position with... `}
-                      /> */}
-                      <div
-                        className="profile__contact__btn"
-                        id="profile__line__space"
-                      >
-                        <a
-                          href={`mailto:${this.props.user[0] &&
-                            this.props.user[0]
-                              .email}?subject=I'd like to offer you a position with... `}
-                        >
-                          <div className="profile__contact__text">
-                            Contact Me
-                          </div>
-                        </a>
-                      </div>
 
-                      {/* <Button
+                      <Button
+                        href={`mailto:${this.props.freelancer[0] &&
+                          this.props.freelancer[0]
+                            .email}?subject=I'd like to offer you a position with... `}
                         style={{
                           backgroundColor: '#008000'
                         }}
-                        // onClick={}
                       >
                         Email this Freelancer
-                      </Button> */}
+                      </Button>
                     </div>
                   </form>
                 </div>
