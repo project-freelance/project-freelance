@@ -8,15 +8,11 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import './Post.css';
-import AddCircle from '@material-ui/icons/AddCircle.js';
-
-import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
+import AddCircleOutline from '@material-ui/icons/AddCircleOutline.js';
 
 class Post extends Component {
   constructor(props) {
@@ -53,19 +49,31 @@ class Post extends Component {
 
   render() {
     const { title, body, specialty, price, time } = this.state;
+
     // console.log(this.state.time);
     // console.log(this.props.user[0] && this.props.user[0].id);
 
     return (
       <div>
         {/* <button onClick={() => console.log(this.state)} /> */}
-
         {/* Modal Posting Button */}
-        <button onClick={this.handleClickOpen}>
-          <AddCircle />
-          {/* <Post /> */}
-        </button>
+        {/* <button onClick={this.handleClickOpen}> */}
 
+        <div className="post__add__icon__div">
+          <Tooltip title="Add Post">
+            <AddCircleOutline
+              className="post__add__icon"
+              style={{
+                width: '60px',
+                height: '60px',
+                color: '#7fc4fd'
+              }}
+              onClick={this.handleClickOpen}
+            />
+          </Tooltip>
+        </div>
+        {/* <Post /> */}
+        {/* </button> */}
         {/* <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button> */}
         <Dialog
           className="post__job__modal"
@@ -234,27 +242,6 @@ class Post extends Component {
                 </div>
               )}
           </DialogContent>
-          {/* <DialogActions> */}
-          {/* <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button> */}
-          {/* <Button
-              onClick={() => {
-                this.handleClose,
-                  this.props.addEmployerPost(
-                    title,
-                    body,
-                    specialty,
-                    price,
-                    this.props.user[0] && this.props.user[0].id
-                  );
-              }}
-              type="submit"
-              color="primary"
-            >
-              Submit
-            </Button> */}
-          {/* </DialogActions> */}
         </Dialog>
       </div>
     );
