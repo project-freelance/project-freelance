@@ -293,12 +293,12 @@ class Feed extends Component {
               <MenuItem
                 onClick={(this.handleClose, () => this.filterFreelancers())}
               >
-                Employers Only
+                Employers Post Only
               </MenuItem>
               <MenuItem
                 onClick={(this.handleClose, () => this.filterEmployers())}
               >
-                Freelancer Only
+                Freelancers Post Only
               </MenuItem>
               <MenuItem onClick={(this.handleClose, () => this.resetFeed())}>
                 News Feed
