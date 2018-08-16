@@ -22,7 +22,6 @@ import FilterList from '@material-ui/icons/FilterList.js';
 import Tooltip from '@material-ui/core/Tooltip';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-//hello
 
 class Feed extends Component {
   constructor() {
