@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getEmployerPosts } from "../../../../ducks/employerReducer";
+import {
+  getEmployerPosts,
+  getAppliedJobs
+} from "../../../../ducks/employerReducer";
 import { getUser, getUsers } from "../../../../ducks/userReducer";
 import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
@@ -15,14 +18,18 @@ class AppliedJobs extends Component {
       this.props.getUsers(),
       this.props.getFaveJobs &&
         this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
+      // this.props.getAppliedJobs()
+      // this.props.getAppliedJobs(32).then(result => console.log(result))
     ]);
 
     this.setState({ users: values[1].value.data });
   }
 
   render() {
+    console.log(this.props);
     let { employerPosts, users } = this.props;
 
+    //filters fave jobs for logged in user and puts employer_post_id's in an array
     let matchJob = this.props.favJobs
       .filter(
         person =>
@@ -37,6 +44,18 @@ class AppliedJobs extends Component {
           person.user_id === (this.props.user[0] && this.props.user[0].id)
       )
       .map(item => item.id);
+
+    // console.log(matchJobEmployer);
+
+    // this.props.getAppliedJobs(33).then(result => console.log(result));
+    // this.props
+    //   .getAppliedJobs(34)
+    //   .then(result => console.log(result.value.data));
+
+    // this.props.getFaveJobs([8]);
+
+    // let getFreelancersWhoAppliedToJob =
+    // this.props.favJobs
 
     let appliedJobs = employerPosts.map((post, index) => {
       //matching post to user who posted to display user data
@@ -104,7 +123,26 @@ class AppliedJobs extends Component {
       });
 
       let postUser2 = users.map((user, i) => {
+        // console.log(this.props.favJobs && this.props.favJobs);
+        // console.log(this.props.appliedJobs && this.props.appliedJobs);
+
+        // console.log(matchJob);
+        //console.log(this.props.getAppliedJobs(post.id));
+
         if (post.user_id === user.id && matchJobEmployer.includes(post.id)) {
+          // () =>
+
+          let holdApplicants = [];
+          this.props
+            .getAppliedJobs(post.id)
+            // .then(result =>
+            //     result.value.data[0].freelancer_id &&
+            //       result.value.data[0].freelancer_id
+            //   )
+            .then(result => console.log(result.value.data));
+
+          console.log(holdApplicants);
+          console.log(users[i].id);
           return (
             <div key={i} className="appliedJobs__employerListingContainer">
               <div className="appliedJobs__employerData">
@@ -152,9 +190,8 @@ class AppliedJobs extends Component {
               </div>
               <div className="appliedJobs__employerModalButton">
                 <EmployerPostModal userId={post.user_id} postId={post.id} />
-
                 {matchJob.includes(post.id) && (
-                  <div className="feed__applied">
+                  <div className="appliedJobs__applied">
                     <p>APPLIED</p>
                   </div>
                 )}
@@ -191,9 +228,10 @@ function mapStateToProps(state) {
     user: state.userReducer.user,
     users: state.userReducer.users,
     favJobs: state.freelancerReducer.favJobs
+    // appliedJobs: state.employerReducer.appliedJobs
   };
 }
 export default connect(
   mapStateToProps,
-  { getEmployerPosts, getUsers, getUser, getFaveJobs }
+  { getEmployerPosts, getUsers, getUser, getFaveJobs, getAppliedJobs }
 )(AppliedJobs);
