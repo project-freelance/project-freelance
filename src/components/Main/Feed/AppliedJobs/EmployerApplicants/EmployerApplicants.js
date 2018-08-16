@@ -10,14 +10,20 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../../Post/EmployerPostModal/EmployerPostModal";
 import "./EmployerApplicants.css";
+import axios from "axios";
 
 class EmployerApplicants extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      applicants: []
+    };
   }
   componentDidMount() {
-    //   axios.get(`/api/getappliedfreelancers/${this.props.user_id}`).then((res)=> console.log({res}))
+    axios
+      .get(`/api/employer/appliedJobs/freelancers/${this.props.user_id}`)
+      .then(res => console.log({ res }));
+    // .then(response => this.setState({ applicants: response.data[0] }));
   }
   render() {
     console.log(this.props);
