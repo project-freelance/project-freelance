@@ -2,6 +2,11 @@ a {
   text-decoration: none;
   color: black;
 }
+.freelancersList__totalWrapper {
+  // background-color: red;
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .freelancersList__wrapper {
   display: flex;
