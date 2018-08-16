@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployer } from "../../../ducks/employerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import { withRouter } from "react-router-dom";
-import Moment from "react-moment";
-import AvgRating from "./Reviews/AvgRating/AvgRating";
-import Reviews from "./Reviews/Reviews";
-import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
-import "./EmployerProfile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployer } from '../../../ducks/employerReducer';
+import AddReview from './Reviews/AddReview/AddReview';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
+import { withRouter } from 'react-router-dom';
+import Moment from 'react-moment';
+import AvgRating from './Reviews/AvgRating/AvgRating';
+import Reviews from './Reviews/Reviews';
+import ReviewModal from './Reviews/ReviewModal/ReviewModal';
+import Email from '@material-ui/icons/Email.js';
+import Button from '@material-ui/core/Button';
+import './EmployerProfile.css';
 class EmployerProfile extends Component {
   constructor() {
     super();
@@ -53,7 +55,7 @@ class EmployerProfile extends Component {
             <div className="employerProfile__company">{`${employer[0] &&
               employer[0].company}`}</div>
             <div id="employerProfile__line__space">
-              {`${employer[0] && employer[0].city}`},{" "}
+              {`${employer[0] && employer[0].city}`},{' '}
               {`${employer[0] && employer[0].state}`}
             </div>
             {this.props.rating && this.props.rating > 0 ? (
@@ -83,8 +85,8 @@ class EmployerProfile extends Component {
               <div className="employerProfile__mgr__text">
                 <div>Point of Contact:</div>
                 <div>
-                  {`${employer[0] && employer[0].first_name}`}{" "}
-                  {`${employer[0] && employer[0].last_name}`},{" "}
+                  {`${employer[0] && employer[0].first_name}`}{' '}
+                  {`${employer[0] && employer[0].last_name}`},{' '}
                   {`${employer[0] && employer[0].position}`}
                 </div>
               </div>
@@ -103,13 +105,13 @@ class EmployerProfile extends Component {
               className="employerProfile__contact__btn"
               id="profile__line__space"
             >
-              <a
+              <Button
                 href={`mailto:${employer[0] &&
                   employer[0]
                     .email}?subject=I'd like to offer you a position with... `}
               >
-                <div className="employerProfile__contact__text">Contact Me</div>
-              </a>
+                Contact Me<Email />
+              </Button>
             </div>
             {/* <AddReview {...employer} loggedInUser={this.props.user} /> */}
             <div>
@@ -132,7 +134,7 @@ class EmployerProfile extends Component {
                     />
                     <div className="employerProfile__review__textBlock">
                       <div>
-                        {reviewerObj && reviewerObj.first_name}{" "}
+                        {reviewerObj && reviewerObj.first_name}{' '}
                         {reviewerObj && reviewerObj.last_name}
                       </div>
                       {this.props.reviews[0] && this.props.reviews[0].review}
