@@ -18,7 +18,10 @@ import FreelancerPostModal from './Post/FreelancerPostModal/FreelancerPostModal'
 import EmployerPostModal from './Post/EmployerPostModal/EmployerPostModal';
 import Button from '@material-ui/core/Button';
 import DeleteForever from '@material-ui/icons/DeleteForever.js';
+import FilterList from '@material-ui/icons/FilterList.js';
 import Tooltip from '@material-ui/core/Tooltip';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 //hello
 
 class Feed extends Component {
@@ -26,7 +29,8 @@ class Feed extends Component {
     super();
     this.state = {
       showFreelancers: true,
-      showEmployers: true
+      showEmployers: true,
+      anchorEl: null
     };
     this.filterFreelancers = this.filterFreelancers.bind(this);
     this.filterEmployers = this.filterEmployers.bind(this);
@@ -44,6 +48,13 @@ class Feed extends Component {
     this.props.getFaveJobs &&
       this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
   }
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   filterFreelancers() {
     this.setState({ showFreelancers: false, showEmployers: true });
@@ -57,6 +68,7 @@ class Feed extends Component {
 
   render() {
     //getting logged in user's saved jobs
+    const { anchorEl } = this.state;
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
@@ -261,7 +273,39 @@ class Feed extends Component {
     return (
       <div className="feed__container">
         <div className="feed__topNav">
-          <Button
+          <div className="feed__filterMenu">
+            <Button
+              aria-owns={anchorEl ? 'filter-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+              style={{
+                color: 'white'
+              }}
+            >
+              Filter<FilterList />
+            </Button>
+            <Menu
+              id="filter-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleClose}
+            >
+              <MenuItem
+                onClick={(this.handleClose, () => this.filterFreelancers())}
+              >
+                Employers Only
+              </MenuItem>
+              <MenuItem
+                onClick={(this.handleClose, () => this.filterEmployers())}
+              >
+                Freelancer Only
+              </MenuItem>
+              <MenuItem onClick={(this.handleClose, () => this.resetFeed())}>
+                News Feed
+              </MenuItem>
+            </Menu>
+          </div>
+          {/* <Button
             style={{
               // backgroundColor: "rgb(127, 196, 253)"
               color: 'white'
@@ -288,7 +332,7 @@ class Feed extends Component {
             onClick={() => this.resetFeed()}
           >
             Reset Feed
-          </Button>
+          </Button> */}
         </div>
         <div>
           <h1>In the Feed...</h1>
