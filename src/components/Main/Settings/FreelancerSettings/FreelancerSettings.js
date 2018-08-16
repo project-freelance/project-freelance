@@ -52,9 +52,7 @@ class FreelancerSettings extends Component {
     };
   }
   componentDidMount() {
-    // this.props
-    //   .getPortfolio(this.props.user[0].id)
-    //   .then(console.log(this.props));
+    this.props.getFreelancer(this.props.user[0].id);
   }
   handleChange = name => event => {
     this.setState({
