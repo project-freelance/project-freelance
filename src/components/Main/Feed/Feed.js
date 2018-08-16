@@ -17,6 +17,9 @@ import Moment from 'react-moment';
 import FreelancerPostModal from './Post/FreelancerPostModal/FreelancerPostModal';
 import EmployerPostModal from './Post/EmployerPostModal/EmployerPostModal';
 import Button from '@material-ui/core/Button';
+import DeleteForever from '@material-ui/icons/DeleteForever.js';
+import Tooltip from '@material-ui/core/Tooltip';
+//hello
 
 class Feed extends Component {
   constructor() {
@@ -53,7 +56,6 @@ class Feed extends Component {
   }
 
   render() {
-    console.log(this.props);
     //getting logged in user's saved jobs
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
@@ -91,6 +93,9 @@ class Feed extends Component {
               <div key={index}>
                 <div className="feed__mergedFreelancerContainer">
                   <div className="feed__freelancerUser">
+                    <div className="feed__is__freelancer">
+                      <h3>Freelancer</h3>
+                    </div>
                     <Link
                       className="feed__linkToUser"
                       to={`/main/profile/${user.id}`}
@@ -113,32 +118,46 @@ class Feed extends Component {
                       </div>
                     </Link>
                   </div>
-                  {post.user_id === this.props.user[0].id ? (
-                    <button
-                      onClick={() =>
-                        this.props.deleteFreelancerPost(post.id).then(() => {
-                          this.props.getFreelancerPosts();
-                        })
-                      }
-                    >
-                      Delete Post
-                    </button>
-                  ) : null}
 
                   <div className="feed__freelancerPosting">
-                    <h3>Freelancer Posting</h3>
-                    <p>Post Title: {post.title}</p>
-                    <p>Post Body: {post.body}</p>
-                    <div>
-                      <Moment fromNow>{post.moment}</Moment>
+                    <div className="feed__freelancerPosting__header">
+                      <h3>{post.title}</h3>
+                    </div>
+                    <div className="feed__freelancerPosting__body">
+                      <p>{post.body}</p>
                     </div>
                   </div>
-                  <div className="feed__freelancerModalButton">
+                  <div className="feed__freelancerPosting__rightdiv">
                     <div className="feed__freelancerModalButton">
                       <FreelancerPostModal
                         userId={post.user_id}
                         postId={post.id}
                       />
+                      <div className="">
+                        {post.user_id === this.props.user[0].id ? (
+                          <Button
+                            style={{
+                              width: '20px',
+                              height: '20px',
+                              color: '#7fc4fd'
+                            }}
+                            onClick={() =>
+                              this.props
+                                .deleteFreelancerPost(post.id)
+                                .then(() => {
+                                  this.props.getFreelancerPosts();
+                                })
+                            }
+                          >
+                            <Tooltip title="Delete Post">
+                              <DeleteForever />
+                            </Tooltip>
+                          </Button>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="feed__freelancerPosting__moment">
+                      <Moment fromNow>{post.moment}</Moment>
                     </div>
                   </div>
                 </div>
@@ -149,67 +168,84 @@ class Feed extends Component {
             return (
               <div key={i} className="feed__mergedEmployerContainer">
                 <div className="feed__employerData">
+                  <div className="feed__is__employer">
+                    <h3>Employer</h3>
+                  </div>
                   <Link
                     className="feed__linkToUser"
                     to={`/main/profile/${user.id}`}
                     style={{ textDecoration: 'none' }}
                   >
                     <div className="feed__employerImage">
-                      <img
-                        src={user.profile_image}
-                        alt="person"
-                        style={{
-                          width: '80px',
-                          height: '80px',
-                          borderRadius: '50%'
-                        }}
-                      />
-                    </div>
-                    <div className="feed__employerName">
-                      <p>{`${user.first_name} ${user.last_name}`}</p>
-                      <p>{user.specialty}</p>
+                      <Tooltip title="Click to see Profile">
+                        <img
+                          src={user.profile_image}
+                          alt="person"
+                          style={{
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%'
+                          }}
+                        />
+                      </Tooltip>
+                      <div className="feed__employerName">
+                        <p>{`${user.first_name} ${user.last_name}`}</p>
+                        <p>{user.specialty}</p>
+                      </div>
                     </div>
                   </Link>
                 </div>
-                {post.user_id === this.props.user[0].id ? (
-                  <button
-                    onClick={() =>
-                      this.props.deleteEmployerPost(post.id).then(() => {
-                        this.props.getEmployerPosts();
-                      })
-                    }
-                  >
-                    Delete Post
-                  </button>
-                ) : null}
 
                 <div className="feed__employerPosting">
-                  <h3>Employer Posting</h3>
-                  <p>
-                    Post Title:
-                    {post.title}
-                  </p>
-                  <p>
-                    Job Title:
-                    {post.specialty}
-                  </p>
-                  <p>
-                    Post Body:
-                    {post.body}
-                  </p>
-                  <p>Pay: {post.price}</p>
-                  <div>
-                    <Moment fromNow>{post.moment}</Moment>
+                  <div className="feed__employerPosting__header">
+                    <h3>
+                      {/* Employer Posting: &nbsp; */}
+                      {post.title}
+                    </h3>
+                  </div>
+                  <div className="feed__employerPosting__body">
+                    <p>{post.body}</p>
                   </div>
                 </div>
-                <div className="feed__employerModalButton">
-                  <EmployerPostModal userId={post.user_id} postId={post.id} />
-
-                  {matchJob.includes(post.id) && (
-                    <div className="feed__applied">
-                      <p>APPLIED</p>
-                    </div>
-                  )}
+                <div className="feed__employerPosting__rightdiv">
+                  <div className="feed__employerPosting__employerModalButton">
+                    <EmployerPostModal userId={post.user_id} postId={post.id} />
+                    {post.user_id === this.props.user[0].id ? (
+                      <Button
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          color: '#7fc4fd'
+                        }}
+                        onClick={() =>
+                          this.props.deleteEmployerPost(post.id).then(() => {
+                            this.props.getEmployerPosts();
+                          })
+                        }
+                      >
+                        <Tooltip title="Delete Post">
+                          <DeleteForever />
+                        </Tooltip>
+                      </Button>
+                    ) : null}
+                  </div>
+                  <div className="feed__employerModalButton">
+                    {matchJob.includes(post.id) && (
+                      <div className="feed__applied">
+                        <p>APPLIED</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="feed__employerPosting__rightdiv__specialty__price">
+                    <p>
+                      Looking For: &nbsp;
+                      {post.specialty}
+                    </p>
+                    <p>Pay: ${post.price}</p>
+                  </div>
+                  <div className="feed__employerPosting__moment">
+                    <Moment fromNow>{post.moment}</Moment>
+                  </div>
                 </div>
               </div>
             );

@@ -35,3 +35,17 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.post__add__icon__div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 80%;
+  position: fixed;
+  bottom: 10px;
+  right: 100px;
+}
+.post__add__icon {
+  display: flex;
+  width: 25px;
+  height: 25px;
+}
