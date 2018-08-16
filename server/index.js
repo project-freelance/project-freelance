@@ -124,6 +124,12 @@ app.put("/api/employerPost/:id", employerCtrl.updateEmployerPost);
 
 app.get("/api/employer/appliedJobs/:id", employerCtrl.getAppliedJobs);
 
+// gets all Freelancers who applied to an employers job post id
+app.get(
+  "/api/employer/appliedJobs/freelancers/:id",
+  employerCtrl.getEmployerJobFreelancers
+);
+
 // freelancer
 app.post("/api/freelancer/:id", freelancerCtrl.addFreelancer);
 app.get("/api/freelancers", freelancerCtrl.getFreelancers);
