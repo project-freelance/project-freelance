@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import Portfolio from "../Portfolio";
-import AddReview from "../AddReview/AddReview";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import "./ReviewModal.css";
+import AddReview from '../AddReview/AddReview';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import './ReviewModal.css';
 // import "./PortfolioModal.css";
 
 export default class ReviewModal extends Component {
@@ -47,10 +47,10 @@ export default class ReviewModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentStyle={{
-            width: "70vh",
-            maxWidth: "100%",
-            height: "70vw",
-            padding: "30px"
+            width: '50vh',
+            maxWidth: '100%',
+            height: '50vw',
+            padding: '30px'
           }}
         >
           <DialogContent>
