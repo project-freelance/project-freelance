@@ -8,7 +8,6 @@ import {
 } from "../../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import EmployerPostModal from "../../Post/EmployerPostModal/EmployerPostModal";
 import "./EmployerApplicants.css";
 import axios from "axios";
 
@@ -21,20 +20,43 @@ class EmployerApplicants extends Component {
   }
   componentDidMount() {
     axios
-      .get(`/api/employer/appliedJobs/freelancers/${this.props.user_id}`)
-      .then(res => console.log({ res }));
-    // .then(response => this.setState({ applicants: response.data[0] }));
+      .get(`/api/employer/appliedJobs/freelancers/${this.props.post.id}`)
+      .then(response => this.setState({ applicants: response.data }));
   }
   render() {
-    console.log(this.props);
-    console.log(this.props.post.user_id);
+    console.log(this.state);
+
+    let applicantList = this.state.applicants.map((applicant, i) => {
+      return (
+        <div key={i}>
+          {" "}
+          <Link to={`/main/profile/${applicant.freelancer_id}`}>
+            <p>
+              {applicant.first_name}
+              {"  "} {applicant.last_name}
+            </p>
+
+            <img
+              src={applicant.profile_image}
+              style={{ height: "50px", width: "auto" }}
+            />
+          </Link>
+          {console.log(applicant)}
+        </div>
+      );
+    });
+
     return (
-      <div className="appliedJobs__container">
-        <h1>{this.props.post.title}</h1>
-        <p>{this.props.post.body}</p>
-        <p> {this.props.post.specialty}</p>
-        <p> {this.props.post.moment}</p>
-        <p> {this.props.post.user_id}</p>
+      <div className="employerApplicants__employerListingContainer">
+        <div className="employerApplicants__employerPosting">
+          <h1>{this.props.post.title}</h1>
+          <p>{this.props.post.body}</p>
+          <p> {this.props.post.specialty}</p>
+          <Moment fromNow>{this.props.post.moment}</Moment>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            {applicantList}
+          </div>
+        </div>
       </div>
     );
   }
@@ -42,11 +64,7 @@ class EmployerApplicants extends Component {
 
 function mapStateToProps(state) {
   return {
-    // employerPosts: state.employerReducer.employerPosts,
-    // user: state.userReducer.user,
-    // users: state.userReducer.users,
-    // favJobs: state.freelancerReducer.favJobs,
-    // freelancers: state.freelancerReducer.freelancers
+    user: state.userReducer.user
   };
 }
 export default connect(
