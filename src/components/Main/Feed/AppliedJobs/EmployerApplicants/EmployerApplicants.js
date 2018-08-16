@@ -24,13 +24,14 @@ class EmployerApplicants extends Component {
       .then(response => this.setState({ applicants: response.data }));
   }
   render() {
-    console.log(this.state);
-
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
         <div key={i}>
           {" "}
-          <Link to={`/main/profile/${applicant.freelancer_id}`}>
+          <Link
+            to={`/main/profile/${applicant.freelancer_id}`}
+            style={{ textDecoration: "none" }}
+          >
             <p>
               {applicant.first_name}
               {"  "} {applicant.last_name}
@@ -41,7 +42,6 @@ class EmployerApplicants extends Component {
               style={{ height: "50px", width: "auto" }}
             />
           </Link>
-          {console.log(applicant)}
         </div>
       );
     });
@@ -53,6 +53,7 @@ class EmployerApplicants extends Component {
           <p>{this.props.post.body}</p>
           <p> {this.props.post.specialty}</p>
           <Moment fromNow>{this.props.post.moment}</Moment>
+          <h2> My Job Applicants: </h2>
           <div style={{ display: "flex", flexDirection: "row" }}>
             {applicantList}
           </div>
