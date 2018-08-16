@@ -128,6 +128,7 @@ app.get("/api/employer/appliedJobs/:id", employerCtrl.getAppliedJobs);
 app.post("/api/freelancer/:id", freelancerCtrl.addFreelancer);
 app.get("/api/freelancers", freelancerCtrl.getFreelancers);
 app.get("/api/freelancer/:id", freelancerCtrl.getFreelancer);
+app.get("/api/all_freelancers", freelancerCtrl.getAllFreelancerInfo);
 app.put("/api/freelancer/:id", freelancerCtrl.updateFreelancer);
 
 app.post("/api/freelancerPost", freelancerCtrl.addFreelancerPost);

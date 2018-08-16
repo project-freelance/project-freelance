@@ -4,6 +4,7 @@ import axios from "axios";
 const ADD_FREELANCER = "ADD_FREELANCER";
 const GET_FREELANCER = "GET_FREELANCER";
 const GET_FREELANCERS = "GET_FREELANCERS";
+const GET_ALL_FREELANCER_INFO = "GET_ALL_FREELANCER_INFO";
 const UPDATE_FREELANCER = "UPDATE_FREELANCER";
 
 const ADD_FREELANCER_POST = "ADD_FREELANCER_POST";
@@ -44,6 +45,12 @@ export function getFreelancers() {
   return {
     type: GET_FREELANCERS,
     payload: axios.get("/api/freelancers")
+  };
+}
+export function getAllFreelancerInfo() {
+  return {
+    type: GET_ALL_FREELANCER_INFO,
+    payload: axios.get("/api/all_freelancers")
   };
 }
 
@@ -128,6 +135,7 @@ export function deleteFaveJob(empid, freeid) {
 const initialState = {
   freelancer: [],
   freelancers: [],
+  allFreelancers: [],
   favJob: [],
   favJobs: [],
   freelancerPosts: [],
@@ -173,7 +181,23 @@ export default function freelancerReducer(state = initialState, action) {
         isLoading: false,
         error: action.payload
       };
-
+    case `${GET_ALL_FREELANCER_INFO}_PENDING`:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case `${GET_ALL_FREELANCER_INFO}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        allFreelancers: action.payload.data
+      };
+    case `${GET_ALL_FREELANCER_INFO}_REJECTED`:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     case `${ADD_FREELANCER}_PENDING`:
       return {
         ...state,
