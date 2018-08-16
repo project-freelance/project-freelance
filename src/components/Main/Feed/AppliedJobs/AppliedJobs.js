@@ -5,7 +5,10 @@ import {
   getAppliedJobs
 } from "../../../../ducks/employerReducer";
 import { getUser, getUsers } from "../../../../ducks/userReducer";
-import { getFaveJobs } from "../../../../ducks/freelancerReducer";
+import {
+  getFaveJobs,
+  getFreelancers
+} from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
@@ -17,15 +20,15 @@ class AppliedJobs extends Component {
       this.props.getEmployerPosts(),
       this.props.getUsers(),
       this.props.getFaveJobs &&
-        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
-      // this.props.getAppliedJobs()
-      // this.props.getAppliedJobs(32).then(result => console.log(result))
+        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id),
+      this.props.getFreelancers()
     ]);
 
     this.setState({ users: values[1].value.data });
   }
 
   render() {
+    console.log(this.state);
     console.log(this.props);
     let { employerPosts, users } = this.props;
 
@@ -45,20 +48,13 @@ class AppliedJobs extends Component {
       )
       .map(item => item.id);
 
-    // console.log(matchJobEmployer);
-
-    // this.props.getAppliedJobs(33).then(result => console.log(result));
-    // this.props
-    //   .getAppliedJobs(34)
-    //   .then(result => console.log(result.value.data));
-
-    // this.props.getFaveJobs([8]);
-
-    // let getFreelancersWhoAppliedToJob =
-    // this.props.favJobs
-
-    let appliedJobs = employerPosts.map((post, index) => {
+    let appliedJobsFinder = employerPosts.map((post, index) => {
       //matching post to user who posted to display user data
+
+      // this.props
+      //   .getAppliedJobs(post.id)
+      //   .then(result => console.log(result.value.data));
+
       let postUser = users.map((user, i) => {
         if (post.user_id === user.id && matchJob.includes(post.id)) {
           return (
@@ -123,26 +119,11 @@ class AppliedJobs extends Component {
       });
 
       let postUser2 = users.map((user, i) => {
-        // console.log(this.props.favJobs && this.props.favJobs);
-        // console.log(this.props.appliedJobs && this.props.appliedJobs);
-
-        // console.log(matchJob);
-        //console.log(this.props.getAppliedJobs(post.id));
-
         if (post.user_id === user.id && matchJobEmployer.includes(post.id)) {
-          // () =>
+          // this.props
+          //   .getAppliedJobs(post.id)
+          //   .then(result => console.log(result.value.data));
 
-          let holdApplicants = [];
-          this.props
-            .getAppliedJobs(post.id)
-            // .then(result =>
-            //     result.value.data[0].freelancer_id &&
-            //       result.value.data[0].freelancer_id
-            //   )
-            .then(result => console.log(result.value.data));
-
-          console.log(holdApplicants);
-          console.log(users[i].id);
           return (
             <div key={i} className="appliedJobs__employerListingContainer">
               <div className="appliedJobs__employerData">
@@ -216,7 +197,7 @@ class AppliedJobs extends Component {
     return (
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
-        <div>{appliedJobs}</div>
+        <div>{appliedJobsFinder}</div>
       </div>
     );
   }
@@ -227,11 +208,19 @@ function mapStateToProps(state) {
     employerPosts: state.employerReducer.employerPosts,
     user: state.userReducer.user,
     users: state.userReducer.users,
-    favJobs: state.freelancerReducer.favJobs
-    // appliedJobs: state.employerReducer.appliedJobs
+    favJobs: state.freelancerReducer.favJobs,
+    //appliedJobs: state.employerReducer.appliedJobs,
+    freelancers: state.freelancerReducer.freelancers
   };
 }
 export default connect(
   mapStateToProps,
-  { getEmployerPosts, getUsers, getUser, getFaveJobs, getAppliedJobs }
+  {
+    getEmployerPosts,
+    getUsers,
+    getUser,
+    getFaveJobs,
+    getAppliedJobs,
+    getFreelancers
+  }
 )(AppliedJobs);
