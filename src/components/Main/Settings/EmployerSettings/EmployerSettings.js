@@ -38,20 +38,16 @@ class EmployerSettings extends Component {
   }
   componentDidMount() {
     this.props.getEmployer(this.props.user[0].id);
-    console.log(this.state);
-    console.log(this.props);
   }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
-    console.log(this.state);
   };
   handleExperienceChange = experience => event => {
     this.setState({
       [experience]: event.target.value
     });
-    console.log(this.state);
   };
 
   onPictureUpload = s3 => {
@@ -72,7 +68,6 @@ class EmployerSettings extends Component {
 
   // progress bar
   progress = percent => {
-    console.log(percent);
     const { completed } = this.state;
     if (completed === 100) {
       window.setTimeout(() => this.setState({ completed: 0 }), 1000);
@@ -102,6 +97,7 @@ class EmployerSettings extends Component {
     return (
       <div className="settings__container">
         <h1> Employer</h1>
+
         <div className="settings__profile">
           <img
             className="settings__profileImage"
@@ -112,11 +108,13 @@ class EmployerSettings extends Component {
             {first_name}
             {"  "} {last_name}
           </h2>
-          <img
-            className="settings__profileImage"
-            src={company_logo}
-            alt="User Profile Image"
-          />
+          <div>
+            <img
+              className="settings__companyImage"
+              src={company_logo}
+              alt="User Profile Image"
+            />
+          </div>
           <ReactS3Uploader
             signingUrl="/s3/sign"
             signingUrlMethod="GET"
@@ -255,8 +253,6 @@ class EmployerSettings extends Component {
             server={process.env.REACT_APP_DEV_HOST}
             autoUpload
           />
-
-          <LinearProgress variant="determinate" value={this.state.completed} />
           <Button
             variant="outlined"
             color="primary"
@@ -265,8 +261,14 @@ class EmployerSettings extends Component {
           >
             Save
           </Button>
+          <div>
+            <LinearProgress
+              variant="determinate"
+              value={this.state.completed}
+            />
+          </div>
         </div>
-        <button onClick={() => console.log(this.props)} />
+        {/* <button onClick={() => console.log(this.props)} /> */}
       </div>
     );
   }
