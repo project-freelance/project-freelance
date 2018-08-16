@@ -11,7 +11,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import './Post.css';
-import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline.js';
 
 class Post extends Component {
@@ -60,21 +60,17 @@ class Post extends Component {
         {/* <button onClick={this.handleClickOpen}> */}
 
         <div className="post__add__icon__div">
-          <IconButton
-            touch={true}
-            tooltip="Create A Post"
-            tooltipPosition="top-center"
-          >
+          <Tooltip title="Add Post">
             <AddCircleOutline
               className="post__add__icon"
               style={{
-                width: '50px',
-                height: '50px',
-                color: '#EE7600'
+                width: '60px',
+                height: '60px',
+                color: '#7fc4fd'
               }}
               onClick={this.handleClickOpen}
             />
-          </IconButton>
+          </Tooltip>
         </div>
         {/* <Post /> */}
         {/* </button> */}

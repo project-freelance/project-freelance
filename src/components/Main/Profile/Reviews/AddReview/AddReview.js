@@ -1,17 +1,19 @@
-import React, { Component } from "react";
-import StarRatings from "react-star-ratings";
-import { connect } from "react-redux";
-import { addReview, getReviews } from "../../../../../ducks/reviewReducer";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import StarRatings from 'react-star-ratings';
+import { connect } from 'react-redux';
+import { addReview, getReviews } from '../../../../../ducks/reviewReducer';
+import { withRouter } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class AddReview extends Component {
   constructor() {
     super();
     this.state = {
-      userInput: "",
+      userInput: '',
       time: new Date(),
       rating: 0,
-      open: true
+      open: false
     };
   }
 
@@ -50,12 +52,22 @@ class AddReview extends Component {
     return (
       <div>
         <div>
-          Leave Review of{" "}
+          Leave Review of{' '}
           {this.props.beingReviewed && this.props.beingReviewed.first_name}
         </div>
-        <input
+        {/* <input
           onChange={e => this.changeHandler(e)}
           placeholder="Enter review here"
+        /> */}
+        <TextField
+          multiline={true}
+          rows={1}
+          rowsMax={1}
+          fullWidth
+          margin="normal"
+          placeholder="Type review here"
+          helperText="Full width!"
+          onChange={e => this.changeHandler(e)}
         />
         <StarRatings
           rating={this.state.rating}
@@ -77,22 +89,24 @@ class AddReview extends Component {
             )
           }
         > */}
-        <button
+        <br />
+        <Button
+          variant="contained"
           onClick={() => {
-            // this.handleClose,
-            this.submitHandler(
-              this.state.userInput,
-              this.props.beingReviewed && this.props.beingReviewed.user_id,
-              this.props.loggedInUser && this.props.loggedInUser.id,
-              this.state.time,
-              this.state.rating
-            );
+            this.handleClose,
+              this.submitHandler(
+                this.state.userInput,
+                this.props.beingReviewed && this.props.beingReviewed.user_id,
+                this.props.loggedInUser && this.props.loggedInUser.id,
+                this.state.time,
+                this.state.rating
+              );
           }}
           type="submit"
           // onClick={() => this.props.onClose}
         >
-          Submit Review
-        </button>
+          Submit
+        </Button>
       </div>
     );
   }

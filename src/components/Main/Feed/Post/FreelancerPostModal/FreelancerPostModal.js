@@ -13,6 +13,7 @@ import Moment from 'react-moment';
 import '../FreelancerPostModal/FreelancerPostModal.css';
 import { Link } from 'react-router-dom';
 import OpenWith from '@material-ui/icons/OpenWith.js';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class FreelancerPostModal extends Component {
   constructor(props) {
@@ -50,18 +51,17 @@ class FreelancerPostModal extends Component {
     return (
       <div>
         {/* Modal Open Button */}
-
         <Button onClick={this.handleClickOpen}>
-          Expand
-          <OpenWith />
+          <Tooltip title="More Info">
+            <OpenWith />
+          </Tooltip>
         </Button>
-
         <Dialog
           className="freelancerPostModal__container"
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          contentStyle={{
+          contentstyle={{
             width: '70vh',
             maxWidth: '100%',
             height: '70vw',
@@ -115,7 +115,7 @@ class FreelancerPostModal extends Component {
                       >
                         <Button
                           style={{
-                            backgroundColor: '#0000FF'
+                            backgroundColor: '#7fc4fd'
                           }}
                         >
                           View My Profile
