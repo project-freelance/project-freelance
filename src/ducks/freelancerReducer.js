@@ -152,6 +152,7 @@ export default function freelancerReducer(state = initialState, action) {
         isLoading: true
       };
     case `${GET_FREELANCER}_FULFILLED`:
+      console.log(action.payload);
       return {
         ...state,
         isLoading: false,

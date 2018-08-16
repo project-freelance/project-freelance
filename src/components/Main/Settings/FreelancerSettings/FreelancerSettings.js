@@ -33,12 +33,12 @@ class FreelancerSettings extends Component {
       email: this.props.user[0].email,
       profile_image: this.props.user[0].profile_image,
 
-      experience: this.props.freelancer[0].experience,
-      city: this.props.freelancer[0].city,
-      state: this.props.freelancer[0].state,
-      bio: this.props.freelancer[0].bio,
-      heading: this.props.freelancer[0].heading,
-      skills: this.props.freelancer[0].skills,
+      experience: "loading...",
+      city: "loading...",
+      state: "loading...",
+      bio: "loading...",
+      heading: "loading...",
+      skills: "loading...",
 
       image_url1: this.props.portfolio[0].image_url1,
       image_url2: this.props.portfolio[0].image_url2,
@@ -52,19 +52,28 @@ class FreelancerSettings extends Component {
     };
   }
   componentDidMount() {
-    this.props.getFreelancer(this.props.user[0].id);
+    console.log(this.props.freelancer);
+    this.props.getFreelancer(this.props.user[0].id).then(() =>
+      this.setState({
+        experience: this.props.freelancer[0].experience,
+        city: this.props.freelancer[0].city,
+        state: this.props.freelancer[0].state,
+        bio: this.props.freelancer[0].bio,
+        heading: this.props.freelancer[0].heading,
+        skills: this.props.freelancer[0].skills
+      })
+    );
+    console.log(this.props.freelancer);
   }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
-    console.log(this.state);
   };
   handleExperienceChange = experience => event => {
     this.setState({
       [experience]: event.target.value
     });
-    console.log(this.state);
   };
 
   onPictureUpload = s3 => {
