@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
 import "./AppliedJobs.css";
+import EmployerApplicants from "../AppliedJobs/EmployerApplicants/EmployerApplicants";
 
 class AppliedJobs extends Component {
   async componentDidMount() {
@@ -30,6 +31,13 @@ class AppliedJobs extends Component {
   render() {
     console.log(this.state);
     console.log(this.props);
+
+    let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
+      if (post.user_id == this.props.user[0].id) {
+        return <EmployerApplicants key={i} post={post} />;
+      }
+    });
+
     let { employerPosts, users } = this.props;
 
     //filters fave jobs for logged in user and puts employer_post_id's in an array
@@ -118,77 +126,77 @@ class AppliedJobs extends Component {
         }
       });
 
-      let postUser2 = users.map((user, i) => {
-        if (post.user_id === user.id && matchJobEmployer.includes(post.id)) {
-          // this.props
-          //   .getAppliedJobs(post.id)
-          //   .then(result => console.log(result.value.data));
+      // let postUser2 = users.map((user, i) => {
+      //   if (post.user_id === user.id && matchJobEmployer.includes(post.id)) {
+      //     // this.props
+      //     //   .getAppliedJobs(post.id)
+      //     //   .then(result => console.log(result.value.data));
 
-          return (
-            <div key={i} className="appliedJobs__employerListingContainer">
-              <div className="appliedJobs__employerData">
-                <Link
-                  className="appliedJobs__linkToUser"
-                  to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="appliedJobs__employerImage">
-                    <img
-                      src={user.profile_image}
-                      alt="person"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "50%"
-                      }}
-                    />
-                  </div>
-                  <div className="appliedJobs__employerName">
-                    <p>{`${user.first_name} ${user.last_name}`}</p>
-                    <p>{user.specialty}</p>
-                  </div>
-                </Link>
-              </div>
+      //     return (
+      //       <div key={i} className="appliedJobs__employerListingContainer">
+      //         <div className="appliedJobs__employerData">
+      //           <Link
+      //             className="appliedJobs__linkToUser"
+      //             to={`/main/profile/${user.id}`}
+      //             style={{ textDecoration: "none" }}
+      //           >
+      //             <div className="appliedJobs__employerImage">
+      //               <img
+      //                 src={user.profile_image}
+      //                 alt="person"
+      //                 style={{
+      //                   width: "80px",
+      //                   height: "80px",
+      //                   borderRadius: "50%"
+      //                 }}
+      //               />
+      //             </div>
+      //             <div className="appliedJobs__employerName">
+      //               <p>{`${user.first_name} ${user.last_name}`}</p>
+      //               <p>{user.specialty}</p>
+      //             </div>
+      //           </Link>
+      //         </div>
 
-              <div className="appliedJobs__employerPosting">
-                <h3>Employer Posting</h3>
-                <p>
-                  Post Title:
-                  {post.title}
-                </p>
-                <p>
-                  Job Title:
-                  {post.specialty}
-                </p>
-                <p>
-                  Post Body:
-                  {post.body}
-                </p>
-                <p>Pay: {post.price}</p>
-                <div>
-                  <Moment fromNow>{post.moment}</Moment>
-                </div>
-              </div>
-              <div className="appliedJobs__employerModalButton">
-                <EmployerPostModal userId={post.user_id} postId={post.id} />
-                {matchJob.includes(post.id) && (
-                  <div className="appliedJobs__applied">
-                    <p>APPLIED</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        } else {
-          return null;
-        }
-      });
+      //         <div className="appliedJobs__employerPosting">
+      //           <h3>Employer Posting</h3>
+      //           <p>
+      //             Post Title:
+      //             {post.title}
+      //           </p>
+      //           <p>
+      //             Job Title:
+      //             {post.specialty}
+      //           </p>
+      //           <p>
+      //             Post Body:
+      //             {post.body}
+      //           </p>
+      //           <p>Pay: {post.price}</p>
+      //           <div>
+      //             <Moment fromNow>{post.moment}</Moment>
+      //           </div>
+      //         </div>
+      //         <div className="appliedJobs__employerModalButton">
+      //           <EmployerPostModal userId={post.user_id} postId={post.id} />
+      //           {matchJob.includes(post.id) && (
+      //             <div className="appliedJobs__applied">
+      //               <p>APPLIED</p>
+      //             </div>
+      //           )}
+      //         </div>
+      //       </div>
+      //     );
+      //   } else {
+      //     return null;
+      //   }
+      // });
 
       return (
         <div key={index}>
           {postUser}
-
-          {postUser2}
+          {/* <EmployerApplicants /> */}
+          {/* {postUser2} */}
         </div>
       );
     });
@@ -198,6 +206,8 @@ class AppliedJobs extends Component {
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
         <div>{appliedJobsFinder}</div>
+        <p>AppliedJobs</p>
+        {appliedJobsFinder2}
       </div>
     );
   }
