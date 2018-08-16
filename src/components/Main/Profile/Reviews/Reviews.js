@@ -14,6 +14,7 @@ class Reviews extends Component {
           <img
             src={reviewerObj && reviewerObj.profile_image}
             className="reviews__reviewer__img"
+            alt="profile"
           />
           <div className="reviews__review__textBlock">
             <div>

@@ -1,0 +1,50 @@
+.freelancersList__block {
+  //   height: 50px;
+  width: 200px;
+  border: 1px solid red;
+  padding: 25px;
+}
+
+.freelancersList__img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  //   visibility: hidden;
+}
+
+.freelancersList__name {
+  //   visibility: collapse;
+  //   display: none;
+  //   color: red;
+}
+
+.howdy {
+  display: none;
+}
+
+// .freelancersList__name:hover {
+//   //   display: none;
+//   color: red;
+// }
+
+// @media (hover: hover) {
+//   .freelancersList__name:hover {
+//     color: red;
+//     visibility: visible;
+//   }
+// }
+
+// .freelancersList__name:hover {
+//   display: block;
+// }
+
+// .freelancersList__block:hover > .freelancersList__name, .howdy {
+//   display: none;
+// }
+.freelancersList__block:hover > .freelancersList__img {
+  display: none;
+}
+
+.freelancersList__block:hover > .howdy {
+  display: block;
+}
