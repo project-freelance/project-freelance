@@ -5,10 +5,7 @@ import {
   getAppliedJobs
 } from "../../../../ducks/employerReducer";
 import { getUser, getUsers } from "../../../../ducks/userReducer";
-import {
-  getFaveJobs,
-  getFreelancers
-} from "../../../../ducks/freelancerReducer";
+import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
@@ -21,8 +18,7 @@ class AppliedJobs extends Component {
       this.props.getEmployerPosts(),
       this.props.getUsers(),
       this.props.getFaveJobs &&
-        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id),
-      this.props.getFreelancers()
+        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
     ]);
 
     this.setState({ users: values[1].value.data });
@@ -130,8 +126,7 @@ function mapStateToProps(state) {
     employerPosts: state.employerReducer.employerPosts,
     user: state.userReducer.user,
     users: state.userReducer.users,
-    favJobs: state.freelancerReducer.favJobs,
-    freelancers: state.freelancerReducer.freelancers
+    favJobs: state.freelancerReducer.favJobs
   };
 }
 export default connect(
@@ -141,7 +136,6 @@ export default connect(
     getUsers,
     getUser,
     getFaveJobs,
-    getAppliedJobs,
-    getFreelancers
+    getAppliedJobs
   }
 )(AppliedJobs);
