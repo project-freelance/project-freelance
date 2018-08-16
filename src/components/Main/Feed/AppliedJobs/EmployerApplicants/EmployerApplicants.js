@@ -52,9 +52,16 @@ class EmployerApplicants extends Component {
           <h1>{this.props.post.title}</h1>
           <p>{this.props.post.body}</p>
           <p> {this.props.post.specialty}</p>
+          <p> ${this.props.post.price}</p>
           <Moment fromNow>{this.props.post.moment}</Moment>
           <h2> My Job Applicants: </h2>
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignSelf: "center"
+            }}
+          >
             {applicantList}
           </div>
         </div>
