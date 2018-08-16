@@ -27,16 +27,19 @@ export default class PortfolioModal extends Component {
             className="profile__portfolio__image"
             src={this.props.url1}
             onClick={this.handleClickOpen}
+            alt="portfolio"
           />
           <img
             className="profile__portfolio__image"
             src={this.props.url2}
             onClick={this.handleClickOpen}
+            alt="portfolio"
           />
           <img
             className="profile__portfolio__image"
             src={this.props.url3}
             onClick={this.handleClickOpen}
+            alt="portfolio"
           />
         </div>
         <Dialog

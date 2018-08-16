@@ -1,3 +1,21 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+.freelancersList__totalWrapper {
+  // background-color: red;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.freelancersList__wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+  // color: red;
+  //   width: 200px;
+}
+
 .freelancersList__block {
   //   height: 50px;
   width: 200px;
@@ -9,42 +27,116 @@
   height: 100px;
   width: 100px;
   border-radius: 50px;
-  //   visibility: hidden;
 }
 
-.freelancersList__name {
-  //   visibility: collapse;
-  //   display: none;
+.freelancersList__popout {
+  //   box-shadow: 5px 5px 5px 5px #888888;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.28);
+  //   width: 50px;
+  //   height: 50px;
+  //   border: 1px blue solid;
+  //   margin: 25px;
+  //   //   visibility: hidden;
+  //   //   display: block;
+  //   //   display: none;
+  //   //   visibility: hidden;
+  border-radius: 8px;
+}
+
+#freelancersList__popout__lineSpace {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.freelancersList__popout__block {
+  //   height: 50px;
+  width: 200px;
+  border: 1px solid red;
+  padding: 25px;
+  border-radius: 8px;
+  width: 300px;
+  height: 350px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+}
+.freelancersList__popout__heading {
   //   color: red;
+  font-weight: bold;
 }
 
-.howdy {
-  display: none;
+.freelancersList__popout__belowHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-// .freelancersList__name:hover {
-//   //   display: none;
-//   color: red;
-// }
+.freelancersList__popout__img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50px;
+}
 
-// @media (hover: hover) {
-//   .freelancersList__name:hover {
-//     color: red;
-//     visibility: visible;
+.freelancersList__popout__textBlock {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+}
+
+#freelancer__popout__textBlock__nameRole {
+  // color: red;
+  font-size: 20px;
+}
+#freelancer__popout__textBlock__citySkills {
+  // color: red;
+  font-size: 15px;
+  color: #666666;
+}
+
+// .freelancersList__wrapper:hover > {
+//   .freelancersList__block {
+//     // visibility: hidden;
+//     display: none;
 //   }
+.freelancersList__wrapper:hover > {
+  .freelancersList__block {
+    // visibility: hidden;
+    display: none;
+  }
+
+  .freelancersList__popout {
+    // visibility: visible;
+    display: block;
+  }
+}
+
+// .freelancersList__wrapper:hover > .howdy {
+//   visibility: visible;
 // }
 
-// .freelancersList__name:hover {
+// .freelancersList__wrapper:hover > .freelancersList__img {
+//   display: none;
+// }
+
+// .freelancersList__img:hover {
+//   display: none;
+// }
+// .freelancersList__wrapper:hover > .freelancersList__block {
+//   display: none;
+// }
+
+// .freelancersList__wrapper:hover > .bye {
+//   display: none;
+//   //   color: red;
+// }
+
+// .freelancersList__wrapper > .freelancersList__img:hover > .howdy {
 //   display: block;
 // }
 
-// .freelancersList__block:hover > .freelancersList__name, .howdy {
-//   display: none;
+// .freelancersList__img:hover > .howdy {
+//   display: block;
 // }
-.freelancersList__block:hover > .freelancersList__img {
-  display: none;
-}
-
-.freelancersList__block:hover > .howdy {
-  display: block;
-}
