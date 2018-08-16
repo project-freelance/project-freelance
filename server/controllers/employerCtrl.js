@@ -125,5 +125,13 @@ module.exports = {
     db.employers.getAppliedJobs(req.params.id).then(jobs => {
       return res.status(200).send(jobs);
     });
+  },
+  getEmployerJobFreelancers: (req, res, next) => {
+    const db = req.app.get("db");
+    let { id } = req.params;
+    console.log(req.params);
+    db.employers.getEmployersJobFreelancers(id).then(jobs => {
+      return res.status(200).send(jobs);
+    });
   }
 };
