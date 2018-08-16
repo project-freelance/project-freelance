@@ -125,11 +125,11 @@ class Feed extends Component {
                   ) : null}
 
                   <div className="feed__freelancerPosting">
-                    <h3>Freelancer Posting</h3>
-                    <p>Post Title: {post.title}</p>
-                    <p>Post Body: {post.body}</p>
-                    <div>
-                      <Moment fromNow>{post.moment}</Moment>
+                    <div className="feed__freelancerPosting__header">
+                      <h3>Freelancer Posting: &nbsp; {post.title}</h3>
+                    </div>
+                    <div className="feed__freelancerPosting__body">
+                      <p>{post.body}</p>
                     </div>
                   </div>
                   <div className="feed__freelancerModalButton">
@@ -138,6 +138,9 @@ class Feed extends Component {
                         userId={post.user_id}
                         postId={post.id}
                       />
+                    </div>
+                    <div>
+                      <Moment fromNow>{post.moment}</Moment>
                     </div>
                   </div>
                 </div>
@@ -154,6 +157,9 @@ class Feed extends Component {
                     style={{ textDecoration: 'none' }}
                   >
                     <div className="feed__employerImage">
+                      <div className="feed__is__employer">
+                        <h3>Employer</h3>
+                      </div>
                       <img
                         src={user.profile_image}
                         alt="person"
@@ -163,10 +169,10 @@ class Feed extends Component {
                           borderRadius: '50%'
                         }}
                       />
-                    </div>
-                    <div className="feed__employerName">
-                      <p>{`${user.first_name} ${user.last_name}`}</p>
-                      <p>{user.specialty}</p>
+                      <div className="feed__employerName">
+                        <p>{`${user.first_name} ${user.last_name}`}</p>
+                        <p>{user.specialty}</p>
+                      </div>
                     </div>
                   </Link>
                 </div>
@@ -183,28 +189,35 @@ class Feed extends Component {
                 ) : null}
 
                 <div className="feed__employerPosting">
-                  <h3>
-                    Employer Posting: &nbsp;
-                    {post.title}
-                  </h3>
-                  <p>
-                    Looking For: &nbsp;
-                    {post.specialty}
-                  </p>
-                  <p>{post.body}</p>
-                </div>
-                <div className="feed__employerModalButton">
-                  <div>
-                    <Moment fromNow>{post.moment}</Moment>
-                    <p>Pay: {post.price}</p>
+                  <div className="feed__employerPosting__header">
+                    <h3>
+                      Employer Posting: &nbsp;
+                      {post.title}
+                    </h3>
                   </div>
-                  <EmployerPostModal userId={post.user_id} postId={post.id} />
-
-                  {matchJob.includes(post.id) && (
-                    <div className="feed__applied">
-                      <p>APPLIED</p>
-                    </div>
-                  )}
+                  <div className="feed__employerPosting__body">
+                    <p>{post.body}</p>
+                  </div>
+                </div>
+                <div className="feed__employerPosting__rightdiv">
+                  <div className="feed__employerModalButton">
+                    <EmployerPostModal userId={post.user_id} postId={post.id} />
+                    {matchJob.includes(post.id) && (
+                      <div className="feed__applied">
+                        <p>APPLIED</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="feed__employerPosting__rightdiv__specialty__price">
+                    <p>
+                      Looking For: &nbsp;
+                      {post.specialty}
+                    </p>
+                    <p>Pay: ${post.price}</p>
+                  </div>
+                  <div className="feed__employerPosting__moment">
+                    <Moment fromNow>{post.moment}</Moment>
+                  </div>
                 </div>
               </div>
             );

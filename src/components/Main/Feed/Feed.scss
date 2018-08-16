@@ -1,20 +1,33 @@
 .feed__mergedFreelancerContainer {
   // border: 2px solid black;
-  background-color: tan;
-  margin-left: 10px;
+  // background-color: tan;
+  background-color: white;
+  margin-left: 100px;
   margin-bottom: 10px;
-  width: 80vw;
+  width: 70vw;
   display: flex;
   flex-direction: row;
 }
 
 .feed__freelancerPosting {
-  margin-left: 30px;
+  margin-left: 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-content: flex-start;
+  width: 80%;
+}
+.feed__freelancerPosting__header {
+  margin-top: 5px;
+  // border: 2px solid green;
   width: 70%;
+  margin: auto;
+  color: #7fc4fd;
+}
+.feed__freelancerPosting__body {
+  display: flex;
+  margin: auto;
+  width: 50%;
 }
 .feed__freelancerModalButton {
   display: flex;
@@ -24,12 +37,24 @@
 
 .feed__mergedEmployerContainer {
   // border: 2px solid black;
-  background-color: blanchedalmond;
-  margin-left: 10px;
+  // background-color: blanchedalmond;
+  background-color: white;
+  margin-left: 100px;
   margin-bottom: 10px;
-  width: 80vw;
+  width: 70vw;
   display: flex;
   flex-direction: row;
+}
+.feed__is__employer {
+  text-decoration: none;
+  color: black;
+}
+.feed__employerPosting__header {
+  margin-top: 5px;
+  // border: 2px solid red;
+  width: 70%;
+  margin: auto;
+  color: #7fc4fd;
 }
 
 .feed__employerPosting {
@@ -37,14 +62,31 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 70%;
+  width: 80%;
+}
+.feed__employerPosting__body {
+  display: flex;
+  margin: auto;
+  width: 50%;
 }
 
-.feed__employerModalButton {
+.feed__employerPosting__rightdiv {
   display: flex;
+  margin-left: 40px;
   justify-content: flex-end;
   flex-direction: column;
   height: 10%;
+}
+.feed__employerModalButton {
+  margin-top: 10px;
+}
+.feed__employerPosting__rightdiv__specialty__price {
+  // margin-bottom: 10px;
+  padding: 20px;
+}
+.feed__employerPosting__moment {
+  margin-left: 120px;
+  font-size: 0.6em;
 }
 
 .feed__applied {

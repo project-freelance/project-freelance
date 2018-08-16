@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import Moment from 'react-moment';
 import '../FreelancerPostModal/FreelancerPostModal.css';
 import { Link } from 'react-router-dom';
+import OpenWith from '@material-ui/icons/OpenWith.js';
+
 class FreelancerPostModal extends Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,11 @@ class FreelancerPostModal extends Component {
     return (
       <div>
         {/* Modal Open Button */}
-        <Button onClick={this.handleClickOpen}>More Info</Button>
+
+        <Button onClick={this.handleClickOpen}>
+          Expand
+          <OpenWith />
+        </Button>
 
         <Dialog
           className="freelancerPostModal__container"

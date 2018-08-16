@@ -11,7 +11,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import './Post.css';
-import AddCircle from '@material-ui/icons/AddCircle.js';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleOutline from '@material-ui/icons/AddCircleOutline.js';
 
 class Post extends Component {
   constructor(props) {
@@ -48,19 +49,35 @@ class Post extends Component {
 
   render() {
     const { title, body, specialty, price, time } = this.state;
+
     // console.log(this.state.time);
     // console.log(this.props.user[0] && this.props.user[0].id);
 
     return (
       <div>
         {/* <button onClick={() => console.log(this.state)} /> */}
-
         {/* Modal Posting Button */}
-        <button onClick={this.handleClickOpen}>
-          <AddCircle />
-          {/* <Post /> */}
-        </button>
+        {/* <button onClick={this.handleClickOpen}> */}
 
+        <div className="post__add__icon__div">
+          <IconButton
+            touch={true}
+            tooltip="Create A Post"
+            tooltipPosition="top-center"
+          >
+            <AddCircleOutline
+              className="post__add__icon"
+              style={{
+                width: '50px',
+                height: '50px',
+                color: '#EE7600'
+              }}
+              onClick={this.handleClickOpen}
+            />
+          </IconButton>
+        </div>
+        {/* <Post /> */}
+        {/* </button> */}
         {/* <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button> */}
         <Dialog
           className="post__job__modal"
