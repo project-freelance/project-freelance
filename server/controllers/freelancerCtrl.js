@@ -41,6 +41,13 @@ module.exports = {
     });
   },
 
+  getAllFreelancerInfo: (req, res, next) => {
+    let db = req.app.get("db");
+    db.freelancers.getAllFreelancerInfo().then(info => {
+      return res.status(200).send(info);
+    });
+  },
+
   getFreelancer: (req, res, next) => {
     let db = req.app.get("db");
     db.freelancers.getFreelancer([req.params.id]).then(freelancer => {
