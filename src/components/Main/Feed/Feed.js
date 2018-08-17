@@ -29,7 +29,8 @@ class Feed extends Component {
     this.state = {
       showFreelancers: true,
       showEmployers: true,
-      anchorEl: null
+      anchorEl: null,
+      open: false
     };
     this.filterFreelancers = this.filterFreelancers.bind(this);
     this.filterEmployers = this.filterEmployers.bind(this);
@@ -54,6 +55,14 @@ class Feed extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  // handleClickOpen = () => {
+  //   this.setState({ open: true });
+  // };
+
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
   filterFreelancers() {
     this.setState({ showFreelancers: false, showEmployers: true });
@@ -114,13 +123,9 @@ class Feed extends Component {
                     >
                       <div className="feed__userImage">
                         <img
+                          className="feed__userImage--picture"
                           src={user.profile_image}
                           alt="person"
-                          style={{
-                            width: '80px',
-                            height: '80px',
-                            borderRadius: '50%'
-                          }}
                         />
                       </div>
                       <div className="feed__userName">
@@ -250,9 +255,12 @@ class Feed extends Component {
                   <div className="feed__employerPosting__rightdiv__specialty__price">
                     <p>
                       Looking For: &nbsp;
-                      {post.specialty}
+                      <strong>{post.specialty}</strong>
                     </p>
-                    <p>Pay: ${post.price}</p>
+                    <hr />
+                    <p>
+                      Pay Rate: &nbsp; <strong>${post.price}</strong>
+                    </p>
                   </div>
                   <div className="feed__employerPosting__moment">
                     <Moment fromNow>{post.moment}</Moment>
@@ -287,21 +295,17 @@ class Feed extends Component {
               id="filter-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
+              // open={false}
+              // open={this.state.open}
               onClose={this.handleClose}
             >
-              <MenuItem
-                onClick={(this.handleClose, () => this.filterFreelancers())}
-              >
+              <MenuItem onClick={() => this.filterFreelancers()}>
                 Employers Post Only
               </MenuItem>
-              <MenuItem
-                onClick={(this.handleClose, () => this.filterEmployers())}
-              >
+              <MenuItem onClick={() => this.filterEmployers()}>
                 Freelancers Post Only
               </MenuItem>
-              <MenuItem onClick={(this.handleClose, () => this.resetFeed())}>
-                News Feed
-              </MenuItem>
+              <MenuItem onClick={() => this.resetFeed()}>News Feed</MenuItem>
             </Menu>
           </div>
           {/* <Button
