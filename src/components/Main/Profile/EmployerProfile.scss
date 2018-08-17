@@ -1,6 +1,6 @@
 .employerProfile__header {
   text-align: left;
-  margin-left: 2vw;
+  margin-left: 8vh;
   height: 8vh;
   display: flex;
   align-items: center;
@@ -11,20 +11,24 @@
 .employerProfile__container {
   display: flex;
   background-color: white;
+  // margin: 0 8vh;
 }
 
 .employerProfile__left__panel {
   background-color: white;
   width: 50vw;
   height: 100vh;
+  margin: 3vh 4vh 3vh 8vh;
   //   display: flex;
   // margin-left: 0;
 }
 
 .employerProfile__company__img {
   width: 40vw;
-  margin: 3vh;
+  // margin: 3vh 3vh 3vh 8vh;
   object-fit: cover;
+  box-shadow: 5px 5px 2px #b9b9b9;
+  border-radius: 5px;
 }
 
 .employerProfile__right__panel {
@@ -32,6 +36,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  margin: 3vh 8vh 3vh 4vh;
+  // margin-right: 8vh;
 }
 
 #employerProfile__line__space {
@@ -40,7 +46,7 @@
 }
 
 .employerProfile__company {
-  margin-top: 3vh;
+  // margin-top: 3vh;
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -54,6 +60,11 @@
 .employerProfile__reviews__num {
   margin-left: 8px;
   color: #888888;
+}
+
+.employerProfile__titleText {
+  font-weight: bold;
+  color: #373737;
 }
 
 .employerProfile__mgr__block {
