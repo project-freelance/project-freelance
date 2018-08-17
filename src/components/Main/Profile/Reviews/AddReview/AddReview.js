@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
-import StarRatings from 'react-star-ratings';
-import { connect } from 'react-redux';
-import { addReview, getReviews } from '../../../../../ducks/reviewReducer';
-import { withRouter } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import StarRatings from "react-star-ratings";
+import { connect } from "react-redux";
+import {
+  addReview,
+  getReviews,
+  getAvgRating
+} from "../../../../../ducks/reviewReducer";
+import { withRouter } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 class AddReview extends Component {
   constructor() {
     super();
     this.state = {
-      userInput: '',
+      userInput: "",
       time: new Date(),
       rating: 0,
       open: false
@@ -39,12 +43,11 @@ class AddReview extends Component {
       .addReview(review, user_id, reviewer_id, moment, rating)
       .then(() => {
         this.props.getReviews(this.props.match.params.id);
+      })
+      .then(() => {
+        this.props.getAvgRating(this.props.match.params.id);
       });
   };
-
-  // goToProperty = id => {
-  //   this.props.history.push(`/property/${id}`);
-  // };
 
   render() {
     console.log(this.props);
@@ -52,8 +55,8 @@ class AddReview extends Component {
     return (
       <div>
         <div>
-          Leave Review of{' '}
-          {this.props.beingReviewed && this.props.beingReviewed.first_name}
+          Leave Review of{" "}
+          {this.props.beingReviewed && this.props.beingReviewed.company}
         </div>
         {/* <input
           onChange={e => this.changeHandler(e)}
@@ -117,6 +120,6 @@ const mapStateToProps = ({ reviewReducer }) => ({ ...reviewReducer });
 export default withRouter(
   connect(
     mapStateToProps,
-    { addReview, getReviews }
+    { addReview, getReviews, getAvgRating }
   )(AddReview)
 );
