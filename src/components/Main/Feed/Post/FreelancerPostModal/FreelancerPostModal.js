@@ -12,8 +12,11 @@ import Button from '@material-ui/core/Button';
 import Moment from 'react-moment';
 import '../FreelancerPostModal/FreelancerPostModal.css';
 import { Link } from 'react-router-dom';
-import OpenWith from '@material-ui/icons/OpenWith.js';
 import Tooltip from '@material-ui/core/Tooltip';
+import Info from '@material-ui/icons/Info.js';
+import Email from '@material-ui/icons/Email.js';
+import AccountCircle from '@material-ui/icons/AccountCircle.js';
+import CancelPresentation from '@material-ui/icons/CancelPresentation.js';
 
 class FreelancerPostModal extends Component {
   constructor(props) {
@@ -51,9 +54,14 @@ class FreelancerPostModal extends Component {
     return (
       <div>
         {/* Modal Open Button */}
-        <Button onClick={this.handleClickOpen}>
+        <Button
+          style={{
+            color: '#808080'
+          }}
+          onClick={this.handleClickOpen}
+        >
           <Tooltip title="More Info">
-            <OpenWith />
+            <Info />
           </Tooltip>
         </Button>
         <Dialog
@@ -83,15 +91,10 @@ class FreelancerPostModal extends Component {
                     />
                   </div>
                   <div className="freelancerPostModal__buttonMoment">
-                    <div>
-                      <Button
-                        style={{
-                          backgroundColor: '#FF4500'
-                        }}
-                        onClick={this.handleClose}
-                      >
-                        Cancel
-                      </Button>
+                    <div className="freelancerPostModal__cancelButton">
+                      <Tooltip title="Cancel">
+                        <CancelPresentation onClick={this.handleClose} />
+                      </Tooltip>
                     </div>
                     <div>
                       <Moment fromNow>{matchPost && matchPost.moment}</Moment>
@@ -118,7 +121,9 @@ class FreelancerPostModal extends Component {
                             backgroundColor: '#7fc4fd'
                           }}
                         >
-                          View My Profile
+                          <Tooltip title="View My Profile">
+                            <AccountCircle />
+                          </Tooltip>
                         </Button>
                       </Link>
 
@@ -127,10 +132,12 @@ class FreelancerPostModal extends Component {
                           this.props.freelancer[0]
                             .email}?subject=I'd like to offer you a position with... `}
                         style={{
-                          backgroundColor: '#008000'
+                          backgroundColor: '#7fc4fd'
                         }}
                       >
-                        Email this Freelancer
+                        <Tooltip title="Email This Freelancer">
+                          <Email />
+                        </Tooltip>
                       </Button>
                     </div>
                   </form>

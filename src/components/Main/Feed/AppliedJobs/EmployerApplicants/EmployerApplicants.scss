@@ -9,9 +9,12 @@
 }
 
 .employerApplicants__employerPosting {
-  margin-left: 30px;
+  margin-left: 10vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 70%;
+}
+h2 {
+  font-weight: bold;
 }

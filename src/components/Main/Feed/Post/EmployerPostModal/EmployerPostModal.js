@@ -14,8 +14,10 @@ import Button from '@material-ui/core/Button';
 import Moment from 'react-moment';
 import '../EmployerPostModal/EmployerPostModal.css';
 import { Link } from 'react-router-dom';
-import OpenWith from '@material-ui/icons/OpenWith.js';
 import Tooltip from '@material-ui/core/Tooltip';
+import Info from '@material-ui/icons/Info.js';
+import CancelPresentation from '@material-ui/icons/CancelPresentation.js';
+import AccountCircle from '@material-ui/icons/AccountCircle.js';
 
 class EmployerPostModal extends Component {
   constructor(props) {
@@ -58,9 +60,14 @@ class EmployerPostModal extends Component {
     return (
       <div>
         {/* Modal Open Button */}
-        <Button onClick={this.handleClickOpen}>
+        <Button
+          style={{
+            color: '#808080'
+          }}
+          onClick={this.handleClickOpen}
+        >
           <Tooltip title="More Info">
-            <OpenWith />
+            <Info />
           </Tooltip>
         </Button>
 
@@ -91,15 +98,10 @@ class EmployerPostModal extends Component {
                     />
                   </div>
                   <div className="employerPostModal__buttonMoment">
-                    <div>
-                      <Button
-                        style={{
-                          backgroundColor: '#FF4500'
-                        }}
-                        onClick={this.handleClose}
-                      >
-                        Cancel
-                      </Button>
+                    <div className="employerPostModal__cancelButton">
+                      <Tooltip title="Cancel">
+                        <CancelPresentation onClick={this.handleClose} />
+                      </Tooltip>
                     </div>
                     <div>
                       <Moment fromNow>{matchPost && matchPost.moment}</Moment>
@@ -127,7 +129,9 @@ class EmployerPostModal extends Component {
                             backgroundColor: '#7fc4fd'
                           }}
                         >
-                          View My Profile
+                          <Tooltip title="View My Profile">
+                            <AccountCircle />
+                          </Tooltip>
                         </Button>
                       </Link>
                       {matchJob.includes(matchPost.id) && (
@@ -168,7 +172,7 @@ class EmployerPostModal extends Component {
                               );
                           }}
                         >
-                          Apply to this Job
+                          Apply
                         </Button>
                       )}
                     </div>

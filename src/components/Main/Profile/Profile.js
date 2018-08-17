@@ -12,6 +12,7 @@ import Reviews from './Reviews/Reviews';
 import Button from '@material-ui/core/Button';
 import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
 import ReviewModal from './Reviews/ReviewModal/ReviewModal';
+import Email from '@material-ui/icons/Email.js';
 import './Profile.css';
 class Profile extends Component {
   constructor() {
@@ -142,13 +143,14 @@ class Profile extends Component {
                     className="profile__contact__btn"
                     id="profile__line__space"
                   >
-                    <a
+                    <Button
                       href={`mailto:${freelancer[0] &&
                         freelancer[0]
                           .email}?subject=I'd like to offer you a position with... `}
                     >
-                      <div className="profile__contact__text">Contact Me</div>
-                    </a>
+                      Contact Me<Email />
+                      {/* <div className="profile__contact__text">Contact Me</div> */}
+                    </Button>
                   </div>
                   <div>
                     <div
