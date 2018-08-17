@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   getFreelancer,
   getFreelancerPosts
-} from '../../../../../ducks/freelancerReducer';
-import { getUser } from '../../../../../ducks/userReducer';
-import { getUsers } from '../../../../../ducks/userReducer';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import Moment from 'react-moment';
-import '../FreelancerPostModal/FreelancerPostModal.css';
-import { Link } from 'react-router-dom';
-import Tooltip from '@material-ui/core/Tooltip';
-import Info from '@material-ui/icons/Info.js';
-import Email from '@material-ui/icons/Email.js';
-import AccountCircle from '@material-ui/icons/AccountCircle.js';
-import CancelPresentation from '@material-ui/icons/CancelPresentation.js';
+} from "../../../../../ducks/freelancerReducer";
+import { getUser } from "../../../../../ducks/userReducer";
+import { getUsers } from "../../../../../ducks/userReducer";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
+import Moment from "react-moment";
+import "../FreelancerPostModal/FreelancerPostModal.css";
+import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import Info from "@material-ui/icons/Info.js";
+import Email from "@material-ui/icons/Email.js";
+import AccountCircle from "@material-ui/icons/AccountCircle.js";
+import CancelPresentation from "@material-ui/icons/CancelPresentation.js";
 
 class FreelancerPostModal extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class FreelancerPostModal extends Component {
     };
   }
   componentDidMount() {
+    console.log(this.props.user);
     this.props.getFreelancer(this.props.userId);
   }
   handleClickOpen = () => {
@@ -56,7 +57,7 @@ class FreelancerPostModal extends Component {
         {/* Modal Open Button */}
         <Button
           style={{
-            color: '#808080'
+            color: "#808080"
           }}
           onClick={this.handleClickOpen}
         >
@@ -70,10 +71,10 @@ class FreelancerPostModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentstyle={{
-            width: '70vh',
-            maxWidth: '100%',
-            height: '70vw',
-            padding: '30px'
+            width: "70vh",
+            maxWidth: "100%",
+            height: "70vw",
+            padding: "30px"
           }}
         >
           <DialogContent>
@@ -85,8 +86,8 @@ class FreelancerPostModal extends Component {
                       src={matchUser && matchUser.profile_image}
                       alt="person"
                       style={{
-                        width: '120px',
-                        height: '120px'
+                        width: "120px",
+                        height: "120px"
                       }}
                     />
                   </div>
@@ -104,7 +105,7 @@ class FreelancerPostModal extends Component {
                 <div className="freelancerPostModal__data">
                   <h2>
                     {matchUser &&
-                      matchUser.first_name + ' ' + matchUser.last_name}
+                      matchUser.first_name + " " + matchUser.last_name}
                   </h2>
                   <p>{matchUser && matchUser.specialty}</p>
                   <p>{matchPost && matchPost.title}</p>
@@ -114,11 +115,11 @@ class FreelancerPostModal extends Component {
                     <div className="freelancerPostModal__buttons">
                       <Link
                         to={`/main/profile/${matchUser && matchUser.id}`}
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: "none" }}
                       >
                         <Button
                           style={{
-                            backgroundColor: '#7fc4fd'
+                            backgroundColor: "#7fc4fd"
                           }}
                         >
                           <Tooltip title="View My Profile">
@@ -132,7 +133,7 @@ class FreelancerPostModal extends Component {
                           this.props.freelancer[0]
                             .email}?subject=I'd like to offer you a position with... `}
                         style={{
-                          backgroundColor: '#7fc4fd'
+                          backgroundColor: "#7fc4fd"
                         }}
                       >
                         <Tooltip title="Email This Freelancer">
