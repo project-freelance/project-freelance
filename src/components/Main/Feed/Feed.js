@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   getEmployerPosts,
   deleteEmployerPost
-} from '../../../ducks/employerReducer';
+} from "../../../ducks/employerReducer";
 import {
   getFreelancerPosts,
   deleteFreelancerPost
-} from '../../../ducks/freelancerReducer';
-import { getUser, getUsers } from '../../../ducks/userReducer';
-import { getFaveJobs } from '../../../ducks/freelancerReducer';
-import '../Feed/Feed.css';
-import Post from '../Feed/Post/Post';
-import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
-import FreelancerPostModal from './Post/FreelancerPostModal/FreelancerPostModal';
-import EmployerPostModal from './Post/EmployerPostModal/EmployerPostModal';
-import Button from '@material-ui/core/Button';
-import DeleteForever from '@material-ui/icons/DeleteForever.js';
-import FilterList from '@material-ui/icons/FilterList.js';
-import Tooltip from '@material-ui/core/Tooltip';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+} from "../../../ducks/freelancerReducer";
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getFaveJobs } from "../../../ducks/freelancerReducer";
+import "../Feed/Feed.css";
+import Post from "../Feed/Post/Post";
+import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import FreelancerPostModal from "./Post/FreelancerPostModal/FreelancerPostModal";
+import EmployerPostModal from "./Post/EmployerPostModal/EmployerPostModal";
+import Button from "@material-ui/core/Button";
+import DeleteForever from "@material-ui/icons/DeleteForever.js";
+import FilterList from "@material-ui/icons/FilterList.js";
+import Tooltip from "@material-ui/core/Tooltip";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 class Feed extends Component {
   constructor() {
@@ -75,6 +75,8 @@ class Feed extends Component {
   }
 
   render() {
+    console.log(this.props);
+
     //getting logged in user's saved jobs
     const { anchorEl } = this.state;
     let matchJob = this.props.favJobs
@@ -108,7 +110,7 @@ class Feed extends Component {
       let postUser = users.map((user, i) => {
         if (post.user_id == user.id) {
           //if freelancer display this in return
-          if (user.role === 'Freelancer') {
+          if (user.role === "Freelancer") {
             return (
               <div key={index}>
                 <div className="feed__mergedFreelancerContainer">
@@ -119,7 +121,7 @@ class Feed extends Component {
                     <Link
                       className="feed__linkToUser"
                       to={`/main/profile/${user.id}`}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
                       <div className="feed__userImage">
                         <img
@@ -145,17 +147,17 @@ class Feed extends Component {
                   </div>
                   <div className="feed__freelancerPosting__rightdiv">
                     <div className="feed__freelancerModalButton">
-                      {/* <FreelancerPostModal
+                      <FreelancerPostModal
                         userId={post.user_id}
                         postId={post.id}
-                      /> */}
+                      />
                       <div className="">
                         {post.user_id === this.props.user[0].id ? (
                           <Button
                             style={{
-                              width: '20px',
-                              height: '20px',
-                              color: '#7fc4fd'
+                              width: "20px",
+                              height: "20px",
+                              color: "#7fc4fd"
                             }}
                             onClick={() =>
                               this.props
@@ -190,7 +192,7 @@ class Feed extends Component {
                   <Link
                     className="feed__linkToUser"
                     to={`/main/profile/${user.id}`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
                     <div className="feed__employerImage">
                       <Tooltip title="Click to see Profile">
@@ -198,9 +200,9 @@ class Feed extends Component {
                           src={user.profile_image}
                           alt="person"
                           style={{
-                            width: '80px',
-                            height: '80px',
-                            borderRadius: '50%'
+                            width: "80px",
+                            height: "80px",
+                            borderRadius: "50%"
                           }}
                         />
                       </Tooltip>
@@ -229,9 +231,9 @@ class Feed extends Component {
                     {post.user_id === this.props.user[0].id ? (
                       <Button
                         style={{
-                          width: '20px',
-                          height: '20px',
-                          color: '#7fc4fd'
+                          width: "20px",
+                          height: "20px",
+                          color: "#7fc4fd"
                         }}
                         onClick={() =>
                           this.props.deleteEmployerPost(post.id).then(() => {
@@ -282,11 +284,11 @@ class Feed extends Component {
         <div className="feed__topNav">
           <div className="feed__filterMenu">
             <Button
-              aria-owns={anchorEl ? 'filter-menu' : null}
+              aria-owns={anchorEl ? "filter-menu" : null}
               aria-haspopup="true"
               onClick={this.handleClick}
               style={{
-                color: 'white'
+                color: "white"
               }}
             >
               Filter
@@ -308,34 +310,6 @@ class Feed extends Component {
               <MenuItem onClick={() => this.resetFeed()}>News Feed</MenuItem>
             </Menu>
           </div>
-          {/* <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.filterFreelancers()}
-          >
-            Show Employers Only
-          </Button>
-          <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.filterEmployers()}
-          >
-            Show Freelancers Only
-          </Button>
-
-          <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.resetFeed()}
-          >
-            Reset Feed
-          </Button> */}
         </div>
         <div>
           <h1>In the Feed...</h1>

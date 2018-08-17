@@ -130,7 +130,8 @@ module.exports = {
 
   getFaveJobs: (req, res, next) => {
     let db = req.app.get("db");
-    db.freelancers.getFaveJobs(req.params.id).then(jobs => {
+    let { id } = req.session.user;
+    db.freelancers.getFaveJobs(id).then(jobs => {
       return res.status(200).send(jobs);
     });
   },

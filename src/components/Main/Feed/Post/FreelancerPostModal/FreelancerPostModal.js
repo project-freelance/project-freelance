@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getFreelancer,
+  // getFreelancer,
   getFreelancerPosts
 } from "../../../../../ducks/freelancerReducer";
 import { getUser } from "../../../../../ducks/userReducer";
@@ -25,10 +25,7 @@ class FreelancerPostModal extends Component {
       open: false
     };
   }
-  componentDidMount() {
-    console.log(this.props.user);
-    this.props.getFreelancer(this.props.userId);
-  }
+  componentDidMount() {}
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -44,7 +41,7 @@ class FreelancerPostModal extends Component {
   };
 
   render() {
-    // console.log(this.props.userId);
+    console.log(this.props);
 
     const localUserId = this.props && this.props.userId;
     const postId = this.props && this.props.postId;
@@ -129,8 +126,8 @@ class FreelancerPostModal extends Component {
                       </Link>
 
                       <Button
-                        href={`mailto:${this.props.freelancer[0] &&
-                          this.props.freelancer[0]
+                        href={`mailto:${this.props.matchUser &&
+                          this.props.matchUser
                             .email}?subject=I'd like to offer you a position with... `}
                         style={{
                           backgroundColor: "#7fc4fd"
@@ -154,7 +151,7 @@ class FreelancerPostModal extends Component {
 
 function mapStateToProps(state) {
   return {
-    freelancer: state.freelancerReducer.freelancer,
+    // freelancer: state.freelancerReducer.freelancer,
     freelancerPosts: state.freelancerReducer.freelancerPosts,
     user: state.userReducer.user,
     users: state.userReducer.users
@@ -163,7 +160,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    getFreelancer,
+    // getFreelancer,
     getFreelancerPosts,
     getUser,
     getUsers
