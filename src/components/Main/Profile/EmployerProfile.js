@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getEmployer } from '../../../ducks/employerReducer';
-import AddReview from './Reviews/AddReview/AddReview';
-import { getUser, getUsers } from '../../../ducks/userReducer';
-import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
-import { withRouter } from 'react-router-dom';
-import Moment from 'react-moment';
-import AvgRating from './Reviews/AvgRating/AvgRating';
-import Reviews from './Reviews/Reviews';
-import ReviewModal from './Reviews/ReviewModal/ReviewModal';
-import Email from '@material-ui/icons/Email.js';
-import Button from '@material-ui/core/Button';
-import './EmployerProfile.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getEmployer } from "../../../ducks/employerReducer";
+import AddReview from "./Reviews/AddReview/AddReview";
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
+import { withRouter } from "react-router-dom";
+import Moment from "react-moment";
+import AvgRating from "./Reviews/AvgRating/AvgRating";
+import Reviews from "./Reviews/Reviews";
+import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
+import Email from "@material-ui/icons/Email.js";
+import Button from "@material-ui/core/Button";
+import "./EmployerProfile.css";
 class EmployerProfile extends Component {
   constructor() {
     super();
@@ -31,6 +31,7 @@ class EmployerProfile extends Component {
   };
 
   render() {
+    console.log(this.props);
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
 
     let reviewerObj =
@@ -55,7 +56,7 @@ class EmployerProfile extends Component {
             <div className="employerProfile__company">{`${employer[0] &&
               employer[0].company}`}</div>
             <div id="employerProfile__line__space">
-              {`${employer[0] && employer[0].city}`},{' '}
+              {`${employer[0] && employer[0].city}`},{" "}
               {`${employer[0] && employer[0].state}`}
             </div>
             {this.props.rating && this.props.rating > 0 ? (
@@ -75,7 +76,8 @@ class EmployerProfile extends Component {
             )}
 
             <div id="employerProfile__line__space">
-              Company Profile: {`${employer[0] && employer[0].bio}`}
+              <div className="employerProfile__titleText">Company Profile:</div>
+              <div>{`${employer[0] && employer[0].bio}`}</div>
             </div>
 
             <div
@@ -83,10 +85,12 @@ class EmployerProfile extends Component {
               className="employerProfile__mgr__block"
             >
               <div className="employerProfile__mgr__text">
-                <div>Point of Contact:</div>
+                <div className="employerProfile__titleText">
+                  Point of Contact:
+                </div>
                 <div>
-                  {`${employer[0] && employer[0].first_name}`}{' '}
-                  {`${employer[0] && employer[0].last_name}`},{' '}
+                  {`${employer[0] && employer[0].first_name}`}{" "}
+                  {`${employer[0] && employer[0].last_name}`},{" "}
                   {`${employer[0] && employer[0].position}`}
                 </div>
               </div>
@@ -117,58 +121,67 @@ class EmployerProfile extends Component {
             <div>
               <div
                 id="employerProfile__line__space"
-                className="employerProfile__reviews__title"
+                className="employerProfile__titleText"
               >
                 Reviews
               </div>
               <div />
-              {this.state.reviewShow ? (
-                <div>
-                  <div className="employerProfile__review__block">
-                    <div
-                      style={{
-                        backgroundImage: `url(${reviewerObj &&
-                          reviewerObj.profile_image})`
-                      }}
-                      className="employerProfile__reviewer__img"
-                    />
-                    <div className="employerProfile__review__textBlock">
-                      <div>
-                        {reviewerObj && reviewerObj.first_name}{' '}
-                        {reviewerObj && reviewerObj.last_name}
-                      </div>
-                      {this.props.reviews[0] && this.props.reviews[0].review}
-                      <div className="employerProfile__review__moment">
-                        <Moment fromNow>
-                          {this.props.reviews[0] &&
-                            this.props.reviews[0].moment}
-                        </Moment>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="employerProfile__reviews__toggle"
-                    onClick={() => this.toggleReviews()}
-                  >
-                    See All Reviews
-                  </div>
-                </div>
+
+              {this.props.reviews.length < 1 ? (
+                <div>No Reviews Dude</div>
               ) : (
                 <div>
-                  <Reviews
-                    reviews={this.props.reviews && this.props.reviews}
-                    users={this.props.users && this.props.users}
-                  />
-                  <div
-                    className="profile__reviews__toggle"
-                    onClick={() => {
-                      this.toggleReviews();
-                    }}
-                  >
-                    Minimize Reviews
-                  </div>
+                  {this.state.reviewShow ? (
+                    <div>
+                      <div className="employerProfile__review__block">
+                        <div
+                          style={{
+                            backgroundImage: `url(${reviewerObj &&
+                              reviewerObj.profile_image})`
+                          }}
+                          className="employerProfile__reviewer__img"
+                        />
+                        <div className="employerProfile__review__textBlock">
+                          <div>
+                            {reviewerObj && reviewerObj.first_name}{" "}
+                            {reviewerObj && reviewerObj.last_name}
+                          </div>
+                          {this.props.reviews[0] &&
+                            this.props.reviews[0].review}
+                          <div className="employerProfile__review__moment">
+                            <Moment fromNow>
+                              {this.props.reviews[0] &&
+                                this.props.reviews[0].moment}
+                            </Moment>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="employerProfile__reviews__toggle"
+                        onClick={() => this.toggleReviews()}
+                      >
+                        See All Reviews
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <Reviews
+                        reviews={this.props.reviews && this.props.reviews}
+                        users={this.props.users && this.props.users}
+                      />
+                      <div
+                        className="profile__reviews__toggle"
+                        onClick={() => {
+                          this.toggleReviews();
+                        }}
+                      >
+                        Minimize Reviews
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
+
               <ReviewModal {...employer} loggedInUser={this.props.user} />
             </div>
           </div>
