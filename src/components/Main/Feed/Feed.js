@@ -121,9 +121,9 @@ class Feed extends Component {
                       to={`/main/profile/${user.id}`}
                       style={{ textDecoration: 'none' }}
                     >
-                      <div className="feed__userImage">
+                      <div className="feed__freelancerImage">
                         <img
-                          className="feed__userImage--picture"
+                          className="feed__freelancerImage--picture"
                           src={user.profile_image}
                           alt="person"
                         />
@@ -195,13 +195,9 @@ class Feed extends Component {
                     <div className="feed__employerImage">
                       <Tooltip title="Click to see Profile">
                         <img
+                          className="feed__employerImage--picture"
                           src={user.profile_image}
                           alt="person"
-                          style={{
-                            width: '80px',
-                            height: '80px',
-                            borderRadius: '50%'
-                          }}
                         />
                       </Tooltip>
                       <div className="feed__employerName">
