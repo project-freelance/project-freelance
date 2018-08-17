@@ -64,9 +64,9 @@ class Post extends Component {
             <AddCircleOutline
               className="post__add__icon"
               style={{
-                width: '60px',
-                height: '60px',
-                color: '#7fc4fd'
+                width: '65px',
+                height: '65px',
+                color: 'blue'
               }}
               onClick={this.handleClickOpen}
             />
