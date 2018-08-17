@@ -118,10 +118,10 @@ export function addFaveJob(employer_post_id, freelancer_id) {
     })
   };
 }
-export function getFaveJobs(id) {
+export function getFaveJobs() {
   return {
     type: GET_FAVE_JOBS,
-    payload: axios.get(`/api/user/jobs/${id}`)
+    payload: axios.get(`/api/user/jobs`)
   };
 }
 export function deleteFaveJob(empid, freeid) {
