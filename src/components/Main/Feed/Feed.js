@@ -295,7 +295,6 @@ class Feed extends Component {
               id="filter-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              // open={false}
               // open={this.state.open}
               onClose={this.handleClose}
             >
