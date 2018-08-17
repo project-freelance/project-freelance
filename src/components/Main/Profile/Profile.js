@@ -1,30 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getFreelancer } from '../../../ducks/freelancerReducer';
-import AddReview from './Reviews/AddReview/AddReview';
-import { getUser, getUsers } from '../../../ducks/userReducer';
-import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
-import EmployerProfile from './EmployerProfile';
-import Portfolio from './Portfolio/Portfolio';
-import AvgRating from './Reviews/AvgRating/AvgRating';
-import Moment from 'react-moment';
-import Reviews from './Reviews/Reviews';
-import Button from '@material-ui/core/Button';
-import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
-import ReviewModal from './Reviews/ReviewModal/ReviewModal';
-import Email from '@material-ui/icons/Email.js';
-import './Profile.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getFreelancer } from "../../../ducks/freelancerReducer";
+import AddReview from "./Reviews/AddReview/AddReview";
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
+import EmployerProfile from "./EmployerProfile";
+import Portfolio from "./Portfolio/Portfolio";
+import AvgRating from "./Reviews/AvgRating/AvgRating";
+import Moment from "react-moment";
+import Reviews from "./Reviews/Reviews";
+import Button from "@material-ui/core/Button";
+import PortfolioModal from "./Portfolio/PortfolioModal/PortfolioModal";
+import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
+import Email from "@material-ui/icons/Email.js";
+import "./Profile.css";
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
       reviewShow: true,
       allReviewsShow: false,
-      open: false
+      open: false,
+
+      first_name: "Hello",
+      profile_image:
+        "https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/62991d50-a76e-457c-ba9c-bd42af91d335_pug.jpeg"
     };
   }
   componentDidMount() {
-    this.props.getFreelancer(this.props.match.params.id);
+    this.props.getFreelancer(this.props.match.params.id).then(() => {
+      if (
+        this.props.freelancer[0] &&
+        this.props.freelancer[0].role === "Freelancer"
+      ) {
+        this.setState({ first_name: this.props.freelancer[0].first_name });
+        this.setState({
+          profile_image: this.props.freelancer[0].profile_image
+        });
+      }
+    });
     // this.props.getUser();
     this.props.getAvgRating(this.props.match.params.id);
     this.props.getReviews(this.props.match.params.id);
@@ -48,31 +62,30 @@ class Profile extends Component {
       this.props.users && this.props.users.find(user => user.id === reviewerId);
 
     let { freelancer, review } = this.props;
+
+    let { first_name, profile_image } = this.state;
     return (
       <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
-        this.props.freelancer[0].role === 'Freelancer' ? (
+        this.props.freelancer[0].role === "Freelancer" ? (
           <div>
             <div className="profile__header">
               {freelancer[0] && freelancer[0].heading}
             </div>
             <div className="profile__container">
               <div className="profile__left__panel">
-                <img
-                  className="profile__user__img"
-                  src={freelancer[0] && freelancer[0].profile_image}
-                />
+                <img className="profile__user__img" src={profile_image} />
               </div>
               <div>
                 <div className="profile__right__panel">
                   <div className="profile__user__name">
-                    {`${freelancer[0] && freelancer[0].first_name}`}{' '}
+                    {`${first_name}`}{" "}
                     {`${freelancer[0] && freelancer[0].last_name}`}
                   </div>
                   <div id="profile__line__space">
                     {freelancer[0].city && freelancer[0].city.length > 0 ? (
                       <div>
-                        {`${freelancer[0] && freelancer[0].city},`}{' '}
+                        {`${freelancer[0] && freelancer[0].city},`}{" "}
                         {freelancer[0] && freelancer[0].state}
                       </div>
                     ) : (
@@ -148,7 +161,8 @@ class Profile extends Component {
                         freelancer[0]
                           .email}?subject=I'd like to offer you a position with... `}
                     >
-                      Contact Me<Email />
+                      Contact Me
+                      <Email />
                       {/* <div className="profile__contact__text">Contact Me</div> */}
                     </Button>
                   </div>
@@ -172,7 +186,7 @@ class Profile extends Component {
                           />
                           <div className="profile__review__textBlock">
                             <div>
-                              {reviewerObj && reviewerObj.first_name}{' '}
+                              {reviewerObj && reviewerObj.first_name}{" "}
                               {reviewerObj && reviewerObj.last_name}
                             </div>
                             {this.props.reviews[0] &&

@@ -145,10 +145,10 @@ class Feed extends Component {
                   </div>
                   <div className="feed__freelancerPosting__rightdiv">
                     <div className="feed__freelancerModalButton">
-                      <FreelancerPostModal
+                      {/* <FreelancerPostModal
                         userId={post.user_id}
                         postId={post.id}
-                      />
+                      /> */}
                       <div className="">
                         {post.user_id === this.props.user[0].id ? (
                           <Button
@@ -289,7 +289,8 @@ class Feed extends Component {
                 color: 'white'
               }}
             >
-              Filter<FilterList />
+              Filter
+              <FilterList />
             </Button>
             <Menu
               id="filter-menu"

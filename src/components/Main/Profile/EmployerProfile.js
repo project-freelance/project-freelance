@@ -21,6 +21,7 @@ class EmployerProfile extends Component {
     };
   }
   componentDidMount() {
+    console.log(this.props);
     this.props.getEmployer(this.props.match.params.id);
     // this.props.getUser();
     this.props.getAvgRating(this.props.match.params.id);
@@ -114,7 +115,8 @@ class EmployerProfile extends Component {
                   employer[0]
                     .email}?subject=I'd like to offer you a position with... `}
               >
-                Contact Me<Email />
+                Contact Me
+                <Email />
               </Button>
             </div>
             {/* <AddReview {...employer} loggedInUser={this.props.user} /> */}

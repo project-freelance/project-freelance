@@ -14,6 +14,7 @@ import EmployerApplicants from "../AppliedJobs/EmployerApplicants/EmployerApplic
 
 class AppliedJobs extends Component {
   async componentDidMount() {
+    console.log(this.props);
     const values = await Promise.all([
       this.props.getEmployerPosts(),
       this.props.getUsers(),
@@ -21,14 +22,16 @@ class AppliedJobs extends Component {
         this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
     ]);
 
-    this.setState({ users: values[1].value.data });
+    this.setState({ users: values[1].value.data }, console.log(this.props));
   }
 
   render() {
     //finds employers listed posts and passes down to Employer Applicants Component
     let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
-      if (post.user_id == this.props.user[0].id) {
+      if (post.user_id === this.props.user[0].id) {
         return <EmployerApplicants key={i} post={post} />;
+      } else {
+        return null;
       }
     });
 
