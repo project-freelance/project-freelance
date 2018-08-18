@@ -7,27 +7,30 @@
   .nav__accountImage {
     .nav__profileImage {
       width: 100px;
-      height: auto;
+      height: 100px;
       object-fit: cover;
       border-radius: 50px;
     }
   }
-  .nav__links {
-    color: white;
-    &:hover {
-      color: lightblue;
-      pointer: cursor;
+  .nav__linkContainer {
+    .nav__links {
+      color: white;
+      margin: 10px;
+      &:hover {
+        color: lightblue;
+        pointer: cursor;
+      }
     }
-  }
-  a:visited {
-    color: white;
-  }
+    a:visited {
+      color: white;
+    }
 
-  a:hover {
-    color: lightblue;
-  }
+    a:hover {
+      color: lightblue;
+    }
 
-  a:active {
-    color: blue;
+    a:active {
+      color: blue;
+    }
   }
 }

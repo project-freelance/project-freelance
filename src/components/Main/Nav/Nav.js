@@ -15,7 +15,6 @@ class Nav extends Component {
       id: 0
     };
   }
-
   componentDidMount() {
     this.props
       .getUser()
@@ -53,7 +52,7 @@ class Nav extends Component {
               src={profile_image}
               alt="User Profile Image"
             />
-            <div>
+            <div className="nav__accountName">
               <h3>
                 {first_name}
                 {"  "} {last_name}
@@ -61,28 +60,22 @@ class Nav extends Component {
             </div>
           </div>
 
-          <div>
-            <Link className="nav__links" to="/main/feed">
-              News Feed
-            </Link>
-          </div>
-          <div>
-            <Link className="nav__links" to="/main/appliedjobs">
-              My Jobs
-            </Link>
-          </div>
-          <div>
-            <Link className="nav__links" to={`/main/profile/${id}`}>
-              My Profile
-            </Link>
-          </div>
-          <div>
-            <Link className="nav__links" to="/main/settings">
-              Settings
-            </Link>
-          </div>
-          <div>
-            <a href="http://localhost:3001/logout">logout</a>
+          <div className="nav__linkContainer">
+            <div className="nav__links">
+              <Link to="/main/feed">News Feed</Link>
+            </div>
+            <div className="nav__links">
+              <Link to="/main/appliedjobs">My Jobs</Link>
+            </div>
+            <div className="nav__links">
+              <Link to={`/main/profile/${this.state.id}`}>My Profile</Link>
+            </div>
+            <div className="nav__links">
+              <Link to="/main/settings">Settings</Link>
+            </div>
+            <div className="nav__links">
+              <a href="http://localhost:3001/logout">logout</a>
+            </div>
           </div>
         </nav>
       </div>
