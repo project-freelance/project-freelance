@@ -41,7 +41,7 @@ class EmployerApplicants extends Component {
                 src={applicant.profile_image}
                 style={{ height: "50px", width: "auto" }}
               />
-              <div class="overlay">
+              <div className="overlay">
                 <div className="employerApplicants__text">
                   <p>
                     {applicant.first_name} {"  "}
