@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import Portfolio from "../Portfolio";
-import AddReview from '../AddReview/AddReview';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import './ReviewModal.css';
+import AddReview from "../AddReview/AddReview";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import "./ReviewModal.css";
 // import "./PortfolioModal.css";
 
 export default class ReviewModal extends Component {
@@ -22,7 +22,7 @@ export default class ReviewModal extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         <div>
@@ -30,8 +30,8 @@ export default class ReviewModal extends Component {
             className="reviewModal__addReview__btn"
             onClick={this.handleClickOpen}
           >
-            Have you worked with {this.props[0] && this.props[0].first_name}?
-            Write a review!
+            Have you worked with {this.props[0] && this.props[0].company}? Write
+            a review!
           </div>
         </div>
         {/* <div className="profile__portfolio__container">
@@ -47,10 +47,10 @@ export default class ReviewModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentStyle={{
-            width: '50vh',
-            maxWidth: '100%',
-            height: '50vw',
-            padding: '30px'
+            width: "50vh",
+            maxWidth: "100%",
+            height: "50vw",
+            padding: "30px"
           }}
         >
           <DialogContent>

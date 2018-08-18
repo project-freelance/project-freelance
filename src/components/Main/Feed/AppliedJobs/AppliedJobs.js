@@ -20,15 +20,16 @@ class AppliedJobs extends Component {
       this.props.getFaveJobs &&
         this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
     ]);
-
     this.setState({ users: values[1].value.data });
   }
 
   render() {
     //finds employers listed posts and passes down to Employer Applicants Component
     let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
-      if (post.user_id == this.props.user[0].id) {
+      if (post.user_id === this.props.user[0].id) {
         return <EmployerApplicants key={i} post={post} />;
+      } else {
+        return null;
       }
     });
 

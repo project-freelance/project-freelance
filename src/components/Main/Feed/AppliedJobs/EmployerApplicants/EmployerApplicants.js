@@ -27,20 +27,32 @@ class EmployerApplicants extends Component {
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
         <div key={i}>
-          {" "}
           <Link
             to={`/main/profile/${applicant.freelancer_id}`}
             style={{ textDecoration: "none" }}
           >
-            <p>
-              {applicant.first_name}
-              {"  "} {applicant.last_name}
-            </p>
+            <div className="employerApplicants__applicantContainer">
+              <p>
+                {applicant.first_name} {"  "}
+                {applicant.last_name}
+              </p>
 
-            <img
-              src={applicant.profile_image}
-              style={{ height: "50px", width: "auto" }}
-            />
+              <img
+                src={applicant.profile_image}
+                style={{ height: "50px", width: "auto" }}
+              />
+              <div className="overlay">
+                <div className="employerApplicants__text">
+                  <p>
+                    {applicant.first_name} {"  "}
+                    {applicant.last_name}
+                  </p>
+                  <p className="employerApplicants__viewProfile">
+                    View My Profile
+                  </p>
+                </div>
+              </div>
+            </div>
           </Link>
         </div>
       );
