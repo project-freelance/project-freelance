@@ -341,9 +341,8 @@ class Feed extends Component {
           </div>
         </div>
         <div>
-          <h1>In the Feed...</h1>
           <Post />
-          {mergedStyled}
+          <div className="feed__merged__newsFeed">{mergedStyled}</div>
         </div>
       </div>
     );

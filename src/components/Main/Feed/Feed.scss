@@ -180,7 +180,7 @@
   background-color: #343337;
   // background-color: #7fc4fd;
   padding-left: 2vw;
-  height: 8vh;
+  height: 5vh;
   display: flex;
   justify-content: space-around;
   color: white;
@@ -190,4 +190,7 @@
   align-items: flex-end;
   width: 75%;
   justify-content: flex-end;
+}
+.feed__merged__newsFeed {
+  margin-top: 50px;
 }
