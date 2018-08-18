@@ -22,7 +22,7 @@ export default class ReviewModal extends Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <div>
         <div>
@@ -59,6 +59,7 @@ export default class ReviewModal extends Component {
                 beingReviewed={this.props[0]}
                 loggedInUser={this.props.loggedInUser[0]}
                 handleClose={this.handleClose}
+                stateOfClose={this.state.open}
               />
             </div>
           </DialogContent>
