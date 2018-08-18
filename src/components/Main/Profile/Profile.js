@@ -42,7 +42,7 @@ class Profile extends Component {
         this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer"
       ) {
-        this.setState({ first_name: this.props.freelancer[0].heading });
+        this.setState({ heading: this.props.freelancer[0].heading });
         this.setState({
           profile_image: this.props.freelancer[0].profile_image
         });
@@ -100,9 +100,7 @@ class Profile extends Component {
         {this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer" ? (
           <div>
-            <div className="profile__header">
-              {freelancer[0] && freelancer[0].heading}
-            </div>
+            <div className="profile__header">{heading}</div>
             <div className="profile__container">
               <div className="profile__left__panel">
                 <img className="profile__user__img" src={profile_image} />
