@@ -8,7 +8,7 @@ import {
   getFreelancerPosts,
   deleteFreelancerPost
 } from '../../../ducks/freelancerReducer';
-import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getUsers } from '../../../ducks/userReducer';
 import { getFaveJobs } from '../../../ducks/freelancerReducer';
 import '../Feed/Feed.css';
 import Post from '../Feed/Post/Post';
@@ -40,13 +40,8 @@ class Feed extends Component {
   componentDidMount() {
     this.props.getEmployerPosts();
     this.props.getFreelancerPosts();
-    this.props.getUsers().then(result => {
-      this.setState({
-        users: result.value.data
-      });
-    });
-    this.props.getFaveJobs &&
-      this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
+    this.props.getUsers();
+    this.props.getFaveJobs();
   }
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -55,14 +50,6 @@ class Feed extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-
-  // handleClickOpen = () => {
-  //   this.setState({ open: true });
-  // };
-
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
 
   filterFreelancers() {
     this.setState({ showFreelancers: false, showEmployers: true });
@@ -75,13 +62,14 @@ class Feed extends Component {
   }
 
   render() {
-    //getting logged in user's saved jobs
     const { anchorEl } = this.state;
+
+    //getting logged in user's favorite jobs and list job numbers in an array
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
 
-    let { employerPosts, freelancerPosts, isLoading, users } = this.props;
+    let { employerPosts, freelancerPosts, users } = this.props;
 
     //function to merge arrays and sort by moment
     function preMerge(arr1, arr2) {
@@ -94,6 +82,7 @@ class Feed extends Component {
     //invoking the merge function passing in our arrays
     let mergedArrays = preMerge(employerPosts, freelancerPosts);
 
+    //reassign merged array contents based on menu filters
     if (this.state.showFreelancers === false) {
       mergedArrays = employerPosts;
     } else if (this.state.showEmployers === false) {
@@ -106,7 +95,7 @@ class Feed extends Component {
     let mergedStyled = mergedArrays.map((post, index) => {
       //matching post to user who posted to display user data
       let postUser = users.map((user, i) => {
-        if (post.user_id == user.id) {
+        if (post.user_id === user.id) {
           //if freelancer display this in return
           if (user.role === 'Freelancer') {
             return (
@@ -145,10 +134,19 @@ class Feed extends Component {
                   </div>
                   <div className="feed__freelancerPosting__rightdiv">
                     <div className="feed__freelancerModalButton">
-                      {/* <FreelancerPostModal
-                        userId={post.user_id}
+                      <FreelancerPostModal
+                        postUserId={post.user_id}
                         postId={post.id}
-                      /> */}
+                        email={user.email}
+                        favJobs={this.props.favJobs}
+                        pic={user.profile_image}
+                        firstName={user.first_name}
+                        lastName={user.last_name}
+                        specialty={user.specialty}
+                        title={post.title}
+                        body={post.body}
+                        moment={post.moment}
+                      />
                       <div className="">
                         {post.user_id === this.props.user[0].id ? (
                           <Button
@@ -221,7 +219,19 @@ class Feed extends Component {
                 </div>
                 <div className="feed__employerPosting__rightdiv">
                   <div className="feed__employerPosting__employerModalButton">
-                    <EmployerPostModal userId={post.user_id} postId={post.id} />
+                    <EmployerPostModal
+                      postUserId={post.user_id}
+                      postId={post.id}
+                      favJobs={this.props.favJobs}
+                      pic={user.profile_image}
+                      firstName={user.first_name}
+                      lastName={user.last_name}
+                      specialty={user.specialty}
+                      title={post.title}
+                      body={post.body}
+                      price={post.price}
+                      moment={post.moment}
+                    />
                     {post.user_id === this.props.user[0].id ? (
                       <Button
                         style={{
@@ -304,34 +314,6 @@ class Feed extends Component {
               <MenuItem onClick={() => this.resetFeed()}>News Feed</MenuItem>
             </Menu>
           </div>
-          {/* <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.filterFreelancers()}
-          >
-            Show Employers Only
-          </Button>
-          <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.filterEmployers()}
-          >
-            Show Freelancers Only
-          </Button>
-
-          <Button
-            style={{
-              // backgroundColor: "rgb(127, 196, 253)"
-              color: 'white'
-            }}
-            onClick={() => this.resetFeed()}
-          >
-            Reset Feed
-          </Button> */}
         </div>
         <div>
           <h1>In the Feed...</h1>
@@ -359,7 +341,6 @@ export default connect(
     getEmployerPosts,
     getFreelancerPosts,
     getUsers,
-    getUser,
     getFaveJobs,
     deleteFreelancerPost,
     deleteEmployerPost

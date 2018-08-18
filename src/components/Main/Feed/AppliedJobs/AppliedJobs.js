@@ -17,15 +17,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 class AppliedJobs extends Component {
   async componentDidMount() {
-    console.log(this.props);
     const values = await Promise.all([
       this.props.getEmployerPosts(),
       this.props.getUsers(),
       this.props.getFaveJobs &&
         this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
     ]);
-
-    this.setState({ users: values[1].value.data }, console.log(this.props));
+    this.setState({ users: values[1].value.data });
   }
 
   render() {

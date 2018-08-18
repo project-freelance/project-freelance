@@ -17,12 +17,28 @@ class EmployerProfile extends Component {
     super();
     this.state = {
       reviewShow: true,
-      allReviewsShow: false
+      allReviewsShow: false,
+      heading: "",
+      company_logo:
+        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
+      company: "",
+      city: "",
+      state: "",
+      bio: "",
+      position: "",
+      profile_image:
+        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
+      email: "",
+      first_name: "",
+      last_name: "",
+      role: ""
     };
   }
   componentDidMount() {
     console.log(this.props);
-    this.props.getEmployer(this.props.match.params.id);
+    this.props.getEmployer(this.props.match.params.id).then(() => {
+      this.setState({ heading: this.props.employer[0].heading });
+    });
     // this.props.getUser();
     this.props.getAvgRating(this.props.match.params.id);
   }

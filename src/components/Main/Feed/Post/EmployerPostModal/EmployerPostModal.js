@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getEmployerPosts } from '../../../../../ducks/employerReducer';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   addFaveJob,
-  getFaveJobs,
-  deleteFaveJob
-} from '../../../../../ducks/freelancerReducer';
-import { getUser } from '../../../../../ducks/userReducer';
-import { getUsers } from '../../../../../ducks/userReducer';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import Moment from 'react-moment';
-import '../EmployerPostModal/EmployerPostModal.css';
-import { Link } from 'react-router-dom';
-import Tooltip from '@material-ui/core/Tooltip';
-import Info from '@material-ui/icons/Info.js';
-import CancelPresentation from '@material-ui/icons/CancelPresentation.js';
-import AccountCircle from '@material-ui/icons/AccountCircle.js';
+  deleteFaveJob,
+  getFaveJobs
+} from "../../../../../ducks/freelancerReducer";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
+import Moment from "react-moment";
+import "../EmployerPostModal/EmployerPostModal.css";
+import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import Info from "@material-ui/icons/Info.js";
+import CancelPresentation from "@material-ui/icons/CancelPresentation.js";
+import AccountCircle from "@material-ui/icons/AccountCircle.js";
 
 class EmployerPostModal extends Component {
   constructor(props) {
@@ -25,11 +22,6 @@ class EmployerPostModal extends Component {
     this.state = {
       open: false
     };
-  }
-
-  componentDidMount() {
-    this.props.getFaveJobs &&
-      this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id);
   }
 
   handleClickOpen = () => {
@@ -40,29 +32,18 @@ class EmployerPostModal extends Component {
     this.setState({ open: false });
   };
 
-  handleSpecialtyChange = specialty => event => {
-    this.setState({
-      [specialty]: event.target.value
-    });
-  };
-
   render() {
-    const userIdFromPost = this.props && this.props.userId;
-    const postId = this.props && this.props.postId;
-    // const idFromModalPost = this.props && this.props.id;
-
-    let matchUser = this.props.users.find(user => user.id === userIdFromPost);
-    let matchPost = this.props.employerPosts.find(post => post.id === postId);
-
+    //check if logged in user has this job on their fav list
     let matchJob = this.props.favJobs
       .filter(person => person.freelancer_id === this.props.user[0].id)
       .map(item => item.employer_post_id);
+
     return (
       <div>
         {/* Modal Open Button */}
         <Button
           style={{
-            color: '#808080'
+            color: "#808080"
           }}
           onClick={this.handleClickOpen}
         >
@@ -77,10 +58,10 @@ class EmployerPostModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentstyle={{
-            width: '70vh',
-            maxWidth: '100%',
-            height: '70vw',
-            padding: '30px'
+            width: "70vh",
+            maxWidth: "100%",
+            height: "70vw",
+            padding: "30px"
           }}
         >
           <DialogContent>
@@ -89,11 +70,11 @@ class EmployerPostModal extends Component {
                 <div className="employerPostModal__picCancel">
                   <div>
                     <img
-                      src={matchUser && matchUser.profile_image}
-                      alt="person"
+                      src={this.props.pic}
+                      alt="employer"
                       style={{
-                        width: '120px',
-                        height: '120px'
+                        width: "120px",
+                        height: "120px"
                       }}
                     />
                   </div>
@@ -104,29 +85,25 @@ class EmployerPostModal extends Component {
                       </Tooltip>
                     </div>
                     <div>
-                      <Moment fromNow>{matchPost && matchPost.moment}</Moment>
+                      <Moment fromNow>{this.props.moment}</Moment>
                     </div>
                   </div>
                 </div>
                 <div className="employerPostModal__data">
-                  <h2>
-                    {matchUser &&
-                      matchUser.first_name + ' ' + matchUser.last_name}
-                  </h2>
-                  <p>{matchUser && matchUser.specialty}</p>
-                  <p>{matchPost && matchPost.title}</p>
-                  <p>{matchPost && matchPost.body}</p>
-                  <p>${matchPost && matchPost.price}</p>
-
+                  <h2>{`${this.props.firstName} ${this.props.lastName}`}</h2>
+                  <p>{this.props.specialty}</p>
+                  <p>{this.props.title}</p>
+                  <p>{this.props.body}</p>
+                  <p>${this.props.price}</p>
                   <form>
                     <div className="employerPostModal__buttons">
                       <Link
-                        to={`/main/profile/${matchUser && matchUser.id}`}
-                        style={{ textDecoration: 'none' }}
+                        to={`/main/profile/${this.props.postUserId}`}
+                        style={{ textDecoration: "none" }}
                       >
                         <Button
                           style={{
-                            backgroundColor: '#7fc4fd'
+                            backgroundColor: "#7fc4fd"
                           }}
                         >
                           <Tooltip title="View My Profile">
@@ -134,24 +111,19 @@ class EmployerPostModal extends Component {
                           </Tooltip>
                         </Button>
                       </Link>
-                      {matchJob.includes(matchPost.id) && (
+                      {matchJob.includes(this.props.postId) && (
                         <div className="employerPostModal__applied">
                           <Button
                             style={{
-                              backgroundColor: '#008000'
+                              backgroundColor: "#008000"
                             }}
                             onClick={() => {
                               this.props
                                 .deleteFaveJob(
-                                  matchPost.id,
+                                  this.props.postId,
                                   this.props.user[0].id
                                 )
-                                .then(() =>
-                                  this.props.getFaveJobs(
-                                    this.props.favJobs[0] &&
-                                      this.props.favJobs[0].freelancer_id
-                                  )
-                                );
+                                .then(() => this.props.getFaveJobs());
                             }}
                           >
                             Unapply
@@ -159,17 +131,18 @@ class EmployerPostModal extends Component {
                           APPLIED
                         </div>
                       )}
-                      {!matchJob.includes(matchPost.id) && (
+                      {!matchJob.includes(this.props.postId) && (
                         <Button
                           style={{
-                            backgroundColor: '#008000'
+                            backgroundColor: "#008000"
                           }}
                           onClick={() => {
                             this.props
-                              .addFaveJob(matchPost.id, this.props.user[0].id)
-                              .then(() =>
-                                this.props.getFaveJobs(this.props.user[0].id)
-                              );
+                              .addFaveJob(
+                                this.props.postId,
+                                this.props.user[0].id
+                              )
+                              .then(() => this.props.getFaveJobs());
                           }}
                         >
                           Apply
@@ -191,18 +164,14 @@ function mapStateToProps(state) {
   return {
     employerPosts: state.employerReducer.employerPosts,
     user: state.userReducer.user,
-    users: state.userReducer.users,
     favJobs: state.freelancerReducer.favJobs
   };
 }
 export default connect(
   mapStateToProps,
   {
-    getEmployerPosts,
-    getUser,
-    getUsers,
     addFaveJob,
-    getFaveJobs,
-    deleteFaveJob
+    deleteFaveJob,
+    getFaveJobs
   }
 )(EmployerPostModal);
