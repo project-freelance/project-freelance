@@ -76,7 +76,7 @@ class Profile extends Component {
   // };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);

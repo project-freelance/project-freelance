@@ -22,7 +22,7 @@ export default class ReviewModal extends Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <div>
         <div>
@@ -30,8 +30,8 @@ export default class ReviewModal extends Component {
             className="reviewModal__addReview__btn"
             onClick={this.handleClickOpen}
           >
-            Have you worked with {this.props[0] && this.props[0].company}? Write
-            a review!
+            Have you worked with {this.props[0] && this.props[0].first_name}?
+            Write a review!
           </div>
         </div>
         {/* <div className="profile__portfolio__container">
@@ -59,6 +59,7 @@ export default class ReviewModal extends Component {
                 beingReviewed={this.props[0]}
                 loggedInUser={this.props.loggedInUser[0]}
                 handleClose={this.handleClose}
+                stateOfClose={this.state.open}
               />
             </div>
           </DialogContent>
