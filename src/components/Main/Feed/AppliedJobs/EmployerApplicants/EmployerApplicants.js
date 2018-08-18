@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEmployerPosts } from '../../../../../ducks/employerReducer';
+import {
+  getEmployerPosts,
+  deleteEmployerPost
+} from '../../../../../ducks/employerReducer';
 import { getUser, getUsers } from '../../../../../ducks/userReducer';
 import {
   getFaveJobs,
@@ -64,11 +67,11 @@ class EmployerApplicants extends Component {
 
     return (
       <div className="feed__mergedEmployerContainer">
-        <div className="feed__employerData">
+        {/* <div className="feed__employerData">
           <div className="feed__is__employer">
             <h3>Employer</h3>
           </div>
-        </div>
+        </div> */}
 
         <div className="feed__employerPosting">
           <div className="feed__employerPosting__header">
@@ -97,7 +100,7 @@ class EmployerApplicants extends Component {
                   color: '#7fc4fd'
                 }}
                 onClick={() =>
-                  this.props.deleteEmployerPost(this.post.id).then(() => {
+                  this.props.deleteEmployerPost(this.props.post.id).then(() => {
                     this.props.getEmployerPosts();
                   })
                 }
@@ -140,6 +143,7 @@ export default connect(
     getUsers,
     getUser,
     getFaveJobs,
-    getFreelancers
+    getFreelancers,
+    deleteEmployerPost
   }
 )(EmployerApplicants);
