@@ -1,16 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   getEmployerPosts,
   getAppliedJobs
-} from "../../../../ducks/employerReducer";
-import { getUser, getUsers } from "../../../../ducks/userReducer";
-import { getFaveJobs } from "../../../../ducks/freelancerReducer";
-import { Link } from "react-router-dom";
-import Moment from "react-moment";
-import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
-import "./AppliedJobs.css";
-import EmployerApplicants from "../AppliedJobs/EmployerApplicants/EmployerApplicants";
+} from '../../../../ducks/employerReducer';
+import { getUser, getUsers } from '../../../../ducks/userReducer';
+import { getFaveJobs } from '../../../../ducks/freelancerReducer';
+import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+import EmployerPostModal from '../Post/EmployerPostModal/EmployerPostModal';
+import './AppliedJobs.css';
+import EmployerApplicants from '../AppliedJobs/EmployerApplicants/EmployerApplicants';
+import Button from '@material-ui/core/Button';
+import DeleteForever from '@material-ui/icons/DeleteForever.js';
+import Tooltip from '@material-ui/core/Tooltip';
 
 class AppliedJobs extends Component {
   async componentDidMount() {
@@ -48,58 +51,85 @@ class AppliedJobs extends Component {
       let postUser = users.map((user, i) => {
         if (post.user_id === user.id && matchJob.includes(post.id)) {
           return (
-            <div key={i} className="appliedJobs__freelancerFavContainer">
-              <div className="appliedJobs__userData">
+            <div key={i} className="feed__mergedEmployerContainer">
+              <div className="feed__employerData">
+                <div className="feed__is__employer">
+                  <h3>Employer</h3>
+                </div>
                 <Link
-                  className="appliedJobs__linkToUser"
+                  className="feed__linkToUser"
                   to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: 'none' }}
                 >
-                  <div className="appliedJobs__employerImage">
-                    <img
-                      src={user.profile_image}
-                      alt="person"
-                      style={{
-                        width: "80px",
-                        height: "80px",
-                        borderRadius: "50%"
-                      }}
-                    />
-                  </div>
-                  <div className="appliedJobs__employerName">
-                    <p>{`${user.first_name} ${user.last_name}`}</p>
-                    <p>{user.specialty}</p>
+                  <div className="feed__employerImage">
+                    <Tooltip title="Click to see Profile">
+                      <img
+                        className="feed__employerImage--picture"
+                        src={user.profile_image}
+                        alt="person"
+                      />
+                    </Tooltip>
+                    <div className="feed__employerName">
+                      <p>{`${user.first_name} ${user.last_name}`}</p>
+                      <p>{user.specialty}</p>
+                    </div>
                   </div>
                 </Link>
               </div>
 
-              <div className="appliedJobs__employerPosting">
-                <h3>Employer Posting</h3>
-                <p>
-                  Post Title:
-                  {post.title}
-                </p>
-                <p>
-                  Job Title:
-                  {post.specialty}
-                </p>
-                <p>
-                  Post Body:
-                  {post.body}
-                </p>
-                <p>Pay: {post.price}</p>
-                <div>
-                  <Moment fromNow>{post.moment}</Moment>
+              <div className="feed__employerPosting">
+                <div className="feed__employerPosting__header">
+                  <h3>
+                    {/* Employer Posting: &nbsp; */}
+                    {post.title}
+                  </h3>
+                </div>
+                <div className="feed__employerPosting__body">
+                  <p>{post.body}</p>
                 </div>
               </div>
-              <div className="appliedJobs__employerModalButton">
-                <EmployerPostModal userId={post.user_id} postId={post.id} />
-
-                {matchJob.includes(post.id) && (
-                  <div className="appliedJobs__applied">
-                    <p>APPLIED</p>
-                  </div>
-                )}
+              <div className="feed__employerPosting__rightdiv">
+                <div className="feed__employerPosting__employerModalButton">
+                  <EmployerPostModal userId={post.user_id} postId={post.id} />
+                  {post.user_id === this.props.user[0].id ? (
+                    <Button
+                      style={{
+                        width: '20px',
+                        height: '20px',
+                        color: '#7fc4fd'
+                      }}
+                      onClick={() =>
+                        this.props.deleteEmployerPost(post.id).then(() => {
+                          this.props.getEmployerPosts();
+                        })
+                      }
+                    >
+                      <Tooltip title="Delete Post">
+                        <DeleteForever />
+                      </Tooltip>
+                    </Button>
+                  ) : null}
+                </div>
+                <div className="feed__employerModalButton">
+                  {matchJob.includes(post.id) && (
+                    <div className="feed__applied">
+                      <p>APPLIED</p>
+                    </div>
+                  )}
+                </div>
+                <div className="feed__employerPosting__rightdiv__specialty__price">
+                  <p>
+                    Looking For: &nbsp;
+                    <strong>{post.specialty}</strong>
+                  </p>
+                  <hr />
+                  <p>
+                    Pay Rate: &nbsp; <strong>${post.price}</strong>
+                  </p>
+                </div>
+                <div className="feed__employerPosting__moment">
+                  <Moment fromNow>{post.moment}</Moment>
+                </div>
               </div>
             </div>
           );
