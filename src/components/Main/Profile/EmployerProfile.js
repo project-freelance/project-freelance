@@ -62,7 +62,7 @@ class EmployerProfile extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
@@ -172,7 +172,7 @@ class EmployerProfile extends Component {
               <div />
 
               {this.props.reviews.length < 1 ? (
-                <div>No Reviews Dude</div>
+                <div>No reviews have been made</div>
               ) : (
                 <div>
                   {this.state.reviewShow ? (
