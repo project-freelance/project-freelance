@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   getEmployerPosts,
   deleteEmployerPost
-} from '../../../../../ducks/employerReducer';
-import { getUser, getUsers } from '../../../../../ducks/userReducer';
+} from "../../../../../ducks/employerReducer";
+import { getUser, getUsers } from "../../../../../ducks/userReducer";
 import {
   getFaveJobs,
   getFreelancers
-} from '../../../../../ducks/freelancerReducer';
-import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
-import './EmployerApplicants.css';
-import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import DeleteForever from '@material-ui/icons/DeleteForever.js';
-import Tooltip from '@material-ui/core/Tooltip';
+} from "../../../../../ducks/freelancerReducer";
+import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import "./EmployerApplicants.css";
+import axios from "axios";
+import Button from "@material-ui/core/Button";
+import DeleteForever from "@material-ui/icons/DeleteForever.js";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class EmployerApplicants extends Component {
   constructor(props) {
@@ -30,28 +30,27 @@ class EmployerApplicants extends Component {
       .then(response => this.setState({ applicants: response.data }));
   }
   render() {
-    console.log(this.props);
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
         <div key={i}>
           <Link
             to={`/main/profile/${applicant.freelancer_id}`}
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: "none" }}
           >
             <div className="employerApplicants__applicantContainer">
               <p>
-                {applicant.first_name} {'  '}
+                {applicant.first_name} {"  "}
                 {applicant.last_name}
               </p>
 
               <img
                 src={applicant.profile_image}
-                style={{ height: '50px', width: 'auto' }}
+                style={{ height: "50px", width: "auto" }}
               />
               <div className="overlay">
                 <div className="employerApplicants__text">
                   <p>
-                    {applicant.first_name} {'  '}
+                    {applicant.first_name} {"  "}
                     {applicant.last_name}
                   </p>
                   <p className="employerApplicants__viewProfile">
@@ -86,7 +85,13 @@ class EmployerApplicants extends Component {
           <div className="employerApplicants__list__header">
             <h2> My Job Applicants: </h2>
 
-            <div className="employerApplicants__list">{applicantList}</div>
+            <div className="employerApplicants__list">
+              {applicantList.length != 0 ? (
+                applicantList
+              ) : (
+                <h4>This job has no applicants</h4>
+              )}
+            </div>
           </div>
         </div>
 
@@ -95,9 +100,9 @@ class EmployerApplicants extends Component {
             {this.props.post.user_id === this.props.user[0].id ? (
               <Button
                 style={{
-                  width: '20px',
-                  height: '20px',
-                  color: '#7fc4fd'
+                  width: "20px",
+                  height: "20px",
+                  color: "#7fc4fd"
                 }}
                 onClick={() =>
                   this.props.deleteEmployerPost(this.props.post.id).then(() => {
