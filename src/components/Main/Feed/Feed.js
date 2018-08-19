@@ -22,6 +22,7 @@ import FilterList from '@material-ui/icons/FilterList.js';
 import Tooltip from '@material-ui/core/Tooltip';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+//
 
 class Feed extends Component {
   constructor() {
@@ -341,9 +342,8 @@ class Feed extends Component {
           </div>
         </div>
         <div>
-          <h1>In the Feed...</h1>
           <Post />
-          {mergedStyled}
+          <div className="feed__merged__newsFeed">{mergedStyled}</div>
         </div>
       </div>
     );
