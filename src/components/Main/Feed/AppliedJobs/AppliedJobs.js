@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   getEmployerPosts,
   getAppliedJobs
-} from '../../../../ducks/employerReducer';
-import { getUser, getUsers } from '../../../../ducks/userReducer';
-import { getFaveJobs } from '../../../../ducks/freelancerReducer';
-import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
-import EmployerPostModal from '../Post/EmployerPostModal/EmployerPostModal';
-import './AppliedJobs.css';
-import EmployerApplicants from '../AppliedJobs/EmployerApplicants/EmployerApplicants';
-import Button from '@material-ui/core/Button';
-import DeleteForever from '@material-ui/icons/DeleteForever.js';
-import Tooltip from '@material-ui/core/Tooltip';
+} from "../../../../ducks/employerReducer";
+import { getUser, getUsers } from "../../../../ducks/userReducer";
+import { getFaveJobs } from "../../../../ducks/freelancerReducer";
+import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
+import "./AppliedJobs.css";
+import EmployerApplicants from "../AppliedJobs/EmployerApplicants/EmployerApplicants";
+import Button from "@material-ui/core/Button";
+import DeleteForever from "@material-ui/icons/DeleteForever.js";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class AppliedJobs extends Component {
   async componentDidMount() {
@@ -59,7 +59,7 @@ class AppliedJobs extends Component {
                 <Link
                   className="feed__linkToUser"
                   to={`/main/profile/${user.id}`}
-                  style={{ textDecoration: 'none' }}
+                  style={{ textDecoration: "none" }}
                 >
                   <div className="feed__employerImage">
                     <Tooltip title="Click to see Profile">
@@ -94,9 +94,9 @@ class AppliedJobs extends Component {
                   {post.user_id === this.props.user[0].id ? (
                     <Button
                       style={{
-                        width: '20px',
-                        height: '20px',
-                        color: '#7fc4fd'
+                        width: "20px",
+                        height: "20px",
+                        color: "#7fc4fd"
                       }}
                       onClick={() =>
                         this.props.deleteEmployerPost(post.id).then(() => {
