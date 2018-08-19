@@ -80,16 +80,16 @@ module.exports = {
     const { title, body, specialty, price, user_id, moment } = req.body;
     db.employers
       .addEmployerPost([title, body, specialty, price, user_id, moment])
-      .then(post => {
-        return res
-          .status(200)
-          .send(post)
-          .catch(err => {
-            res.status(500).send({
-              errorMessage: "error!"
-            });
-            console.log(err);
-          });
+      .then(() =>
+        db.employers.getEmployerPosts().then(posts => {
+          return res.status(200).send(posts);
+        })
+      )
+      .catch(err => {
+        res.status(500).send({
+          errorMessage: "error!"
+        });
+        console.log(err);
       });
   },
 
@@ -99,12 +99,16 @@ module.exports = {
       return res.status(200).send(posts);
     });
   },
+
   deleteEmployerPost: (req, res, next) => {
     let db = req.app.get("db");
     db.employers.deleteEmployerPost(req.params.id).then(() => {
-      return res.sendStatus(200);
+      db.employers.getEmployerPosts().then(posts => {
+        return res.status(200).send(posts);
+      });
     });
   },
+
   updateEmployerPost: (req, res, next) => {
     console.log("req.body", req.body, "params", req.params);
     let db = req.app.get("db");
