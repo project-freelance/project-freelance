@@ -44,15 +44,19 @@
 .feed__freelancerPosting__header {
   margin-top: 5px;
   // border: 2px solid green;
-  width: 70%;
+  width: 90%;
   margin: auto;
   color: blue;
+  display: flex;
+  justify-content: flex-start;
 }
 .feed__freelancerPosting__body {
   display: flex;
   margin: auto;
-  width: 60%;
-  justify-content: center;
+  margin-top: 0px;
+  width: 90%;
+  justify-content: flex-start;
+  text-align: left;
 }
 .feed__freelancerModalButton {
   display: flex;
@@ -64,7 +68,7 @@
 }
 .feed__freelancerPosting__rightdiv {
   display: flex;
-  margin-left: 30px;
+  // margin-left: 30px;
   justify-content: flex-end;
   flex-direction: column;
   width: 180px;
@@ -112,9 +116,11 @@
 .feed__employerPosting__header {
   margin-top: 5px;
   // border: 2px solid red;
-  width: 100%;
+  width: 90%;
   margin: auto;
   color: blue;
+  display: flex;
+  justify-content: flex-start;
 }
 .feed__employerData {
   width: 150px;
@@ -132,13 +138,15 @@
 .feed__employerPosting__body {
   display: flex;
   margin: auto;
-  width: 60%;
-  justify-content: center;
+  margin-top: 0px;
+  width: 90%;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .feed__employerPosting__rightdiv {
   display: flex;
-  margin-left: 30px;
+  // margin-left: 30px;
   justify-content: flex-end;
   flex-direction: column;
   width: 180px;
@@ -168,7 +176,7 @@
 }
 
 .feed__applied {
-  color: green;
+  color: #33cd32;
   font-weight: bold;
   margin: auto;
 }
