@@ -27,6 +27,7 @@ class AppliedJobs extends Component {
   }
 
   render() {
+    console.log(this.props);
     //finds employers listed posts and passes down to Employer Applicants Component
     let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
       if (post.user_id === this.props.user[0].id) {
@@ -145,7 +146,16 @@ class AppliedJobs extends Component {
     return (
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
-        <div>{appliedJobsFinder}</div>
+        <div>
+          {this.props.favJobs.length != 0 ? (
+            appliedJobsFinder
+          ) : (
+            <h2 className="appliedJobs__noJobs">
+              You have not saved any jobs!
+            </h2>
+          )}
+        </div>
+        {/* appliedJobsFinder2 shows employer applicants from employer applicant component */}
         {appliedJobsFinder2}
       </div>
     );
