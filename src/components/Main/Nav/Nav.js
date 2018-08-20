@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import { getEmployer } from "../../../ducks/employerReducer";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
 import { getPortfolio } from "../../../ducks/portfolioReducer";
+
+// material icons
+import AccountCircleOutlined from "@material-ui/icons/AccountCircleOutlined";
+import SettingsApplicationsOutlined from "@material-ui/icons/SettingsApplicationsOutlined";
+import ExitToApp from "@material-ui/icons/ExitToApp";
+import WorkOutline from "@material-ui/icons/WorkOutline";
+import ViewList from "@material-ui/icons/ViewList";
 
 import "./Nav.css";
 
@@ -62,19 +69,44 @@ class Nav extends Component {
 
           <div className="nav__linkContainer">
             <div className="nav__links">
-              <Link to="/main/feed">News Feed</Link>
+              <Link to="/main/feed">
+                <ViewList
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />
+                News Feed
+              </Link>
             </div>
             <div className="nav__links">
-              <Link to="/main/appliedjobs">My Jobs</Link>
+              <Link to="/main/appliedjobs">
+                <WorkOutline
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />
+                My Jobs
+              </Link>
             </div>
             <div className="nav__links">
-              <Link to={`/main/profile/${this.state.id}`}>My Profile</Link>
+              <Link exact to={`/main/profile/${id}`}>
+                <AccountCircleOutlined
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />{" "}
+                My Profile
+              </Link>
             </div>
             <div className="nav__links">
-              <Link to="/main/settings">Settings</Link>
+              <Link to="/main/settings">
+                <SettingsApplicationsOutlined
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />
+                Settings
+              </Link>
             </div>
             <div className="nav__links">
-              <a href="http://localhost:3001/logout">logout</a>
+              <a href="http://localhost:3001/logout">
+                <ExitToApp
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />
+                logout
+              </a>
             </div>
           </div>
         </nav>
