@@ -145,7 +145,7 @@ class AppliedJobs extends Component {
     return (
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
-        <div>
+        <div style={{ backgroundColor: "#ececec" }}>
           {this.props.user[0].role === "Freelancer" ? (
             this.props.favJobs.length !== 0 ? (
               appliedJobsFinder
