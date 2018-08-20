@@ -6,7 +6,9 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 5px;
   grid-template-areas: "settings__profile settings__profile . settings__info settings__info" "settings__profile settings__profile . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" "settings__bio settings__bio . settings__info settings__info" ". . . settings__info settings__info" ". . . settings__info settings__info";
-  color: rgb(127, 196, 253);
+  body {
+    background-color: white;
+  }
   text-transform: capitalize;
   .settings__profile {
     grid-area: settings__profile;

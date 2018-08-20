@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import "./Logo.css";
 
 class Logo extends Component {
@@ -13,6 +14,15 @@ class Logo extends Component {
         </div>
         <div className="logo__title">
           <h1 className="logo__title--Grow">Freelancer</h1>
+        </div>
+        <div className="logo__scroll">
+          <p>Down</p>
+          <div className="arrow__bounce">
+            <ArrowDownward style={{ margin: "auto" }} />
+          </div>
+        </div>
+        <div className="logo__about">
+          <h1>Hello</h1>
         </div>
       </div>
     );
