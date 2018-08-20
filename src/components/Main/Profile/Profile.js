@@ -42,20 +42,18 @@ class Profile extends Component {
         this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer"
       ) {
-        this.setState({ heading: this.props.freelancer[0].heading });
         this.setState({
-          profile_image: this.props.freelancer[0].profile_image
+          heading: this.props.freelancer[0].heading,
+          profile_image: this.props.freelancer[0].profile_image,
+          first_name: this.props.freelancer[0].first_name,
+          last_name: this.props.freelancer[0].last_name,
+          city: this.props.freelancer[0].city,
+          state: this.props.freelancer[0].state,
+          specialty: this.props.freelancer[0].specialty,
+          skills: this.props.freelancer[0].skills,
+          experience: this.props.freelancer[0].experience,
+          bio: this.props.freelancer[0].bio
         });
-        this.setState({ first_name: this.props.freelancer[0].first_name });
-        this.setState({ last_name: this.props.freelancer[0].last_name });
-        this.setState({ city: this.props.freelancer[0].city });
-        this.setState({ state: this.props.freelancer[0].state });
-        this.setState({ specialty: this.props.freelancer[0].specialty });
-        this.setState({ skills: this.props.freelancer[0].skills });
-        this.setState({ experience: this.props.freelancer[0].experience });
-        this.setState({ bio: this.props.freelancer[0].bio });
-
-        // this.setState({ freelancer.first_name: this.props.freelancer[0].first_name });
       }
     });
     // this.props.getUser();
@@ -70,10 +68,6 @@ class Profile extends Component {
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
 
   render() {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
@@ -130,9 +124,11 @@ class Profile extends Component {
                         <div>No ratings have been made yet.</div>
                       </div>
                     )}
-                    <div className="profile__reviews__num">
-                      ({this.props.reviews.length})
-                    </div>
+                    {this.props.reviews.length > 0 ? (
+                      <div className="profile__reviews__num">
+                        ({this.props.reviews.length})
+                      </div>
+                    ) : null}
                   </div>
                   <div id="profile__line__space">{`${specialty}`}</div>
                   <div id="profile__line__space">
@@ -204,56 +200,62 @@ class Profile extends Component {
                       Reviews
                     </div>
                     <div />
-                    {this.state.reviewShow ? (
-                      <div>
-                        <div className="profile__review__block">
-                          <div
-                            style={{
-                              backgroundImage: `url(${reviewerObj &&
-                                reviewerObj.profile_image})`
-                            }}
-                            className="profile__reviewer__img"
-                          />
-                          <div className="profile__review__textBlock">
-                            <div>
-                              {reviewerObj && reviewerObj.first_name}{" "}
-                              {reviewerObj && reviewerObj.last_name}
-                            </div>
-                            {this.props.reviews[0] &&
-                              this.props.reviews[0].review}
-                            <div className="profile__review__moment">
-                              <Moment fromNow>
-                                {this.props.reviews[0] &&
-                                  this.props.reviews[0].moment}
-                              </Moment>
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          className="profile__reviews__toggle"
-                          onClick={() => this.toggleReviews()}
-                        >
-                          See All Reviews
-                        </div>
-                      </div>
+
+                    {this.props.reviews.length < 1 ? (
+                      <div>No reviews have been made</div>
                     ) : (
                       <div>
-                        <Reviews
-                          reviews={this.props.reviews && this.props.reviews}
-                          users={this.props.users && this.props.users}
-                        />
-                        <div
-                          className="profile__reviews__toggle"
-                          onClick={() => {
-                            this.toggleReviews();
-                          }}
-                        >
-                          Minimize Reviews
-                        </div>
+                        {this.state.reviewShow ? (
+                          <div>
+                            <div className="profile__review__block">
+                              <div
+                                style={{
+                                  backgroundImage: `url(${reviewerObj &&
+                                    reviewerObj.profile_image})`
+                                }}
+                                className="profile__reviewer__img"
+                              />
+                              <div className="profile__review__textBlock">
+                                <div>
+                                  {reviewerObj && reviewerObj.first_name}{" "}
+                                  {reviewerObj && reviewerObj.last_name}
+                                </div>
+                                {this.props.reviews[0] &&
+                                  this.props.reviews[0].review}
+                                <div className="profile__review__moment">
+                                  <Moment fromNow>
+                                    {this.props.reviews[0] &&
+                                      this.props.reviews[0].moment}
+                                  </Moment>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="profile__reviews__toggle"
+                              onClick={() => this.toggleReviews()}
+                            >
+                              See All Reviews
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <Reviews
+                              reviews={this.props.reviews && this.props.reviews}
+                              users={this.props.users && this.props.users}
+                            />
+                            <div
+                              className="profile__reviews__toggle"
+                              onClick={() => {
+                                this.toggleReviews();
+                              }}
+                            >
+                              Minimize Reviews
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
-                  {/* <AddReview {...freelancer} loggedInUser={this.props.user} /> */}
                   <ReviewModal {...freelancer} loggedInUser={this.props.user} />
                 </div>
               </div>
