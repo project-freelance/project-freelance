@@ -133,7 +133,13 @@
   }
 }
 .logo__about {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   background-color: white;
+  .logo__about__content {
+    margin-left: 10vh;
+    margin-top: 25vh;
+    height: 25vh;
+    width: 40vw;
+  }
 }
