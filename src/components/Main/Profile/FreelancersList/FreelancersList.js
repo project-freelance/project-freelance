@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { getAllFreelancerInfo } from "../../../../ducks/freelancerReducer";
 import "./FreelancersList.css";
 import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
 
 class FreelancersList extends Component {
   constructor() {
@@ -25,11 +27,17 @@ class FreelancersList extends Component {
   };
 
   render() {
+    // below allows user to search with upper- or lower-case text. Changes first letter in search to Uppercase
+    let searchText =
+      this.state.filterString.charAt(0).toUpperCase() +
+      this.state.filterString.slice(1);
+
     let freelancers = this.props.allFreelancers
       .filter((freelancer, ind) => {
         return (
-          freelancer.specialty.includes(this.state.filterString) ||
-          freelancer.first_name.includes(this.state.filterString)
+          freelancer.specialty.includes(searchText) ||
+          freelancer.first_name.includes(searchText) ||
+          freelancer.last_name.includes(searchText)
         );
       })
       .map(freelancer => {
@@ -37,26 +45,26 @@ class FreelancersList extends Component {
           <Link to={`/main/profile/${freelancer.user_id}`}>
             <div className="freelancersList__popout__card">
               <img
-                // id="freelancersList__popout__lineSpace"
                 className="freelancersList__popout__img"
                 src={freelancer.profile_image}
                 width="340"
                 height="280"
               />
               <div className="freelancersList__popout__textBlock">
-                {/* <div id="freelancer__popout__textBlock__nameRole"> */}
-                <div className="freelancer__popout__mainText">
-                  {freelancer.first_name} {freelancer.last_name}
-                </div>
-                {/* </div> */}
-                <div className="freelancersList__popout__textBlock__specialtySkills">
-                  <div id="freelancer__popout__textBlock__nameRole">
-                    <div className="freelancersList__popout__specialty">
-                      {freelancer.specialty}
-                    </div>
+                <div className="freelancersList__popout__textBlock__top">
+                  <div className="freelancersList__popout__name">
+                    {freelancer.first_name} {freelancer.last_name}
                   </div>
-                  <div>Let's talk about:</div>
-                  <div id="freelancer__popout__textBlock__skills">
+                  <div className="freelancersList__popout__minorText">
+                    {freelancer.specialty}
+                  </div>
+                </div>
+
+                <div className="freelancersList__popout__textBlock__bottom">
+                  <div className="freelancersList__popout__letsTalk">
+                    Let's talk about:
+                  </div>
+                  <div className="freelancersList__popout__minorText">
                     {freelancer.skills}
                   </div>
                 </div>
@@ -70,12 +78,20 @@ class FreelancersList extends Component {
         <div className="freelancersList__header">
           <div className="freelancersList__headerTitle">Freelancers In App</div>
         </div>
-        <input
-          onChange={e => {
-            this.handleChange(e);
-          }}
-        />
-        <div className="freelancersList__totalWrapper">{freelancers}</div>
+        <div className="freelancersList__belowHeader">
+          <div className="freelancersList__searchContainer">
+            <Input
+              fullWidth
+              placeholder="Search 'Developer' or 'Designer', or enter name"
+              inputProps={{ "aria-label": "Description" }}
+              onChange={e => {
+                this.handleChange(e);
+              }}
+            />
+          </div>
+
+          <div className="freelancersList__totalWrapper">{freelancers}</div>
+        </div>
       </div>
     );
   }

@@ -17,7 +17,7 @@ a {
 }
 .freelancersList__headerTitle {
   color: white;
-  margin-left: 10vw;
+  margin-left: 8vh;
 }
 
 .freelancersList__totalWrapper {
@@ -26,6 +26,27 @@ a {
   justify-content: center;
   // margin: 0 100px;
   margin: 0 10vw;
+}
+
+.freelancersList__belowHeader {
+  // background-color: red;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.freelancersList__searchContainer {
+  display: flex;
+  width: 475px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  // border: 1px solid red;
+}
+
+.freelancersList__searchTitle {
+  margin-right: 10px;
 }
 
 .freelancersList__popout__card {
@@ -78,22 +99,23 @@ a {
 
 .freelancersList__popout__textBlock {
   text-align: left;
+  margin-left: 5px;
 }
 
-.freelancer__popout__mainText {
+.freelancersList__popout__textBlock__top {
+  margin-bottom: 10px;
+}
+
+.freelancersList__popout__name {
   font-size: 20px;
 }
 
-.freelancersList__popout__specialty {
+.freelancersList__popout__minorText {
   // font-size: 15px;
   color: #666666;
-}
-
-#freelancer__popout__textBlock__nameRole {
-  font-size: 20px;
-}
-
-#freelancer__popout__textBlock__skills {
   font-size: 15px;
-  color: #666666;
+}
+
+.freelancersList__popout__letsTalk {
+  font-size: 17px;
 }
