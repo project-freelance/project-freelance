@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   addFaveJob,
   deleteFaveJob,
   getFaveJobs
-} from '../../../../../ducks/freelancerReducer';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-import Moment from 'react-moment';
-import '../EmployerPostModal/EmployerPostModal.css';
-import { Link } from 'react-router-dom';
-import Tooltip from '@material-ui/core/Tooltip';
-import Info from '@material-ui/icons/Info.js';
-import CancelPresentation from '@material-ui/icons/CancelPresentation.js';
-import AccountCircle from '@material-ui/icons/AccountCircle.js';
+} from "../../../../../ducks/freelancerReducer";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
+import Moment from "react-moment";
+import "../EmployerPostModal/EmployerPostModal.css";
+import { Link } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import Info from "@material-ui/icons/Info.js";
+import CancelPresentation from "@material-ui/icons/CancelPresentation.js";
+import AccountCircle from "@material-ui/icons/AccountCircle.js";
 
 class EmployerPostModal extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class EmployerPostModal extends Component {
         {/* Modal Open Button */}
         <Button
           style={{
-            color: '#808080'
+            color: "#808080"
           }}
           onClick={this.handleClickOpen}
         >
@@ -58,10 +58,10 @@ class EmployerPostModal extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           contentstyle={{
-            width: '70vh',
-            maxWidth: '100%',
-            height: '70vw',
-            padding: '30px'
+            width: "70vh",
+            maxWidth: "100%",
+            height: "70vw",
+            padding: "30px"
           }}
         >
           <DialogContent>
@@ -73,8 +73,8 @@ class EmployerPostModal extends Component {
                       src={this.props.pic}
                       alt="employer"
                       style={{
-                        width: '120px',
-                        height: '120px'
+                        width: "120px",
+                        height: "120px"
                       }}
                     />
                   </div>
@@ -99,11 +99,11 @@ class EmployerPostModal extends Component {
                     <div className="employerPostModal__buttons">
                       <Link
                         to={`/main/profile/${this.props.postUserId}`}
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: "none" }}
                       >
                         <Button
                           style={{
-                            backgroundColor: '#7fc4fd'
+                            backgroundColor: "#7fc4fd"
                           }}
                         >
                           <Tooltip title="View My Profile">
@@ -115,7 +115,7 @@ class EmployerPostModal extends Component {
                         <div className="employerPostModal__applied">
                           <Button
                             style={{
-                              backgroundColor: '#008000'
+                              backgroundColor: "#32cd32"
                             }}
                             onClick={() => {
                               this.props
@@ -134,7 +134,7 @@ class EmployerPostModal extends Component {
                       {!matchJob.includes(this.props.postId) && (
                         <Button
                           style={{
-                            backgroundColor: '#00FF7F'
+                            backgroundColor: "#32cd32"
                           }}
                           onClick={() => {
                             this.props

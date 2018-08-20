@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  getEmployerPosts,
-  getAppliedJobs
-} from "../../../../ducks/employerReducer";
-import { getUser, getUsers } from "../../../../ducks/userReducer";
-import { getFaveJobs } from "../../../../ducks/freelancerReducer";
+// import {
+//   getEmployerPosts,
+//   getAppliedJobs
+// } from "../../../../ducks/employerReducer";
+// import { getUser, getUsers } from "../../../../ducks/userReducer";
+// import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
@@ -16,17 +16,17 @@ import DeleteForever from "@material-ui/icons/DeleteForever.js";
 import Tooltip from "@material-ui/core/Tooltip";
 
 class AppliedJobs extends Component {
-  async componentDidMount() {
-    const values = await Promise.all([
-      this.props.getEmployerPosts(),
-      this.props.getUsers(),
-      this.props.getFaveJobs &&
-        this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
-    ]);
-    this.setState({ users: values[1].value.data });
-  }
-
+  // async componentDidMount() {
+  //   const values = await Promise.all([
+  //     //this.props.getEmployerPosts(),
+  //     this.props.getUsers(),
+  //     this.props.getFaveJobs &&
+  //       this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
+  //   ]);
+  //   this.setState({ users: values[1].value.data });
+  // }
   render() {
+    // console.log(this.props);
     //finds employers listed posts and passes down to Employer Applicants Component
     let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
       if (post.user_id === this.props.user[0].id) {
@@ -145,7 +145,18 @@ class AppliedJobs extends Component {
     return (
       <div className="appliedJobs__container">
         <div className="appliedJobs__topNav" />
-        <div>{appliedJobsFinder}</div>
+        <div>
+          {this.props.user[0].role === "Freelancer" ? (
+            this.props.favJobs.length !== 0 ? (
+              appliedJobsFinder
+            ) : (
+              <h2 className="appliedJobs__noJobs">
+                You have not saved any jobs!
+              </h2>
+            )
+          ) : null}
+        </div>
+        {/* appliedJobsFinder2 shows employer applicants from employer applicant component */}
         {appliedJobsFinder2}
       </div>
     );
@@ -163,10 +174,10 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    getEmployerPosts,
-    getUsers,
-    getUser,
-    getFaveJobs,
-    getAppliedJobs
+    // getEmployerPosts,
+    // getUsers,
+    // getUser,
+    // getFaveJobs,
+    // getAppliedJobs
   }
 )(AppliedJobs);

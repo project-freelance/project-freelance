@@ -159,8 +159,8 @@ class FreelancerSettings extends Component {
             rowsMax={1}
             fullWidth
             margin="normal"
-            placeholder="Placeholder"
-            helperText="Full width!"
+            placeholder="The Neanderthal's brain was bigger than yours is."
+            helperText="Write something intresting!"
             value={heading}
             onChange={e => this.setState({ heading: e.target.value })}
           />
@@ -171,8 +171,8 @@ class FreelancerSettings extends Component {
             rowsMax={4}
             fullWidth
             margin="normal"
-            placeholder="Placeholder"
-            helperText="Full width!"
+            placeholder="Mario, of Super Mario Bros. fame, appeared in the 1981 arcade game, Donkey Kong. His original name was Jumpman, but was changed to Mario to honor the Nintendo of America's landlord, Mario Segali."
+            helperText="Tell everyone a little about yourself here!"
             value={bio}
             onChange={e => this.setState({ bio: e.target.value })}
           />
@@ -389,12 +389,12 @@ class FreelancerSettings extends Component {
             </div>
           </div>
         </div>
-        <button
+        {/* <button
           onClick={() => {
             console.log(this.props);
             console.log(this.state);
           }}
-        />
+        /> */}
       </div>
     );
   }

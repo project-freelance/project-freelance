@@ -5,21 +5,30 @@
   .nav__bar {
   }
   .nav__accountImage {
+    margin-top: 5vh;
     .nav__profileImage {
       width: 100px;
       height: 100px;
       object-fit: cover;
       border-radius: 50px;
+      // border: 2px solid white;
     }
+    border-bottom: 4px solid rgb(127, 196, 253);
   }
   .nav__linkContainer {
+    margin-top: 2.5vh;
+    text-align: left;
+    margin-left: 10px;
     .nav__links {
       color: white;
-      margin: 10px;
+      margin: 20px;
       &:hover {
         color: lightblue;
         pointer: cursor;
       }
+    }
+    a {
+      color: white;
     }
     a:visited {
       color: white;
@@ -28,9 +37,8 @@
     a:hover {
       color: lightblue;
     }
-
-    a:active {
-      color: blue;
-    }
   }
+}
+.active {
+  color: red;
 }

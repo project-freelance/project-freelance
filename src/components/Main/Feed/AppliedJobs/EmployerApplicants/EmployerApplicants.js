@@ -4,11 +4,11 @@ import {
   getEmployerPosts,
   deleteEmployerPost
 } from "../../../../../ducks/employerReducer";
-import { getUser, getUsers } from "../../../../../ducks/userReducer";
-import {
-  getFaveJobs,
-  getFreelancers
-} from "../../../../../ducks/freelancerReducer";
+// import { getUser, getUsers } from "../../../../../ducks/userReducer";
+// import {
+//   getFaveJobs,
+//   getFreelancers
+// } from "../../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import "./EmployerApplicants.css";
@@ -30,6 +30,7 @@ class EmployerApplicants extends Component {
       .then(response => this.setState({ applicants: response.data }));
   }
   render() {
+    // console.log(this.props);
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
         <div key={i}>
@@ -46,6 +47,7 @@ class EmployerApplicants extends Component {
               <img
                 src={applicant.profile_image}
                 style={{ height: "50px", width: "auto" }}
+                alt="person"
               />
               <div className="overlay">
                 <div className="employerApplicants__text">
@@ -86,7 +88,7 @@ class EmployerApplicants extends Component {
             <h2> My Job Applicants: </h2>
 
             <div className="employerApplicants__list">
-              {applicantList.length != 0 ? (
+              {applicantList.length !== 0 ? (
                 applicantList
               ) : (
                 <h4>This job has no applicants</h4>
@@ -145,10 +147,10 @@ export default connect(
   mapStateToProps,
   {
     getEmployerPosts,
-    getUsers,
-    getUser,
-    getFaveJobs,
-    getFreelancers,
+    // getUsers,
+    // getUser,
+    // getFaveJobs,
+    // getFreelancers,
     deleteEmployerPost
   }
 )(EmployerApplicants);
