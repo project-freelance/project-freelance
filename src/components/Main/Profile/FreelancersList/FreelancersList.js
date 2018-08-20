@@ -55,7 +55,7 @@ class FreelancersList extends Component {
                       {freelancer.specialty}
                     </div>
                   </div>
-                  <div>Skills:</div>
+                  <div>Let's talk about:</div>
                   <div id="freelancer__popout__textBlock__skills">
                     {freelancer.skills}
                   </div>
@@ -67,7 +67,9 @@ class FreelancersList extends Component {
       });
     return (
       <div>
-        <h1>Freelancers In App</h1>
+        <div className="freelancersList__header">
+          <div className="freelancersList__headerTitle">Freelancers In App</div>
+        </div>
         <input
           onChange={e => {
             this.handleChange(e);
