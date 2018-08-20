@@ -2,16 +2,10 @@
   // background-color: red;
 }
 
-.profile__container {
-  display: flex;
-  background-color: white;
-  padding-right: 15vw;
-}
-
 .profile__header {
   // background-color: red;
   text-align: left;
-  margin-left: 2vw;
+  margin-left: 8vh;
   height: 8vh;
   display: flex;
   align-items: center;
@@ -19,14 +13,25 @@
   font-size: 30px;
 }
 
+.profile__container {
+  display: flex;
+  background-color: white;
+  // padding-right: 15vw;
+}
+
 .profile__left__panel {
   background-color: white;
   width: 50vw;
-  // height: 100vh;
+  height: 100vh;
+  margin: 3vh 4vh 3vh 8vh;
 }
 .profile__user__img {
-  height: 50vh;
-  margin: 3vh;
+  width: 35vw;
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px #b9b9b9;
+  // max-height: 40vh;
+  // height: 50vh;
+  // margin: 3vh;
   object-fit: cover;
 }
 
@@ -34,11 +39,13 @@
   text-align: left;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  margin: 3vh 8vh 3vh 4vh;
   // height: 100vh;
 }
 
 .profile__user__name {
-  margin-top: 3vh;
+  // margin-top: 3vh;
   font-size: 30px;
   font-weight: bold;
 }
@@ -50,6 +57,15 @@
 
 .profile__stars__number {
   display: flex;
+}
+
+.profile__skills__title {
+  font-weight: bold;
+  color: #373737;
+}
+.profile__experience__title {
+  font-weight: bold;
+  color: #373737;
 }
 
 .profile__portfolio__title {
@@ -76,9 +92,17 @@
   color: white;
 }
 
+.profile__reviewsContainer {
+  margin-top: 10px;
+  // background-color: red;
+}
+
 .profile__reviews__title {
+  // margin-top: 100px;
+  // padding-top: 20px;
   font-weight: bold;
   color: #373737;
+  // font-size: 20px;
 }
 
 .profile__reviewer__img {
@@ -134,6 +158,7 @@
 
 .profile__portfolio__container {
   display: flex;
+  margin-bottom: 5px;
 }
 
 .profile__portfolio__image {

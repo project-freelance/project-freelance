@@ -115,7 +115,7 @@ class EmployerPostModal extends Component {
                         <div className="employerPostModal__applied">
                           <Button
                             style={{
-                              backgroundColor: "#008000"
+                              backgroundColor: "#32cd32"
                             }}
                             onClick={() => {
                               this.props
@@ -134,7 +134,7 @@ class EmployerPostModal extends Component {
                       {!matchJob.includes(this.props.postId) && (
                         <Button
                           style={{
-                            backgroundColor: "#008000"
+                            backgroundColor: "#32cd32"
                           }}
                           onClick={() => {
                             this.props

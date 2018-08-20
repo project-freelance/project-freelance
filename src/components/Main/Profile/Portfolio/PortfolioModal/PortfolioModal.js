@@ -47,12 +47,6 @@ export default class PortfolioModal extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          // contentStyle={{
-          //   width: '500px',
-          //   maxWidth: '100%',
-          //   height: '500px',
-          //   padding: '10px'
-          // }}
         >
           <DialogContent>
             <div className="profile__portfolio__modal">

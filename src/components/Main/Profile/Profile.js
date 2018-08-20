@@ -42,7 +42,7 @@ class Profile extends Component {
         this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer"
       ) {
-        this.setState({ first_name: this.props.freelancer[0].heading });
+        this.setState({ heading: this.props.freelancer[0].heading });
         this.setState({
           profile_image: this.props.freelancer[0].profile_image
         });
@@ -76,7 +76,6 @@ class Profile extends Component {
   // };
 
   render() {
-    console.log(this.state);
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
@@ -100,9 +99,7 @@ class Profile extends Component {
         {this.props.freelancer[0] &&
         this.props.freelancer[0].role === "Freelancer" ? (
           <div>
-            <div className="profile__header">
-              {freelancer[0] && freelancer[0].heading}
-            </div>
+            <div className="profile__header">{heading}</div>
             <div className="profile__container">
               <div className="profile__left__panel">
                 <img className="profile__user__img" src={profile_image} />
@@ -140,7 +137,10 @@ class Profile extends Component {
                   <div id="profile__line__space">{`${specialty}`}</div>
                   <div id="profile__line__space">
                     {freelancer[0].skills && freelancer[0].skills.length > 0 ? (
-                      <div>Skills: {`${skills}`}</div>
+                      <div>
+                        <div className="profile__skills__title">Skills:</div>
+                        {`${skills}`}
+                      </div>
                     ) : (
                       <div>No skills listed</div>
                     )}
@@ -148,14 +148,21 @@ class Profile extends Component {
                   <div id="profile__line__space">
                     {freelancer[0].experience &&
                     freelancer[0].experience > 0 ? (
-                      <div>{`${experience}`} years of experience</div>
+                      <div>
+                        <div className="profile__experience__title">
+                          Years of experience:{" "}
+                        </div>
+                        {`${experience}`}
+                      </div>
                     ) : (
                       <div>No experience listed</div>
                     )}
                   </div>
                   {freelancer[0].bio && freelancer[0].bio.length > 0 ? (
                     <div id="profile__line__space">
-                      <div>About me:</div>
+                      <div className="profile__experience__title">
+                        About me:
+                      </div>
                       <div>{`${bio}`}</div>
                     </div>
                   ) : (
@@ -189,7 +196,7 @@ class Profile extends Component {
                       {/* <div className="profile__contact__text">Contact Me</div> */}
                     </Button>
                   </div>
-                  <div>
+                  <div className="profile__reviewsContainer">
                     <div
                       id="profile__line__space"
                       className="profile__reviews__title"

@@ -22,6 +22,7 @@ import FilterList from "@material-ui/icons/FilterList.js";
 import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+//
 
 class Feed extends Component {
   constructor() {
@@ -110,9 +111,9 @@ class Feed extends Component {
                       to={`/main/profile/${user.id}`}
                       style={{ textDecoration: "none" }}
                     >
-                      <div className="feed__userImage">
+                      <div className="feed__freelancerImage">
                         <img
-                          className="feed__userImage--picture"
+                          className="feed__freelancerImage--picture"
                           src={user.profile_image}
                           alt="person"
                         />
@@ -193,13 +194,9 @@ class Feed extends Component {
                     <div className="feed__employerImage">
                       <Tooltip title="Click to see Profile">
                         <img
+                          className="feed__employerImage--picture"
                           src={user.profile_image}
                           alt="person"
-                          style={{
-                            width: "80px",
-                            height: "80px",
-                            borderRadius: "50%"
-                          }}
                         />
                       </Tooltip>
                       <div className="feed__employerName">
@@ -223,19 +220,6 @@ class Feed extends Component {
                 </div>
                 <div className="feed__employerPosting__rightdiv">
                   <div className="feed__employerPosting__employerModalButton">
-                    <EmployerPostModal
-                      postUserId={post.user_id}
-                      postId={post.id}
-                      favJobs={this.props.favJobs}
-                      pic={user.profile_image}
-                      firstName={user.first_name}
-                      lastName={user.last_name}
-                      specialty={user.specialty}
-                      title={post.title}
-                      body={post.body}
-                      price={post.price}
-                      moment={post.moment}
-                    />
                     {post.user_id === this.props.user[0].id ? (
                       <Button
                         style={{
@@ -254,6 +238,19 @@ class Feed extends Component {
                         </Tooltip>
                       </Button>
                     ) : null}
+                    <EmployerPostModal
+                      postUserId={post.user_id}
+                      postId={post.id}
+                      favJobs={this.props.favJobs}
+                      pic={user.profile_image}
+                      firstName={user.first_name}
+                      lastName={user.last_name}
+                      specialty={user.specialty}
+                      title={post.title}
+                      body={post.body}
+                      price={post.price}
+                      moment={post.moment}
+                    />
                   </div>
                   <div className="feed__employerModalButton">
                     {matchJob.includes(post.id) && (
@@ -306,23 +303,46 @@ class Feed extends Component {
               id="filter-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              // open={this.state.open}
+              // open={open}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={() => this.filterFreelancers()}>
+              <MenuItem
+                onClick={() => {
+                  this.handleClose(), this.filterFreelancers();
+                }}
+              >
                 Employers Post Only
               </MenuItem>
-              <MenuItem onClick={() => this.filterEmployers()}>
+              <MenuItem
+                onClick={() => {
+                  this.handleClose(), this.filterEmployers();
+                }}
+              >
                 Freelancers Post Only
               </MenuItem>
-              <MenuItem onClick={() => this.resetFeed()}>News Feed</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  this.handleClose(), this.resetFeed();
+                }}
+              >
+                All News Feed
+              </MenuItem>
+              <Link to="/main/freelancers">
+                <MenuItem
+                  onClick={() => {
+                    this.handleClose();
+                  }}
+                >
+                  See All Freelancers List
+                </MenuItem>
+              </Link>
+              {/* <Route path="/main/freelancers" component={FreelancersList} /> */}
             </Menu>
           </div>
         </div>
         <div>
-          <h1>In the Feed...</h1>
           <Post />
-          {mergedStyled}
+          <div className="feed__merged__newsFeed">{mergedStyled}</div>
         </div>
       </div>
     );

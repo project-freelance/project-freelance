@@ -33,9 +33,9 @@ class AddReview extends Component {
     });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
   submitHandler = (review, user_id, reviewer_id, moment, rating) => {
     // console.log(review, user_id, review_id, moment, rating);
@@ -46,7 +46,13 @@ class AddReview extends Component {
       })
       .then(() => {
         this.props.getAvgRating(this.props.match.params.id);
+      })
+      .then(() => {
+        this.props.handleClose();
       });
+    // .then(()=>{
+    //   this.setState({this.props.stateOfClose: false})
+    // })
   };
 
   render() {
@@ -96,14 +102,13 @@ class AddReview extends Component {
         <Button
           variant="contained"
           onClick={() => {
-            this.handleClose,
-              this.submitHandler(
-                this.state.userInput,
-                this.props.beingReviewed && this.props.beingReviewed.user_id,
-                this.props.loggedInUser && this.props.loggedInUser.id,
-                this.state.time,
-                this.state.rating
-              );
+            this.submitHandler(
+              this.state.userInput,
+              this.props.beingReviewed && this.props.beingReviewed.user_id,
+              this.props.loggedInUser && this.props.loggedInUser.id,
+              this.state.time,
+              this.state.rating
+            );
           }}
           type="submit"
           // onClick={() => this.props.onClose}
