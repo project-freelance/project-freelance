@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
 import { getUser, getUsers } from "../../../ducks/userReducer";
 import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
 import EmployerProfile from "./EmployerProfile";
-import Portfolio from "./Portfolio/Portfolio";
 import AvgRating from "./Reviews/AvgRating/AvgRating";
 import Moment from "react-moment";
 import Reviews from "./Reviews/Reviews";
@@ -100,7 +98,7 @@ class Profile extends Component {
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
 
-    let { freelancer, review } = this.props;
+    let { freelancer } = this.props;
 
     let {
       first_name,
@@ -122,7 +120,11 @@ class Profile extends Component {
             <div className="profile__header">{heading}</div>
             <div className="profile__container">
               <div className="profile__left__panel">
-                <img className="profile__user__img" src={profile_image} />
+                <img
+                  className="profile__user__img"
+                  src={profile_image}
+                  alt="profile"
+                />
               </div>
               <div>
                 <div className="profile__right__panel">
