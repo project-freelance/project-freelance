@@ -27,11 +27,11 @@ class Post extends Component {
     };
   }
 
-  componentDidMount() {
-    let userRole = this.props.user[0] && this.props.user[0].role;
-    // console.log(this.props.user[0] && this.props.user[0].role);
-    // this.props.getUser();
-  }
+  // componentDidMount() {
+  // this.props.user[0] && this.props.user[0].role;
+  // console.log(this.props.user[0] && this.props.user[0].role);
+  // this.props.getUser();
+  // }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -80,7 +80,7 @@ class Post extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          contentStyle={{ width: '50vw', maxWidth: '100%', height: '50vh' }}
+          contentstyle={{ width: '50vw', maxWidth: '100%', height: '50vh' }}
         >
           <DialogContent>
             {/* create freelancer posting */}
@@ -129,13 +129,13 @@ class Post extends Component {
                           variant="outlined"
                           color="primary"
                           onClick={() => {
-                            this.handleClose,
-                              this.props.addFreelancerPost(
-                                title,
-                                body,
-                                this.props.user[0] && this.props.user[0].id,
-                                time
-                              );
+                            this.handleClose();
+                            this.props.addFreelancerPost(
+                              title,
+                              body,
+                              this.props.user[0] && this.props.user[0].id,
+                              time
+                            );
                           }}
                           type="submit"
                         >
@@ -224,15 +224,15 @@ class Post extends Component {
                             backgroundColor: '#00FF7F'
                           }}
                           onClick={() => {
-                            this.handleClose,
-                              this.props.addEmployerPost(
-                                title,
-                                body,
-                                specialty,
-                                price,
-                                this.props.user[0] && this.props.user[0].id,
-                                time
-                              );
+                            this.handleClose();
+                            this.props.addEmployerPost(
+                              title,
+                              body,
+                              specialty,
+                              price,
+                              this.props.user[0] && this.props.user[0].id,
+                              time
+                            );
                           }}
                           type="submit"
                         >
