@@ -74,7 +74,8 @@ class FreelancersList extends Component {
         );
       });
     return (
-      <div style={{ backgroundColor: "Yellow" }}>
+      // <div style={{ backgroundColor: "Yellow" }}>
+      <div className="freelancersList__overallWrapper">
         <div className="freelancersList__header">
           <div className="freelancersList__headerTitle">Search Freelancers</div>
         </div>
