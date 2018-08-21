@@ -119,17 +119,15 @@ class Post extends Component {
                       </div>
                       <div className="freelancer__post__buttons">
                         <Button
-                          style={{
-                            backgroundColor: '#FF4500'
-                          }}
+                          variant="outlined"
+                          color="secondary"
                           onClick={this.handleClose}
                         >
                           Cancel
                         </Button>
                         <Button
-                          style={{
-                            backgroundColor: '#00FF7F'
-                          }}
+                          variant="outlined"
+                          color="primary"
                           onClick={() => {
                             this.handleClose,
                               this.props.addFreelancerPost(

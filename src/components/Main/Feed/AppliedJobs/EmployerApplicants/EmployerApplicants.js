@@ -33,7 +33,7 @@ class EmployerApplicants extends Component {
     // console.log(this.props);
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
-        <div key={i}>
+        <div className="employerApplicant__background" key={i}>
           <Link
             to={`/main/profile/${applicant.freelancer_id}`}
             style={{ textDecoration: "none" }}
