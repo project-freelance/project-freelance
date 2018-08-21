@@ -20,6 +20,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Snackbar from "@material-ui/core/Snackbar";
 // Material UI
 
 import "./FreelancerSettings.css";
@@ -51,7 +52,11 @@ class FreelancerSettings extends Component {
       link3: this.props.portfolio[0].link3,
 
       completed: 0,
-      percent: 0
+      percent: 0,
+
+      open: false,
+      vertical: "bottom",
+      horizontal: "right"
     };
   }
   componentDidMount() {
@@ -110,10 +115,13 @@ class FreelancerSettings extends Component {
   };
 
   onSaveHandler = () => {
-    this.props.updateUser(this.state).then(() => {
-      this.props.updateFreelancer(this.props.user[0].id, this.state);
-      this.props.updatePortfolio(this.props.user[0].id, this.state);
-    });
+    this.props
+      .updateUser(this.state)
+      .then(() => {
+        this.props.updateFreelancer(this.props.user[0].id, this.state);
+        this.props.updatePortfolio(this.props.user[0].id, this.state);
+      })
+      .then(() => this.handleClick());
   };
 
   // progress bar
@@ -129,7 +137,16 @@ class FreelancerSettings extends Component {
     }
   };
   //end progress bar
+  handleClick = () => {
+    this.setState({ open: true });
+    setTimeout(() => {
+      this.setState({ open: false });
+    }, 5000);
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   render() {
     let {
       last_name,
@@ -147,7 +164,10 @@ class FreelancerSettings extends Component {
       link3,
       image_url1,
       image_url2,
-      image_url3
+      image_url3,
+      open,
+      vertical,
+      horizontal
     } = this.state;
     return (
       <div>
@@ -157,7 +177,7 @@ class FreelancerSettings extends Component {
             <img
               className="settings__profileImage"
               src={profile_image}
-              alt="User Profile Image"
+              alt="User Profile"
             />
             <h2>
               {first_name}
@@ -320,7 +340,7 @@ class FreelancerSettings extends Component {
             <img
               className="settings__portfolioImage"
               src={image_url1}
-              alt="Porfolio image one"
+              alt="Porfolio one"
             />{" "}
             <ReactS3Uploader
               signingUrl="/s3/sign"
@@ -349,7 +369,7 @@ class FreelancerSettings extends Component {
             <img
               className="settings__portfolioImage"
               src={image_url2}
-              alt="portfolio image two"
+              alt="portfolio two"
             />{" "}
             <ReactS3Uploader
               signingUrl="/s3/sign"
@@ -378,7 +398,7 @@ class FreelancerSettings extends Component {
             <img
               className="settings__portfolioImage"
               src={image_url3}
-              alt="portfolio image 3"
+              alt="portfolio 3"
             />
             <ReactS3Uploader
               signingUrl="/s3/sign"
@@ -413,6 +433,15 @@ class FreelancerSettings extends Component {
               value={this.state.completed}
             />
           </div>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">Saved.</span>}
+          />
         </div>
       </div>
     );

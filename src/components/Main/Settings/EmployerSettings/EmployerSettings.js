@@ -7,11 +7,11 @@ import { updateEmployer, getEmployer } from "../../../../ducks/employerReducer";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
+
 import Button from "@material-ui/core/Button";
-import NativeSelect from "@material-ui/core/NativeSelect";
+
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Snackbar from "@material-ui/core/Snackbar";
 // Material UI
 
 import "./EmployerSettings.css";
@@ -33,7 +33,11 @@ class EmployerSettings extends Component {
       bio: "loading...",
       heading: "loading...",
       company: "loading...",
-      position: "loading..."
+      position: "loading...",
+
+      open: false,
+      vertical: "bottom",
+      horizontal: "right"
     };
   }
   componentDidMount() {
@@ -71,9 +75,12 @@ class EmployerSettings extends Component {
     });
   };
   onSaveHandler = () => {
-    this.props.updateUser(this.state).then(() => {
-      this.props.updateEmployer(this.props.user[0].id, this.state);
-    });
+    this.props
+      .updateUser(this.state)
+      .then(() => {
+        this.props.updateEmployer(this.props.user[0].id, this.state);
+      })
+      .then(() => this.handleClick());
   };
 
   // progress bar
@@ -86,6 +93,16 @@ class EmployerSettings extends Component {
         completed: percent
       });
     }
+  };
+  handleClick = () => {
+    this.setState({ open: true });
+    setTimeout(() => {
+      this.setState({ open: false });
+    }, 5000);
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   //end progress bar
@@ -102,7 +119,10 @@ class EmployerSettings extends Component {
       state,
       heading,
       company,
-      position
+      position,
+      open,
+      vertical,
+      horizontal
     } = this.state;
     return (
       <div>
@@ -112,7 +132,7 @@ class EmployerSettings extends Component {
             <img
               className="settings__profileImage"
               src={profile_image}
-              alt="User Profile Image"
+              alt="User Profile"
             />
             <h2>
               {first_name}
@@ -251,7 +271,7 @@ class EmployerSettings extends Component {
               <img
                 className="settings__companyImage"
                 src={company_logo}
-                alt="User Profile Image"
+                alt="Company logo"
               />
               <ReactS3Uploader
                 signingUrl="/s3/sign"
@@ -305,6 +325,15 @@ class EmployerSettings extends Component {
               value={this.state.completed}
             />
           </div>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">Saved.</span>}
+          />
         </div>
       </div>
     );
