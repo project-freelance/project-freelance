@@ -40,9 +40,12 @@ class FreelancerSettings extends Component {
       heading: "loading...",
       skills: "loading...",
 
-      image_url1: this.props.portfolio[0].image_url1,
-      image_url2: this.props.portfolio[0].image_url2,
-      image_url3: this.props.portfolio[0].image_url3,
+      image_url1:
+        "https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/62991d50-a76e-457c-ba9c-bd42af91d335_pug.jpeg",
+      image_url2:
+        "https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/d9fe48ac-c9f3-4c6a-844d-85715c4eb23c_Pug1.jpeg",
+      image_url3:
+        "https://s3.us-east-1.amazonaws.com/freelancer-userprofilebucket/64bea7de-f8d0-414d-a110-950584f7b3c7_Pug3.jpg",
       link1: this.props.portfolio[0].link1,
       link2: this.props.portfolio[0].link2,
       link3: this.props.portfolio[0].link3,
@@ -52,18 +55,27 @@ class FreelancerSettings extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.freelancer);
-    this.props.getFreelancer(this.props.user[0].id).then(() =>
-      this.setState({
-        experience: this.props.freelancer[0].experience,
-        city: this.props.freelancer[0].city,
-        state: this.props.freelancer[0].state,
-        bio: this.props.freelancer[0].bio,
-        heading: this.props.freelancer[0].heading,
-        skills: this.props.freelancer[0].skills
+    this.props.getFreelancer(this.props.user[0].id).then(
+      () =>
+        this.setState({
+          experience: this.props.freelancer[0].experience,
+          city: this.props.freelancer[0].city,
+          state: this.props.freelancer[0].state,
+          bio: this.props.freelancer[0].bio,
+          heading: this.props.freelancer[0].heading,
+          skills: this.props.freelancer[0].skills
+        }),
+      this.props.getPortfolio(this.props.user[0].id).then(() => {
+        this.setState({
+          image_url1: this.props.portfolio[0].image_url1,
+          image_url2: this.props.portfolio[0].image_url2,
+          image_url3: this.props.portfolio[0].image_url3,
+          link1: this.props.portfolio[0].link1,
+          link2: this.props.portfolio[0].link2,
+          link3: this.props.portfolio[0].link3
+        });
       })
     );
-    console.log(this.props.freelancer);
   }
   handleChange = name => event => {
     this.setState({
