@@ -312,21 +312,24 @@ class Feed extends Component {
             >
               <MenuItem
                 onClick={() => {
-                  this.handleClose(), this.filterFreelancers();
+                  this.handleClose();
+                  this.filterFreelancers();
                 }}
               >
                 Employers Post Only
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  this.handleClose(), this.filterEmployers();
+                  this.handleClose();
+                  this.filterEmployers();
                 }}
               >
                 Freelancers Post Only
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  this.handleClose(), this.resetFeed();
+                  this.handleClose();
+                  this.resetFeed();
                 }}
               >
                 All News Feed
