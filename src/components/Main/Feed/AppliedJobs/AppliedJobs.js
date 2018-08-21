@@ -1,11 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import {
-//   getEmployerPosts,
-//   getAppliedJobs
-// } from "../../../../ducks/employerReducer";
-// import { getUser, getUsers } from "../../../../ducks/userReducer";
-// import { getFaveJobs } from "../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import EmployerPostModal from "../Post/EmployerPostModal/EmployerPostModal";
@@ -16,17 +10,7 @@ import DeleteForever from "@material-ui/icons/DeleteForever.js";
 import Tooltip from "@material-ui/core/Tooltip";
 
 class AppliedJobs extends Component {
-  // async componentDidMount() {
-  //   const values = await Promise.all([
-  //     //this.props.getEmployerPosts(),
-  //     this.props.getUsers(),
-  //     this.props.getFaveJobs &&
-  //       this.props.getFaveJobs(this.props.user[0] && this.props.user[0].id)
-  //   ]);
-  //   this.setState({ users: values[1].value.data });
-  // }
   render() {
-    // console.log(this.props);
     //finds employers listed posts and passes down to Employer Applicants Component
     let appliedJobsFinder2 = this.props.employerPosts.map((post, i) => {
       if (post.user_id === this.props.user[0].id) {
@@ -79,10 +63,7 @@ class AppliedJobs extends Component {
 
               <div className="feed__employerPosting">
                 <div className="feed__employerPosting__header">
-                  <h3>
-                    {/* Employer Posting: &nbsp; */}
-                    {post.title}
-                  </h3>
+                  <h3>{post.title}</h3>
                 </div>
                 <div className="feed__employerPosting__body">
                   <p>{post.body}</p>
@@ -186,11 +167,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  {
-    // getEmployerPosts,
-    // getUsers,
-    // getUser,
-    // getFaveJobs,
-    // getAppliedJobs
-  }
+  {}
 )(AppliedJobs);
