@@ -7,10 +7,9 @@ import { updateEmployer, getEmployer } from "../../../../ducks/employerReducer";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
+
 import Button from "@material-ui/core/Button";
-import NativeSelect from "@material-ui/core/NativeSelect";
+
 import LinearProgress from "@material-ui/core/LinearProgress";
 // Material UI
 
@@ -112,7 +111,7 @@ class EmployerSettings extends Component {
             <img
               className="settings__profileImage"
               src={profile_image}
-              alt="User Profile Image"
+              alt="User Profile"
             />
             <h2>
               {first_name}
@@ -251,7 +250,7 @@ class EmployerSettings extends Component {
               <img
                 className="settings__companyImage"
                 src={company_logo}
-                alt="User Profile Image"
+                alt="Company logo"
               />
               <ReactS3Uploader
                 signingUrl="/s3/sign"

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../../ducks/userReducer";
 import { getEmployer } from "../../../ducks/employerReducer";
@@ -57,7 +57,7 @@ class Nav extends Component {
             <img
               className="nav__profileImage"
               src={profile_image}
-              alt="User Profile Image"
+              alt="User Profile"
             />
             <div className="nav__accountName">
               <h3>

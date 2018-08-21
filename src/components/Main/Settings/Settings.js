@@ -22,9 +22,9 @@ class Settings extends Component {
   }
 
   settingDecider = () => {
-    if (this.state.role == "Freelancer") {
+    if (this.state.role === "Freelancer") {
       return <FreelancerSettings />;
-    } else if (this.state.role == "Employer") {
+    } else if (this.state.role === "Employer") {
       return <EmployerSettings />;
     }
   };
