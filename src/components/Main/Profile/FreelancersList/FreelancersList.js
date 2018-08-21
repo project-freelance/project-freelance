@@ -76,7 +76,7 @@ class FreelancersList extends Component {
     return (
       <div>
         <div className="freelancersList__header">
-          <div className="freelancersList__headerTitle">Freelancers In App</div>
+          <div className="freelancersList__headerTitle">Search Freelancers</div>
         </div>
         <div className="freelancersList__belowHeader">
           <div className="freelancersList__searchContainer">
