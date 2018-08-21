@@ -144,7 +144,7 @@ class Profile extends Component {
                   <div id="profile__line__space">
                     {freelancer[0].experience &&
                     freelancer[0].experience > 0 ? (
-                      <div>
+                      <div className="profile__experienceBlock">
                         <div className="profile__experience__title">
                           Years of experience:{' '}
                         </div>
@@ -164,7 +164,7 @@ class Profile extends Component {
                   ) : (
                     <div>No bio listed</div>
                   )}
-                  <div className="profile__portfolio__title">Portfolio</div>
+                  <div className="profile__portfolio__title">Portfolio:</div>
                   <div
                     id="profile__line__space"
                     className="profile__sample__portfolio"

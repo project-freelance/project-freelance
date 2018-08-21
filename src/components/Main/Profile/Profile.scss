@@ -62,9 +62,14 @@
   font-weight: bold;
   color: #373737;
 }
+
+.profile__experienceBlock {
+  display: flex;
+}
 .profile__experience__title {
   font-weight: bold;
   color: #373737;
+  margin-right: 5px;
 }
 
 .profile__portfolio__title {

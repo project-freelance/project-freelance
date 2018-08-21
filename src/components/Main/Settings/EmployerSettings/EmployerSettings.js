@@ -27,17 +27,27 @@ class EmployerSettings extends Component {
       email: this.props.user[0].email,
       profile_image: this.props.user[0].profile_image,
 
-      company_logo: this.props.employer[0].company_logo,
-      city: this.props.employer[0].city,
-      state: this.props.employer[0].state,
-      bio: this.props.employer[0].bio,
-      heading: this.props.employer[0].bio,
-      company: this.props.employer[0].company,
-      position: this.props.employer[0].position
+      company_logo: "loading...",
+      city: "loading...",
+      state: "loading...",
+      bio: "loading...",
+      heading: "loading...",
+      company: "loading...",
+      position: "loading..."
     };
   }
   componentDidMount() {
-    this.props.getEmployer(this.props.user[0].id);
+    this.props.getEmployer(this.props.user[0].id).then(() => {
+      this.setState({
+        company_logo: this.props.employer[0].company_logo,
+        city: this.props.employer[0].city,
+        state: this.props.employer[0].state,
+        bio: this.props.employer[0].bio,
+        heading: this.props.employer[0].bio,
+        company: this.props.employer[0].company,
+        position: this.props.employer[0].position
+      });
+    });
   }
   handleChange = name => event => {
     this.setState({
