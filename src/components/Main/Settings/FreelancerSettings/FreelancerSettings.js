@@ -442,8 +442,6 @@ class FreelancerSettings extends Component {
             }}
             message={<span id="message-id">Saved.</span>}
           />
-
-          <Button onClick={() => this.handleClick()}>Bottom-Right</Button>
         </div>
       </div>
     );
