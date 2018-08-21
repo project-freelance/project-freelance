@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getEmployer } from "../../../ducks/employerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import { withRouter } from "react-router-dom";
-import Moment from "react-moment";
-import AvgRating from "./Reviews/AvgRating/AvgRating";
-import Reviews from "./Reviews/Reviews";
-import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
-import Email from "@material-ui/icons/Email.js";
-import Button from "@material-ui/core/Button";
-import "./EmployerProfile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmployer } from '../../../ducks/employerReducer';
+import AddReview from './Reviews/AddReview/AddReview';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
+import { withRouter } from 'react-router-dom';
+import Moment from 'react-moment';
+import AvgRating from './Reviews/AvgRating/AvgRating';
+import Reviews from './Reviews/Reviews';
+import ReviewModal from './Reviews/ReviewModal/ReviewModal';
+import Email from '@material-ui/icons/Email.js';
+import Button from '@material-ui/core/Button';
+import './EmployerProfile.css';
 class EmployerProfile extends Component {
   constructor() {
     super();
     this.state = {
       reviewShow: true,
       allReviewsShow: false,
-      heading: "yes",
+      heading: 'yes',
       company_logo:
-        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
-      company: "",
-      city: "",
-      state: "",
-      bio: "",
-      position: "",
+        'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif',
+      company: '',
+      city: '',
+      state: '',
+      bio: '',
+      position: '',
       profile_image:
-        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
-      first_name: "",
-      last_name: "",
-      role: ""
+        'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif',
+      first_name: '',
+      last_name: '',
+      role: ''
     };
   }
   componentDidMount() {
@@ -38,7 +38,7 @@ class EmployerProfile extends Component {
     this.props.getEmployer(this.props.match.params.id).then(() => {
       if (
         this.props.employer[0] &&
-        this.props.employer[0].role === "Employer"
+        this.props.employer[0].role === 'Employer'
       ) {
         this.setState({
           heading: this.props.employer[0].heading,
@@ -100,7 +100,7 @@ class EmployerProfile extends Component {
             <div className="employerProfile__company">{`${employer[0] &&
               employer[0].company}`}</div>
             <div id="employerProfile__line__space">
-              {`${employer[0] && employer[0].city}`},{" "}
+              {`${employer[0] && employer[0].city}`},{' '}
               {`${employer[0] && employer[0].state}`}
             </div>
             {this.props.rating && this.props.rating > 0 ? (
@@ -133,8 +133,8 @@ class EmployerProfile extends Component {
                   Point of Contact:
                 </div>
                 <div>
-                  {`${employer[0] && employer[0].first_name}`}{" "}
-                  {`${employer[0] && employer[0].last_name}`},{" "}
+                  {`${employer[0] && employer[0].first_name}`}{' '}
+                  {`${employer[0] && employer[0].last_name}`},{' '}
                   {`${employer[0] && employer[0].position}`}
                 </div>
               </div>
@@ -154,6 +154,8 @@ class EmployerProfile extends Component {
               id="profile__line__space"
             >
               <Button
+                variant="outlined"
+                color="primary"
                 href={`mailto:${employer[0] &&
                   employer[0]
                     .email}?subject=I'd like to offer you a position with... `}
@@ -188,7 +190,7 @@ class EmployerProfile extends Component {
                         />
                         <div className="employerProfile__review__textBlock">
                           <div>
-                            {reviewerObj && reviewerObj.first_name}{" "}
+                            {reviewerObj && reviewerObj.first_name}{' '}
                             {reviewerObj && reviewerObj.last_name}
                           </div>
                           {this.props.reviews[0] &&

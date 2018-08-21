@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getFreelancer } from "../../../ducks/freelancerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import EmployerProfile from "./EmployerProfile";
-import Portfolio from "./Portfolio/Portfolio";
-import AvgRating from "./Reviews/AvgRating/AvgRating";
-import Moment from "react-moment";
-import Reviews from "./Reviews/Reviews";
-import Button from "@material-ui/core/Button";
-import PortfolioModal from "./Portfolio/PortfolioModal/PortfolioModal";
-import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
-import Email from "@material-ui/icons/Email.js";
-import "./Profile.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getFreelancer } from '../../../ducks/freelancerReducer';
+import AddReview from './Reviews/AddReview/AddReview';
+import { getUser, getUsers } from '../../../ducks/userReducer';
+import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
+import EmployerProfile from './EmployerProfile';
+import Portfolio from './Portfolio/Portfolio';
+import AvgRating from './Reviews/AvgRating/AvgRating';
+import Moment from 'react-moment';
+import Reviews from './Reviews/Reviews';
+import Button from '@material-ui/core/Button';
+import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
+import ReviewModal from './Reviews/ReviewModal/ReviewModal';
+import Email from '@material-ui/icons/Email.js';
+import './Profile.css';
 class Profile extends Component {
   constructor() {
     super();
@@ -22,17 +22,17 @@ class Profile extends Component {
       allReviewsShow: false,
       open: false,
       // freelancer: {
-      heading: "",
+      heading: '',
       profile_image:
-        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
-      first_name: "",
-      last_name: "",
-      city: "",
-      state: "",
-      specialty: "",
-      skills: "",
-      experience: "",
-      bio: ""
+        'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif',
+      first_name: '',
+      last_name: '',
+      city: '',
+      state: '',
+      specialty: '',
+      skills: '',
+      experience: '',
+      bio: ''
       // }
     };
   }
@@ -40,7 +40,7 @@ class Profile extends Component {
     this.props.getFreelancer(this.props.match.params.id).then(() => {
       if (
         this.props.freelancer[0] &&
-        this.props.freelancer[0].role === "Freelancer"
+        this.props.freelancer[0].role === 'Freelancer'
       ) {
         this.setState({
           heading: this.props.freelancer[0].heading,
@@ -91,7 +91,7 @@ class Profile extends Component {
     return (
       <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
-        this.props.freelancer[0].role === "Freelancer" ? (
+        this.props.freelancer[0].role === 'Freelancer' ? (
           <div>
             <div className="profile__header">{heading}</div>
             <div className="profile__container">
@@ -146,7 +146,7 @@ class Profile extends Component {
                     freelancer[0].experience > 0 ? (
                       <div>
                         <div className="profile__experience__title">
-                          Years of experience:{" "}
+                          Years of experience:{' '}
                         </div>
                         {`${experience}`}
                       </div>
@@ -183,6 +183,8 @@ class Profile extends Component {
                     id="profile__line__space"
                   >
                     <Button
+                      variant="outlined"
+                      color="primary"
                       href={`mailto:${freelancer[0] &&
                         freelancer[0]
                           .email}?subject=I'd like to offer you a position with... `}
@@ -217,7 +219,7 @@ class Profile extends Component {
                               />
                               <div className="profile__review__textBlock">
                                 <div>
-                                  {reviewerObj && reviewerObj.first_name}{" "}
+                                  {reviewerObj && reviewerObj.first_name}{' '}
                                   {reviewerObj && reviewerObj.last_name}
                                 </div>
                                 {this.props.reviews[0] &&
