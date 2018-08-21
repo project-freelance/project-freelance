@@ -90,7 +90,20 @@ class AppliedJobs extends Component {
               </div>
               <div className="feed__employerPosting__rightdiv">
                 <div className="feed__employerPosting__employerModalButton">
-                  <EmployerPostModal userId={post.user_id} postId={post.id} />
+                  <EmployerPostModal
+                    postUserId={post.user_id}
+                    postId={post.id}
+                    favJobs={this.props.favJobs}
+                    pic={user.profile_image}
+                    firstName={user.first_name}
+                    lastName={user.last_name}
+                    specialty={user.specialty}
+                    title={post.title}
+                    body={post.body}
+                    price={post.price}
+                    moment={post.moment}
+                  />
+
                   {post.user_id === this.props.user[0].id ? (
                     <Button
                       style={{
