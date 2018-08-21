@@ -61,6 +61,7 @@ class FreelancerPostModal extends Component {
                 <div className="freelancerPostModal__picCancel">
                   <div>
                     <img
+                      className="freelancerPostModal__image"
                       src={this.props.pic}
                       alt="person"
                       style={{
