@@ -27,12 +27,6 @@ class Post extends Component {
     };
   }
 
-  // componentDidMount() {
-  // this.props.user[0] && this.props.user[0].role;
-  // console.log(this.props.user[0] && this.props.user[0].role);
-  // this.props.getUser();
-  // }
-
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -50,15 +44,8 @@ class Post extends Component {
   render() {
     const { title, body, specialty, price, time } = this.state;
 
-    // console.log(this.state.time);
-    // console.log(this.props.user[0] && this.props.user[0].id);
-
     return (
       <div>
-        {/* <button onClick={() => console.log(this.state)} /> */}
-        {/* Modal Posting Button */}
-        {/* <button onClick={this.handleClickOpen}> */}
-
         <div className="post__add__icon__div">
           <Tooltip title="Add Post">
             <AddCircleOutline
@@ -72,9 +59,7 @@ class Post extends Component {
             />
           </Tooltip>
         </div>
-        {/* <Post /> */}
-        {/* </button> */}
-        {/* <Button onClick={this.handleClickOpen}>Add Circle Icon Here.</Button> */}
+
         <Dialog
           className="post__job__modal"
           open={this.state.open}
