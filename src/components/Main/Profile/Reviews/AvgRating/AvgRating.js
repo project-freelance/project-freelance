@@ -21,7 +21,6 @@ class AvgRating extends Component {
         <StarRatings
           rating={this.props.rating}
           starRatedColor="gold"
-          //   changeRating={this.changeRating}
           numberOfStars={5}
           name="rating"
           starDimension="20px"
