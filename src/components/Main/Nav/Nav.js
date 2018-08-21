@@ -12,6 +12,7 @@ import SettingsApplicationsOutlined from "@material-ui/icons/SettingsApplication
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import WorkOutline from "@material-ui/icons/WorkOutline";
 import ViewList from "@material-ui/icons/ViewList";
+import PeopleOutline from "@material-ui/icons/PeopleOutline";
 
 import "./Nav.css";
 
@@ -82,6 +83,14 @@ class Nav extends Component {
                   style={{ marginBottom: "-6px", marginRight: "10px" }}
                 />
                 My Jobs
+              </Link>
+            </div>
+            <div className="nav__links">
+              <Link to="/main/freelancers">
+                <PeopleOutline
+                  style={{ marginBottom: "-6px", marginRight: "10px" }}
+                />
+                Search Freelancers
               </Link>
             </div>
             <div className="nav__links">
