@@ -33,12 +33,7 @@ class AddReview extends Component {
     });
   };
 
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
-
   submitHandler = (review, user_id, reviewer_id, moment, rating) => {
-    // console.log(review, user_id, review_id, moment, rating);
     this.props
       .addReview(review, user_id, reviewer_id, moment, rating)
       .then(() => {
@@ -50,24 +45,16 @@ class AddReview extends Component {
       .then(() => {
         this.props.handleClose();
       });
-    // .then(()=>{
-    //   this.setState({this.props.stateOfClose: false})
-    // })
   };
 
   render() {
     console.log(this.props);
-    // console.log(this.props[0] && this.props[0].first_name);
     return (
       <div>
         <div>
           Leave Review of{" "}
           {this.props.beingReviewed && this.props.beingReviewed.company}
         </div>
-        {/* <input
-          onChange={e => this.changeHandler(e)}
-          placeholder="Enter review here"
-        /> */}
         <TextField
           multiline={true}
           rows={1}
@@ -87,17 +74,6 @@ class AddReview extends Component {
           name="rating"
           starDimension="25px"
         />
-        {/* <button
-          onClick={() =>
-            this.submitHandler(
-              this.state.userInput,
-              this.props[0] && this.props[0].user_id,
-              this.props.loggedInUser[0] && this.props.loggedInUser[0].id,
-              this.state.time,
-              this.state.rating
-            )
-          }
-        > */}
         <br />
         <Button
           variant="contained"
@@ -111,7 +87,6 @@ class AddReview extends Component {
             );
           }}
           type="submit"
-          // onClick={() => this.props.onClose}
         >
           Submit
         </Button>

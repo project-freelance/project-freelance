@@ -42,8 +42,8 @@ class FreelancersList extends Component {
       })
       .map(freelancer => {
         return (
-          <Link to={`/main/profile/${freelancer.user_id}`}>
-            <div className="freelancersList__popout__card">
+          <div className="freelancersList__popout__card" key={freelancer.id}>
+            <Link to={`/main/profile/${freelancer.user_id}`}>
               <img
                 className="freelancersList__popout__img"
                 src={freelancer.profile_image}
@@ -69,8 +69,8 @@ class FreelancersList extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         );
       });
     return (
