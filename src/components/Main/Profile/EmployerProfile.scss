@@ -11,23 +11,18 @@
 .employerProfile__container {
   display: flex;
   background-color: white;
-  // margin: 0 8vh;
 }
 
 .employerProfile__left__panel {
   background-color: white;
-  // width: 50vw;
   max-width: 640px;
   height: 100vh;
   margin: 4vh 4vh 3vh 8vh;
   display: flex;
-  // margin-left: 0;
 }
 
 .employerProfile__company__img {
   width: 40vw;
-  // width: 35vw;
-  // height: 100vh;
   max-height: 40vh;
   object-fit: cover;
   box-shadow: 5px 5px 2px #b9b9b9;
@@ -40,7 +35,6 @@
   flex-direction: column;
   height: 100vh;
   margin: 4vh 8vh 3vh 4vh;
-  // margin-right: 8vh;
 }
 
 #employerProfile__line__space {
@@ -49,14 +43,12 @@
 }
 
 .employerProfile__company {
-  // margin-top: 3vh;
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .employerProfile__avgReview__block {
-  // background-color: red;
   display: flex;
 }
 
@@ -72,7 +64,6 @@
 }
 
 .employerProfile__mgr__block {
-  // background-color: red;
   display: flex;
   align-items: center;
 }
@@ -87,7 +78,6 @@
 .employerProfile__contact__btn {
   height: 5vh;
   width: 11vw;
-  // background-color: rgb(127, 196, 253);
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -102,7 +92,6 @@
 
 .employerProfile__review__block {
   display: flex;
-  // background-color: red;
   height: 10vh;
   align-items: center;
   margin-top: 2vh;
@@ -115,10 +104,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // background-color: yellow;
   height: 7vh;
   margin-left: 1vw;
-  // height: 100vh;
 }
 
 .employerProfile__reviewer__img {

@@ -21,7 +21,6 @@ class Profile extends Component {
       reviewShow: true,
       allReviewsShow: false,
       open: false,
-      // freelancer: {
       heading: "",
       profile_image:
         "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
@@ -33,12 +32,10 @@ class Profile extends Component {
       skills: "",
       experience: "",
       bio: ""
-      // }
     };
   }
   componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      // window.location.reload();
       this.props
         .getFreelancer(this.props.match.params.id)
         .then(() => {
@@ -61,8 +58,6 @@ class Profile extends Component {
           }
         })
         .then(() => {});
-
-      // this.props.getUser();
       this.props.getAvgRating(this.props.match.params.id);
       this.props.getReviews(this.props.match.params.id);
     }
@@ -88,7 +83,6 @@ class Profile extends Component {
         });
       }
     });
-    // this.props.getUser();
     this.props.getAvgRating(this.props.match.params.id);
     this.props.getReviews(this.props.match.params.id);
   }
@@ -218,12 +212,10 @@ class Profile extends Component {
                       variant="outlined"
                       color="primary"
                       href={`mailto:${freelancer[0] &&
-                        freelancer[0]
-                          .email}?subject=I'd like to offer you a position with... `}
+                        freelancer[0].email}?subject=`}
                     >
                       Contact Me &nbsp;
                       <Email />
-                      {/* <div className="profile__contact__text">Contact Me</div> */}
                     </Button>
                   </div>
                   <div className="profile__reviewsContainer">
@@ -296,7 +288,6 @@ class Profile extends Component {
             </div>
           </div>
         ) : (
-          // null
           <EmployerProfile />
         )}
       </div>
