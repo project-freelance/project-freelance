@@ -66,7 +66,7 @@ class Post extends Component {
               style={{
                 width: '65px',
                 height: '65px',
-                color: 'blue'
+                color: '#3b5998'
               }}
               onClick={this.handleClickOpen}
             />

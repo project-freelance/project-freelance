@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { refresh } from "react-router-dom";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
 import AddReview from "./Reviews/AddReview/AddReview";
 import { getUser, getUsers } from "../../../ducks/userReducer";
@@ -70,29 +69,25 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.props
-      .getFreelancer(this.props.match.params.id)
-      .then(() => {
-        if (
-          this.props.freelancer[0] &&
-          this.props.freelancer[0].role === "Freelancer"
-        ) {
-          this.setState({
-            heading: this.props.freelancer[0].heading,
-            profile_image: this.props.freelancer[0].profile_image,
-            first_name: this.props.freelancer[0].first_name,
-            last_name: this.props.freelancer[0].last_name,
-            city: this.props.freelancer[0].city,
-            state: this.props.freelancer[0].state,
-            specialty: this.props.freelancer[0].specialty,
-            skills: this.props.freelancer[0].skills,
-            experience: this.props.freelancer[0].experience,
-            bio: this.props.freelancer[0].bio
-          });
-        }
-      })
-      .then(() => {});
-
+    this.props.getFreelancer(this.props.match.params.id).then(() => {
+      if (
+        this.props.freelancer[0] &&
+        this.props.freelancer[0].role === "Freelancer"
+      ) {
+        this.setState({
+          heading: this.props.freelancer[0].heading,
+          profile_image: this.props.freelancer[0].profile_image,
+          first_name: this.props.freelancer[0].first_name,
+          last_name: this.props.freelancer[0].last_name,
+          city: this.props.freelancer[0].city,
+          state: this.props.freelancer[0].state,
+          specialty: this.props.freelancer[0].specialty,
+          skills: this.props.freelancer[0].skills,
+          experience: this.props.freelancer[0].experience,
+          bio: this.props.freelancer[0].bio
+        });
+      }
+    });
     // this.props.getUser();
     this.props.getAvgRating(this.props.match.params.id);
     this.props.getReviews(this.props.match.params.id);
@@ -220,11 +215,13 @@ class Profile extends Component {
                     id="profile__line__space"
                   >
                     <Button
+                      variant="outlined"
+                      color="primary"
                       href={`mailto:${freelancer[0] &&
                         freelancer[0]
                           .email}?subject=I'd like to offer you a position with... `}
                     >
-                      Contact Me
+                      Contact Me &nbsp;
                       <Email />
                       {/* <div className="profile__contact__text">Contact Me</div> */}
                     </Button>
