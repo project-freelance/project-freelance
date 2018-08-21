@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getFreelancer } from '../../../ducks/freelancerReducer';
-import AddReview from './Reviews/AddReview/AddReview';
-import { getUser, getUsers } from '../../../ducks/userReducer';
-import { getAvgRating, getReviews } from '../../../ducks/reviewReducer';
-import EmployerProfile from './EmployerProfile';
-import Portfolio from './Portfolio/Portfolio';
-import AvgRating from './Reviews/AvgRating/AvgRating';
-import Moment from 'react-moment';
-import Reviews from './Reviews/Reviews';
-import Button from '@material-ui/core/Button';
-import PortfolioModal from './Portfolio/PortfolioModal/PortfolioModal';
-import ReviewModal from './Reviews/ReviewModal/ReviewModal';
-import Email from '@material-ui/icons/Email.js';
-import './Profile.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getFreelancer } from "../../../ducks/freelancerReducer";
+import AddReview from "./Reviews/AddReview/AddReview";
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
+import EmployerProfile from "./EmployerProfile";
+import Portfolio from "./Portfolio/Portfolio";
+import AvgRating from "./Reviews/AvgRating/AvgRating";
+import Moment from "react-moment";
+import Reviews from "./Reviews/Reviews";
+import Button from "@material-ui/core/Button";
+import PortfolioModal from "./Portfolio/PortfolioModal/PortfolioModal";
+import ReviewModal from "./Reviews/ReviewModal/ReviewModal";
+import Email from "@material-ui/icons/Email.js";
+import "./Profile.css";
 class Profile extends Component {
   constructor() {
     super();
@@ -22,25 +22,57 @@ class Profile extends Component {
       allReviewsShow: false,
       open: false,
       // freelancer: {
-      heading: '',
+      heading: "",
       profile_image:
-        'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif',
-      first_name: '',
-      last_name: '',
-      city: '',
-      state: '',
-      specialty: '',
-      skills: '',
-      experience: '',
-      bio: ''
+        "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif",
+      first_name: "",
+      last_name: "",
+      city: "",
+      state: "",
+      specialty: "",
+      skills: "",
+      experience: "",
+      bio: ""
       // }
     };
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      // window.location.reload();
+      this.props
+        .getFreelancer(this.props.match.params.id)
+        .then(() => {
+          if (
+            this.props.freelancer[0] &&
+            this.props.freelancer[0].role === "Freelancer"
+          ) {
+            this.setState({
+              heading: this.props.freelancer[0].heading,
+              profile_image: this.props.freelancer[0].profile_image,
+              first_name: this.props.freelancer[0].first_name,
+              last_name: this.props.freelancer[0].last_name,
+              city: this.props.freelancer[0].city,
+              state: this.props.freelancer[0].state,
+              specialty: this.props.freelancer[0].specialty,
+              skills: this.props.freelancer[0].skills,
+              experience: this.props.freelancer[0].experience,
+              bio: this.props.freelancer[0].bio
+            });
+          }
+        })
+        .then(() => {});
+
+      // this.props.getUser();
+      this.props.getAvgRating(this.props.match.params.id);
+      this.props.getReviews(this.props.match.params.id);
+    }
+  }
+
   componentDidMount() {
     this.props.getFreelancer(this.props.match.params.id).then(() => {
       if (
         this.props.freelancer[0] &&
-        this.props.freelancer[0].role === 'Freelancer'
+        this.props.freelancer[0].role === "Freelancer"
       ) {
         this.setState({
           heading: this.props.freelancer[0].heading,
@@ -91,7 +123,7 @@ class Profile extends Component {
     return (
       <div className="profile__mainContainer">
         {this.props.freelancer[0] &&
-        this.props.freelancer[0].role === 'Freelancer' ? (
+        this.props.freelancer[0].role === "Freelancer" ? (
           <div>
             <div className="profile__header">{heading}</div>
             <div className="profile__container">
@@ -146,7 +178,7 @@ class Profile extends Component {
                     freelancer[0].experience > 0 ? (
                       <div className="profile__experienceBlock">
                         <div className="profile__experience__title">
-                          Years of experience:{' '}
+                          Years of experience:{" "}
                         </div>
                         {`${experience}`}
                       </div>
@@ -219,7 +251,7 @@ class Profile extends Component {
                               />
                               <div className="profile__review__textBlock">
                                 <div>
-                                  {reviewerObj && reviewerObj.first_name}{' '}
+                                  {reviewerObj && reviewerObj.first_name}{" "}
                                   {reviewerObj && reviewerObj.last_name}
                                 </div>
                                 {this.props.reviews[0] &&

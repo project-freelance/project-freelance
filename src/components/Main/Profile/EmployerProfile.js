@@ -33,6 +33,33 @@ class EmployerProfile extends Component {
       role: ''
     };
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.props.getEmployer(this.props.match.params.id).then(() => {
+        if (
+          this.props.employer[0] &&
+          this.props.employer[0].role === "Employer"
+        ) {
+          this.setState({
+            heading: this.props.employer[0].heading,
+            company_logo: this.props.employer[0].company_logo,
+            company: this.props.employer[0].company,
+            city: this.props.employer[0].city,
+            state: this.props.employer[0].state,
+            bio: this.props.employer[0].bio,
+            position: this.props.employer[0].position,
+            profile_image: this.props.employer[0].profile_image,
+            first_name: this.props.employer[0].first_name,
+            last_name: this.props.employer[0].last_name,
+            role: this.props.employer[0].role
+          });
+        }
+      });
+      this.props.getAvgRating(this.props.match.params.id);
+    }
+  }
+
   componentDidMount() {
     // console.log(this.props);
     this.props.getEmployer(this.props.match.params.id).then(() => {
