@@ -1,13 +1,14 @@
 .profile__portfolio__modal {
-  height: 550px;
+  height: 450px;
   width: 500px;
-  padding: 50px;
+  // padding: 50px;
   display: flex;
   flex-direction: column;
 }
 
 .profile__portfolio__container {
   display: flex;
+
   // flex-direction: column;
   // border: 1px solid red;
   // height: 15vh;
@@ -19,4 +20,11 @@
   // width: 10vw;
   margin-right: 2vw;
   cursor: pointer;
+}
+.profile__portfolio__modal__container {
+  height: 800px;
+  width: 800px;
+  // padding: 50px;
+  // display: flex;
+  margin: auto;
 }
