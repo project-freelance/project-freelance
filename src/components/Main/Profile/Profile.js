@@ -189,7 +189,7 @@ class Profile extends Component {
                         freelancer[0]
                           .email}?subject=I'd like to offer you a position with... `}
                     >
-                      Contact Me
+                      Contact Me &nbsp;
                       <Email />
                       {/* <div className="profile__contact__text">Contact Me</div> */}
                     </Button>

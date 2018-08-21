@@ -327,16 +327,6 @@ class Feed extends Component {
               >
                 All News Feed
               </MenuItem>
-              <Link to="/main/freelancers">
-                <MenuItem
-                  onClick={() => {
-                    this.handleClose();
-                  }}
-                >
-                  See All Freelancers List
-                </MenuItem>
-              </Link>
-              {/* <Route path="/main/freelancers" component={FreelancersList} /> */}
             </Menu>
           </div>
         </div>

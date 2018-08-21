@@ -111,8 +111,7 @@ class EmployerPostModal extends Component {
                         <div className="employerPostModal__applied">
                           <Button
                             variant="outlined"
-                            // color="primary"
-
+                            color="primary"
                             onClick={() => {
                               this.props
                                 .deleteFaveJob(
@@ -130,7 +129,7 @@ class EmployerPostModal extends Component {
                       {!matchJob.includes(this.props.postId) && (
                         <Button
                           variant="outlined"
-                          // color="#32cd32"
+                          color="primary"
                           onClick={() => {
                             this.props
                               .addFaveJob(
