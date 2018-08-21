@@ -93,7 +93,9 @@ class EmployerPostModal extends Component {
                 <div className="employerPostModal__data">
                   <h2>{`${this.props.firstName} ${this.props.lastName}`}</h2>
                   {/* <p>{this.props.specialty}</p> */}
-                  <p>{this.props.title}</p>
+                  <div>
+                    <h3 style={{ color: '#3b5998' }}>{this.props.title}</h3>
+                  </div>
                   <p>{this.props.body}</p>
                   <div className="feed__employerPosting__rightdiv__specialty__price">
                     <p>
