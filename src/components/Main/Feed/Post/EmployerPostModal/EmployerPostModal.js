@@ -70,6 +70,7 @@ class EmployerPostModal extends Component {
                 <div className="employerPostModal__picCancel">
                   <div>
                     <img
+                      className="employerPostModal__image"
                       src={this.props.pic}
                       alt="employer"
                       style={{
@@ -91,10 +92,16 @@ class EmployerPostModal extends Component {
                 </div>
                 <div className="employerPostModal__data">
                   <h2>{`${this.props.firstName} ${this.props.lastName}`}</h2>
-                  <p>{this.props.specialty}</p>
-                  <p>{this.props.title}</p>
+                  {/* <p>{this.props.specialty}</p> */}
+                  <div>
+                    <h3 style={{ color: '#3b5998' }}>{this.props.title}</h3>
+                  </div>
                   <p>{this.props.body}</p>
-                  <p>${this.props.price}</p>
+                  <div className="feed__employerPosting__rightdiv__specialty__price">
+                    <p>
+                      Pay Rate: &nbsp; <strong>${this.props.price}</strong>
+                    </p>
+                  </div>
                   <form>
                     <div className="employerPostModal__buttons">
                       <Link
@@ -111,8 +118,7 @@ class EmployerPostModal extends Component {
                         <div className="employerPostModal__applied">
                           <Button
                             variant="outlined"
-                            // color="primary"
-
+                            color="primary"
                             onClick={() => {
                               this.props
                                 .deleteFaveJob(
@@ -130,7 +136,7 @@ class EmployerPostModal extends Component {
                       {!matchJob.includes(this.props.postId) && (
                         <Button
                           variant="outlined"
-                          // color="#32cd32"
+                          color="primary"
                           onClick={() => {
                             this.props
                               .addFaveJob(
