@@ -4,7 +4,6 @@
   --x-color: rgb(127, 196, 253);
 }
 .logo__container {
-  //   padding: 50vh;
   height: 100vh;
   width: 100vw;
   background: rgb(127, 196, 253);
@@ -73,6 +72,7 @@
   color: white;
   font-size: 2.5em;
   margin-top: 100px;
+  height: 34vh;
   font-family: "Permanent Marker", cursive;
   // margin-left: -8vw;
   // focus in
@@ -97,20 +97,17 @@
   width: 20px;
   color: white;
   margin: auto;
-  margin-top: 18vh;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
 
-  $bg: #2d2d37; // Dark blue
-  $primary: #fd6b21; // Orange
-
-  body {
-    background: $bg;
-  }
   a {
     color: white;
     text-decoration: none;
   }
 
   .arrow__bounce {
+    position: absolute;
+    bottom: 3vh;
     text-align: center;
     margin-left: 0.5vw;
     animation: bounce 2s infinite;
@@ -136,7 +133,11 @@
   height: 80vh;
   width: 100vw;
   background-color: white;
+  margin-top: 10vh;
+  position: initial;
   .logo__about__content {
+    align-content: center;
+    padding: 5px;
     margin-left: 10vh;
     margin-top: 25vh;
     height: 25vh;
