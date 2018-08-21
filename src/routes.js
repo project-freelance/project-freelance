@@ -24,6 +24,7 @@ export default (
           <Main>
             <Switch>
               <Route path="/main/feed" component={Feed} />
+              <Route path="/main/myprofile/:id" component={Profile} />
               <Route path="/main/profile/:id" component={Profile} />
               <Route path="/main/settings" component={Settings} />
               <Route exact path="/main/post" component={Post} />

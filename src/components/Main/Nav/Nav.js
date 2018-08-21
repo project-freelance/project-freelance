@@ -32,7 +32,6 @@ class Nav extends Component {
           .getEmployer(this.props.user[0].id)
           .then(() => this.props.getFreelancer(this.props.user[0].id))
           .then(() => this.props.getPortfolio(this.props.user[0].id))
-          .then(() => console.log(`Nav done ${this.props}`))
       );
   }
 
@@ -94,10 +93,10 @@ class Nav extends Component {
               </Link>
             </div>
             <div className="nav__links">
-              <Link exact to={`/main/profile/${id}`}>
+              <Link exact to={`/main/myprofile/${id}`}>
                 <AccountCircleOutlined
                   style={{ marginBottom: "-6px", marginRight: "10px" }}
-                />{" "}
+                />
                 My Profile
               </Link>
             </div>
