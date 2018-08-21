@@ -73,13 +73,13 @@
   }
 }
 .settings__loadingBar {
-  position: relative;
+  position: fixed;
   bottom: 0px;
   width: 85vw;
   background-color: #ececec;
 }
 .settings__saveButton {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   right: 5px;
 }

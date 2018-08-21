@@ -93,7 +93,7 @@ class Nav extends Component {
               </Link>
             </div>
             <div className="nav__links">
-              <Link exact to={`/main/myprofile/${id}`}>
+              <Link to={`/main/myprofile/${id}`}>
                 <AccountCircleOutlined
                   style={{ marginBottom: "-6px", marginRight: "10px" }}
                 />

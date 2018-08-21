@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Carousel from './Carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React, { Component } from "react";
+import Carousel from "./Carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class Portfolio extends Component {
   render(props) {

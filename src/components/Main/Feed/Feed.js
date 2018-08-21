@@ -8,7 +8,7 @@ import {
   getFreelancerPosts,
   deleteFreelancerPost
 } from "../../../ducks/freelancerReducer";
-import { getUsers } from "../../../ducks/userReducer";
+import { getUsers, getUser } from "../../../ducks/userReducer";
 import { getFaveJobs } from "../../../ducks/freelancerReducer";
 import "../Feed/Feed.css";
 import Post from "../Feed/Post/Post";
@@ -31,7 +31,8 @@ class Feed extends Component {
       showFreelancers: true,
       showEmployers: true,
       anchorEl: null,
-      open: false
+      open: false,
+      id: 1
     };
     this.filterFreelancers = this.filterFreelancers.bind(this);
     this.filterEmployers = this.filterEmployers.bind(this);
@@ -39,6 +40,9 @@ class Feed extends Component {
   }
 
   componentDidMount() {
+    this.props.getUser().then(() => {
+      this.setState({ id: this.props.user[0].id });
+    });
     this.props.getEmployerPosts();
     this.props.getFreelancerPosts();
     this.props.getUsers();
@@ -63,7 +67,7 @@ class Feed extends Component {
   }
 
   render() {
-    const { anchorEl } = this.state;
+    const { anchorEl, id } = this.state;
 
     //getting logged in user's favorite jobs and list job numbers in an array
     let matchJob = this.props.favJobs
@@ -149,7 +153,7 @@ class Feed extends Component {
                         moment={post.moment}
                       />
                       <div className="">
-                        {post.user_id === this.props.user[0].id ? (
+                        {post.user_id === id ? (
                           <Button
                             style={{
                               width: "20px",
@@ -220,7 +224,7 @@ class Feed extends Component {
                 </div>
                 <div className="feed__employerPosting__rightdiv">
                   <div className="feed__employerPosting__employerModalButton">
-                    {post.user_id === (this.props.user[0].id || 1) ? (
+                    {post.user_id === id ? (
                       <Button
                         style={{
                           width: "20px",
@@ -363,6 +367,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
+    getUser,
     getEmployerPosts,
     getFreelancerPosts,
     getUsers,
