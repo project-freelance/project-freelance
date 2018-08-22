@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getEmployer } from "../../../ducks/employerReducer";
-import AddReview from "./Reviews/AddReview/AddReview";
 import { getUser, getUsers } from "../../../ducks/userReducer";
 import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
 import { withRouter } from "react-router-dom";
@@ -92,20 +91,20 @@ class EmployerProfile extends Component {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
-    let { employer, review } = this.props;
-    let {
-      heading,
-      company_logo,
-      company,
-      city,
-      state,
-      bio,
-      position,
-      profile_image,
-      first_name,
-      last_name,
-      role
-    } = this.state;
+    let { employer } = this.props;
+    // let {
+    //   heading,
+    //   company_logo,
+    //   company,
+    //   city,
+    //   state,
+    //   bio,
+    //   position,
+    //   profile_image,
+    //   first_name,
+    //   last_name,
+    //   role
+    // } = this.state;
     return (
       <div>
         <div className="employerProfile__header">
