@@ -91,7 +91,7 @@ class EmployerProfile extends Component {
     let reviewerId = this.props.reviews[0] && this.props.reviews[0].reviewer_id;
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
-    let { employer, review } = this.props;
+    let { employer } = this.props;
 
     return (
       <div>
