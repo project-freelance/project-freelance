@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { getAllFreelancerInfo } from "../../../../ducks/freelancerReducer";
 import "./FreelancersList.css";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 import Input from "@material-ui/core/Input";
 
 class FreelancersList extends Component {
@@ -49,7 +52,7 @@ class FreelancersList extends Component {
                 src={freelancer.profile_image}
                 width="340"
                 height="280"
-                alt="Profile"
+                alt="freelancer"
               />
               <div className="freelancersList__popout__textBlock">
                 <div className="freelancersList__popout__textBlock__top">

@@ -4,11 +4,6 @@ import {
   getEmployerPosts,
   deleteEmployerPost
 } from "../../../../../ducks/employerReducer";
-// import { getUser, getUsers } from "../../../../../ducks/userReducer";
-// import {
-//   getFaveJobs,
-//   getFreelancers
-// } from "../../../../../ducks/freelancerReducer";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import "./EmployerApplicants.css";
@@ -30,7 +25,6 @@ class EmployerApplicants extends Component {
       .then(response => this.setState({ applicants: response.data }));
   }
   render() {
-    // console.log(this.props);
     let applicantList = this.state.applicants.map((applicant, i) => {
       return (
         <div className="employerApplicant__background" key={i}>
@@ -68,18 +62,9 @@ class EmployerApplicants extends Component {
 
     return (
       <div className="feed__mergedEmployerContainer">
-        {/* <div className="feed__employerData">
-          <div className="feed__is__employer">
-            <h3>Employer</h3>
-          </div>
-        </div> */}
-
         <div className="feed__employerPosting">
           <div className="feed__employerPosting__header">
-            <h3>
-              {/* Employer Posting: &nbsp; */}
-              {this.props.post.title}
-            </h3>
+            <h3>{this.props.post.title}</h3>
           </div>
           <div className="feed__employerPosting__body">
             <p>{this.props.post.body}</p>
@@ -147,10 +132,6 @@ export default connect(
   mapStateToProps,
   {
     getEmployerPosts,
-    // getUsers,
-    // getUser,
-    // getFaveJobs,
-    // getFreelancers,
     deleteEmployerPost
   }
 )(EmployerApplicants);

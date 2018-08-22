@@ -92,19 +92,7 @@ class EmployerProfile extends Component {
     let reviewerObj =
       this.props.users && this.props.users.find(user => user.id === reviewerId);
     let { employer } = this.props;
-    // let {
-    //   heading,
-    //   company_logo,
-    //   company,
-    //   city,
-    //   state,
-    //   bio,
-    //   position,
-    //   profile_image,
-    //   first_name,
-    //   last_name,
-    //   role
-    // } = this.state;
+
     return (
       <div>
         <div className="employerProfile__header">

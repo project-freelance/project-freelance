@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
+<<<<<<< HEAD
 
 import { getUser, getUsers } from "../../../ducks/userReducer";
 import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
 import EmployerProfile from "./EmployerProfile";
 
+=======
+import { getUser, getUsers } from "../../../ducks/userReducer";
+import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
+import EmployerProfile from "./EmployerProfile";
+>>>>>>> master
 import AvgRating from "./Reviews/AvgRating/AvgRating";
 import Moment from "react-moment";
 import Reviews from "./Reviews/Reviews";
@@ -124,8 +130,8 @@ class Profile extends Component {
               <div className="profile__left__panel">
                 <img
                   className="profile__user__img"
-                  alt="profile"
                   src={profile_image}
+                  alt="profile"
                 />
               </div>
               <div>
