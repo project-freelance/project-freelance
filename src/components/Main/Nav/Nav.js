@@ -109,7 +109,8 @@ class Nav extends Component {
               </Link>
             </div>
             <div className="nav__links">
-              <a href="http://localhost:3001/logout">
+              {/* <a href="http://localhost:3002/logout"> */}
+              <a href={process.env.REACT_APP_LOGOUT}>
                 <ExitToApp
                   style={{ marginBottom: "-6px", marginRight: "10px" }}
                 />
