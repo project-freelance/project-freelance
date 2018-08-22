@@ -8,7 +8,8 @@ const session = require("express-session");
 const passport = require("passport");
 const morgan = require("morgan");
 const strategy = require("./strategy");
-const PORT = process.env.PORT || 3001;
+const path = require("path");
+const PORT = process.env.PORT || 3002;
 
 const app = express();
 
@@ -28,6 +29,7 @@ massive(process.env.CONNECTION_STRING)
 app.use(json());
 app.use(cors());
 app.use(morgan("tiny"));
+app.use(express.static(path.join(__dirname, "../build")));
 
 //Auth /Sessions
 
@@ -70,12 +72,13 @@ app.get("/login", (req, res, next) => {
           })
           .then(newUser => {
             req.session.user = newUser;
-            return res.redirect("http://localhost:3000/#/setup");
+            // return res.redirect("http://localhost:3000/#/setup");
+            return res.redirect(process.env.REACT_APP_SETUP);
           });
       } else {
         req.session.user = dbUser;
-        console.log(req.session);
-        return res.redirect("http://localhost:3000/#/main/feed");
+        // return res.redirect("http://localhost:3000/#/main/feed");
+        return res.redirect(process.env.REACT_APP_FEED);
       }
     });
   })(req, res, next);
@@ -83,7 +86,8 @@ app.get("/login", (req, res, next) => {
 
 app.get("/logout", (req, res, next) => {
   req.session = null;
-  res.redirect("http://localhost:3000");
+  // res.redirect("http://localhost:3000");
+  res.redirect(process.env.REACT_APP_HOMEPAGE);
 });
 
 // End Auth
@@ -161,3 +165,7 @@ app.delete("/api/review/:id", reviewCtrl.deleteReview);
 app.get("/api/rating/:id", reviewCtrl.getAvgRating);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
