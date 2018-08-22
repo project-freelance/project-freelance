@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getFreelancer } from "../../../ducks/freelancerReducer";
-<<<<<<< HEAD
-
 import { getUser, getUsers } from "../../../ducks/userReducer";
 import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
 import EmployerProfile from "./EmployerProfile";
-
-=======
-import { getUser, getUsers } from "../../../ducks/userReducer";
-import { getAvgRating, getReviews } from "../../../ducks/reviewReducer";
-import EmployerProfile from "./EmployerProfile";
->>>>>>> master
 import AvgRating from "./Reviews/AvgRating/AvgRating";
 import Moment from "react-moment";
 import Reviews from "./Reviews/Reviews";

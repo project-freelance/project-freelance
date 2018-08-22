@@ -3,10 +3,6 @@ import { connect } from "react-redux";
 import { getAllFreelancerInfo } from "../../../../ducks/freelancerReducer";
 import "./FreelancersList.css";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 import Input from "@material-ui/core/Input";
 
 class FreelancersList extends Component {
