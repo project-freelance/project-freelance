@@ -11,7 +11,6 @@ class Splash extends Component {
       <div className="splash__content">
         <div className="splash__logoContainer">
           <div className="splash__loginContainer">
-            {/* <a href="http://localhost:3001/login"> */}
             <a href={process.env.REACT_APP_LOGIN}>
               <Button
                 variant="contained"
